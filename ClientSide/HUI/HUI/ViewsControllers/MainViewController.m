@@ -154,7 +154,7 @@
 
 - (void)addNewPlantWithName:(NSString*) plantName{
     
-    int localNumberOfPlants = [self.numberOfPlants integerValue];
+    int localNumberOfPlants = [self.numberOfPlants intValue];
     
     if (localNumberOfPlants < 3){
         
