@@ -56,6 +56,20 @@
                         <action selector="showWalkthrough:" destination="-1" eventType="touchUpInside" id="iYx-cR-5kB"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DQo-PL-Pz7">
+                    <rect key="frame" x="37" y="426" width="122" height="30"/>
+                    <state key="normal" title="PREGUNTA A HUI"/>
+                    <connections>
+                        <action selector="showRecognizerOnTouchUpInside:" destination="-1" eventType="touchUpInside" id="QQP-c8-mzn"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f4w-EE-Bru">
+                    <rect key="frame" x="44" y="479" width="109" height="30"/>
+                    <state key="normal" title="HUI RESPONDE"/>
+                    <connections>
+                        <action selector="showVocalizerOnTouchUpInside:" destination="-1" eventType="touchUpInside" id="KqD-Mx-T2D"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <point key="canvasLocation" x="164" y="327"/>

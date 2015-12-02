@@ -1,6 +1,6 @@
 //
-//  DMRecognizerViewController.h
-//  DMRecognizer
+//  DMVocalizerViewController.h
+//  DMVocalizer
 //
 // Copyright 2010, Nuance Communications Inc. All rights reserved.
 //
@@ -27,37 +27,26 @@
 #import "BaseViewController.h"
 #import <SpeechKit/SpeechKit.h>
 
-@interface DMRecognizerViewController : BaseViewController <SpeechKitDelegate, SKRecognizerDelegate, UITextFieldDelegate> {
-    IBOutlet UIButton* recordButton;
-    IBOutlet UITextField* searchBox;
+@interface DMVocalizerViewController : BaseViewController<SpeechKitDelegate, SKVocalizerDelegate, UITextFieldDelegate> {
+    IBOutlet UITextView* textToRead;
+    IBOutlet UITextView* textReadSoFar;
+    IBOutlet UIButton* speakButton;
     IBOutlet UITextField* serverBox;
     IBOutlet UITextField* portBox;
-    IBOutlet UITextView* alternativesDisplay;
-    IBOutlet UIView* vuMeter;
-    IBOutlet UISegmentedControl* recognitionType;
-    IBOutlet UISegmentedControl* languageType;
-    
-    SKRecognizer* voiceSearch;
-    enum {
-        TS_IDLE,
-        TS_INITIAL,
-        TS_RECORDING,
-        TS_PROCESSING,
-    } transactionState;
+    BOOL isSpeaking;
+    SKVocalizer* vocalizer;
 }
 
-@property(nonatomic,retain) IBOutlet UIButton* recordButton;
-@property(nonatomic,retain) IBOutlet UITextField* searchBox;
+@property(nonatomic,retain) IBOutlet UITextView* textToRead;
+@property(nonatomic,retain) IBOutlet UITextView* textReadSoFar;
+@property(nonatomic,retain) IBOutlet UIButton* speakButton;
 @property(nonatomic,retain) IBOutlet UITextField* serverBox;
 @property(nonatomic,retain) IBOutlet UITextField* portBox;
-@property(nonatomic,retain) IBOutlet UITextView* alternativesDisplay;
-@property(nonatomic,retain) IBOutlet UIView* vuMeter;
-@property(readonly)         SKRecognizer* voiceSearch;
+@property(readonly)         SKVocalizer* vocalizer;
 
-- (IBAction)recordButtonAction: (id)sender;
+- (IBAction)speakOrStopAction: (id) sender;
 - (IBAction)serverUpdateButtonAction: (id)sender;
 
-+ ( DMRecognizerViewController* )instantiate;
-
++ ( DMVocalizerViewController* )instantiate;
 @end
 

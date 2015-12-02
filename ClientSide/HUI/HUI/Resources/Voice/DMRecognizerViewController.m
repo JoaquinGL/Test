@@ -47,21 +47,13 @@ const unsigned char SpeechKitApplicationKey[] = {0x2b, 0x68, 0xea, 0x70, 0x07, 0
 @implementation DMRecognizerViewController
 @synthesize recordButton,searchBox,serverBox,portBox,alternativesDisplay,vuMeter,voiceSearch;
 
-/*
-// The designated initializer. Override to perform setup that is required before the view is loaded.
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
-        // Custom initialization
-    }
-    return self;
-}
-*/
 
-/*
-// Implement loadView to create a view hierarchy programmatically, without using a nib.
-- (void)loadView {
+#pragma mark - Instantiate method
+
++ ( DMRecognizerViewController* )instantiate
+{
+    return [[ DMRecognizerViewController alloc]  initWithNibName:@"RecognizerView" bundle:nil];
 }
-*/
 
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.

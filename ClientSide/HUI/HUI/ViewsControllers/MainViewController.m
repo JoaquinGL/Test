@@ -11,6 +11,8 @@
 #import "WalkThroughViewController.h"
 #import "WalkthroughPageViewController.h"
 #import "CustomPageViewController.h"
+#import "DMRecognizerViewController.h"
+#import "DMVocalizerViewController.h"
 
 
 @interface MainViewController (){
@@ -20,6 +22,9 @@
     PlantViewController* _plant0ViewController;
     PlantViewController* _plant1ViewController;
     PlantViewController* _plant2ViewController;
+    
+    DMRecognizerViewController* _dMRecognizerViewController;
+    DMVocalizerViewController* _dMVocalizerViewController;
 }
 
 @end
@@ -106,6 +111,21 @@
     
     [self presentViewController:walkthrough animated:YES completion:nil];
 }
+
+- (IBAction)showRecognizerOnTouchUpInside:(id)sender{
+    
+    _dMRecognizerViewController = [DMRecognizerViewController instantiate];
+    
+    [self.navigationController pushViewController:_dMRecognizerViewController animated:YES];
+}
+
+- (IBAction)showVocalizerOnTouchUpInside:(id)sender{
+    
+    _dMVocalizerViewController = [DMVocalizerViewController instantiate];
+    
+    [self.navigationController pushViewController:_dMVocalizerViewController animated:YES];
+}
+
 
 #pragma - DELEGATE Walk
 
