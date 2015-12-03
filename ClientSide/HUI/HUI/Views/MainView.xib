@@ -49,8 +49,15 @@
                         <action selector="showVocalizerOnTouchUpInside:" destination="-1" eventType="touchUpInside" id="KqD-Mx-T2D"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S44-EE-pjg">
+                    <rect key="frame" x="31" y="68" width="79" height="30"/>
+                    <state key="normal" title="SHOW ASK"/>
+                    <connections>
+                        <action selector="onAskHuiTouchUpInside:" destination="-1" eventType="touchUpInside" id="IGC-Nk-e7n"/>
+                    </connections>
+                </button>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <point key="canvasLocation" x="164" y="327"/>
         </view>
     </objects>

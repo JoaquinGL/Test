@@ -12,6 +12,7 @@
 #import "CustomPageViewController.h"
 #import "DMRecognizerViewController.h"
 #import "DMVocalizerViewController.h"
+#import "AskHuiViewController.h"
 
 
 @interface MainViewController (){
@@ -24,6 +25,8 @@
     
     DMRecognizerViewController* _dMRecognizerViewController;
     DMVocalizerViewController* _dMVocalizerViewController;
+    
+    AskHuiViewController* _askHuiViewController;
 }
 
 @end
@@ -43,7 +46,9 @@
     
     _searchPlantViewController = [SearchPlantViewController instantiate];
     _detailPlantViewController = [DetailPlantViewController instantiate];
+    _askHuiViewController = [AskHuiViewController instantiate];
     
+    _askHuiViewController.delegate = self;
     _detailPlantViewController.delegate = self;
     _searchPlantViewController.delegate = self;
     
@@ -121,6 +126,34 @@
     [self.navigationController pushViewController:_dMVocalizerViewController animated:YES];
 }
 
+- (IBAction) onAskHuiTouchUpInside:(id)sender{
+    
+    if(! _askHuiViewController ){
+        _askHuiViewController = [AskHuiViewController instantiate];
+        _askHuiViewController.delegate = self;
+    }
+    
+    [_askHuiViewController.view setFrame: self.view.frame];
+    
+    
+    [_askHuiViewController.view setAlpha: 0.0];
+    [self.navigationController.view addSubview:_askHuiViewController.view];
+    
+    [Utils fadeIn:_askHuiViewController.view completion:nil];
+
+}
+
+
+#pragma - DELEGATE AskHUI
+
+- (void) onBackAskTouchUpInside{
+    
+    [Utils fadeOut:_askHuiViewController.view
+        completion:^(BOOL completion){
+        [_askHuiViewController.view removeFromSuperview];
+        _askHuiViewController = nil;
+    }];
+}
 
 #pragma - DELEGATE Walk
 
@@ -148,16 +181,12 @@
 
 - (void)onSelectPlant:(NSString*) plantName{
     
-    NSLog(@"Plant Name: %@", plantName);
-    
     [self addNewPlantWithName: plantName];
 }
 
 #pragma - Delegate PlantView
 
 - (void)showPlantDetail:(NSDictionary*) plantDictionary{
-    
-    NSLog(@"Plant to show: %@", [plantDictionary objectForKey:@"name"]);
     
     _detailPlantViewController.title = [plantDictionary objectForKey:@"name"];
     _detailPlantViewController.identify = [plantDictionary objectForKey:@"id"];
@@ -167,8 +196,6 @@
 
 #pragma - Delegate DetailPlant
 - (void)deletePlant:(NSNumber *)identify{
-    
-    NSLog(@"Number of delete: %ld", (long)[identify integerValue]);
     
     int localNumberOfPlants = [identify intValue];
     

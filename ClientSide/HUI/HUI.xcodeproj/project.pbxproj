@@ -54,6 +54,9 @@
 		E3EFE1E81C0F53ED0033BB25 /* RecognizerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3EFE1E71C0F53ED0033BB25 /* RecognizerView.xib */; };
 		E3EFE1EB1C0F58810033BB25 /* DMVocalizerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3EFE1EA1C0F58810033BB25 /* DMVocalizerViewController.m */; };
 		E3EFE1ED1C0F59240033BB25 /* VocalizerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3EFE1EC1C0F59240033BB25 /* VocalizerView.xib */; };
+		E3EFE1F31C108BF50033BB25 /* AskHuiView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3EFE1F21C108BF50033BB25 /* AskHuiView.xib */; };
+		E3EFE1F61C108C0A0033BB25 /* AskHuiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3EFE1F51C108C0A0033BB25 /* AskHuiViewController.m */; };
+		E3EFE1FA1C109CDA0033BB25 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = E3EFE1F91C109CDA0033BB25 /* Utils.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -141,6 +144,11 @@
 		E3EFE1E91C0F58810033BB25 /* DMVocalizerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMVocalizerViewController.h; sourceTree = "<group>"; };
 		E3EFE1EA1C0F58810033BB25 /* DMVocalizerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMVocalizerViewController.m; sourceTree = "<group>"; };
 		E3EFE1EC1C0F59240033BB25 /* VocalizerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VocalizerView.xib; sourceTree = "<group>"; };
+		E3EFE1F21C108BF50033BB25 /* AskHuiView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AskHuiView.xib; sourceTree = "<group>"; };
+		E3EFE1F41C108C0A0033BB25 /* AskHuiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AskHuiViewController.h; sourceTree = "<group>"; };
+		E3EFE1F51C108C0A0033BB25 /* AskHuiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AskHuiViewController.m; sourceTree = "<group>"; };
+		E3EFE1F81C109CDA0033BB25 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
+		E3EFE1F91C109CDA0033BB25 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -277,6 +285,7 @@
 				E3694FE21C074A540036D1F1 /* SearchPlantView.xib */,
 				E3B02EB21C09AEB9005E7DF4 /* MainView.xib */,
 				E3DF6C9F1C0D896200004DA2 /* PlantView.xib */,
+				E3EFE1F21C108BF50033BB25 /* AskHuiView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -294,6 +303,8 @@
 				E3694FDE1C0733670036D1F1 /* SearchPlantViewController.m */,
 				E3DA78601C08430600F6C06A /* PlantViewController.h */,
 				E3DA78611C08430600F6C06A /* PlantViewController.m */,
+				E3EFE1F41C108C0A0033BB25 /* AskHuiViewController.h */,
+				E3EFE1F51C108C0A0033BB25 /* AskHuiViewController.m */,
 				E3CE4E561C0222CC0096D0FB /* ViewController.h */,
 				E3CE4E571C0222CD0096D0FB /* ViewController.m */,
 				E308168A1C04558D0007D896 /* WalkthroughPageViewController.h */,
@@ -329,6 +340,7 @@
 		E3DA78691C0848FC00F6C06A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E3EFE1F71C109B550033BB25 /* Utils */,
 				E3EFE1DD1C0F4FBA0033BB25 /* Voice */,
 				E3DA78A31C085BC200F6C06A /* Transitions */,
 				E3DA78981C084F1100F6C06A /* Reachability */,
@@ -364,6 +376,15 @@
 				E3EFE1EA1C0F58810033BB25 /* DMVocalizerViewController.m */,
 			);
 			path = Voice;
+			sourceTree = "<group>";
+		};
+		E3EFE1F71C109B550033BB25 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				E3EFE1F81C109CDA0033BB25 /* Utils.h */,
+				E3EFE1F91C109CDA0033BB25 /* Utils.m */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -473,6 +494,7 @@
 				E3694FE31C074A540036D1F1 /* SearchPlantView.xib in Resources */,
 				E3DA78AE1C086B5100F6C06A /* Main.storyboard in Resources */,
 				E3CE4E271C0221850096D0FB /* LaunchScreen.storyboard in Resources */,
+				E3EFE1F31C108BF50033BB25 /* AskHuiView.xib in Resources */,
 				E30816981C0457EA0007D896 /* WalkOne.xib in Resources */,
 				E3CE4E241C0221850096D0FB /* Assets.xcassets in Resources */,
 				E308169A1C0457EA0007D896 /* WalkThroughViewController.xib in Resources */,
@@ -521,11 +543,13 @@
 				E3DA78621C08430600F6C06A /* PlantViewController.m in Sources */,
 				E3EFE1EB1C0F58810033BB25 /* DMVocalizerViewController.m in Sources */,
 				E3CE4E191C0221850096D0FB /* AppDelegate.m in Sources */,
+				E3EFE1F61C108C0A0033BB25 /* AskHuiViewController.m in Sources */,
 				E30816921C0455CB0007D896 /* CustomPageViewController.m in Sources */,
 				E3CE4E581C0222CD0096D0FB /* ViewController.m in Sources */,
 				E3EFE1E01C0F4FBA0033BB25 /* DMRecognizerViewController.m in Sources */,
 				E308168F1C04558D0007D896 /* WalkThroughViewController.m in Sources */,
 				E3CE4E161C0221850096D0FB /* main.m in Sources */,
+				E3EFE1FA1C109CDA0033BB25 /* Utils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
