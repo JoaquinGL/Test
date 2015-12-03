@@ -8,10 +8,20 @@
 
 #import "BaseViewController.h"
 
+@protocol DetailPlantViewControllerDelegate <NSObject>
+
+@required
+
+-(void)deletePlant:(NSNumber*) identify;
+
+@end
+
+
 @interface DetailPlantViewController : BaseViewController{
 }
 
-@property (nonatomic, assign) UINavigationController* navigationController;
+@property (nonatomic, assign) id <DetailPlantViewControllerDelegate> delegate;
+@property (nonatomic, assign) NSNumber* identify;
 
 + ( DetailPlantViewController* )instantiate;
 

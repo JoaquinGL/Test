@@ -21,32 +21,11 @@
                         <navigationItem title="HUI" id="o1i-9b-KhZ"/>
                     </items>
                 </navigationBar>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wbR-JQ-wPQ">
-                    <rect key="frame" x="37" y="112" width="63" height="30"/>
-                    <state key="normal" title="PLANTA1"/>
-                    <connections>
-                        <action selector="showDetailPlantOnTouchUpInside:" destination="-1" eventType="touchUpInside" id="YBr-wP-Vu0"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ssl-XN-WbZ">
-                    <rect key="frame" x="37" y="150" width="66" height="30"/>
-                    <state key="normal" title="PLANTA2"/>
-                    <connections>
-                        <action selector="showDetailPlantOnTouchUpInside:" destination="-1" eventType="touchUpInside" id="OgC-Kc-Jpo"/>
-                    </connections>
-                </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0nt-x4-zh0">
                     <rect key="frame" x="37" y="269" width="110" height="30"/>
                     <state key="normal" title="NUEVA PLANTA"/>
                     <connections>
                         <action selector="showSearchPlantOnTouchUpInside:" destination="-1" eventType="touchUpInside" id="ubG-Nf-mti"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kDZ-DQ-Sma">
-                    <rect key="frame" x="37" y="206" width="66" height="30"/>
-                    <state key="normal" title="PLANTA3"/>
-                    <connections>
-                        <action selector="showDetailPlantOnTouchUpInside:" destination="-1" eventType="touchUpInside" id="rL2-fA-6k3"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ivy-mr-PSO">

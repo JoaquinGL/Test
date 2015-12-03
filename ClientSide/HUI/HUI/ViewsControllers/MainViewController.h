@@ -10,11 +10,13 @@
 #import "WalkThroughViewController.h"
 #import "SearchPlantViewController.h"
 #import "PlantViewController.h"
+#import "DetailPlantViewController.h"
 
 @interface MainViewController : BaseViewController <
                                     WalkthroughViewControllerDelegate
                                     , SearchPlantViewControllerDelegate
                                     , PlantViewControllerDelegate
+                                    , DetailPlantViewControllerDelegate
                                 >
 
 @property (nonatomic, assign) UINavigationController* navigationController;

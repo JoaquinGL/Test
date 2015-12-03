@@ -18,7 +18,8 @@
 
 @implementation PlantViewController
 
-@synthesize plantName        = plantName,
+@synthesize identify         = _identify,
+            plantName        = _plantName,
             plantStatus      = _plantStatus,
             plantSun         = _plantSun,
             plantImage       = _plantImage,
@@ -49,9 +50,9 @@
 
 - (IBAction) onPlantButtonTouchUpInside:(id)sender{
     
-    NSDictionary* plantDictionary = @{@"name":self.plantName};
+    NSDictionary* plantDictionary = @{@"id":self.identify ,@"name":self.plantName};
     
-    [self.delegate showPlantDetail:plantDictionary ];
+    [self.delegate showPlantDetail:plantDictionary];
 
 }
 

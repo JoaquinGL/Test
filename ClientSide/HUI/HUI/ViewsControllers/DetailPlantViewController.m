@@ -16,12 +16,18 @@
 
 @implementation DetailPlantViewController
 
-@synthesize navigationController = _navigationController;
+@synthesize identify = _identify;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self customInit];
 }
 
+- (void)customInit{
+    UIBarButtonItem *deleteButton = [[UIBarButtonItem alloc] initWithTitle:@"Delete" style:UIBarButtonItemStylePlain
+                                                                     target:self action:@selector(onDeletePlantTouchUpInside:)];
+    self.navigationItem.rightBarButtonItem = deleteButton;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -55,6 +61,14 @@
     UIViewController* plantViewController = [[SearchPlantViewController alloc] initWithNibName:@"SearchPlantView" bundle:nil];
     
     [self.navigationController pushViewController:plantViewController animated:YES];
+}
+
+- (IBAction)onDeletePlantTouchUpInside:(id)sender{
+    
+    [self.delegate deletePlant: self.identify];
+    
+    [[self navigationController] popViewControllerAnimated:YES];
+
 }
 
 

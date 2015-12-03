@@ -7,7 +7,6 @@
 //
 
 #import "MainViewController.h"
-#import "DetailPlantViewController.h"
 #import "WalkThroughViewController.h"
 #import "WalkthroughPageViewController.h"
 #import "CustomPageViewController.h"
@@ -45,6 +44,7 @@
     _searchPlantViewController = [SearchPlantViewController instantiate];
     _detailPlantViewController = [DetailPlantViewController instantiate];
     
+    _detailPlantViewController.delegate = self;
     _searchPlantViewController.delegate = self;
     
     self.title = @"HUI";
@@ -81,11 +81,6 @@
 }
 
 #pragma - ACTIONS BUTTONS
-
-- (IBAction)showDetailPlantOnTouchUpInside:(id)sender{
-    
-    [self.navigationController pushViewController:_detailPlantViewController animated:YES];
-}
 
 - (IBAction)showSearchPlantOnTouchUpInside:(id)sender{
     
@@ -160,15 +155,91 @@
 
 #pragma - Delegate PlantView
 
--(void)showPlantDetail:(NSDictionary*) plantDictionary{
+- (void)showPlantDetail:(NSDictionary*) plantDictionary{
     
     NSLog(@"Plant to show: %@", [plantDictionary objectForKey:@"name"]);
     
     _detailPlantViewController.title = [plantDictionary objectForKey:@"name"];
+    _detailPlantViewController.identify = [plantDictionary objectForKey:@"id"];
     
     [self.navigationController pushViewController:_detailPlantViewController animated:YES];
 }
 
+#pragma - Delegate DetailPlant
+- (void)deletePlant:(NSNumber *)identify{
+    
+    NSLog(@"Number of delete: %ld", (long)[identify integerValue]);
+    
+    int localNumberOfPlants = [identify intValue];
+    
+    switch (localNumberOfPlants) {
+        case 0:
+            
+            if( [self.numberOfPlants intValue] == 3){
+                
+                _plant2ViewController.view.frame = _plant1ViewController.view.frame;
+                _plant1ViewController.view.frame = _plant0ViewController.view.frame;
+                
+                _plant1ViewController.identify =_plant0ViewController.identify;
+                _plant2ViewController.identify =_plant1ViewController.identify;
+                
+                [_plant0ViewController.view removeFromSuperview];
+                _plant0ViewController = _plant1ViewController;
+                _plant1ViewController = _plant2ViewController;
+                
+                _plant2ViewController = nil;
+                
+            }else if( [self.numberOfPlants intValue] == 2){
+            
+                _plant1ViewController.view.frame = _plant0ViewController.view.frame;
+                _plant1ViewController.identify =_plant0ViewController.identify;
+                
+                [_plant0ViewController.view removeFromSuperview];
+                _plant0ViewController = _plant1ViewController;
+                
+                _plant0ViewController.identify =_plant1ViewController.identify;
+                
+                _plant1ViewController = nil;
+                
+            }else{
+                
+                [_plant0ViewController.view removeFromSuperview];
+                _plant0ViewController = nil;
+                
+            }
+            break;
+            
+        case 1:
+            
+            if( [self.numberOfPlants intValue] == 3){
+                
+                _plant2ViewController.view.frame = _plant1ViewController.view.frame;
+                
+                _plant2ViewController.identify =_plant1ViewController.identify;
+                
+                [_plant1ViewController.view removeFromSuperview];
+                _plant1ViewController = _plant2ViewController;
+                
+                _plant2ViewController = nil;
+                
+            }else if( [self.numberOfPlants intValue] == 2){
+
+                [_plant1ViewController.view removeFromSuperview];
+                _plant1ViewController = nil;
+            }
+            
+        break;
+            
+        case 2:
+            
+            [_plant2ViewController.view removeFromSuperview];
+            _plant2ViewController = nil;
+        break;
+    }
+    
+    self.numberOfPlants = [NSNumber numberWithInt:[self.numberOfPlants intValue] - 1];
+    
+}
 
 #pragma - PlantViewsController
 
@@ -183,7 +254,7 @@
                 _plant0ViewController = [PlantViewController instantiate];
                 _plant0ViewController.delegate = self;
                 _plant0ViewController.plantName = plantName;
-                
+                _plant0ViewController.identify = self.numberOfPlants;
                 [_plant0ViewController.view setFrame:CGRectMake(50, 100, _plant0ViewController.view.frame.size.width, _plant0ViewController.view.frame.size.height)];
                 
                 // showWithAnimationTheView
@@ -194,7 +265,7 @@
                 _plant1ViewController = [PlantViewController instantiate];
                 _plant1ViewController.plantName = plantName;
                 _plant1ViewController.delegate = self;
-                
+                _plant1ViewController.identify = self.numberOfPlants;
                 [_plant1ViewController.view setFrame:CGRectMake(200, 100, _plant1ViewController.view.frame.size.width, _plant1ViewController.view.frame.size.height)];
                 
                 // showWithAnimationTheView
@@ -205,7 +276,7 @@
                 _plant2ViewController = [PlantViewController instantiate];
                 _plant2ViewController.plantName = plantName;
                 _plant2ViewController.delegate = self;
-                
+                _plant2ViewController.identify = self.numberOfPlants;
                 [_plant2ViewController.view setFrame:CGRectMake(50, 300, _plant2ViewController.view.frame.size.width, _plant2ViewController.view.frame.size.height)];
                 
                 // showWithAnimationTheView
