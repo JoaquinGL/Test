@@ -9,7 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "Utils.h"
 
-@interface BaseViewController : UIViewController
+@interface BaseViewController : UIViewController{
+    enum {
+        TS_IDLE,
+        TS_INITIAL,
+        TS_RECORDING,
+        TS_PROCESSING,
+    } transactionState;
+}
 
 - (IBAction)onCloseButtonTouchUpInside:(id)sender;
 

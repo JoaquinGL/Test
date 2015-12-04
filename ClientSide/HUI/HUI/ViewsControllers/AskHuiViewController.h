@@ -7,6 +7,7 @@
 //
 
 #import "BaseViewController.h"
+#import <SpeechKit/SpeechKit.h>
 
 @protocol AskHuiViewControllerDelegate <NSObject>
 
@@ -16,9 +17,24 @@
 
 @end
 
-@interface AskHuiViewController : BaseViewController
+@interface AskHuiViewController : BaseViewController<SpeechKitDelegate, SKRecognizerDelegate, UITextFieldDelegate>{
+    
+    IBOutlet UIButton* recordButton;
+    IBOutlet UITextField* searchBox;
+    IBOutlet UIView* vuMeter;
+    IBOutlet UISegmentedControl* recognitionType;
+    
+    SKRecognizer* voiceSearch;
+    
+}
 
+@property(nonatomic,retain) IBOutlet UIButton* recordButton;
+@property(nonatomic,retain) IBOutlet UITextField* searchBox;
+@property(nonatomic,retain) IBOutlet UIView* vuMeter;
+@property(readonly)         SKRecognizer* voiceSearch;
 @property (nonatomic, assign) id <AskHuiViewControllerDelegate> delegate;
+
+- (IBAction)recordButtonAction: (id)sender;
 
 + ( AskHuiViewController* )instantiate;
 

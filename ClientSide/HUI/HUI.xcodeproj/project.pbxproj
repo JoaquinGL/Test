@@ -42,6 +42,17 @@
 		E3DA78661C08489200F6C06A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3DA78651C08489200F6C06A /* UIKit.framework */; };
 		E3DA789B1C084F1100F6C06A /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = E3DA789A1C084F1100F6C06A /* Reachability.m */; };
 		E3DA78AE1C086B5100F6C06A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3DA78AC1C086B5100F6C06A /* Main.storyboard */; };
+		E3DDCB301C11B46E0053E150 /* Cancel.wav in Resources */ = {isa = PBXBuildFile; fileRef = E3DDCB2D1C11B46E0053E150 /* Cancel.wav */; };
+		E3DDCB311C11B46E0053E150 /* Robot1.wav in Resources */ = {isa = PBXBuildFile; fileRef = E3DDCB2E1C11B46E0053E150 /* Robot1.wav */; };
+		E3DDCB321C11B46E0053E150 /* Robot2.wav in Resources */ = {isa = PBXBuildFile; fileRef = E3DDCB2F1C11B46E0053E150 /* Robot2.wav */; };
+		E3DDCB3E1C11BE2F0053E150 /* 37x-Checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = E3DDCB351C11BE2F0053E150 /* 37x-Checkmark.png */; };
+		E3DDCB3F1C11BE2F0053E150 /* 37x-Checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E3DDCB361C11BE2F0053E150 /* 37x-Checkmark@2x.png */; };
+		E3DDCB401C11BE2F0053E150 /* Icon-iOS7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E3DDCB371C11BE2F0053E150 /* Icon-iOS7@2x.png */; };
+		E3DDCB411C11BE2F0053E150 /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = E3DDCB381C11BE2F0053E150 /* Icon-Small.png */; };
+		E3DDCB421C11BE2F0053E150 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E3DDCB391C11BE2F0053E150 /* Icon-Small@2x.png */; };
+		E3DDCB431C11BE2F0053E150 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = E3DDCB3A1C11BE2F0053E150 /* Icon.png */; };
+		E3DDCB441C11BE2F0053E150 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E3DDCB3B1C11BE2F0053E150 /* Icon@2x.png */; };
+		E3DDCB451C11BE2F0053E150 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = E3DDCB3D1C11BE2F0053E150 /* MBProgressHUD.m */; };
 		E3DF6CA01C0D896200004DA2 /* PlantView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3DF6C9F1C0D896200004DA2 /* PlantView.xib */; };
 		E3EFE1D21C0F48CD0033BB25 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3EFE1D11C0F48CD0033BB25 /* AudioToolbox.framework */; };
 		E3EFE1D41C0F48DC0033BB25 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3EFE1D31C0F48DC0033BB25 /* AVFoundation.framework */; };
@@ -130,6 +141,18 @@
 		E3DA789A1C084F1100F6C06A /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		E3DA78AB1C085D6F00F6C06A /* NavigationTransitionController-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NavigationTransitionController-Prefix.pch"; sourceTree = "<group>"; };
 		E3DA78AD1C086B5100F6C06A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		E3DDCB2D1C11B46E0053E150 /* Cancel.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Cancel.wav; sourceTree = "<group>"; };
+		E3DDCB2E1C11B46E0053E150 /* Robot1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Robot1.wav; sourceTree = "<group>"; };
+		E3DDCB2F1C11B46E0053E150 /* Robot2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Robot2.wav; sourceTree = "<group>"; };
+		E3DDCB351C11BE2F0053E150 /* 37x-Checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37x-Checkmark.png"; sourceTree = "<group>"; };
+		E3DDCB361C11BE2F0053E150 /* 37x-Checkmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37x-Checkmark@2x.png"; sourceTree = "<group>"; };
+		E3DDCB371C11BE2F0053E150 /* Icon-iOS7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-iOS7@2x.png"; sourceTree = "<group>"; };
+		E3DDCB381C11BE2F0053E150 /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small.png"; sourceTree = "<group>"; };
+		E3DDCB391C11BE2F0053E150 /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
+		E3DDCB3A1C11BE2F0053E150 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		E3DDCB3B1C11BE2F0053E150 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		E3DDCB3C1C11BE2F0053E150 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		E3DDCB3D1C11BE2F0053E150 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		E3DF6C9F1C0D896200004DA2 /* PlantView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlantView.xib; sourceTree = "<group>"; };
 		E3EFE1D11C0F48CD0033BB25 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		E3EFE1D31C0F48DC0033BB25 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -340,6 +363,7 @@
 		E3DA78691C0848FC00F6C06A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E3DDCB331C11BE2F0053E150 /* Progress */,
 				E3EFE1F71C109B550033BB25 /* Utils */,
 				E3EFE1DD1C0F4FBA0033BB25 /* Voice */,
 				E3DA78A31C085BC200F6C06A /* Transitions */,
@@ -364,9 +388,36 @@
 			path = Transitions;
 			sourceTree = "<group>";
 		};
+		E3DDCB331C11BE2F0053E150 /* Progress */ = {
+			isa = PBXGroup;
+			children = (
+				E3DDCB341C11BE2F0053E150 /* Images */,
+				E3DDCB3C1C11BE2F0053E150 /* MBProgressHUD.h */,
+				E3DDCB3D1C11BE2F0053E150 /* MBProgressHUD.m */,
+			);
+			path = Progress;
+			sourceTree = "<group>";
+		};
+		E3DDCB341C11BE2F0053E150 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				E3DDCB351C11BE2F0053E150 /* 37x-Checkmark.png */,
+				E3DDCB361C11BE2F0053E150 /* 37x-Checkmark@2x.png */,
+				E3DDCB371C11BE2F0053E150 /* Icon-iOS7@2x.png */,
+				E3DDCB381C11BE2F0053E150 /* Icon-Small.png */,
+				E3DDCB391C11BE2F0053E150 /* Icon-Small@2x.png */,
+				E3DDCB3A1C11BE2F0053E150 /* Icon.png */,
+				E3DDCB3B1C11BE2F0053E150 /* Icon@2x.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
 		E3EFE1DD1C0F4FBA0033BB25 /* Voice */ = {
 			isa = PBXGroup;
 			children = (
+				E3DDCB2D1C11B46E0053E150 /* Cancel.wav */,
+				E3DDCB2E1C11B46E0053E150 /* Robot1.wav */,
+				E3DDCB2F1C11B46E0053E150 /* Robot2.wav */,
 				E3EFE1E11C0F51C40033BB25 /* earcon_cancel.wav */,
 				E3EFE1E21C0F51C40033BB25 /* earcon_done_listening.wav */,
 				E3EFE1E31C0F51C40033BB25 /* earcon_listening.wav */,
@@ -491,22 +542,32 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E3DDCB431C11BE2F0053E150 /* Icon.png in Resources */,
 				E3694FE31C074A540036D1F1 /* SearchPlantView.xib in Resources */,
 				E3DA78AE1C086B5100F6C06A /* Main.storyboard in Resources */,
+				E3DDCB321C11B46E0053E150 /* Robot2.wav in Resources */,
+				E3DDCB411C11BE2F0053E150 /* Icon-Small.png in Resources */,
 				E3CE4E271C0221850096D0FB /* LaunchScreen.storyboard in Resources */,
+				E3DDCB421C11BE2F0053E150 /* Icon-Small@2x.png in Resources */,
 				E3EFE1F31C108BF50033BB25 /* AskHuiView.xib in Resources */,
 				E30816981C0457EA0007D896 /* WalkOne.xib in Resources */,
+				E3DDCB441C11BE2F0053E150 /* Icon@2x.png in Resources */,
+				E3DDCB311C11B46E0053E150 /* Robot1.wav in Resources */,
 				E3CE4E241C0221850096D0FB /* Assets.xcassets in Resources */,
 				E308169A1C0457EA0007D896 /* WalkThroughViewController.xib in Resources */,
 				E308169C1C0457EA0007D896 /* WalkZero.xib in Resources */,
 				E3EFE1E61C0F51C40033BB25 /* earcon_listening.wav in Resources */,
 				E3694FE11C074A1A0036D1F1 /* DetailPlantView.xib in Resources */,
+				E3DDCB3E1C11BE2F0053E150 /* 37x-Checkmark.png in Resources */,
 				E3EFE1E41C0F51C40033BB25 /* earcon_cancel.wav in Resources */,
+				E3DDCB301C11B46E0053E150 /* Cancel.wav in Resources */,
 				E3DF6CA01C0D896200004DA2 /* PlantView.xib in Resources */,
+				E3DDCB3F1C11BE2F0053E150 /* 37x-Checkmark@2x.png in Resources */,
 				E308169B1C0457EA0007D896 /* WalkTwo.xib in Resources */,
 				E30816991C0457EA0007D896 /* WalkThree.xib in Resources */,
 				E3EFE1E51C0F51C40033BB25 /* earcon_done_listening.wav in Resources */,
 				E3EFE1E81C0F53ED0033BB25 /* RecognizerView.xib in Resources */,
+				E3DDCB401C11BE2F0053E150 /* Icon-iOS7@2x.png in Resources */,
 				E3B02EB31C09AEB9005E7DF4 /* MainView.xib in Resources */,
 				E3EFE1ED1C0F59240033BB25 /* VocalizerView.xib in Resources */,
 			);
@@ -546,6 +607,7 @@
 				E3EFE1F61C108C0A0033BB25 /* AskHuiViewController.m in Sources */,
 				E30816921C0455CB0007D896 /* CustomPageViewController.m in Sources */,
 				E3CE4E581C0222CD0096D0FB /* ViewController.m in Sources */,
+				E3DDCB451C11BE2F0053E150 /* MBProgressHUD.m in Sources */,
 				E3EFE1E01C0F4FBA0033BB25 /* DMRecognizerViewController.m in Sources */,
 				E308168F1C04558D0007D896 /* WalkThroughViewController.m in Sources */,
 				E3CE4E161C0221850096D0FB /* main.m in Sources */,

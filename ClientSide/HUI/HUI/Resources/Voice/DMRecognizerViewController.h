@@ -38,12 +38,6 @@
     IBOutlet UISegmentedControl* languageType;
     
     SKRecognizer* voiceSearch;
-    enum {
-        TS_IDLE,
-        TS_INITIAL,
-        TS_RECORDING,
-        TS_PROCESSING,
-    } transactionState;
 }
 
 @property(nonatomic,retain) IBOutlet UIButton* recordButton;
