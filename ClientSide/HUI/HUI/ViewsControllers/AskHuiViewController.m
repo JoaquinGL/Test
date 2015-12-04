@@ -8,7 +8,9 @@
 
 #import "AskHuiViewController.h"
 
-@interface AskHuiViewController ()
+@interface AskHuiViewController (){
+    //TODO, MUTE
+}
 
 @end
 
@@ -27,7 +29,7 @@
                   delegate:self];
     
     // Set earcons to play
-    SKEarcon* earconStart	= [SKEarcon earconWithName:@"Robot1.wav"];
+    SKEarcon* earconStart	= [SKEarcon earconWithName:@"Play.wav"];
     SKEarcon* earconStop	= [SKEarcon earconWithName:@"Robot2.wav"];
     SKEarcon* earconCancel	= [SKEarcon earconWithName:@"Cancel.wav"];
     

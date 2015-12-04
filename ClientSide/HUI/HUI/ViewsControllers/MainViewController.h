@@ -12,13 +12,15 @@
 #import "PlantViewController.h"
 #import "DetailPlantViewController.h"
 #import "AskHuiViewController.h"
+#import "MBProgressHUD.h"
 
 @interface MainViewController : BaseViewController <
-                                    WalkthroughViewControllerDelegate
-                                    , SearchPlantViewControllerDelegate
-                                    , PlantViewControllerDelegate
-                                    , DetailPlantViewControllerDelegate
-                                    , AskHuiViewControllerDelegate
+  WalkthroughViewControllerDelegate
+, SearchPlantViewControllerDelegate
+, PlantViewControllerDelegate
+, DetailPlantViewControllerDelegate
+, AskHuiViewControllerDelegate
+, MBProgressHUDDelegate
                                 >
 
 @property (nonatomic, assign) UINavigationController* navigationController;

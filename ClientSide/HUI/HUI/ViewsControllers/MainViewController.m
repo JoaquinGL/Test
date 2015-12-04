@@ -27,6 +27,8 @@
     DMVocalizerViewController* _dMVocalizerViewController;
     
     AskHuiViewController* _askHuiViewController;
+    
+    MBProgressHUD* _HUD;
 }
 
 @end
@@ -55,6 +57,11 @@
     self.title = @"HUI";
     
     self.numberOfPlants = [NSNumber numberWithInt: 0];
+    
+    _askHuiViewController = [AskHuiViewController instantiate];
+    _askHuiViewController.delegate = self;
+    
+    [_askHuiViewController.view setFrame: self.view.frame];
     
     /* TODO: comprobar la lógica de plantas guardadas en el movil. Para que se quede guardado en BBDD
      Aqui hay que tener el sistema de notificaciones para poder añadir los botones si se selecciona una planta nueva. 
@@ -85,7 +92,7 @@
     return [[ MainViewController alloc]  initWithNibName:@"MainView" bundle:nil];
 }
 
-#pragma - ACTIONS BUTTONS
+#pragma mark - ACTIONS BUTTONS
 
 - (IBAction)showSearchPlantOnTouchUpInside:(id)sender{
     
@@ -128,34 +135,35 @@
 
 - (IBAction) onAskHuiTouchUpInside:(id)sender{
     
-    if(! _askHuiViewController ){
-        _askHuiViewController = [AskHuiViewController instantiate];
-        _askHuiViewController.delegate = self;
-    }
+    _HUD = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.view addSubview:_HUD];
     
-    [_askHuiViewController.view setFrame: self.view.frame];
+    _HUD.delegate = self;
+    _HUD.labelText = @"Loading";
     
-    
+    [_HUD showWhileExecuting:@selector(showHUIAssistant) onTarget:self withObject:nil animated:YES];
+}
+
+- (void) showHUIAssistant{
+
     [_askHuiViewController.view setAlpha: 0.0];
     [self.navigationController.view addSubview:_askHuiViewController.view];
     
     [Utils fadeIn:_askHuiViewController.view completion:nil];
-
 }
 
 
-#pragma - DELEGATE AskHUI
+#pragma mark - DELEGATE AskHUI
 
 - (void) onBackAskTouchUpInside{
     
     [Utils fadeOut:_askHuiViewController.view
         completion:^(BOOL completion){
         [_askHuiViewController.view removeFromSuperview];
-        _askHuiViewController = nil;
     }];
 }
 
-#pragma - DELEGATE Walk
+#pragma mark - DELEGATE Walk
 
 - (void)walkthroughCloseButtonPressed
 {
@@ -177,7 +185,7 @@
     NSLog(@"%ld",(long)pageNumber);
 }
 
-#pragma - Delegate Search
+#pragma mark - Delegate Search
 
 - (void)onSelectPlant:(NSString*) plantName{
     
@@ -194,7 +202,7 @@
     [self.navigationController pushViewController:_detailPlantViewController animated:YES];
 }
 
-#pragma - Delegate DetailPlant
+#pragma mark - Delegate DetailPlant
 - (void)deletePlant:(NSNumber *)identify{
     
     int localNumberOfPlants = [identify intValue];
@@ -268,7 +276,7 @@
     
 }
 
-#pragma - PlantViewsController
+#pragma mark - PlantViewsController
 
 - (void)addNewPlantWithName:(NSString*) plantName{
     

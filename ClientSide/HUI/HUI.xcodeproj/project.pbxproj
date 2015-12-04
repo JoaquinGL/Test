@@ -53,6 +53,7 @@
 		E3DDCB431C11BE2F0053E150 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = E3DDCB3A1C11BE2F0053E150 /* Icon.png */; };
 		E3DDCB441C11BE2F0053E150 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E3DDCB3B1C11BE2F0053E150 /* Icon@2x.png */; };
 		E3DDCB451C11BE2F0053E150 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = E3DDCB3D1C11BE2F0053E150 /* MBProgressHUD.m */; };
+		E3DDCB471C11F5BC0053E150 /* Play.wav in Resources */ = {isa = PBXBuildFile; fileRef = E3DDCB461C11F5BC0053E150 /* Play.wav */; };
 		E3DF6CA01C0D896200004DA2 /* PlantView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3DF6C9F1C0D896200004DA2 /* PlantView.xib */; };
 		E3EFE1D21C0F48CD0033BB25 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3EFE1D11C0F48CD0033BB25 /* AudioToolbox.framework */; };
 		E3EFE1D41C0F48DC0033BB25 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3EFE1D31C0F48DC0033BB25 /* AVFoundation.framework */; };
@@ -153,6 +154,7 @@
 		E3DDCB3B1C11BE2F0053E150 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		E3DDCB3C1C11BE2F0053E150 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		E3DDCB3D1C11BE2F0053E150 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		E3DDCB461C11F5BC0053E150 /* Play.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Play.wav; sourceTree = "<group>"; };
 		E3DF6C9F1C0D896200004DA2 /* PlantView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlantView.xib; sourceTree = "<group>"; };
 		E3EFE1D11C0F48CD0033BB25 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		E3EFE1D31C0F48DC0033BB25 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -415,6 +417,7 @@
 		E3EFE1DD1C0F4FBA0033BB25 /* Voice */ = {
 			isa = PBXGroup;
 			children = (
+				E3DDCB461C11F5BC0053E150 /* Play.wav */,
 				E3DDCB2D1C11B46E0053E150 /* Cancel.wav */,
 				E3DDCB2E1C11B46E0053E150 /* Robot1.wav */,
 				E3DDCB2F1C11B46E0053E150 /* Robot2.wav */,
@@ -564,6 +567,7 @@
 				E3DF6CA01C0D896200004DA2 /* PlantView.xib in Resources */,
 				E3DDCB3F1C11BE2F0053E150 /* 37x-Checkmark@2x.png in Resources */,
 				E308169B1C0457EA0007D896 /* WalkTwo.xib in Resources */,
+				E3DDCB471C11F5BC0053E150 /* Play.wav in Resources */,
 				E30816991C0457EA0007D896 /* WalkThree.xib in Resources */,
 				E3EFE1E51C0F51C40033BB25 /* earcon_done_listening.wav in Resources */,
 				E3EFE1E81C0F53ED0033BB25 /* RecognizerView.xib in Resources */,
