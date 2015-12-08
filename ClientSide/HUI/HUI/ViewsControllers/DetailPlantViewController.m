@@ -24,9 +24,19 @@
 }
 
 - (void)customInit{
-    UIBarButtonItem *deleteButton = [[UIBarButtonItem alloc] initWithTitle:@"Delete" style:UIBarButtonItemStylePlain
-                                                                     target:self action:@selector(onDeletePlantTouchUpInside:)];
-    self.navigationItem.rightBarButtonItem = deleteButton;
+    
+    UIImage* deleteImage = [UIImage imageNamed:@"trash.png"];
+    CGRect frameimg = CGRectMake(0, 0, deleteImage.size.width - 10, deleteImage.size.height - 13);
+    UIButton *deleteButton = [[UIButton alloc] initWithFrame:frameimg];
+    [deleteButton setBackgroundImage:deleteImage forState:UIControlStateNormal];
+    
+    [deleteButton addTarget:self action:@selector(onDeletePlantTouchUpInside:)
+         forControlEvents:UIControlEventTouchUpInside];
+    
+    [deleteButton setShowsTouchWhenHighlighted:YES];
+    
+    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithCustomView: deleteButton];
+    self.navigationItem.rightBarButtonItem = rightButton;
 }
 
 - (void)didReceiveMemoryWarning {

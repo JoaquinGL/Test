@@ -175,7 +175,8 @@ const unsigned char SpeechKitApplicationKey[] = {0x2b, 0x68, 0xea, 0x70, 0x07, 0
     NSLog(@"Recording started.");
     
     transactionState = TS_RECORDING;
-    [recordButton setTitle:@"Recording..." forState:UIControlStateNormal];
+    [recordButton setImage:[UIImage imageNamed:@"mic_on.png"] forState:UIControlStateNormal];
+    
     [self performSelector:@selector(updateVUMeter) withObject:nil afterDelay:0.05];
 }
 
@@ -186,7 +187,7 @@ const unsigned char SpeechKitApplicationKey[] = {0x2b, 0x68, 0xea, 0x70, 0x07, 0
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(updateVUMeter) object:nil];
     [self setVUMeterWidth:0.];
     transactionState = TS_PROCESSING;
-    [recordButton setTitle:@"Processing..." forState:UIControlStateNormal];
+    [recordButton setImage:[UIImage imageNamed:@"mic_processing.png"] forState:UIControlStateNormal];
 }
 
 - (void)recognizer:(SKRecognizer *)recognizer didFinishWithResults:(SKRecognition *)results
@@ -197,7 +198,7 @@ const unsigned char SpeechKitApplicationKey[] = {0x2b, 0x68, 0xea, 0x70, 0x07, 0
     long numOfResults = [results.results count];
     
     transactionState = TS_IDLE;
-    [recordButton setTitle:@"Speak" forState:UIControlStateNormal];
+    [recordButton setImage:[UIImage imageNamed:@"mic_off.png"] forState:UIControlStateNormal];
     
     if (numOfResults > 0)
         searchBox.text = [results firstResult];

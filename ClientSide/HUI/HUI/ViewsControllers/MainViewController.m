@@ -50,7 +50,7 @@
     _detailPlantViewController.delegate = self;
     _searchPlantViewController.delegate = self;
     
-    self.title = @"HUI";
+    self.title = @"My Garden";
     
     self.numberOfPlants = [NSNumber numberWithInt: 0];
     
@@ -74,6 +74,29 @@
      Si no se hace un sistma de notificaciones que es chungo de controlar, mejor un delegado, como el que ya tenemos en los sliders.
      
      */
+    
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"title.png"] forBarMetrics:UIBarMetricsDefault];
+    [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
+                                                           [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0], NSForegroundColorAttributeName,
+                                                            nil]];
+    
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    
+    
+    UIImage* deleteImage = [UIImage imageNamed:@"info.png"];
+    CGRect frameimg = CGRectMake(0, 0, deleteImage.size.width, deleteImage.size.height);
+    UIButton *infoButton = [[UIButton alloc] initWithFrame:frameimg];
+    [infoButton setBackgroundImage:deleteImage forState:UIControlStateNormal];
+    
+    [infoButton addTarget:self action:@selector(showWalkthrough:)
+           forControlEvents:UIControlEventTouchUpInside];
+    
+    [infoButton setShowsTouchWhenHighlighted:YES];
+    
+    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithCustomView: infoButton];
+    self.navigationItem.rightBarButtonItem = rightButton;
+
+    
 }
 
 - (void)didReceiveMemoryWarning {

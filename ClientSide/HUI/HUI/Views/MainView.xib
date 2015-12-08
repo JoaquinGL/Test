@@ -12,53 +12,31 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OZn-cC-137">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
-                    <items>
-                        <navigationItem title="HUI" id="o1i-9b-KhZ"/>
-                    </items>
-                </navigationBar>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0nt-x4-zh0">
-                    <rect key="frame" x="37" y="269" width="110" height="30"/>
-                    <state key="normal" title="NUEVA PLANTA"/>
-                    <connections>
-                        <action selector="showSearchPlantOnTouchUpInside:" destination="-1" eventType="touchUpInside" id="ubG-Nf-mti"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ivy-mr-PSO">
-                    <rect key="frame" x="37" y="338" width="66" height="30"/>
-                    <state key="normal" title="Info"/>
-                    <connections>
-                        <action selector="showWalkthrough:" destination="-1" eventType="touchUpInside" id="iYx-cR-5kB"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DQo-PL-Pz7">
-                    <rect key="frame" x="37" y="426" width="122" height="30"/>
-                    <state key="normal" title="PREGUNTA A HUI"/>
-                    <connections>
-                        <action selector="showRecognizerOnTouchUpInside:" destination="-1" eventType="touchUpInside" id="QQP-c8-mzn"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f4w-EE-Bru">
-                    <rect key="frame" x="44" y="479" width="109" height="30"/>
-                    <state key="normal" title="HUI RESPONDE"/>
-                    <connections>
-                        <action selector="showVocalizerOnTouchUpInside:" destination="-1" eventType="touchUpInside" id="KqD-Mx-T2D"/>
-                    </connections>
-                </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S44-EE-pjg">
-                    <rect key="frame" x="31" y="68" width="79" height="30"/>
-                    <state key="normal" title="SHOW ASK"/>
+                    <rect key="frame" x="120" y="402" width="80" height="80"/>
+                    <state key="normal" backgroundImage="askHUI"/>
                     <connections>
                         <action selector="onAskHuiTouchUpInside:" destination="-1" eventType="touchUpInside" id="IGC-Nk-e7n"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0nt-x4-zh0">
+                    <rect key="frame" x="80" y="73" width="160" height="160"/>
+                    <state key="normal" backgroundImage="plant_something_new"/>
+                    <connections>
+                        <action selector="showSearchPlantOnTouchUpInside:" destination="-1" eventType="touchUpInside" id="ubG-Nf-mti"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
             <point key="canvasLocation" x="164" y="327"/>
         </view>
     </objects>
+    <resources>
+        <image name="askHUI" width="84" height="84"/>
+        <image name="plant_something_new" width="84" height="84"/>
+    </resources>
 </document>

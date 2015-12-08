@@ -57,6 +57,8 @@
         
         _mainViewController.navigationController = navController;
         
+        navController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        
         [self presentViewController:navController animated:YES completion:nil];
         
     }
