@@ -59,13 +59,9 @@
 		E3EFE1D41C0F48DC0033BB25 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3EFE1D31C0F48DC0033BB25 /* AVFoundation.framework */; };
 		E3EFE1D61C0F48F10033BB25 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3EFE1D51C0F48F10033BB25 /* Security.framework */; };
 		E3EFE1DC1C0F4F190033BB25 /* SpeechKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3EFE1DB1C0F4F190033BB25 /* SpeechKit.framework */; };
-		E3EFE1E01C0F4FBA0033BB25 /* DMRecognizerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3EFE1DF1C0F4FBA0033BB25 /* DMRecognizerViewController.m */; };
 		E3EFE1E41C0F51C40033BB25 /* earcon_cancel.wav in Resources */ = {isa = PBXBuildFile; fileRef = E3EFE1E11C0F51C40033BB25 /* earcon_cancel.wav */; };
 		E3EFE1E51C0F51C40033BB25 /* earcon_done_listening.wav in Resources */ = {isa = PBXBuildFile; fileRef = E3EFE1E21C0F51C40033BB25 /* earcon_done_listening.wav */; };
 		E3EFE1E61C0F51C40033BB25 /* earcon_listening.wav in Resources */ = {isa = PBXBuildFile; fileRef = E3EFE1E31C0F51C40033BB25 /* earcon_listening.wav */; };
-		E3EFE1E81C0F53ED0033BB25 /* RecognizerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3EFE1E71C0F53ED0033BB25 /* RecognizerView.xib */; };
-		E3EFE1EB1C0F58810033BB25 /* DMVocalizerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3EFE1EA1C0F58810033BB25 /* DMVocalizerViewController.m */; };
-		E3EFE1ED1C0F59240033BB25 /* VocalizerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3EFE1EC1C0F59240033BB25 /* VocalizerView.xib */; };
 		E3EFE1F31C108BF50033BB25 /* AskHuiView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3EFE1F21C108BF50033BB25 /* AskHuiView.xib */; };
 		E3EFE1F61C108C0A0033BB25 /* AskHuiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3EFE1F51C108C0A0033BB25 /* AskHuiViewController.m */; };
 		E3EFE1FA1C109CDA0033BB25 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = E3EFE1F91C109CDA0033BB25 /* Utils.m */; };
@@ -160,15 +156,9 @@
 		E3EFE1D31C0F48DC0033BB25 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		E3EFE1D51C0F48F10033BB25 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		E3EFE1DB1C0F4F190033BB25 /* SpeechKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpeechKit.framework; sourceTree = "<group>"; };
-		E3EFE1DE1C0F4FBA0033BB25 /* DMRecognizerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMRecognizerViewController.h; sourceTree = "<group>"; };
-		E3EFE1DF1C0F4FBA0033BB25 /* DMRecognizerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMRecognizerViewController.m; sourceTree = "<group>"; };
 		E3EFE1E11C0F51C40033BB25 /* earcon_cancel.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = earcon_cancel.wav; sourceTree = "<group>"; };
 		E3EFE1E21C0F51C40033BB25 /* earcon_done_listening.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = earcon_done_listening.wav; sourceTree = "<group>"; };
 		E3EFE1E31C0F51C40033BB25 /* earcon_listening.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = earcon_listening.wav; sourceTree = "<group>"; };
-		E3EFE1E71C0F53ED0033BB25 /* RecognizerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecognizerView.xib; sourceTree = "<group>"; };
-		E3EFE1E91C0F58810033BB25 /* DMVocalizerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMVocalizerViewController.h; sourceTree = "<group>"; };
-		E3EFE1EA1C0F58810033BB25 /* DMVocalizerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMVocalizerViewController.m; sourceTree = "<group>"; };
-		E3EFE1EC1C0F59240033BB25 /* VocalizerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VocalizerView.xib; sourceTree = "<group>"; };
 		E3EFE1F21C108BF50033BB25 /* AskHuiView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AskHuiView.xib; sourceTree = "<group>"; };
 		E3EFE1F41C108C0A0033BB25 /* AskHuiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AskHuiViewController.h; sourceTree = "<group>"; };
 		E3EFE1F51C108C0A0033BB25 /* AskHuiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AskHuiViewController.m; sourceTree = "<group>"; };
@@ -299,8 +289,6 @@
 		E3CE4E511C02226F0096D0FB /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				E3EFE1E71C0F53ED0033BB25 /* RecognizerView.xib */,
-				E3EFE1EC1C0F59240033BB25 /* VocalizerView.xib */,
 				E30816931C0457EA0007D896 /* WalkOne.xib */,
 				E30816941C0457EA0007D896 /* WalkThree.xib */,
 				E30816951C0457EA0007D896 /* WalkThroughViewController.xib */,
@@ -424,10 +412,6 @@
 				E3EFE1E11C0F51C40033BB25 /* earcon_cancel.wav */,
 				E3EFE1E21C0F51C40033BB25 /* earcon_done_listening.wav */,
 				E3EFE1E31C0F51C40033BB25 /* earcon_listening.wav */,
-				E3EFE1DE1C0F4FBA0033BB25 /* DMRecognizerViewController.h */,
-				E3EFE1DF1C0F4FBA0033BB25 /* DMRecognizerViewController.m */,
-				E3EFE1E91C0F58810033BB25 /* DMVocalizerViewController.h */,
-				E3EFE1EA1C0F58810033BB25 /* DMVocalizerViewController.m */,
 			);
 			path = Voice;
 			sourceTree = "<group>";
@@ -570,10 +554,8 @@
 				E3DDCB471C11F5BC0053E150 /* Play.wav in Resources */,
 				E30816991C0457EA0007D896 /* WalkThree.xib in Resources */,
 				E3EFE1E51C0F51C40033BB25 /* earcon_done_listening.wav in Resources */,
-				E3EFE1E81C0F53ED0033BB25 /* RecognizerView.xib in Resources */,
 				E3DDCB401C11BE2F0053E150 /* Icon-iOS7@2x.png in Resources */,
 				E3B02EB31C09AEB9005E7DF4 /* MainView.xib in Resources */,
-				E3EFE1ED1C0F59240033BB25 /* VocalizerView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -606,13 +588,11 @@
 				E3694FDC1C07330D0036D1F1 /* DetailPlantViewController.m in Sources */,
 				E3694FDF1C0733670036D1F1 /* SearchPlantViewController.m in Sources */,
 				E3DA78621C08430600F6C06A /* PlantViewController.m in Sources */,
-				E3EFE1EB1C0F58810033BB25 /* DMVocalizerViewController.m in Sources */,
 				E3CE4E191C0221850096D0FB /* AppDelegate.m in Sources */,
 				E3EFE1F61C108C0A0033BB25 /* AskHuiViewController.m in Sources */,
 				E30816921C0455CB0007D896 /* CustomPageViewController.m in Sources */,
 				E3CE4E581C0222CD0096D0FB /* ViewController.m in Sources */,
 				E3DDCB451C11BE2F0053E150 /* MBProgressHUD.m in Sources */,
-				E3EFE1E01C0F4FBA0033BB25 /* DMRecognizerViewController.m in Sources */,
 				E308168F1C04558D0007D896 /* WalkThroughViewController.m in Sources */,
 				E3CE4E161C0221850096D0FB /* main.m in Sources */,
 				E3EFE1FA1C109CDA0033BB25 /* Utils.m in Sources */,

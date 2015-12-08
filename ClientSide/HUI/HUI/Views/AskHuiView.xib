@@ -10,6 +10,8 @@
                 <outlet property="recognitionType" destination="bKq-VW-6Ry" id="0CE-J6-W1j"/>
                 <outlet property="recordButton" destination="Nuo-2K-xlY" id="4nQ-tx-fOI"/>
                 <outlet property="searchBox" destination="eFa-sf-nag" id="6gD-OV-1e6"/>
+                <outlet property="speakButton" destination="Lg9-P8-aJM" id="izn-5L-Mnh"/>
+                <outlet property="textToRead" destination="YJ0-Bw-E94" id="Tft-Z1-tfN"/>
                 <outlet property="view" destination="iN0-l3-epB" id="eNk-UI-ZT2"/>
                 <outlet property="vuMeter" destination="8hv-lQ-99r" id="SX5-p5-KHR"/>
             </connections>
@@ -75,6 +77,15 @@
                                 </state>
                                 <connections>
                                     <action selector="recordButtonAction:" destination="-1" eventType="touchUpInside" id="Wiu-2p-j9L"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lg9-P8-aJM">
+                                <rect key="frame" x="114" y="504" width="92" height="53"/>
+                                <state key="normal" title="Read">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="speakOrStopAction:" destination="-1" eventType="touchUpInside" id="qVR-xN-bdc"/>
                                 </connections>
                             </button>
                         </subviews>

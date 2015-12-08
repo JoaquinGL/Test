@@ -14,9 +14,18 @@
 
 @end
 
+const unsigned char SpeechKitApplicationKey[] = {0x2b, 0x68, 0xea, 0x70, 0x07, 0x01, 0xc0, 0xff, 0xea, 0xb5, 0x2b, 0xb4, 0x60, 0xea, 0xb5, 0x4a, 0xba, 0xed, 0x7f, 0x1a, 0xd3, 0x3e, 0x53, 0x4d, 0xbc, 0x6a, 0x61, 0xcb, 0xf2, 0xc0, 0xe2, 0x1d, 0x29, 0xcc, 0x8d, 0x30, 0xcd, 0x4e, 0x2f, 0xb7, 0x03, 0x5a, 0x6b, 0x63, 0x44, 0x20, 0xae, 0xfe, 0x0d, 0x2d, 0x19, 0xe1, 0x6c, 0x6c, 0x2e, 0x28, 0xd7, 0x90, 0xf3, 0xc9, 0x50, 0xd5, 0xe7, 0x79};
+
+
 @implementation AskHuiViewController
 
-@synthesize recordButton,searchBox,vuMeter,voiceSearch;
+@synthesize recordButton
+            , searchBox
+            , vuMeter
+            , voiceSearch
+            , textToRead
+            , speakButton
+            , vocalizer;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -29,7 +38,7 @@
                   delegate:self];
     
     // Set earcons to play
-    SKEarcon* earconStart	= [SKEarcon earconWithName:@"Play.wav"];
+    SKEarcon* earconStart	= [SKEarcon earconWithName:@"Robot1.wav"];
     SKEarcon* earconStop	= [SKEarcon earconWithName:@"Robot2.wav"];
     SKEarcon* earconCancel	= [SKEarcon earconWithName:@"Cancel.wav"];
     
@@ -94,6 +103,39 @@
                                                 delegate:self];
     }
 }
+
+
+- (IBAction)speakOrStopAction: (id) sender {
+    [textToRead resignFirstResponder];
+    
+    if (isSpeaking) {
+        [vocalizer cancel];
+        isSpeaking = NO;
+    }
+    else {
+        isSpeaking = YES;
+        // Initializes an english voice
+        vocalizer = [[SKVocalizer alloc] initWithLanguage:@"en_US" delegate:self];
+        
+        // Initializes a french voice
+        // vocalizer = [[SKVocalizer alloc] initWithLanguage:@"fr_FR" delegate:self];
+        
+        // Initializes a SKVocalizer with a specific voice
+        // vocalizer = [[SKVocalizer alloc] initWithVoice:@"Samantha" delegate:self];
+        
+        // Speaks the string text
+        [vocalizer speakString:textToRead.text];
+        
+        // Speaks the markup text with language For multiple languages, add <s></s> tags to markup string
+        // NSString * textToReadString = [[[[NSString alloc] initWithCString:"<?xml version=\"1.0\"?> <speak version=\"1.0\" xmlns=\"http://www.w3.org/2001/10/synthesis\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://www.w3.org/2001/10/synthesis http://www.w3.org/TR/speech-synthesis/synthesis.xsd\" xml:lang=\"en-us\"> <s xml:lang=\"fr\"> "] stringByAppendingString:textToRead.text] stringByAppendingString:@"</s></speak>"];
+        // [vocalizer speakMarkupString:textToReadString];
+        
+        // Speaks the markup text with voice, For multiple voices, add <voice></voice> tags to markup string.
+        // NSString * textToReadString = [[[[NSString alloc] initWithCString:"<?xml version=\"1.0\"?> <speak version=\"1.0\" xmlns=\"http://www.w3.org/2001/10/synthesis\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://www.w3.org/2001/10/synthesis http://www.w3.org/TR/speech-synthesis/synthesis.xsd\" xml:lang=\"en-us\"> <voice name=\"Samantha\">"] stringByAppendingString:textToRead.text] stringByAppendingString:@"</voice></speak>"];
+        // [vocalizer speakMarkupString:textToReadString];
+    }
+}
+
 
 
 #pragma mark SpeechKitDelegate methods
@@ -212,6 +254,39 @@
     
     voiceSearch = nil;
 }
+
+#pragma mark -
+#pragma mark SKVocalizerDelegate methods
+
+- (void)vocalizer:(SKVocalizer *)vocalizer willBeginSpeakingString:(NSString *)text {
+    isSpeaking = YES;
+    [speakButton setTitle:@"Stop" forState:UIControlStateNormal];
+}
+
+- (void)vocalizer:(SKVocalizer *)vocalizer willSpeakTextAtCharacter:(NSUInteger)index ofString:(NSString *)text {
+    NSLog(@"Session id [%@].", [SpeechKit sessionID]); // for debugging purpose: printing out the speechkit session id
+}
+
+- (void)vocalizer:(SKVocalizer *)vocalizer didFinishSpeakingString:(NSString *)text withError:(NSError *)error {
+    NSLog(@"Session id [%@].", [SpeechKit sessionID]); // for debugging purpose: printing out the speechkit session id
+    isSpeaking = NO;
+    [speakButton setTitle:@"Read It" forState:UIControlStateNormal];
+    if (error !=nil)
+    {
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Error"
+                                                                       message:[error localizedDescription]
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                              handler:^(UIAlertAction * action) {}];
+        
+        [alert addAction:defaultAction];
+        [self presentViewController:alert animated:YES completion:nil];
+        
+        
+    }
+}
+
 
 #pragma mark -
 #pragma mark UITextFieldDelegate methods
