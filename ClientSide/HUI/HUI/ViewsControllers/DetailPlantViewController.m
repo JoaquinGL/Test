@@ -16,9 +16,9 @@
     IBOutlet UILabel* plantWater;
     IBOutlet UILabel* plantTemperature;
     IBOutlet UIImageView* plantImageView;
-    IBOutlet UIImageView* statusSun;
-    IBOutlet UIImageView* statusWater;
-    IBOutlet UIImageView* statusTemperature;
+    IBOutlet UIImageView* sunStatusImageView;
+    IBOutlet UIImageView* waterStatusImageView;
+    IBOutlet UIImageView* temperatureStatusImageView;
     IBOutlet UIButton* configureHUIButton;
 }
 
@@ -27,7 +27,7 @@
 
 @implementation DetailPlantViewController
 
-@synthesize identify = _identify, plant = _plant;
+@synthesize identify = _identify, plantViewModel = _plantViewModel;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -81,7 +81,7 @@
 
 - (IBAction)onDeletePlantTouchUpInside:(id)sender{
     
-    [self.delegate deletePlant: self.identify];
+    [self.delegate deletePlant: [self.plantViewModel getIdentify]];
     
     [[self navigationController] popViewControllerAnimated:YES];
 
@@ -92,51 +92,18 @@
 
 - (void) initPlantContent{
 
-    plantName.text = [self.plant objectForKey:@"name"];
+    plantName.text = [self.plantViewModel getName];
     
-    [plantImageView setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@.png",[self.plant objectForKey:@"name"]]]];
+    [plantImageView setImage:[self.plantViewModel getImage]];
+
+    [sunStatusImageView setImage:[self.plantViewModel getSunImage]];
+    [waterStatusImageView setImage:[self.plantViewModel getWaterImage]];
+    [temperatureStatusImageView setImage:[self.plantViewModel getTemperatureImage]];
     
-    if ([[self.plant objectForKey:@"status_sun"] intValue] == 1){
-        [statusSun setImage:[UIImage imageNamed:@"thumb_up.png"]];
-    }else if ([[self.plant objectForKey:@"status_sun"] intValue] == 0){
-        [statusSun setImage:[UIImage imageNamed:@"thumb_down.png"]];
-    }
-    
-    if ([[self.plant objectForKey:@"status_water"] intValue] == 1){
-        [statusWater setImage:[UIImage imageNamed:@"thumb_up.png"]];
-    }else if ([[self.plant objectForKey:@"status_water"] intValue] == 0){
-        [statusWater setImage:[UIImage imageNamed:@"thumb_down.png"]];
-    }
-    
-    if ([[self.plant objectForKey:@"status_temperature"] intValue] == 1){
-        [statusTemperature setImage:[UIImage imageNamed:@"thumb_up.png"]];
-    }else if ([[self.plant objectForKey:@"status_temperature"] intValue] == 0){
-        [statusTemperature setImage:[UIImage imageNamed:@"thumb_down.png"]];
-    }
-    
-    plantSun.text = [self.plant objectForKey:@"sun"];
-    plantWater.text = [self.plant objectForKey:@"water"];
-    plantTemperature.text = [self.plant objectForKey:@"temperature"];
+    plantSun.text = [self.plantViewModel getSunValue];
+    plantWater.text = [self.plantViewModel getWaterValue];
+    plantTemperature.text = [self.plantViewModel getTemperatureValue];
     
 }
-
-/*
-    OBJECT PLANT
- 
-    plant = {
-        id: number,
-        name: string,
-        sun: string,
-        water: string,
-        temperature: string,
-        status_sun: number,
-        status_water: number,
-        status_temperature: number,
-        HUI_identity: string
-    }
- */
-
-
-
 
 @end

@@ -8,8 +8,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PlantViewController">
             <connections>
                 <outlet property="_plantButton" destination="lPb-kM-AmA" id="T55-Th-7dq"/>
+                <outlet property="_plantNameLabel" destination="IAs-g5-zxQ" id="W2E-LQ-WPv"/>
                 <outlet property="plantImage" destination="hBf-RE-755" id="V4j-J8-xAx"/>
-                <outlet property="plantNameLabel" destination="IAs-g5-zxQ" id="sfF-8K-Eiy"/>
                 <outlet property="status" destination="vrP-eT-VVh" id="Iot-Vx-LMI"/>
                 <outlet property="view" destination="iN0-l3-epB" id="fek-qH-fGj"/>
             </connections>

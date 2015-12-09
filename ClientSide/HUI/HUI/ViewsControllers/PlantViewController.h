@@ -7,12 +7,13 @@
 //  This view is for the plant view controller in the main view. This view have a button and 3 imageViews to set the indicators of the plant
 
 #import "BaseViewController.h"
+#import "PlantViewModel.h"
 
 @protocol PlantViewControllerDelegate <NSObject>
 
 @required
 
--(void)showPlantDetail:(NSDictionary*) plantDictionary;
+-(void)showPlantDetail:(PlantViewModel*) plantViewModel;
 
 @end
 

@@ -7,11 +7,13 @@
 //
 
 #import "PlantViewController.h"
+#import "PlantViewModel.h"
 
 @interface PlantViewController (){
 
     IBOutlet UIButton* _plantButton;
     IBOutlet UILabel*  _plantNameLabel;
+    __strong PlantViewModel *_plantViewModel;
 }
 
 @end
@@ -51,21 +53,37 @@
 
 - (IBAction) onPlantButtonTouchUpInside:(id)sender{
     
-    NSDictionary* plantDictionary = @{
-      @"id":self.identify
+    if (_plantViewModel)
+    {
+        _plantViewModel = nil;
+    }
+    
+    _plantViewModel = [[PlantViewModel alloc] init];
+    
+    
+    UIImage *tempImage = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png",self.plantName]];
+    
+    if (!tempImage) {
+        tempImage = [UIImage imageNamed:@"plant.png"];
+    }
+    
+    _plantViewModel.innerState = @{
+      @"identify":self.identify
       ,@"name":self.plantName
-      ,@"sun": @"prueba valores"
-      ,@"water": @"prueba valores"
-      ,@"temperature": @"prueba valores"
-      ,@"status_sun": [NSNumber numberWithInt:1]
-      ,@"status_water": [NSNumber numberWithInt:1]
-      ,@"status_temperature": [NSNumber numberWithInt:1]
+      ,@"image": tempImage
+      ,@"sunValue": @"prueba valores"
+      ,@"waterValue": @"prueba valores"
+      ,@"temperatureValue": @"prueba valores"
+      ,@"sunStatus": [NSNumber numberWithInt:0]
+      ,@"waterStatus": [NSNumber numberWithInt:1]
+      ,@"temperatureStatus": [NSNumber numberWithInt:0]
       };
 
     /* GET THE OBJECT FROM BBDD, WITH THE ID THE BBDD have everything update from server. remember that */
     
+
     
-    [self.delegate showPlantDetail:plantDictionary];
+    [self.delegate showPlantDetail:_plantViewModel];
 }
 
 

@@ -9,13 +9,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "HUI/ViewsControllers/MainViewController.m"
-            timestampString = "471345365.232866"
+            filePath = "HUI/Models/BaseViewModel.m"
+            timestampString = "471373256.687044"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "300"
-            endingLineNumber = "300"
-            landmarkName = "-deletePlant:"
+            startingLineNumber = "15"
+            endingLineNumber = "15"
+            landmarkName = "-init"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,13 +25,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "HUI/ViewsControllers/MainViewController.m"
-            timestampString = "471345365.232866"
+            filePath = "HUI/ViewsControllers/DetailPlantViewController.m"
+            timestampString = "471379791.024356"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "301"
-            endingLineNumber = "301"
-            landmarkName = "-deletePlant:"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
+            landmarkName = "-onDeletePlantTouchUpInside:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

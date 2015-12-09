@@ -11,7 +11,7 @@
 #import "WalkthroughPageViewController.h"
 #import "CustomPageViewController.h"
 #import "AskHuiViewController.h"
-
+#import "PlantViewModel.h"
 
 @interface MainViewController (){
     SearchPlantViewController* _searchPlantViewController;
@@ -208,19 +208,19 @@
 
 #pragma mark - Delegate Search
 
-- (void)onSelectPlant:(NSString*) plantName{
+- (void)onSelectPlant:(NSString*) plantName withId:(long)position{
     
-    [self addNewPlantWithName: plantName];
+    [self addNewPlantWithName: plantName withId: position];
 }
 
 #pragma - Delegate PlantView
 
-- (void)showPlantDetail:(NSDictionary*) plantDictionary{
+- (void)showPlantDetail:(PlantViewModel*) plantViewModel{
     
-    _detailPlantViewController.title = [plantDictionary objectForKey:@"name"];
-    _detailPlantViewController.identify = [plantDictionary objectForKey:@"id"];
+    _detailPlantViewController.title = [plantViewModel getName];
+    _detailPlantViewController.identify = [plantViewModel getIdentify];
 
-    _detailPlantViewController.plant = plantDictionary;
+    _detailPlantViewController.plantViewModel = plantViewModel;
     
     [self.navigationController pushViewController:_detailPlantViewController animated:YES];
 }
@@ -228,9 +228,9 @@
 #pragma mark - Delegate DetailPlant
 - (void)deletePlant:(NSNumber *)identify{
     
-    int localNumberOfPlants = [identify intValue];
+    int orderOfDelete = [identify intValue];
     
-    switch (localNumberOfPlants) {
+    switch (orderOfDelete) {
         case 0:
             
             if( [self.numberOfPlants intValue] == 3){
@@ -238,8 +238,8 @@
                 _plant2ViewController.view.frame = _plant1ViewController.view.frame;
                 _plant1ViewController.view.frame = _plant0ViewController.view.frame;
                 
-                _plant1ViewController.identify =_plant0ViewController.identify;
-                _plant2ViewController.identify =_plant1ViewController.identify;
+                _plant1ViewController.identify = [NSNumber numberWithInt: 0];
+                _plant2ViewController.identify = [NSNumber numberWithInt: 1];
                 
                 [_plant0ViewController.view removeFromSuperview];
                 _plant0ViewController = _plant1ViewController;
@@ -257,9 +257,11 @@
                 [_plant0ViewController.view removeFromSuperview];
                 _plant0ViewController = _plant1ViewController;
                 
-                _plant0ViewController.identify =_plant1ViewController.identify;
+                _plant0ViewController.identify =[NSNumber numberWithInt: 0];
                 
                 _plant1ViewController = nil;
+                
+                [_plant0ViewController.view setFrame:CGRectMake(95, 20, _plant0ViewController.view.frame.size.width, _plant0ViewController.view.frame.size.height)];
                 
                 [newPlantButton setFrame: FRAME_NEW_PLANT_1_PLANT];
                 
@@ -271,7 +273,6 @@
                 [newPlantButton setFrame: FRAME_NEW_PLANT];
                 
             }
-            
             
             
             break;
@@ -287,11 +288,15 @@
                 [_plant1ViewController.view removeFromSuperview];
                 _plant1ViewController = _plant2ViewController;
                 
+                _plant1ViewController.identify =[NSNumber numberWithInt: 1];
+                
                 _plant2ViewController = nil;
                 
             }else if( [self.numberOfPlants intValue] == 2){
                 
                 [_plant0ViewController.view setFrame:CGRectMake(95, 20, _plant0ViewController.view.frame.size.width, _plant0ViewController.view.frame.size.height)];
+                
+                _plant0ViewController.identify =[NSNumber numberWithInt: 0];
                 
                 [_plant1ViewController.view removeFromSuperview];
                 _plant1ViewController = nil;
@@ -315,7 +320,7 @@
 
 #pragma mark - PlantViewsController
 
-- (void)addNewPlantWithName:(NSString*) plantName{
+- (void)addNewPlantWithName:(NSString*) plantName withId:(long) position{
     
     int localNumberOfPlants = [self.numberOfPlants intValue];
     
@@ -326,8 +331,7 @@
                 _plant0ViewController = [PlantViewController instantiate];
                 _plant0ViewController.delegate = self;
                 _plant0ViewController.plantName = plantName;
-                _plant0ViewController.identify = self.numberOfPlants;
-                
+                _plant0ViewController.identify = [NSNumber numberWithInt:0];
                 [_plant0ViewController.view setFrame:CGRectMake(95, 20, _plant0ViewController.view.frame.size.width, _plant0ViewController.view.frame.size.height)];
                 
                 [newPlantButton setFrame: FRAME_NEW_PLANT_1_PLANT];
@@ -344,7 +348,7 @@
                 _plant1ViewController = [PlantViewController instantiate];
                 _plant1ViewController.plantName = plantName;
                 _plant1ViewController.delegate = self;
-                _plant1ViewController.identify = self.numberOfPlants;
+                _plant1ViewController.identify = [NSNumber numberWithInt:1];
                 [_plant0ViewController.view setFrame:CGRectMake(20, 20, _plant0ViewController.view.frame.size.width, _plant0ViewController.view.frame.size.height)];
                 [_plant1ViewController.view setFrame:CGRectMake(170, 20, _plant1ViewController.view.frame.size.width, _plant1ViewController.view.frame.size.height)];
                 [newPlantButton setFrame: FRAME_NEW_PLANT_2_PLANT];
@@ -360,7 +364,7 @@
                 _plant2ViewController = [PlantViewController instantiate];
                 _plant2ViewController.plantName = plantName;
                 _plant2ViewController.delegate = self;
-                _plant2ViewController.identify = self.numberOfPlants;
+                _plant2ViewController.identify = [NSNumber numberWithInt:2];
                 [_plant2ViewController.view setFrame:CGRectMake(20, 200, _plant2ViewController.view.frame.size.width, _plant2ViewController.view.frame.size.height)];
                 [newPlantButton setFrame: FRAME_NEW_PLANT_3_PLANT];
                 

@@ -7,6 +7,7 @@
 //
 
 #import "BaseViewController.h"
+#import "PlantViewModel.h"
 
 @protocol DetailPlantViewControllerDelegate <NSObject>
 
@@ -22,11 +23,7 @@
 
 @property (nonatomic, assign) id <DetailPlantViewControllerDelegate> delegate;
 @property (nonatomic, assign) NSNumber* identify;
-@property (nonatomic, retain) NSDictionary* plant;
-
-
-
-
+@property (nonatomic, retain) PlantViewModel* plantViewModel;
 
 
 + ( DetailPlantViewController* )instantiate;

@@ -67,7 +67,9 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    [self.delegate onSelectPlant: self.data[indexPath.row]];
+    //TODO: GENERATE GUID
+    
+    [self.delegate onSelectPlant: self.data[indexPath.row] withId:indexPath.row];
     
     [[self navigationController] popViewControllerAnimated:YES];
 }
