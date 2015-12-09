@@ -21,13 +21,19 @@
     PlantViewController* _plant1ViewController;
     PlantViewController* _plant2ViewController;
     
-    
     AskHuiViewController* _askHuiViewController;
+    
+    IBOutlet UIButton* newPlantButton;
     
     MBProgressHUD* _HUD;
 }
 
 @end
+
+#define FRAME_NEW_PLANT CGRectMake(80, 70, 160, 160)
+#define FRAME_NEW_PLANT_1_PLANT CGRectMake(80, 190, 160, 160)
+#define FRAME_NEW_PLANT_2_PLANT CGRectMake(80, 200, 160, 160)
+#define FRAME_NEW_PLANT_3_PLANT CGRectMake(180, 220, 120, 120)
 
 @implementation MainViewController
 
@@ -56,8 +62,14 @@
     
     _askHuiViewController = [AskHuiViewController instantiate];
     _askHuiViewController.delegate = self;
-    
     [_askHuiViewController.view setFrame: self.view.frame];
+    
+    /* New Plant Button */
+    newPlantButton = [[UIButton alloc] initWithFrame: FRAME_NEW_PLANT];
+    [newPlantButton addTarget:self action:@selector(showSearchPlantOnTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
+    [newPlantButton setBackgroundImage:[UIImage imageNamed:@"plant_something_new.png"] forState:UIControlStateNormal];
+    
+    [self.view addSubview: newPlantButton];
     
     /* TODO: comprobar la lógica de plantas guardadas en el movil. Para que se quede guardado en BBDD
      Aqui hay que tener el sistema de notificaciones para poder añadir los botones si se selecciona una planta nueva. 
@@ -97,6 +109,10 @@
     self.navigationItem.rightBarButtonItem = rightButton;
 
     
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear: animated];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -203,6 +219,8 @@
     
     _detailPlantViewController.title = [plantDictionary objectForKey:@"name"];
     _detailPlantViewController.identify = [plantDictionary objectForKey:@"id"];
+
+    _detailPlantViewController.plant = plantDictionary;
     
     [self.navigationController pushViewController:_detailPlantViewController animated:YES];
 }
@@ -229,6 +247,8 @@
                 
                 _plant2ViewController = nil;
                 
+                [newPlantButton setFrame: FRAME_NEW_PLANT_1_PLANT];
+                
             }else if( [self.numberOfPlants intValue] == 2){
             
                 _plant1ViewController.view.frame = _plant0ViewController.view.frame;
@@ -241,12 +261,19 @@
                 
                 _plant1ViewController = nil;
                 
+                [newPlantButton setFrame: FRAME_NEW_PLANT_1_PLANT];
+                
             }else{
                 
                 [_plant0ViewController.view removeFromSuperview];
                 _plant0ViewController = nil;
                 
+                [newPlantButton setFrame: FRAME_NEW_PLANT];
+                
             }
+            
+            
+            
             break;
             
         case 1:
@@ -263,10 +290,13 @@
                 _plant2ViewController = nil;
                 
             }else if( [self.numberOfPlants intValue] == 2){
-
+                
+                [_plant0ViewController.view setFrame:CGRectMake(95, 20, _plant0ViewController.view.frame.size.width, _plant0ViewController.view.frame.size.height)];
+                
                 [_plant1ViewController.view removeFromSuperview];
                 _plant1ViewController = nil;
             }
+            [newPlantButton setFrame: FRAME_NEW_PLANT_2_PLANT];
             
         break;
             
@@ -274,6 +304,8 @@
             
             [_plant2ViewController.view removeFromSuperview];
             _plant2ViewController = nil;
+            
+            [newPlantButton setFrame: FRAME_NEW_PLANT_2_PLANT];
         break;
     }
     
@@ -295,10 +327,17 @@
                 _plant0ViewController.delegate = self;
                 _plant0ViewController.plantName = plantName;
                 _plant0ViewController.identify = self.numberOfPlants;
-                [_plant0ViewController.view setFrame:CGRectMake(50, 100, _plant0ViewController.view.frame.size.width, _plant0ViewController.view.frame.size.height)];
+                
+                [_plant0ViewController.view setFrame:CGRectMake(95, 20, _plant0ViewController.view.frame.size.width, _plant0ViewController.view.frame.size.height)];
+                
+                [newPlantButton setFrame: FRAME_NEW_PLANT_1_PLANT];
                 
                 // showWithAnimationTheView
                 [self.view addSubview:_plant0ViewController.view];
+                
+                [_plant0ViewController setPlantImageFromName:plantName];
+                [_plant0ViewController setStatusUndefined];
+                
                 break;
                 
             case 1:
@@ -306,10 +345,15 @@
                 _plant1ViewController.plantName = plantName;
                 _plant1ViewController.delegate = self;
                 _plant1ViewController.identify = self.numberOfPlants;
-                [_plant1ViewController.view setFrame:CGRectMake(200, 100, _plant1ViewController.view.frame.size.width, _plant1ViewController.view.frame.size.height)];
+                [_plant0ViewController.view setFrame:CGRectMake(20, 20, _plant0ViewController.view.frame.size.width, _plant0ViewController.view.frame.size.height)];
+                [_plant1ViewController.view setFrame:CGRectMake(170, 20, _plant1ViewController.view.frame.size.width, _plant1ViewController.view.frame.size.height)];
+                [newPlantButton setFrame: FRAME_NEW_PLANT_2_PLANT];
                 
                 // showWithAnimationTheView
                 [self.view addSubview:_plant1ViewController.view];
+                
+                [_plant1ViewController setPlantImageFromName:plantName];
+                [_plant1ViewController setStatusUndefined];
                 break;
                 
             default:
@@ -317,10 +361,15 @@
                 _plant2ViewController.plantName = plantName;
                 _plant2ViewController.delegate = self;
                 _plant2ViewController.identify = self.numberOfPlants;
-                [_plant2ViewController.view setFrame:CGRectMake(50, 300, _plant2ViewController.view.frame.size.width, _plant2ViewController.view.frame.size.height)];
+                [_plant2ViewController.view setFrame:CGRectMake(20, 200, _plant2ViewController.view.frame.size.width, _plant2ViewController.view.frame.size.height)];
+                [newPlantButton setFrame: FRAME_NEW_PLANT_3_PLANT];
                 
                 // showWithAnimationTheView
                 [self.view addSubview:_plant2ViewController.view];
+                
+                [_plant2ViewController setPlantImageFromName:plantName];
+                [_plant2ViewController setStatusUndefined];
+
                 break;
         }
         

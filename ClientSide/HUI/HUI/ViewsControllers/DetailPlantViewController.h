@@ -22,7 +22,14 @@
 
 @property (nonatomic, assign) id <DetailPlantViewControllerDelegate> delegate;
 @property (nonatomic, assign) NSNumber* identify;
+@property (nonatomic, retain) NSDictionary* plant;
+
+
+
+
+
 
 + ( DetailPlantViewController* )instantiate;
+
 
 @end

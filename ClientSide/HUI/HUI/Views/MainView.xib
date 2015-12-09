@@ -22,13 +22,6 @@
                         <action selector="onAskHuiTouchUpInside:" destination="-1" eventType="touchUpInside" id="IGC-Nk-e7n"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0nt-x4-zh0">
-                    <rect key="frame" x="80" y="73" width="160" height="160"/>
-                    <state key="normal" backgroundImage="plant_something_new"/>
-                    <connections>
-                        <action selector="showSearchPlantOnTouchUpInside:" destination="-1" eventType="touchUpInside" id="ubG-Nf-mti"/>
-                    </connections>
-                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
@@ -37,6 +30,5 @@
     </objects>
     <resources>
         <image name="askHUI" width="84" height="84"/>
-        <image name="plant_something_new" width="84" height="84"/>
     </resources>
 </document>

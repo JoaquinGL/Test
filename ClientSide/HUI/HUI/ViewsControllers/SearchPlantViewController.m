@@ -32,7 +32,7 @@
 }
 
 - (void)customInit{
-    self.data = @[@"Orange",@"Carrot",@"Tomato",@"Letuce",@"Onion",@"Potatoe",@"Lemon",@"Soja"];
+    self.data = @[@"orange",@"carrot",@"tomato",@"lettuce",@"onion",@"potatoe",@"lemon",@"soja"];
 }
 
 #pragma mark - Instantiate method
