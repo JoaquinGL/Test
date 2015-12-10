@@ -18,6 +18,7 @@
 		E3190EEB1C06F36800F8C390 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3190EEA1C06F36800F8C390 /* BaseViewController.m */; };
 		E36079CB1C18867D00AD6D11 /* BaseViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E36079CA1C18867D00AD6D11 /* BaseViewModel.m */; };
 		E36079D41C18887700AD6D11 /* PlantViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E36079D31C18887700AD6D11 /* PlantViewModel.m */; };
+		E36079D71C1968AF00AD6D11 /* Manager.m in Sources */ = {isa = PBXBuildFile; fileRef = E36079D61C1968AF00AD6D11 /* Manager.m */; };
 		E3694FDC1C07330D0036D1F1 /* DetailPlantViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3694FDB1C07330D0036D1F1 /* DetailPlantViewController.m */; };
 		E3694FDF1C0733670036D1F1 /* SearchPlantViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3694FDE1C0733670036D1F1 /* SearchPlantViewController.m */; };
 		E3694FE11C074A1A0036D1F1 /* DetailPlantView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3694FE01C074A1A0036D1F1 /* DetailPlantView.xib */; };
@@ -104,6 +105,8 @@
 		E36079CA1C18867D00AD6D11 /* BaseViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewModel.m; sourceTree = "<group>"; };
 		E36079D21C18887700AD6D11 /* PlantViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlantViewModel.h; sourceTree = "<group>"; };
 		E36079D31C18887700AD6D11 /* PlantViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlantViewModel.m; sourceTree = "<group>"; };
+		E36079D51C1968AF00AD6D11 /* Manager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Manager.h; sourceTree = "<group>"; };
+		E36079D61C1968AF00AD6D11 /* Manager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Manager.m; sourceTree = "<group>"; };
 		E3694FDA1C07330D0036D1F1 /* DetailPlantViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailPlantViewController.h; sourceTree = "<group>"; };
 		E3694FDB1C07330D0036D1F1 /* DetailPlantViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailPlantViewController.m; sourceTree = "<group>"; };
 		E3694FDD1C0733670036D1F1 /* SearchPlantViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchPlantViewController.h; sourceTree = "<group>"; };
@@ -300,6 +303,8 @@
 		E3CE4E501C02226F0096D0FB /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				E36079D51C1968AF00AD6D11 /* Manager.h */,
+				E36079D61C1968AF00AD6D11 /* Manager.m */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -607,6 +612,7 @@
 				E3694FDF1C0733670036D1F1 /* SearchPlantViewController.m in Sources */,
 				E3DA78621C08430600F6C06A /* PlantViewController.m in Sources */,
 				E36079D41C18887700AD6D11 /* PlantViewModel.m in Sources */,
+				E36079D71C1968AF00AD6D11 /* Manager.m in Sources */,
 				E3CE4E191C0221850096D0FB /* AppDelegate.m in Sources */,
 				E3EFE1F61C108C0A0033BB25 /* AskHuiViewController.m in Sources */,
 				E30816921C0455CB0007D896 /* CustomPageViewController.m in Sources */,

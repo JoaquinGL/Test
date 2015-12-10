@@ -12,6 +12,7 @@
 #import "CustomPageViewController.h"
 #import "AskHuiViewController.h"
 #import "PlantViewModel.h"
+#import "Manager.h"
 
 @interface MainViewController (){
     SearchPlantViewController* _searchPlantViewController;
@@ -26,6 +27,8 @@
     IBOutlet UIButton* newPlantButton;
     
     MBProgressHUD* _HUD;
+    
+    Manager* _manager;
 }
 
 @end
@@ -209,6 +212,12 @@
 #pragma mark - Delegate Search
 
 - (void)onSelectPlant:(NSString*) plantName withId:(long)position{
+    
+    /* Save plant in BBDD */
+    
+    _manager = [[Manager alloc] init];
+    
+    [_manager setPlant: nil];
     
     [self addNewPlantWithName: plantName withId: position];
 }
