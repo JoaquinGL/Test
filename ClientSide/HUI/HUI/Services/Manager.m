@@ -23,16 +23,16 @@
     NSManagedObject *plantInfo = [NSEntityDescription
                                        insertNewObjectForEntityForName:@"Plant"
                                        inManagedObjectContext:context];
-    [plantInfo setValue:@"123A" forKey:@"id"];
-    [plantInfo setValue:@"Tomato" forKey:@"name"];
-    [plantInfo setValue:@"tomato.png" forKey:@"image"];
-    [plantInfo setValue:[NSNumber numberWithInt:1] forKey:@"status"];
-    [plantInfo setValue:[NSNumber numberWithInt:1] forKey:@"sunStatus"];
-    [plantInfo setValue:[NSNumber numberWithInt:1] forKey:@"waterStatus"];
-    [plantInfo setValue:[NSNumber numberWithInt:1] forKey:@"temperatureStatus"];
-    [plantInfo setValue:@"Sun is ok" forKey:@"sunValue"];
-    [plantInfo setValue:@"Water is ok" forKey:@"waterValue"];
-    [plantInfo setValue:@"Temperature is ok" forKey:@"temperatureValue"];
+    [plantInfo setValue:[plantViewModel getIdentify] forKey:@"id"];
+    [plantInfo setValue:[plantViewModel getName] forKey:@"name"];
+    //[plantInfo setValue:[plantViewModel getImage] forKey:@"image"];
+    //[plantInfo setValue:[plantViewModel getStatus] forKey:@"status"];
+    [plantInfo setValue:[plantViewModel getSunStatus] forKey:@"sunStatus"];
+    [plantInfo setValue:[plantViewModel getWaterStatus] forKey:@"waterStatus"];
+    [plantInfo setValue:[plantViewModel getTemperatureStatus] forKey:@"temperatureStatus"];
+    [plantInfo setValue:[plantViewModel getSunValue] forKey:@"sunValue"];
+    [plantInfo setValue:[plantViewModel getWaterValue] forKey:@"waterValue"];
+    [plantInfo setValue:[plantViewModel getTemperatureValue] forKey:@"temperatureValue"];
     
     
     /* HUI object */
@@ -54,8 +54,7 @@
     if (![context save:&error]) {
         NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
     }
-    
-    
+
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription

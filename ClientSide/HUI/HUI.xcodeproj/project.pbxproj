@@ -16,6 +16,7 @@
 		E308169B1C0457EA0007D896 /* WalkTwo.xib in Resources */ = {isa = PBXBuildFile; fileRef = E30816961C0457EA0007D896 /* WalkTwo.xib */; };
 		E308169C1C0457EA0007D896 /* WalkZero.xib in Resources */ = {isa = PBXBuildFile; fileRef = E30816971C0457EA0007D896 /* WalkZero.xib */; };
 		E3190EEB1C06F36800F8C390 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3190EEA1C06F36800F8C390 /* BaseViewController.m */; };
+		E33823751C1A2C310029C285 /* HUIViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E33823741C1A2C310029C285 /* HUIViewModel.m */; };
 		E36079CB1C18867D00AD6D11 /* BaseViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E36079CA1C18867D00AD6D11 /* BaseViewModel.m */; };
 		E36079D41C18887700AD6D11 /* PlantViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E36079D31C18887700AD6D11 /* PlantViewModel.m */; };
 		E36079D71C1968AF00AD6D11 /* Manager.m in Sources */ = {isa = PBXBuildFile; fileRef = E36079D61C1968AF00AD6D11 /* Manager.m */; };
@@ -101,6 +102,8 @@
 		E30816971C0457EA0007D896 /* WalkZero.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WalkZero.xib; sourceTree = "<group>"; };
 		E3190EE91C06F36800F8C390 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		E3190EEA1C06F36800F8C390 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
+		E33823731C1A2C310029C285 /* HUIViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HUIViewModel.h; sourceTree = "<group>"; };
+		E33823741C1A2C310029C285 /* HUIViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HUIViewModel.m; sourceTree = "<group>"; };
 		E36079C91C18867D00AD6D11 /* BaseViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewModel.h; sourceTree = "<group>"; };
 		E36079CA1C18867D00AD6D11 /* BaseViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewModel.m; sourceTree = "<group>"; };
 		E36079D21C18887700AD6D11 /* PlantViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlantViewModel.h; sourceTree = "<group>"; };
@@ -220,6 +223,8 @@
 				E36079CA1C18867D00AD6D11 /* BaseViewModel.m */,
 				E36079D21C18887700AD6D11 /* PlantViewModel.h */,
 				E36079D31C18887700AD6D11 /* PlantViewModel.m */,
+				E33823731C1A2C310029C285 /* HUIViewModel.h */,
+				E33823741C1A2C310029C285 /* HUIViewModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -614,6 +619,7 @@
 				E36079D41C18887700AD6D11 /* PlantViewModel.m in Sources */,
 				E36079D71C1968AF00AD6D11 /* Manager.m in Sources */,
 				E3CE4E191C0221850096D0FB /* AppDelegate.m in Sources */,
+				E33823751C1A2C310029C285 /* HUIViewModel.m in Sources */,
 				E3EFE1F61C108C0A0033BB25 /* AskHuiViewController.m in Sources */,
 				E30816921C0455CB0007D896 /* CustomPageViewController.m in Sources */,
 				E3CE4E581C0222CD0096D0FB /* ViewController.m in Sources */,

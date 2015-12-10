@@ -6,6 +6,20 @@
 //  Copyright © 2015 Giraldez Lopez SL. All rights reserved.
 //
 
+
+/*
+ 
+ TODO: set HUIViewModel and save in BBDD with plantID, in this view,
+ we have to set the HUIviewModel with WifiName, HUIName, HUI GUID and WIFI key.
+ 
+ Tomorrow: To do
+ 
+ save the status in BBDD and get everything. 
+ 
+ configure HUI settings in this viewm asking everything. Maybe a view with a similar form. 
+ 
+ */
+
 #import "DetailPlantViewController.h"
 #import "SearchPlantViewController.h"
 

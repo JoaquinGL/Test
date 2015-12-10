@@ -213,11 +213,9 @@
 
 - (void)onSelectPlant:(NSString*) plantName withId:(long)position{
     
-    /* Save plant in BBDD */
-    
+    /* Add empty plant*/
     _manager = [[Manager alloc] init];
-    
-    [_manager setPlant: nil];
+    [_manager setPlant: [PlantViewModel initEmptyPlantWithName: plantName]];
     
     [self addNewPlantWithName: plantName withId: position];
 }

@@ -10,6 +10,24 @@
 
 @implementation PlantViewModel
 
++ (PlantViewModel* )initEmptyPlantWithName:(NSString* )name{
+    PlantViewModel * emptyPlant = [[PlantViewModel alloc] init];
+    
+    emptyPlant.innerState = @{
+                              @"id":[[NSUUID UUID] UUIDString]
+                              ,@"name":name
+                              ,@"image": [UIImage imageNamed:@"plant.png"]
+                              ,@"sunValue": @"undefined"
+                              ,@"waterValue": @"undefined"
+                              ,@"temperatureValue": @"undefined"
+                              ,@"sunStatus": [NSNumber numberWithInt:0]
+                              ,@"waterStatus": [NSNumber numberWithInt:1]
+                              ,@"temperatureStatus": [NSNumber numberWithInt:0]
+                              };
+    
+    return emptyPlant;
+}
+
 
 - (NSNumber*)getStatus
 {
@@ -53,8 +71,6 @@
 {
     return [ self.innerState valueForKey: @"image" ];
 }
-
-/* POSIBLE TO REMOVE */
 
 - (UIImage* )getWaterImage{
     UIImage* returnValue;

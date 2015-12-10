@@ -17,7 +17,7 @@
 
 @property ( nonatomic, retain, getter = getName ) NSString* name;
 
-@property (nonatomic, assign, getter = getIdentify) NSNumber* identify;
+@property (nonatomic, assign, getter = getIdentify) NSString* identify;
 @property (nonatomic, assign, getter = getSunValue) NSString* sunValue;
 @property (nonatomic, assign, getter = getWaterValue) NSString* waterValue;
 @property (nonatomic, assign, getter = getTemperatureValue) NSString* temperatureValue;
@@ -27,5 +27,6 @@
 @property (nonatomic, assign, getter = getTemperatureImage) IBOutlet UIImage* temperatureImage;
 @property (nonatomic, assign, getter = getSunImage) IBOutlet UIImage* sunImage;
 
++ (PlantViewModel* )initEmptyPlantWithName:(NSString* )name;
 
 @end
