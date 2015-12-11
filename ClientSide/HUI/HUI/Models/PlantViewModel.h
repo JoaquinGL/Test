@@ -29,5 +29,6 @@
 @property (nonatomic, assign, getter = getSunImage) IBOutlet UIImage* sunImage;
 
 + (PlantViewModel* )initEmptyPlantWithName:(NSString* )name andPosition:(NSNumber* )position;
++ (PlantViewModel* )getPlantFromObject:(id) object;
 
 @end

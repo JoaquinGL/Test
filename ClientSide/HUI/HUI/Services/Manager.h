@@ -19,7 +19,8 @@
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
--(void)setPlant:(PlantViewModel* )plantViewModel;
-- (void) removePlant:(PlantViewModel* )plantViewModel;
+- (void)setPlant:(PlantViewModel* )plantViewModel;
+- (void)removePlant:(PlantViewModel* )plantViewModel;
+- (NSMutableArray* )getPlantsFromBBDD;
 
 @end

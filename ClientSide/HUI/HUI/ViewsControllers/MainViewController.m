@@ -110,8 +110,10 @@
     
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithCustomView: infoButton];
     self.navigationItem.rightBarButtonItem = rightButton;
-
     
+    
+    /* GET CONTENT FROM BBDD */
+    [self initializeContent];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -220,7 +222,11 @@
     plantViewModel = [PlantViewModel initEmptyPlantWithName: plantName andPosition: [NSNumber numberWithLong: 0]];
     
     /* Add empty plant*/
-    _manager = [[Manager alloc] init];
+    if(!_manager)
+    {
+        _manager = [[Manager alloc] init];
+    }
+    
     [_manager setPlant: plantViewModel];
     
     [self addNewPlant: plantViewModel];
@@ -406,7 +412,24 @@
     }
 }
 
+#pragma mark - BBDD methods
 
+- (void) initializeContent{
+    
+    if(!_manager)
+    {
+        _manager = [[Manager alloc] init];
+    }
+    
+    NSMutableArray* content = [_manager getPlantsFromBBDD];
+    
+    for (PlantViewModel *plant in content) {
+    
+        [self addNewPlant:plant];
+    }
+    
+
+}
 
 
 @end

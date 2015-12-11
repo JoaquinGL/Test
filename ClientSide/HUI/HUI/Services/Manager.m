@@ -46,15 +46,13 @@
     [huiInfo setValue:@"itcrom" forKey:@"wifiName"];
     [huiInfo setValue:plantInfo forKey:@"plant"];
 
-    
-    
     [plantInfo setValue:huiInfo forKey:@"hui"];
+    
     
     NSError *error;
     if (![context save:&error]) {
         NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
     }
-
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription
@@ -62,12 +60,11 @@
     [fetchRequest setEntity:entity];
     NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
     for (NSManagedObject *info in fetchedObjects) {
-        NSLog(@"Name: %@", [info valueForKey:@"name"]);
         NSLog(@"id: %@", [info valueForKey:@"id"]);
-        
-        NSManagedObject *huiInfo = [info valueForKey:@"hui"];
-        NSLog(@"HUI: %@", [huiInfo valueForKey:@"name"]);
+        NSLog(@"Name: %@", [info valueForKey:@"name"]);
     }
+
+    
 }
 
 - (void) removePlant:(PlantViewModel* )plantViewModel{
@@ -93,6 +90,37 @@
         [context save:nil];
     }
 }
+
+
+- (NSMutableArray* )getPlantsFromBBDD{
+    NSMutableArray* returnObject = [[NSMutableArray alloc] init];
+    
+    NSManagedObjectContext *context = [self managedObjectContext];
+    
+    NSError *error;
+    if (![context save:&error]) {
+        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+    }
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"Plant" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+    for (NSManagedObject *info in fetchedObjects) {
+        NSLog(@"id: %@", [info valueForKey:@"id"]);
+        NSLog(@"Name: %@", [info valueForKey:@"name"]);
+        
+        [returnObject addObject: [self getPlantFromObject: info]];
+    }
+    
+    return returnObject;
+}
+
+- (PlantViewModel* )getPlantFromObject:(NSManagedObject* )object{
+    return [PlantViewModel getPlantFromObject:object];
+}
+
 
 - (NSURL *)applicationDocumentsDirectory {
     // The directory the application uses to store the Core Data store file. This code uses a directory named "homeDevelop.HUI" in the application's documents directory.

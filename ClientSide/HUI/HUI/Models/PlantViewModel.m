@@ -31,6 +31,29 @@
     return emptyPlant;
 }
 
+
++ (PlantViewModel* )getPlantFromObject:(id) object{
+    PlantViewModel * returnPlant = [[PlantViewModel alloc] init];
+    
+    NSDictionary* localState = @{
+                                 @"id":[object valueForKey:@"id"]
+                                 ,@"name":[object valueForKey:@"name"]
+                                 ,@"position": [object valueForKey:@"position"]
+                                 //,@"image": [object valueForKey:@"image"]
+                                 ,@"sunValue": [object valueForKey:@"sunValue"]
+                                 ,@"waterValue": [object valueForKey:@"waterValue"]
+                                 ,@"temperatureValue": [object valueForKey:@"temperatureValue"]
+                                 ,@"sunStatus": [object valueForKey:@"sunStatus"]
+                                 ,@"waterStatus": [object valueForKey:@"waterStatus"]
+                                 ,@"temperatureStatus": [object valueForKey:@"temperatureStatus"]
+                                 ,@"hui":[object valueForKey:@"hui"]
+                                 };
+    
+    [returnPlant.innerState setDictionary: localState];
+    
+    return returnPlant;
+}
+
 -(void)setPosition:(NSNumber *)position{
     [self.innerState setObject: position forKey:@"position"];
 }
