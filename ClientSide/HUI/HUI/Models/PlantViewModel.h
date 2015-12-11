@@ -11,6 +11,7 @@
 @interface PlantViewModel : BaseViewModel
 
 @property ( nonatomic, retain, getter = getStatus ) NSNumber* status;
+@property ( nonatomic, retain, getter = getPosition, setter=setPosition:) NSNumber* position;
 @property ( nonatomic, retain, getter = getSunStatus ) NSNumber* sunStatus;
 @property ( nonatomic, retain, getter = getWaterStatus ) NSNumber* waterStatus;
 @property ( nonatomic, retain, getter = getTemperatureStatus ) NSNumber* temperatureStatus;
@@ -27,6 +28,6 @@
 @property (nonatomic, assign, getter = getTemperatureImage) IBOutlet UIImage* temperatureImage;
 @property (nonatomic, assign, getter = getSunImage) IBOutlet UIImage* sunImage;
 
-+ (PlantViewModel* )initEmptyPlantWithName:(NSString* )name;
++ (PlantViewModel* )initEmptyPlantWithName:(NSString* )name andPosition:(NSNumber* )position;
 
 @end

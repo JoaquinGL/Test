@@ -63,18 +63,36 @@
     NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
     for (NSManagedObject *info in fetchedObjects) {
         NSLog(@"Name: %@", [info valueForKey:@"name"]);
+        NSLog(@"id: %@", [info valueForKey:@"id"]);
         
         NSManagedObject *huiInfo = [info valueForKey:@"hui"];
         NSLog(@"HUI: %@", [huiInfo valueForKey:@"name"]);
     }
-    
-    
-    
-    
 }
 
-
-
+- (void) removePlant:(PlantViewModel* )plantViewModel{
+    NSManagedObjectContext *context = [self managedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:[NSEntityDescription entityForName:@"Plant" inManagedObjectContext:context]];
+    
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"id == %@", [plantViewModel getIdentify]]];
+    
+    NSError *error = nil;
+    NSArray* results = [context executeFetchRequest:fetchRequest error:&error];
+    
+    if ([context save:&error] == NO) {
+        NSAssert(NO, @"Save should not fail\n%@", [error localizedDescription]);
+        abort();
+    }else if (!error && results.count > 0) {
+        for(NSManagedObject *managedObject in results){
+            [context deleteObject:managedObject];
+        }
+        
+        //Save context to write to store
+        [context save:nil];
+    }
+}
 
 - (NSURL *)applicationDocumentsDirectory {
     // The directory the application uses to store the Core Data store file. This code uses a directory named "homeDevelop.HUI" in the application's documents directory.

@@ -11,7 +11,7 @@
 
 @interface BaseViewModel : NSObject
 
-@property ( nonatomic, retain ) NSDictionary* innerState;
+@property ( nonatomic, retain ) NSMutableDictionary* innerState;
 
 - (id)init;
 

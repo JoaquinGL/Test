@@ -10,12 +10,13 @@
 
 @implementation PlantViewModel
 
-+ (PlantViewModel* )initEmptyPlantWithName:(NSString* )name{
++ (PlantViewModel* )initEmptyPlantWithName:(NSString* )name andPosition:(NSNumber* )position{
     PlantViewModel * emptyPlant = [[PlantViewModel alloc] init];
     
-    emptyPlant.innerState = @{
+    NSDictionary* localState = @{
                               @"id":[[NSUUID UUID] UUIDString]
                               ,@"name":name
+                              ,@"position": position
                               ,@"image": [UIImage imageNamed:@"plant.png"]
                               ,@"sunValue": @"undefined"
                               ,@"waterValue": @"undefined"
@@ -25,13 +26,23 @@
                               ,@"temperatureStatus": [NSNumber numberWithInt:0]
                               };
     
+    [emptyPlant.innerState setDictionary: localState];
+    
     return emptyPlant;
 }
 
+-(void)setPosition:(NSNumber *)position{
+    [self.innerState setObject: position forKey:@"position"];
+}
 
 - (NSNumber*)getStatus
 {
     return [ self.innerState valueForKey: @"status" ];
+}
+
+- (NSNumber*)getPosition
+{
+    return [ self.innerState valueForKey: @"position" ];
 }
 
 - (NSNumber* )getSunStatus{
@@ -47,7 +58,7 @@
 }
 
 - (NSNumber*) getIdentify{
-    return [ self.innerState valueForKey: @"identify" ];
+    return [ self.innerState valueForKey: @"id" ];
 }
 
 - (NSString* )getSunValue{

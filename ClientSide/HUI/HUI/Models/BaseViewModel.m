@@ -13,7 +13,7 @@
 - ( id )init
 {
     self = [ super init ];
-    self.innerState = [[NSDictionary alloc] init];
+    self.innerState = [[NSMutableDictionary alloc] init];
     return self;
 }
 

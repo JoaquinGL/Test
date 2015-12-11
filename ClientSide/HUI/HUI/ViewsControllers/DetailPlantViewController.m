@@ -41,7 +41,7 @@
 
 @implementation DetailPlantViewController
 
-@synthesize identify = _identify, plantViewModel = _plantViewModel;
+@synthesize position = _position, plantViewModel = _plantViewModel;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -95,7 +95,7 @@
 
 - (IBAction)onDeletePlantTouchUpInside:(id)sender{
     
-    [self.delegate deletePlant: [self.plantViewModel getIdentify]];
+    [self.delegate deletePlant: self.position];
     
     [[self navigationController] popViewControllerAnimated:YES];
 
@@ -104,11 +104,21 @@
 
 #pragma mark - Plant methods
 
+- (UIImage *)getPlantImageFromName:(NSString* )imageName{
+    UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png",imageName]];
+    
+    if(!image){
+        image = [UIImage imageNamed:@"plant.png"];
+    }
+    
+    return image;
+}
+
 - (void) initPlantContent{
 
     plantName.text = [self.plantViewModel getName];
     
-    [plantImageView setImage:[self.plantViewModel getImage]];
+    [plantImageView setImage:[self getPlantImageFromName:[self.plantViewModel getName]]];
 
     [sunStatusImageView setImage:[self.plantViewModel getSunImage]];
     [waterStatusImageView setImage:[self.plantViewModel getWaterImage]];

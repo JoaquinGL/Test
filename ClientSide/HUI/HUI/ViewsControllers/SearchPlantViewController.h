@@ -12,7 +12,7 @@
 
 @required
 
--(void)onSelectPlant:(NSString*) plantName withId:(long) position;
+-(void)onSelectPlant:(NSString*) plantName;
 
 @end
 

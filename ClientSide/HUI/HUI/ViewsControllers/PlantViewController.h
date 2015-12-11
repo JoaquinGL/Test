@@ -23,6 +23,7 @@
 
 @property (nonatomic, assign) id <PlantViewControllerDelegate> delegate;
 @property (nonatomic, assign) NSNumber* identify;
+@property (nonatomic, assign) NSNumber* position;
 @property (nonatomic, assign) NSString* plantName;
 @property (nonatomic, assign) NSNumber* plantStatus;
 @property (nonatomic, assign) NSNumber* plantSun;
@@ -32,6 +33,7 @@
 @property (nonatomic, assign) IBOutlet UIImageView* temperatureImage;
 @property (nonatomic, assign) IBOutlet UIImageView* sunImage;
 @property (nonatomic, assign) IBOutlet UIImageView* status;
+@property (nonatomic, retain) PlantViewModel* plantViewModel;
 
 
 + ( PlantViewController* )instantiate;

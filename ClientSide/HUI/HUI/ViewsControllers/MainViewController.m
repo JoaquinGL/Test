@@ -211,13 +211,19 @@
 
 #pragma mark - Delegate Search
 
-- (void)onSelectPlant:(NSString*) plantName withId:(long)position{
+- (void)onSelectPlant:(NSString*) plantName{
+    
+    /* create the new plant with empty values */
+    
+    PlantViewModel* plantViewModel = [[PlantViewModel alloc] init];
+    
+    plantViewModel = [PlantViewModel initEmptyPlantWithName: plantName andPosition: [NSNumber numberWithLong: 0]];
     
     /* Add empty plant*/
     _manager = [[Manager alloc] init];
-    [_manager setPlant: [PlantViewModel initEmptyPlantWithName: plantName]];
+    [_manager setPlant: plantViewModel];
     
-    [self addNewPlantWithName: plantName withId: position];
+    [self addNewPlant: plantViewModel];
 }
 
 #pragma - Delegate PlantView
@@ -225,9 +231,8 @@
 - (void)showPlantDetail:(PlantViewModel*) plantViewModel{
     
     _detailPlantViewController.title = [plantViewModel getName];
-    _detailPlantViewController.identify = [plantViewModel getIdentify];
-
     _detailPlantViewController.plantViewModel = plantViewModel;
+    _detailPlantViewController.position = [plantViewModel getPosition];
     
     [self.navigationController pushViewController:_detailPlantViewController animated:YES];
 }
@@ -240,13 +245,15 @@
     switch (orderOfDelete) {
         case 0:
             
+            [_manager removePlant:_plant0ViewController.plantViewModel];
+            
             if( [self.numberOfPlants intValue] == 3){
                 
                 _plant2ViewController.view.frame = _plant1ViewController.view.frame;
                 _plant1ViewController.view.frame = _plant0ViewController.view.frame;
                 
-                _plant1ViewController.identify = [NSNumber numberWithInt: 0];
-                _plant2ViewController.identify = [NSNumber numberWithInt: 1];
+                [_plant1ViewController.plantViewModel setPosition:[NSNumber numberWithInt: 0]];
+                [_plant2ViewController.plantViewModel setPosition:[NSNumber numberWithInt: 1]];
                 
                 [_plant0ViewController.view removeFromSuperview];
                 _plant0ViewController = _plant1ViewController;
@@ -264,7 +271,7 @@
                 [_plant0ViewController.view removeFromSuperview];
                 _plant0ViewController = _plant1ViewController;
                 
-                _plant0ViewController.identify =[NSNumber numberWithInt: 0];
+                [_plant0ViewController.plantViewModel setPosition:[NSNumber numberWithInt: 0]];
                 
                 _plant1ViewController = nil;
                 
@@ -286,16 +293,16 @@
             
         case 1:
             
+            [_manager removePlant:_plant1ViewController.plantViewModel];
+            
             if( [self.numberOfPlants intValue] == 3){
                 
                 _plant2ViewController.view.frame = _plant1ViewController.view.frame;
                 
-                _plant2ViewController.identify =_plant1ViewController.identify;
-                
                 [_plant1ViewController.view removeFromSuperview];
                 _plant1ViewController = _plant2ViewController;
                 
-                _plant1ViewController.identify =[NSNumber numberWithInt: 1];
+                [_plant1ViewController.plantViewModel setPosition:[NSNumber numberWithInt: 1]];
                 
                 _plant2ViewController = nil;
                 
@@ -303,7 +310,7 @@
                 
                 [_plant0ViewController.view setFrame:CGRectMake(95, 20, _plant0ViewController.view.frame.size.width, _plant0ViewController.view.frame.size.height)];
                 
-                _plant0ViewController.identify =[NSNumber numberWithInt: 0];
+                [_plant0ViewController.plantViewModel setPosition:[NSNumber numberWithInt: 0]];
                 
                 [_plant1ViewController.view removeFromSuperview];
                 _plant1ViewController = nil;
@@ -313,6 +320,8 @@
         break;
             
         case 2:
+            
+            [_manager removePlant:_plant2ViewController.plantViewModel];
             
             [_plant2ViewController.view removeFromSuperview];
             _plant2ViewController = nil;
@@ -327,7 +336,7 @@
 
 #pragma mark - PlantViewsController
 
-- (void)addNewPlantWithName:(NSString*) plantName withId:(long) position{
+- (void)addNewPlant:(PlantViewModel*) plant{
     
     int localNumberOfPlants = [self.numberOfPlants intValue];
     
@@ -337,8 +346,11 @@
             case 0:
                 _plant0ViewController = [PlantViewController instantiate];
                 _plant0ViewController.delegate = self;
-                _plant0ViewController.plantName = plantName;
-                _plant0ViewController.identify = [NSNumber numberWithInt:0];
+                _plant0ViewController.plantName = [plant getName];
+                _plant0ViewController.position = [NSNumber numberWithInt:0];
+                
+                [plant setPosition: [NSNumber numberWithInt:0]];
+                
                 [_plant0ViewController.view setFrame:CGRectMake(95, 20, _plant0ViewController.view.frame.size.width, _plant0ViewController.view.frame.size.height)];
                 
                 [newPlantButton setFrame: FRAME_NEW_PLANT_1_PLANT];
@@ -346,41 +358,44 @@
                 // showWithAnimationTheView
                 [self.view addSubview:_plant0ViewController.view];
                 
-                [_plant0ViewController setPlantImageFromName:plantName];
+                [_plant0ViewController setPlantImageFromName:[plant getName]];
                 [_plant0ViewController setStatusUndefined];
-                
+                _plant0ViewController.plantViewModel = plant;
                 break;
                 
             case 1:
                 _plant1ViewController = [PlantViewController instantiate];
-                _plant1ViewController.plantName = plantName;
+                _plant1ViewController.plantName = [plant getName];
                 _plant1ViewController.delegate = self;
-                _plant1ViewController.identify = [NSNumber numberWithInt:1];
+                _plant1ViewController.position = [NSNumber numberWithInt:1];
                 [_plant0ViewController.view setFrame:CGRectMake(20, 20, _plant0ViewController.view.frame.size.width, _plant0ViewController.view.frame.size.height)];
                 [_plant1ViewController.view setFrame:CGRectMake(170, 20, _plant1ViewController.view.frame.size.width, _plant1ViewController.view.frame.size.height)];
                 [newPlantButton setFrame: FRAME_NEW_PLANT_2_PLANT];
-                
+                [plant setPosition: [NSNumber numberWithInt:1]];
                 // showWithAnimationTheView
                 [self.view addSubview:_plant1ViewController.view];
                 
-                [_plant1ViewController setPlantImageFromName:plantName];
+                [_plant1ViewController setPlantImageFromName:[plant getName]];
                 [_plant1ViewController setStatusUndefined];
+                _plant1ViewController.plantViewModel = plant;
                 break;
                 
             default:
                 _plant2ViewController = [PlantViewController instantiate];
-                _plant2ViewController.plantName = plantName;
+                _plant2ViewController.plantName = [plant getName];
                 _plant2ViewController.delegate = self;
-                _plant2ViewController.identify = [NSNumber numberWithInt:2];
+                _plant2ViewController.position = [NSNumber numberWithInt:2];
                 [_plant2ViewController.view setFrame:CGRectMake(20, 200, _plant2ViewController.view.frame.size.width, _plant2ViewController.view.frame.size.height)];
                 [newPlantButton setFrame: FRAME_NEW_PLANT_3_PLANT];
                 
                 // showWithAnimationTheView
                 [self.view addSubview:_plant2ViewController.view];
                 
-                [_plant2ViewController setPlantImageFromName:plantName];
+                [plant setPosition: [NSNumber numberWithInt:2]];
+                [_plant2ViewController setPlantImageFromName:[plant getName]];
                 [_plant2ViewController setStatusUndefined];
-
+                _plant2ViewController.plantViewModel = plant;
+                
                 break;
         }
         

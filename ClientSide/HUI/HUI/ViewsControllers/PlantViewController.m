@@ -13,7 +13,6 @@
 
     IBOutlet UIButton* _plantButton;
     IBOutlet UILabel*  _plantNameLabel;
-    __strong PlantViewModel *_plantViewModel;
 }
 
 @end
@@ -29,6 +28,8 @@
             sunImage         = _sunImage,
             temperatureImage = _temperatureImage,
             status           = _status,
+            position         = _position,
+            plantViewModel   = _plantViewModel,
             plantWater       = _plantWater;
 
 - (void)viewDidLoad {
@@ -53,13 +54,6 @@
 
 - (IBAction) onPlantButtonTouchUpInside:(id)sender{
     
-    if (_plantViewModel)
-    {
-        _plantViewModel = nil;
-    }
-    
-    _plantViewModel = [[PlantViewModel alloc] init];
-    
     
     UIImage *tempImage = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png",self.plantName]];
     
@@ -67,23 +61,7 @@
         tempImage = [UIImage imageNamed:@"plant.png"];
     }
     
-    _plantViewModel.innerState = @{
-      @"identify":self.identify
-      ,@"name":self.plantName
-      ,@"image": tempImage
-      ,@"sunValue": @"prueba valores"
-      ,@"waterValue": @"prueba valores"
-      ,@"temperatureValue": @"prueba valores"
-      ,@"sunStatus": [NSNumber numberWithInt:0]
-      ,@"waterStatus": [NSNumber numberWithInt:1]
-      ,@"temperatureStatus": [NSNumber numberWithInt:0]
-      };
-
-    /* GET THE OBJECT FROM BBDD, WITH THE ID THE BBDD have everything update from server. remember that */
-    
-
-    
-    [self.delegate showPlantDetail:_plantViewModel];
+    [self.delegate showPlantDetail:self.plantViewModel];
 }
 
 

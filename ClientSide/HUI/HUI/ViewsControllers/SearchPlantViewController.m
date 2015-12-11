@@ -69,7 +69,7 @@
     
     //TODO: GENERATE GUID
     
-    [self.delegate onSelectPlant: self.data[indexPath.row] withId:indexPath.row];
+    [self.delegate onSelectPlant: self.data[indexPath.row]];
     
     [[self navigationController] popViewControllerAnimated:YES];
 }
