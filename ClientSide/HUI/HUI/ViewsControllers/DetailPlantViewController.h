@@ -8,6 +8,7 @@
 
 #import "BaseViewController.h"
 #import "PlantViewModel.h"
+#import "ConfigureViewController.h"
 
 @protocol DetailPlantViewControllerDelegate <NSObject>
 
@@ -18,7 +19,7 @@
 @end
 
 
-@interface DetailPlantViewController : BaseViewController{
+@interface DetailPlantViewController : BaseViewController<ConfigureViewControllerDelegate>{
 }
 
 @property (nonatomic, assign) id <DetailPlantViewControllerDelegate> delegate;

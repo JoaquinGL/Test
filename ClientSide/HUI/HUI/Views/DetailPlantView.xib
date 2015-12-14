@@ -34,9 +34,15 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1ih-Jh-gg2">
-                    <rect key="frame" x="112" y="457" width="97" height="30"/>
-                    <state key="normal" title="Configure HUI"/>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1ih-Jh-gg2">
+                    <rect key="frame" x="107" y="469" width="170" height="46"/>
+                    <color key="backgroundColor" red="0.23529411764705882" green="0.23529411764705882" blue="0.23529411764705882" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="normal" title="Configure HUI">
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="onConfigureTouchUpInside:" destination="-1" eventType="touchUpInside" id="r1c-zl-H8j"/>
+                    </connections>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="sun" translatesAutoresizingMaskIntoConstraints="NO" id="lhZ-jA-qMa">
                     <rect key="frame" x="44" y="248" width="40" height="43"/>
@@ -74,12 +80,16 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="configureHui" translatesAutoresizingMaskIntoConstraints="NO" id="ubE-GI-MTU">
+                    <rect key="frame" x="45" y="470" width="43" height="43"/>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
     </objects>
     <resources>
+        <image name="configureHui" width="256" height="256"/>
         <image name="question_mark" width="20" height="20"/>
         <image name="sun" width="25" height="25"/>
         <image name="temperature" width="12" height="27"/>

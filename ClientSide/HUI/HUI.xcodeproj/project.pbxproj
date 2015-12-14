@@ -24,6 +24,9 @@
 		E3694FDF1C0733670036D1F1 /* SearchPlantViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3694FDE1C0733670036D1F1 /* SearchPlantViewController.m */; };
 		E3694FE11C074A1A0036D1F1 /* DetailPlantView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3694FE01C074A1A0036D1F1 /* DetailPlantView.xib */; };
 		E3694FE31C074A540036D1F1 /* SearchPlantView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3694FE21C074A540036D1F1 /* SearchPlantView.xib */; };
+		E39B8C651C1DEAB50015EF9F /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = E39B8C641C1DEAB50015EF9F /* View.xib */; };
+		E39B8C681C1DEAFF0015EF9F /* ConfigureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E39B8C671C1DEAFF0015EF9F /* ConfigureViewController.m */; };
+		E39B8C6A1C1DEB670015EF9F /* ConfigureView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E39B8C691C1DEB670015EF9F /* ConfigureView.xib */; };
 		E3B02EB11C09AE76005E7DF4 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3B02EB01C09AE76005E7DF4 /* MainViewController.m */; };
 		E3B02EB31C09AEB9005E7DF4 /* MainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3B02EB21C09AEB9005E7DF4 /* MainView.xib */; };
 		E3CE4E161C0221850096D0FB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E3CE4E151C0221850096D0FB /* main.m */; };
@@ -116,6 +119,10 @@
 		E3694FDE1C0733670036D1F1 /* SearchPlantViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchPlantViewController.m; sourceTree = "<group>"; };
 		E3694FE01C074A1A0036D1F1 /* DetailPlantView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailPlantView.xib; sourceTree = "<group>"; };
 		E3694FE21C074A540036D1F1 /* SearchPlantView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchPlantView.xib; sourceTree = "<group>"; };
+		E39B8C641C1DEAB50015EF9F /* View.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = View.xib; sourceTree = "<group>"; };
+		E39B8C661C1DEAFF0015EF9F /* ConfigureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigureViewController.h; sourceTree = "<group>"; };
+		E39B8C671C1DEAFF0015EF9F /* ConfigureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigureViewController.m; sourceTree = "<group>"; };
+		E39B8C691C1DEB670015EF9F /* ConfigureView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConfigureView.xib; sourceTree = "<group>"; };
 		E3B02EAF1C09AE76005E7DF4 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		E3B02EB01C09AE76005E7DF4 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		E3B02EB21C09AEB9005E7DF4 /* MainView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainView.xib; sourceTree = "<group>"; };
@@ -327,6 +334,8 @@
 				E3B02EB21C09AEB9005E7DF4 /* MainView.xib */,
 				E3DF6C9F1C0D896200004DA2 /* PlantView.xib */,
 				E3EFE1F21C108BF50033BB25 /* AskHuiView.xib */,
+				E39B8C641C1DEAB50015EF9F /* View.xib */,
+				E39B8C691C1DEB670015EF9F /* ConfigureView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -354,6 +363,8 @@
 				E308168D1C04558D0007D896 /* WalkThroughViewController.m */,
 				E30816901C0455CB0007D896 /* CustomPageViewController.h */,
 				E30816911C0455CB0007D896 /* CustomPageViewController.m */,
+				E39B8C661C1DEAFF0015EF9F /* ConfigureViewController.h */,
+				E39B8C671C1DEAFF0015EF9F /* ConfigureViewController.m */,
 			);
 			path = ViewsControllers;
 			sourceTree = "<group>";
@@ -557,6 +568,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E39B8C651C1DEAB50015EF9F /* View.xib in Resources */,
 				E3DDCB431C11BE2F0053E150 /* Icon.png in Resources */,
 				E3694FE31C074A540036D1F1 /* SearchPlantView.xib in Resources */,
 				E3DA78AE1C086B5100F6C06A /* Main.storyboard in Resources */,
@@ -580,6 +592,7 @@
 				E3DDCB3F1C11BE2F0053E150 /* 37x-Checkmark@2x.png in Resources */,
 				E308169B1C0457EA0007D896 /* WalkTwo.xib in Resources */,
 				E3DDCB471C11F5BC0053E150 /* Play.wav in Resources */,
+				E39B8C6A1C1DEB670015EF9F /* ConfigureView.xib in Resources */,
 				E30816991C0457EA0007D896 /* WalkThree.xib in Resources */,
 				E3EFE1E51C0F51C40033BB25 /* earcon_done_listening.wav in Resources */,
 				E3DDCB401C11BE2F0053E150 /* Icon-iOS7@2x.png in Resources */,
@@ -628,6 +641,7 @@
 				E308168F1C04558D0007D896 /* WalkThroughViewController.m in Sources */,
 				E3CE4E161C0221850096D0FB /* main.m in Sources */,
 				E3EFE1FA1C109CDA0033BB25 /* Utils.m in Sources */,
+				E39B8C681C1DEAFF0015EF9F /* ConfigureViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

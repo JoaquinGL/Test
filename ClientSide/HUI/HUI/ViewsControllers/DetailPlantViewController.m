@@ -23,6 +23,7 @@
 #import "DetailPlantViewController.h"
 #import "SearchPlantViewController.h"
 
+
 @interface DetailPlantViewController (){
 
     IBOutlet UILabel* plantName;
@@ -34,6 +35,8 @@
     IBOutlet UIImageView* waterStatusImageView;
     IBOutlet UIImageView* temperatureStatusImageView;
     IBOutlet UIButton* configureHUIButton;
+    
+    ConfigureViewController* _configureViewController;
 }
 
 @end
@@ -62,6 +65,12 @@
     
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithCustomView: deleteButton];
     self.navigationItem.rightBarButtonItem = rightButton;
+    
+    _configureViewController = [[ConfigureViewController alloc] initWithNibName:@"ConfigureView" bundle:nil];
+    
+    [_configureViewController setDelegate:self];
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -129,5 +138,26 @@
     plantTemperature.text = [self.plantViewModel getTemperatureValue];
     
 }
+
+-(IBAction)onConfigureTouchUpInside:(id)sender{
+    
+    [_configureViewController.view setAlpha: 0.0];
+    [self.navigationController.view addSubview:_configureViewController.view];
+    [_configureViewController initConfigureView];
+    
+    [Utils fadeIn:_configureViewController.view completion:nil];
+    
+}
+
+#pragma mark - delegate methods
+
+-(void)closeConfiguration{
+    
+    [Utils fadeOut:_configureViewController.view
+        completion:^(BOOL completion){
+            [_configureViewController.view removeFromSuperview];
+        }];
+}
+
 
 @end
