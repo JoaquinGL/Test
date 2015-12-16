@@ -107,36 +107,7 @@
     
     /* GET CONTENT FROM BBDD */
     [self initializeContent];
-    
-    
-//    // set the WitDelegate object
-//    [Wit sharedInstance].delegate = self;
-//    
-//    // create the button
-//    CGRect screen = [UIScreen mainScreen].bounds;
-//    CGFloat w = 100;
-//    CGRect rect = CGRectMake(screen.size.width/2 - w/2, 60, w, 100);
-//    
-//    WITMicButton* witButton = [[WITMicButton alloc] initWithFrame:rect];
-//    [self.view addSubview:witButton];
-    
 }
-
-//- (void)witDidGraspIntent:(NSArray *)outcomes messageId:(NSString *)messageId customData:(id) customData error:(NSError*)e {
-//    CGRect screen = [UIScreen mainScreen].bounds;
-//    UILabel* labelView = [[UILabel alloc] initWithFrame:CGRectMake(0, 200, screen.size.width, 50)];
-//    labelView.textAlignment = NSTextAlignmentCenter;
-//    if (e) {
-//        NSLog(@"[Wit] error: %@", [e localizedDescription]);
-//        return;
-//    }
-//    NSDictionary *firstOutcome = [outcomes objectAtIndex:0];
-//    NSString *intent = [firstOutcome objectForKey:@"_text"];
-//    
-//    labelView.text = [NSString stringWithFormat:@"Text = %@", intent];
-//    
-//    [self.view addSubview:labelView];
-//}
 
 
 -(void)viewDidAppear:(BOOL)animated{

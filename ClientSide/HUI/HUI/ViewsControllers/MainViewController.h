@@ -13,7 +13,6 @@
 #import "DetailPlantViewController.h"
 #import "AskHuiViewController.h"
 #import "MBProgressHUD.h"
-//#include <Wit/Wit.h>
 
 @interface MainViewController : BaseViewController <
   WalkthroughViewControllerDelegate
@@ -22,7 +21,6 @@
 , DetailPlantViewControllerDelegate
 , AskHuiViewControllerDelegate
 , MBProgressHUDDelegate
-//, WitDelegate
                                 >
 
 @property (nonatomic, assign) UINavigationController* navigationController;
