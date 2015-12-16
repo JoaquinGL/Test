@@ -120,6 +120,7 @@
 //    WITMicButton* witButton = [[WITMicButton alloc] initWithFrame:rect];
 //    [self.view addSubview:witButton];
     
+    
 }
 
 //- (void)witDidGraspIntent:(NSArray *)outcomes messageId:(NSString *)messageId customData:(id) customData error:(NSError*)e {
@@ -137,6 +138,7 @@
 //    
 //    [self.view addSubview:labelView];
 //}
+
 
 
 -(void)viewDidAppear:(BOOL)animated{
