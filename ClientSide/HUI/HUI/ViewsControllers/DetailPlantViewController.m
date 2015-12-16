@@ -104,7 +104,7 @@
 
 - (IBAction)onDeletePlantTouchUpInside:(id)sender{
     
-    [self.delegate deletePlant: self.position];
+    [self.delegate deletePlant: self.position withId:[self.plantViewModel getIdentify]];
     
     [[self navigationController] popViewControllerAnimated:YES];
 
@@ -151,7 +151,10 @@
 
 #pragma mark - delegate methods
 
--(void)closeConfiguration{
+-(void)closeConfiguration:(HUIViewModel*)huiViewModel{
+    
+    /* Save HUI DATA */
+    
     
     [Utils fadeOut:_configureViewController.view
         completion:^(BOOL completion){

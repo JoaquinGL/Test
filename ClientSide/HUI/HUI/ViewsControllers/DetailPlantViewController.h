@@ -14,7 +14,7 @@
 
 @required
 
--(void)deletePlant:(NSNumber*) identify;
+-(void)deletePlant:(NSNumber*) identify withId:(NSString* ) plantId;
 
 @end
 

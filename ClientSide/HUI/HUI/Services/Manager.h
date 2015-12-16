@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "PlantViewModel.h"
+#import "HUIViewModel.h"
 #import <CoreData/CoreData.h>
 
 

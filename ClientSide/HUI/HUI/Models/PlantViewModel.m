@@ -21,9 +21,9 @@
                               ,@"sunValue": @"undefined"
                               ,@"waterValue": @"undefined"
                               ,@"temperatureValue": @"undefined"
-                              ,@"sunStatus": [NSNumber numberWithInt:0]
-                              ,@"waterStatus": [NSNumber numberWithInt:1]
-                              ,@"temperatureStatus": [NSNumber numberWithInt:0]
+                              ,@"sunStatus": [NSNumber numberWithInt:-1]
+                              ,@"waterStatus": [NSNumber numberWithInt:-1]
+                              ,@"temperatureStatus": [NSNumber numberWithInt:-1]
                               };
     
     [emptyPlant.innerState setDictionary: localState];
@@ -113,6 +113,8 @@
         returnValue = [UIImage imageNamed:@"thumb_up.png"];
     }else if([[self getWaterStatus] intValue] == 1){
         returnValue = [UIImage imageNamed:@"thumb_down.png"];
+    }else if([[self getSunStatus] intValue] == -1){
+        returnValue = [UIImage imageNamed:@"question_mark.png"];
     }
     
     return returnValue;
@@ -125,6 +127,8 @@
         returnValue = [UIImage imageNamed:@"thumb_up.png"];
     }else if([[self getSunStatus] intValue] == 1){
         returnValue = [UIImage imageNamed:@"thumb_down.png"];
+    }else if([[self getSunStatus] intValue] == -1){
+        returnValue = [UIImage imageNamed:@"question_mark.png"];
     }
     
     return returnValue;
@@ -138,6 +142,8 @@
         returnValue = [UIImage imageNamed:@"thumb_up.png"];
     }else if([[self getTemperatureStatus] intValue] == 1){
         returnValue = [UIImage imageNamed:@"thumb_down.png"];
+    }else if([[self getSunStatus] intValue] == -1){
+        returnValue = [UIImage imageNamed:@"question_mark.png"];
     }
     
     return returnValue;

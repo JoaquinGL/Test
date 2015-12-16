@@ -27,6 +27,10 @@
 		E39B8C651C1DEAB50015EF9F /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = E39B8C641C1DEAB50015EF9F /* View.xib */; };
 		E39B8C681C1DEAFF0015EF9F /* ConfigureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E39B8C671C1DEAFF0015EF9F /* ConfigureViewController.m */; };
 		E39B8C6A1C1DEB670015EF9F /* ConfigureView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E39B8C691C1DEB670015EF9F /* ConfigureView.xib */; };
+		E39B8C891C2062590015EF9F /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E39B8C881C2062590015EF9F /* MobileCoreServices.framework */; };
+		E39B8C8B1C20626A0015EF9F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E39B8C8A1C20626A0015EF9F /* CoreLocation.framework */; };
+		E39B8C921C20689D0015EF9F /* Wit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E39B8C901C20689D0015EF9F /* Wit.bundle */; };
+		E39B8C951C20691E0015EF9F /* Wit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E39B8C941C20691E0015EF9F /* Wit.framework */; };
 		E3B02EB11C09AE76005E7DF4 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3B02EB01C09AE76005E7DF4 /* MainViewController.m */; };
 		E3B02EB31C09AEB9005E7DF4 /* MainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3B02EB21C09AEB9005E7DF4 /* MainView.xib */; };
 		E3CE4E161C0221850096D0FB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E3CE4E151C0221850096D0FB /* main.m */; };
@@ -123,6 +127,10 @@
 		E39B8C661C1DEAFF0015EF9F /* ConfigureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigureViewController.h; sourceTree = "<group>"; };
 		E39B8C671C1DEAFF0015EF9F /* ConfigureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigureViewController.m; sourceTree = "<group>"; };
 		E39B8C691C1DEB670015EF9F /* ConfigureView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConfigureView.xib; sourceTree = "<group>"; };
+		E39B8C881C2062590015EF9F /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		E39B8C8A1C20626A0015EF9F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		E39B8C901C20689D0015EF9F /* Wit.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Wit.bundle; path = Wit/Wit.bundle; sourceTree = "<group>"; };
+		E39B8C941C20691E0015EF9F /* Wit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Wit.framework; path = Wit/Wit.framework; sourceTree = "<group>"; };
 		E3B02EAF1C09AE76005E7DF4 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		E3B02EB01C09AE76005E7DF4 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		E3B02EB21C09AEB9005E7DF4 /* MainView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainView.xib; sourceTree = "<group>"; };
@@ -190,6 +198,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E39B8C8B1C20626A0015EF9F /* CoreLocation.framework in Frameworks */,
+				E39B8C891C2062590015EF9F /* MobileCoreServices.framework in Frameworks */,
 				E3EFE1D61C0F48F10033BB25 /* Security.framework in Frameworks */,
 				E3EFE1D41C0F48DC0033BB25 /* AVFoundation.framework in Frameworks */,
 				E3EFE1D21C0F48CD0033BB25 /* AudioToolbox.framework in Frameworks */,
@@ -201,6 +211,7 @@
 				E3CE4E651C0227250096D0FB /* ImageIO.framework in Frameworks */,
 				E3CE4E631C02271B0096D0FB /* CoreGraphics.framework in Frameworks */,
 				E3CE4E611C0227110096D0FB /* Foundation.framework in Frameworks */,
+				E39B8C951C20691E0015EF9F /* Wit.framework in Frameworks */,
 				E3CE4E5F1C0226D80096D0FB /* SystemConfiguration.framework in Frameworks */,
 				E3CE4E5D1C0226B80096D0FB /* CoreData.framework in Frameworks */,
 			);
@@ -234,6 +245,15 @@
 				E33823741C1A2C310029C285 /* HUIViewModel.m */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		E39B8C831C2062050015EF9F /* Wit */ = {
+			isa = PBXGroup;
+			children = (
+				E39B8C941C20691E0015EF9F /* Wit.framework */,
+				E39B8C901C20689D0015EF9F /* Wit.bundle */,
+			);
+			name = Wit;
 			sourceTree = "<group>";
 		};
 		E3CE4E081C0221850096D0FB = {
@@ -372,6 +392,8 @@
 		E3CE4E591C0224BD0096D0FB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E39B8C8A1C20626A0015EF9F /* CoreLocation.framework */,
+				E39B8C881C2062590015EF9F /* MobileCoreServices.framework */,
 				E3EFE1DB1C0F4F190033BB25 /* SpeechKit.framework */,
 				E3EFE1D51C0F48F10033BB25 /* Security.framework */,
 				E3EFE1D31C0F48DC0033BB25 /* AVFoundation.framework */,
@@ -392,10 +414,10 @@
 		E3DA78691C0848FC00F6C06A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E39B8C831C2062050015EF9F /* Wit */,
 				E3DDCB331C11BE2F0053E150 /* Progress */,
 				E3EFE1F71C109B550033BB25 /* Utils */,
 				E3EFE1DD1C0F4FBA0033BB25 /* Voice */,
-				E3DA78A31C085BC200F6C06A /* Transitions */,
 				E3DA78981C084F1100F6C06A /* Reachability */,
 			);
 			path = Resources;
@@ -408,13 +430,6 @@
 				E3DA789A1C084F1100F6C06A /* Reachability.m */,
 			);
 			path = Reachability;
-			sourceTree = "<group>";
-		};
-		E3DA78A31C085BC200F6C06A /* Transitions */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Transitions;
 			sourceTree = "<group>";
 		};
 		E3DDCB331C11BE2F0053E150 /* Progress */ = {
@@ -588,6 +603,7 @@
 				E3DDCB3E1C11BE2F0053E150 /* 37x-Checkmark.png in Resources */,
 				E3EFE1E41C0F51C40033BB25 /* earcon_cancel.wav in Resources */,
 				E3DDCB301C11B46E0053E150 /* Cancel.wav in Resources */,
+				E39B8C921C20689D0015EF9F /* Wit.bundle in Resources */,
 				E3DF6CA01C0D896200004DA2 /* PlantView.xib in Resources */,
 				E3DDCB3F1C11BE2F0053E150 /* 37x-Checkmark@2x.png in Resources */,
 				E308169B1C0457EA0007D896 /* WalkTwo.xib in Resources */,
@@ -785,6 +801,7 @@
 					"$(inherited)",
 					"$(SRCROOT)",
 					"$(PROJECT_DIR)/HUI",
+					"$(PROJECT_DIR)/HUI/Resources/Wit",
 				);
 				GCC_PREFIX_HEADER = "";
 				HEADER_SEARCH_PATHS = "";
@@ -808,6 +825,7 @@
 					"$(inherited)",
 					"$(SRCROOT)",
 					"$(PROJECT_DIR)/HUI",
+					"$(PROJECT_DIR)/HUI/Resources/Wit",
 				);
 				GCC_PREFIX_HEADER = "";
 				HEADER_SEARCH_PATHS = "";

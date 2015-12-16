@@ -14,6 +14,7 @@
 #import "PlantViewModel.h"
 #import "Manager.h"
 
+
 @interface MainViewController (){
     SearchPlantViewController* _searchPlantViewController;
     DetailPlantViewController* _detailPlantViewController;
@@ -29,6 +30,9 @@
     MBProgressHUD* _HUD;
     
     Manager* _manager;
+    
+    NSMutableArray* _plantsCollection;
+    NSMutableArray* _plantsViewControllerCollection;
 }
 
 @end
@@ -59,7 +63,12 @@
     _detailPlantViewController.delegate = self;
     _searchPlantViewController.delegate = self;
     
-    self.title = @"My Garden";
+    //init collections
+    
+    _plantsCollection = [[NSMutableArray alloc] init];
+    _plantsViewControllerCollection = [[NSMutableArray alloc] init];
+    
+    self.title = NSLocalizedString(@"My Garden", @"");
     
     self.numberOfPlants = [NSNumber numberWithInt: 0];
     
@@ -73,22 +82,6 @@
     [newPlantButton setBackgroundImage:[UIImage imageNamed:@"plant_something_new.png"] forState:UIControlStateNormal];
     
     [self.view addSubview: newPlantButton];
-    
-    /* TODO: comprobar la lógica de plantas guardadas en el movil. Para que se quede guardado en BBDD
-     Aqui hay que tener el sistema de notificaciones para poder añadir los botones si se selecciona una planta nueva. 
-     Tambien hay que controlar la lógica cuando ya hay 3 plantas seleccionadas y se ha llegado al máximo, para indicar al usuario que ya no puede añadir
-     más, que tiene que editar una planta ya creada. 
-     
-     La logica es 0 botones, 1 boton, 2 botones, 3 botones (caso que no se permite añadir mas plantas)
-     
-     De BBDD tiene que venir el numero de plantas guardadas con su estatus. Nombre/ultimo estatus guardado, para poder asignarselo antes de mostrar la vista. 
-     Se puede hacer un sistema de loading si se pide de servidor. Si no hay conexion, se tira de BBDD. 
-     
-     Si se ha sincronizado ok, se guarda el estatus y la hora en la BBDD.
-     
-     Si no se hace un sistma de notificaciones que es chungo de controlar, mejor un delegado, como el que ya tenemos en los sliders.
-     
-     */
     
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"title.png"] forBarMetrics:UIBarMetricsDefault];
     [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
@@ -114,7 +107,37 @@
     
     /* GET CONTENT FROM BBDD */
     [self initializeContent];
+    
+    
+//    // set the WitDelegate object
+//    [Wit sharedInstance].delegate = self;
+//    
+//    // create the button
+//    CGRect screen = [UIScreen mainScreen].bounds;
+//    CGFloat w = 100;
+//    CGRect rect = CGRectMake(screen.size.width/2 - w/2, 60, w, 100);
+//    
+//    WITMicButton* witButton = [[WITMicButton alloc] initWithFrame:rect];
+//    [self.view addSubview:witButton];
+    
 }
+
+//- (void)witDidGraspIntent:(NSArray *)outcomes messageId:(NSString *)messageId customData:(id) customData error:(NSError*)e {
+//    CGRect screen = [UIScreen mainScreen].bounds;
+//    UILabel* labelView = [[UILabel alloc] initWithFrame:CGRectMake(0, 200, screen.size.width, 50)];
+//    labelView.textAlignment = NSTextAlignmentCenter;
+//    if (e) {
+//        NSLog(@"[Wit] error: %@", [e localizedDescription]);
+//        return;
+//    }
+//    NSDictionary *firstOutcome = [outcomes objectAtIndex:0];
+//    NSString *intent = [firstOutcome objectForKey:@"_text"];
+//    
+//    labelView.text = [NSString stringWithFormat:@"Text = %@", intent];
+//    
+//    [self.view addSubview:labelView];
+//}
+
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear: animated];
@@ -229,10 +252,12 @@
     
     [_manager setPlant: plantViewModel];
     
+    [_plantsCollection addObject: plantViewModel];
+    
     [self addNewPlant: plantViewModel];
 }
 
-#pragma - Delegate PlantView
+#pragma mark - Delegate PlantView
 
 - (void)showPlantDetail:(PlantViewModel*) plantViewModel{
     
@@ -242,17 +267,32 @@
     
     [self.navigationController pushViewController:_detailPlantViewController animated:YES];
 }
+#pragma mark - DeleteFromGarden
+
+-(void) removePlantFromBBDDAndCollection:(NSMutableArray* )collection withId:(NSString* )plantId{
+    
+    for (PlantViewModel *plant in collection) {
+        
+        if([plant getIdentify] == plantId){
+            // remove from BBDD
+            [_manager removePlant:plant];
+            
+            // remove from NSMutableArray
+            [collection removeObject: plant];
+            break;
+        }
+    }
+}
 
 #pragma mark - Delegate DetailPlant
-- (void)deletePlant:(NSNumber *)identify{
+- (void)deletePlant:(NSNumber *)identify withId:(NSString *)plantId{
     
     int orderOfDelete = [identify intValue];
     
+    [self removePlantFromBBDDAndCollection:_plantsCollection withId:plantId];
+    
     switch (orderOfDelete) {
         case 0:
-            
-            [_manager removePlant:_plant0ViewController.plantViewModel];
-            
             if( [self.numberOfPlants intValue] == 3){
                 
                 _plant2ViewController.view.frame = _plant1ViewController.view.frame;
@@ -294,12 +334,9 @@
                 
             }
             
-            
             break;
             
         case 1:
-            
-            [_manager removePlant:_plant1ViewController.plantViewModel];
             
             if( [self.numberOfPlants intValue] == 3){
                 
@@ -327,8 +364,6 @@
             
         case 2:
             
-            [_manager removePlant:_plant2ViewController.plantViewModel];
-            
             [_plant2ViewController.view removeFromSuperview];
             _plant2ViewController = nil;
             
@@ -345,6 +380,10 @@
 - (void)addNewPlant:(PlantViewModel*) plant{
     
     int localNumberOfPlants = [self.numberOfPlants intValue];
+    
+    // add plant to collection
+    
+    [_plantsCollection addObject:plant];
     
     if (localNumberOfPlants < 3){
         
@@ -424,12 +463,9 @@
     NSMutableArray* content = [_manager getPlantsFromBBDD];
     
     for (PlantViewModel *plant in content) {
-    
+        
         [self addNewPlant:plant];
     }
-    
-
 }
-
 
 @end

@@ -7,7 +7,8 @@
 //
 
 #import "AppDelegate.h"
-
+#import <AVFoundation/AVFoundation.h>
+#import <Wit/Wit.h>
 
 @interface AppDelegate ()
 {
@@ -15,11 +16,19 @@
 
 @end
 
+#define TOKEN @"6X56PXGVSCYRFTKHHPZHGKLJHBHBGJUH"
+
+
 @implementation AppDelegate
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
+    [[AVAudioSession sharedInstance] setActive:YES error:nil];
     
+    [Wit sharedInstance].accessToken = TOKEN; // replace xxx by your Wit.AI access token
+    //enabling detectSpeechStop will automatically stop listening the microphone when the user stop talking
+    [Wit sharedInstance].detectSpeechStop = WITVadConfigDetectSpeechStop;
     
     return YES;
 }

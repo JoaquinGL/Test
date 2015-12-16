@@ -81,10 +81,19 @@
     return YES;
 }
 
+#pragma mark - Save Data
+
+-(void)saveHuiData{
+    
+    [self.delegate closeConfiguration:nil];
+}
+
 #pragma mark - Actions
 
 -(IBAction)onCloseButtonTouchUpInside:(id)sender{
-   [self.delegate closeConfiguration];
+    
+    // dont save
+    [self.delegate closeConfiguration:nil];
 }
 
 - (IBAction)onNextButtonTouchUpInside:(id)sender{
@@ -121,7 +130,7 @@
             break;
         }
         default:
-            [self.delegate closeConfiguration];
+            [self saveHuiData];
             break;
     }
 }

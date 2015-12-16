@@ -13,7 +13,12 @@
 
 - (NSString*)getIdentify
 {
-    return [ self.innerState valueForKey: @"identify" ];
+    return [ self.innerState valueForKey: @"id" ];
+}
+
+- (NSString*)getName
+{
+    return [ self.innerState valueForKey: @"name" ];
 }
 
 - (NSNumber*)getStatus
@@ -29,6 +34,28 @@
 - (NSString*)getWifiKey
 {
     return [ self.innerState valueForKey: @"wifiKey" ];
+}
+
++ (HUIViewModel* )getHUIFromObject:(id) object{
+    HUIViewModel * returnHUI = [[HUIViewModel alloc] init];
+    
+    NSDictionary* localState = @{
+                                 @"id":[object valueForKey:@"id"]
+                                 ,@"name":[object valueForKey:@"name"]
+                                 ,@"position": [object valueForKey:@"position"]
+                                 //,@"image": [object valueForKey:@"image"]
+                                 ,@"sunValue": [object valueForKey:@"sunValue"]
+                                 ,@"waterValue": [object valueForKey:@"waterValue"]
+                                 ,@"temperatureValue": [object valueForKey:@"temperatureValue"]
+                                 ,@"sunStatus": [object valueForKey:@"sunStatus"]
+                                 ,@"waterStatus": [object valueForKey:@"waterStatus"]
+                                 ,@"temperatureStatus": [object valueForKey:@"temperatureStatus"]
+                                 ,@"hui":[object valueForKey:@"hui"]
+                                 };
+    
+    [returnHUI.innerState setDictionary: localState];
+    
+    return returnHUI;
 }
 
 

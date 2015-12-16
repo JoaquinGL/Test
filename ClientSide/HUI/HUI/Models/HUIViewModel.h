@@ -12,8 +12,11 @@
 
 
 @property (nonatomic, assign, getter = getIdentify) NSString* identify;
+@property (nonatomic, assign, getter = getName) NSString* name;
 @property (nonatomic, assign, getter = getStatus) NSNumber* status;
 @property (nonatomic, assign, getter = getWifiName) NSString* wifiName;
 @property (nonatomic, assign, getter = getWifiKey) NSString* wifiKey;
+
++ (HUIViewModel* )getHUIFromObject:(id) object;
 
 @end

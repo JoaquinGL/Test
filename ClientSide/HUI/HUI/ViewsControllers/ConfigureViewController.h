@@ -7,12 +7,13 @@
 //
 
 #import "BaseViewController.h"
+#import "HUIViewModel.h"
 
 @protocol ConfigureViewControllerDelegate <NSObject>
 
 @required
 
--(void)closeConfiguration;
+-(void)closeConfiguration:(HUIViewModel* )huiViewModel;
 
 @end
 
