@@ -7,4 +7,5 @@
 //
 
 #define KEY_VOICE_RECOGNITION @"xxx"
+#define FRAME_PLANT_VIEW_CONTROLLER CGRectMake(0,0,230,230)
 
