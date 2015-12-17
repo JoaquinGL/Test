@@ -6,11 +6,14 @@
 //  Copyright © 2015 Giraldez Lopez SL. All rights reserved.
 //
 
-#define KEY_VOICE_RECOGNITION @"xxx"
-#define WIDTH_PLANT 230
-#define HEIGHT_PLANT 230
-#define WIDTH_GARDEN_SCROLL_VIEW 400
-#define HEIGHT_GARDEN_SCROLL_VIEW 400
+
+
+
+#define KEY_VOICE_RECOGNITION_TEST @"xxx"
+#define WIDTH_PLANT_TEST 230
+#define HEIGHT_PLANT_TEST 230
+#define WIDTH_GARDEN_SCROLL_VIEW_TEST 400
+#define HEIGHT_GARDEN_SCROLL_VIEW_TEST 400
 
 
 
