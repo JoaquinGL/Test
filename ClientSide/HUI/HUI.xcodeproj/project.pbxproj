@@ -132,7 +132,7 @@
 		E39B8C901C20689D0015EF9F /* Wit.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Wit.bundle; path = Wit/Wit.bundle; sourceTree = "<group>"; };
 		E39B8C941C20691E0015EF9F /* Wit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Wit.framework; path = Wit/Wit.framework; sourceTree = "<group>"; };
 		E39B8C961C22A0770015EF9F /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
-		E39B8C9C1C231B020015EF9F /* ConstantsB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConstantsB.h; sourceTree = "<group>"; };
+		E39B8C9F1C23244D0015EF9F /* Test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Test.h; sourceTree = "<group>"; };
 		E3B02EAF1C09AE76005E7DF4 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		E3B02EB01C09AE76005E7DF4 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		E3B02EB21C09AEB9005E7DF4 /* MainView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainView.xib; sourceTree = "<group>"; };
@@ -478,7 +478,7 @@
 				E3EFE1F81C109CDA0033BB25 /* Utils.h */,
 				E3EFE1F91C109CDA0033BB25 /* Utils.m */,
 				E39B8C961C22A0770015EF9F /* Constants.h */,
-				E39B8C9C1C231B020015EF9F /* ConstantsB.h */,
+				E39B8C9F1C23244D0015EF9F /* Test.h */,
 			);
 			path = Utils;
 			sourceTree = "<group>";

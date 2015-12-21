@@ -33,13 +33,21 @@
     
     NSMutableArray* _plantsCollection;
     NSMutableArray* _plantsViewControllerCollection;
+    
+    NSInteger _positionX;
+    NSInteger _positionY;
+    
 }
 
 @end
 
-#define FRAME_NEW_PLANT CGRectMake(80, 70, 160, 160)
-#define FRAME_NEW_PLANT_1_PLANT CGRectMake(80, 190, 160, 160)
-#define FRAME_NEW_PLANT_2_PLANT CGRectMake(80, 200, 160, 160)
+#define WIDTH_PLANT 160
+#define HEIGHT_PLANT 160
+#define INITIAL_POINT_X 20
+#define INITIAL_POINT_Y 10
+#define FRAME_NEW_PLANT CGRectMake(80, 70, WIDTH_PLANT, HEIGHT_PLANT)
+#define FRAME_NEW_PLANT_1_PLANT CGRectMake(80, 190, WIDTH_PLANT, HEIGHT_PLANT)
+#define FRAME_NEW_PLANT_2_PLANT CGRectMake(80, 200, WIDTH_PLANT, HEIGHT_PLANT)
 #define FRAME_NEW_PLANT_3_PLANT CGRectMake(180, 220, 120, 120)
 
 @implementation MainViewController
@@ -54,6 +62,9 @@
 
 
 - (void)customInit {
+    
+    _positionX = 95;
+    _positionY = 20;
     
     _searchPlantViewController = [SearchPlantViewController instantiate];
     _detailPlantViewController = [DetailPlantViewController instantiate];
@@ -240,16 +251,16 @@
 }
 #pragma mark - DeleteFromGarden
 
--(void) removePlantFromBBDDAndCollection:(NSMutableArray* )collection withId:(NSString* )plantId{
+-(void) removePlantFromBBDDAndCollectionWithId:(NSString* )plantId{
     
-    for (PlantViewModel *plant in collection) {
+    for (PlantViewModel *plant in _plantsCollection) {
         
         if([plant getIdentify] == plantId){
             // remove from BBDD
             [_manager removePlant:plant];
             
             // remove from NSMutableArray
-            [collection removeObject: plant];
+            [_plantsCollection removeObject: plant];
             break;
         }
     }
@@ -258,91 +269,25 @@
 #pragma mark - Delegate DetailPlant
 - (void)deletePlant:(NSNumber *)identify withId:(NSString *)plantId{
     
-    int orderOfDelete = [identify intValue];
+    [self removePlantFromBBDDAndCollectionWithId:plantId];
     
-    [self removePlantFromBBDDAndCollection:_plantsCollection withId:plantId];
-    
-    switch (orderOfDelete) {
-        case 0:
-            if( [self.numberOfPlants intValue] == 3){
-                
-                _plant2ViewController.view.frame = _plant1ViewController.view.frame;
-                _plant1ViewController.view.frame = _plant0ViewController.view.frame;
-                
-                [_plant1ViewController.plantViewModel setPosition:[NSNumber numberWithInt: 0]];
-                [_plant2ViewController.plantViewModel setPosition:[NSNumber numberWithInt: 1]];
-                
-                [_plant0ViewController.view removeFromSuperview];
-                _plant0ViewController = _plant1ViewController;
-                _plant1ViewController = _plant2ViewController;
-                
-                _plant2ViewController = nil;
-                
-                [newPlantButton setFrame: FRAME_NEW_PLANT_1_PLANT];
-                
-            }else if( [self.numberOfPlants intValue] == 2){
-            
-                _plant1ViewController.view.frame = _plant0ViewController.view.frame;
-                _plant1ViewController.identify =_plant0ViewController.identify;
-                
-                [_plant0ViewController.view removeFromSuperview];
-                _plant0ViewController = _plant1ViewController;
-                
-                [_plant0ViewController.plantViewModel setPosition:[NSNumber numberWithInt: 0]];
-                
-                _plant1ViewController = nil;
-                
-                [_plant0ViewController.view setFrame:CGRectMake(95, 20, _plant0ViewController.view.frame.size.width, _plant0ViewController.view.frame.size.height)];
-                
-                [newPlantButton setFrame: FRAME_NEW_PLANT_1_PLANT];
-                
-            }else{
-                
-                [_plant0ViewController.view removeFromSuperview];
-                _plant0ViewController = nil;
-                
-                [newPlantButton setFrame: FRAME_NEW_PLANT];
-                
-            }
-            
-            break;
-            
-        case 1:
-            
-            if( [self.numberOfPlants intValue] == 3){
-                
-                _plant2ViewController.view.frame = _plant1ViewController.view.frame;
-                
-                [_plant1ViewController.view removeFromSuperview];
-                _plant1ViewController = _plant2ViewController;
-                
-                [_plant1ViewController.plantViewModel setPosition:[NSNumber numberWithInt: 1]];
-                
-                _plant2ViewController = nil;
-                
-            }else if( [self.numberOfPlants intValue] == 2){
-                
-                [_plant0ViewController.view setFrame:CGRectMake(95, 20, _plant0ViewController.view.frame.size.width, _plant0ViewController.view.frame.size.height)];
-                
-                [_plant0ViewController.plantViewModel setPosition:[NSNumber numberWithInt: 0]];
-                
-                [_plant1ViewController.view removeFromSuperview];
-                _plant1ViewController = nil;
-            }
-            [newPlantButton setFrame: FRAME_NEW_PLANT_2_PLANT];
-            
-        break;
-            
-        case 2:
-            
-            [_plant2ViewController.view removeFromSuperview];
-            _plant2ViewController = nil;
-            
-            [newPlantButton setFrame: FRAME_NEW_PLANT_2_PLANT];
-        break;
+    for (PlantViewController* plantViewController in _plantsViewControllerCollection){
+        
+        [plantViewController.view removeFromSuperview];
     }
     
-    self.numberOfPlants = [NSNumber numberWithInt:[self.numberOfPlants intValue] - 1];
+    [_plantsCollection removeAllObjects];
+    [_plantsViewControllerCollection removeAllObjects];
+    
+    _plantsCollection = nil;
+    _plantsViewControllerCollection = nil;
+    
+    _plantsCollection = [[NSMutableArray alloc] init];
+    _plantsViewControllerCollection = [[NSMutableArray alloc] init];
+    
+    self.numberOfPlants = [NSNumber numberWithInt: 0];
+    
+    [self initializeContent];
     
 }
 
@@ -354,92 +299,59 @@
     
     // add plant to collection
     
-    [_plantsCollection addObject:plant];
-    
     if (localNumberOfPlants < 3){
         
-        switch ([self.numberOfPlants integerValue]) {
-            case 0:{
-                    _plant0ViewController = [PlantViewController instantiate];
-                    _plant0ViewController.delegate = self;
-                    _plant0ViewController.plantName = [plant getName];
-                    _plant0ViewController.position = [NSNumber numberWithInteger:[_plantsViewControllerCollection count]];
-                
-                    [plant setPosition: [NSNumber numberWithInteger:[_plantsViewControllerCollection count]]];
-                
-                    [_plant0ViewController.view setFrame:CGRectMake(95, 20, _plant0ViewController.view.frame.size.width, _plant0ViewController.view.frame.size.height)];
-                
-                    [newPlantButton setFrame: FRAME_NEW_PLANT_1_PLANT];
-                
-                    // showWithAnimationTheView
-                    [self.view addSubview:_plant0ViewController.view];
-                
-                    [_plant0ViewController setPlantImageFromName:[plant getName]];
-                    [_plant0ViewController setStatusUndefined];
-                    _plant0ViewController.plantViewModel = plant;
-                
-                
-                    // add plantsViewController to collection
-                    [_plantsViewControllerCollection addObject: _plant0ViewController];
-                }
-                break;
-                
-            case 1:{
-                    _plant1ViewController = [PlantViewController instantiate];
-                    _plant1ViewController.plantName = [plant getName];
-                    _plant1ViewController.delegate = self;
-                    _plant1ViewController.position = [NSNumber numberWithInteger:[_plantsViewControllerCollection count]];
-                    [_plant0ViewController.view setFrame:CGRectMake(20, 20, _plant0ViewController.view.frame.size.width, _plant0ViewController.view.frame.size.height)];
-                    [_plant1ViewController.view setFrame:CGRectMake(170, 20, _plant1ViewController.view.frame.size.width, _plant1ViewController.view.frame.size.height)];
-                    [newPlantButton setFrame: FRAME_NEW_PLANT_2_PLANT];
-                    [plant setPosition: [NSNumber numberWithInteger:[_plantsViewControllerCollection count]]];
-                    // showWithAnimationTheView
-                    [self.view addSubview:_plant1ViewController.view];
-                
-                    [_plant1ViewController setPlantImageFromName:[plant getName]];
-                    [_plant1ViewController setStatusUndefined];
-                    _plant1ViewController.plantViewModel = plant;
-                
-                    // add plantsViewController to collection
-                    [_plantsViewControllerCollection addObject: _plant1ViewController];
-                }
-                break;
-                
-            case 2:{
-                    _plant2ViewController = [PlantViewController instantiate];
-                    _plant2ViewController.plantName = [plant getName];
-                    _plant2ViewController.delegate = self;
-                    _plant2ViewController.position = [NSNumber numberWithInteger:[_plantsViewControllerCollection count]];
-                    [_plant2ViewController.view setFrame:CGRectMake(20, 200, _plant2ViewController.view.frame.size.width, _plant2ViewController.view.frame.size.height)];
-                    [newPlantButton setFrame: FRAME_NEW_PLANT_3_PLANT];
-                
-                    // showWithAnimationTheView
-                    [self.view addSubview:_plant2ViewController.view];
-                
-                    [plant setPosition: [NSNumber numberWithInteger:[_plantsViewControllerCollection count]]];
-                    [_plant2ViewController setPlantImageFromName:[plant getName]];
-                    [_plant2ViewController setStatusUndefined];
-                    _plant2ViewController.plantViewModel = plant;
-                
-                    // add plantsViewController to collection
-                    [_plantsViewControllerCollection addObject: _plant2ViewController];
-                }
-                break;
-                
-            default:{
-                PlantViewController* newPlantViewController = [PlantViewController instantiate];
-                newPlantViewController.plantName = [plant getName];
-                newPlantViewController.delegate = self;
-                newPlantViewController.position = [NSNumber numberWithInteger:[_plantsViewControllerCollection count]];
-                // set te positionX and Y dinamic
-                //[newPlantViewController.view setFrame:CGRectMake(_positionX, _positionY, newPlantViewController.view.frame.size.width, newPlantViewController.view.frame.size.height)];
-                [_plantsViewControllerCollection addObject: newPlantViewController];
-                }
-                break;
+        PlantViewController* newPlantViewController = [PlantViewController instantiate];
+        newPlantViewController.plantName = [plant getName];
+        newPlantViewController.delegate = self;
+        newPlantViewController.position = [NSNumber numberWithInteger:[_plantsViewControllerCollection count]];
+
+        // calculate the correct position
+        if([self.numberOfPlants integerValue] == 0)
+        {
+            _positionX = INITIAL_POINT_X + 70;
+            _positionY = INITIAL_POINT_Y;
+        }else if ([self.numberOfPlants integerValue] % 2)
+        {
+            [((PlantViewController*) [_plantsViewControllerCollection objectAtIndex:0]).view setFrame:CGRectMake(INITIAL_POINT_X, INITIAL_POINT_Y, newPlantViewController.view.frame.size.width, newPlantViewController.view.frame.size.height)];
+            _positionX = INITIAL_POINT_X + WIDTH_PLANT - 7;
+            _positionY = INITIAL_POINT_Y;
+        
+        }else{
+            _positionX = INITIAL_POINT_X;
+            _positionY = _positionY + HEIGHT_PLANT + 10;
+        }
+
+        [_plantsCollection addObject:plant];
+        [_plantsViewControllerCollection addObject: newPlantViewController];
+        
+        [plant setPosition: [NSNumber numberWithInteger:[_plantsViewControllerCollection count]]];
+        
+        [newPlantViewController.view setFrame:CGRectMake(_positionX, _positionY, newPlantViewController.view.frame.size.width, newPlantViewController.view.frame.size.height)];
+        
+        // showWithAnimationTheView
+        [self.view addSubview:newPlantViewController.view];
+        
+        [newPlantViewController setPlantImageFromName:[plant getName]];
+        [newPlantViewController setStatusUndefined];
+        newPlantViewController.plantViewModel = plant;
+        
+        // add plantsViewController to collection
+        [_plantsViewControllerCollection addObject: newPlantViewController];
+        
+        self.numberOfPlants = [NSNumber numberWithInt: localNumberOfPlants + 1];
+       
+        // calculate newPlantButton Frame
+        if ([self.numberOfPlants integerValue]==0){
+            [newPlantButton setFrame: FRAME_NEW_PLANT_1_PLANT];
+        }else if ([self.numberOfPlants integerValue] < 2){
+            [newPlantButton setFrame: FRAME_NEW_PLANT_2_PLANT];
+        }else if ([self.numberOfPlants integerValue] == 3){
+            [newPlantButton setFrame: FRAME_NEW_PLANT_3_PLANT];
+        }else{
+            [newPlantButton setFrame: FRAME_NEW_PLANT_1_PLANT];
         }
         
-        self.numberOfPlants = [NSNumber numberWithInt: localNumberOfPlants +1];
-    
     }else{
         NSLog(@"Limit exceeded, you have to delete or modify a plant before add new one");
     }
@@ -456,9 +368,15 @@
     
     NSMutableArray* content = [_manager getPlantsFromBBDD];
     
-    for (PlantViewModel *plant in content) {
+    if([content count] != 0){
+    
+        for (PlantViewModel *plant in content) {
         
-        [self addNewPlant:plant];
+            [self addNewPlant:plant];
+        }
+    }else{
+        //initialize button AddNewPlant
+        [newPlantButton setFrame: FRAME_NEW_PLANT];
     }
 }
 
