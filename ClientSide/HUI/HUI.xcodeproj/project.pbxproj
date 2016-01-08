@@ -31,6 +31,7 @@
 		E39B8C8B1C20626A0015EF9F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E39B8C8A1C20626A0015EF9F /* CoreLocation.framework */; };
 		E39B8C921C20689D0015EF9F /* Wit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E39B8C901C20689D0015EF9F /* Wit.bundle */; };
 		E39B8C951C20691E0015EF9F /* Wit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E39B8C941C20691E0015EF9F /* Wit.framework */; };
+		E39B8CA41C2A858F0015EF9F /* CoreServices.m in Sources */ = {isa = PBXBuildFile; fileRef = E39B8CA31C2A858F0015EF9F /* CoreServices.m */; };
 		E3B02EB11C09AE76005E7DF4 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3B02EB01C09AE76005E7DF4 /* MainViewController.m */; };
 		E3B02EB31C09AEB9005E7DF4 /* MainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3B02EB21C09AEB9005E7DF4 /* MainView.xib */; };
 		E3CE4E161C0221850096D0FB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E3CE4E151C0221850096D0FB /* main.m */; };
@@ -133,6 +134,8 @@
 		E39B8C941C20691E0015EF9F /* Wit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Wit.framework; path = Wit/Wit.framework; sourceTree = "<group>"; };
 		E39B8C961C22A0770015EF9F /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		E39B8C9F1C23244D0015EF9F /* Test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Test.h; sourceTree = "<group>"; };
+		E39B8CA21C2A858E0015EF9F /* CoreServices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreServices.h; sourceTree = "<group>"; };
+		E39B8CA31C2A858F0015EF9F /* CoreServices.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreServices.m; sourceTree = "<group>"; };
 		E3B02EAF1C09AE76005E7DF4 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		E3B02EB01C09AE76005E7DF4 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		E3B02EB21C09AEB9005E7DF4 /* MainView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainView.xib; sourceTree = "<group>"; };
@@ -339,6 +342,8 @@
 			children = (
 				E36079D51C1968AF00AD6D11 /* Manager.h */,
 				E36079D61C1968AF00AD6D11 /* Manager.m */,
+				E39B8CA21C2A858E0015EF9F /* CoreServices.h */,
+				E39B8CA31C2A858F0015EF9F /* CoreServices.m */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -655,6 +660,7 @@
 				E33823751C1A2C310029C285 /* HUIViewModel.m in Sources */,
 				E3EFE1F61C108C0A0033BB25 /* AskHuiViewController.m in Sources */,
 				E30816921C0455CB0007D896 /* CustomPageViewController.m in Sources */,
+				E39B8CA41C2A858F0015EF9F /* CoreServices.m in Sources */,
 				E3CE4E581C0222CD0096D0FB /* ViewController.m in Sources */,
 				E36079CB1C18867D00AD6D11 /* BaseViewModel.m in Sources */,
 				E3DDCB451C11BE2F0053E150 /* MBProgressHUD.m in Sources */,

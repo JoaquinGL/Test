@@ -7,6 +7,7 @@
 //
 
 #import "BaseViewController.h"
+#import "CoreServices.h"
 
 @protocol SearchPlantViewControllerDelegate <NSObject>
 
@@ -16,11 +17,11 @@
 
 @end
 
-@interface SearchPlantViewController : BaseViewController
+@interface SearchPlantViewController : BaseViewController<CoreServicesDelegate, MBProgressHUDDelegate>
 
 
 @property (nonatomic, assign) id <SearchPlantViewControllerDelegate> delegate;
-@property (nonatomic) NSArray* data;
+@property (nonatomic) NSMutableArray* data;
 
 + ( SearchPlantViewController* )instantiate;
 

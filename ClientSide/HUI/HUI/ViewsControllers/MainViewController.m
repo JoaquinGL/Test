@@ -44,11 +44,11 @@
 #define WIDTH_PLANT 160
 #define HEIGHT_PLANT 160
 #define INITIAL_POINT_X 20
-#define INITIAL_POINT_Y 10
-#define FRAME_NEW_PLANT CGRectMake(80, 70, WIDTH_PLANT, HEIGHT_PLANT)
-#define FRAME_NEW_PLANT_1_PLANT CGRectMake(80, 190, WIDTH_PLANT, HEIGHT_PLANT)
-#define FRAME_NEW_PLANT_2_PLANT CGRectMake(80, 200, WIDTH_PLANT, HEIGHT_PLANT)
-#define FRAME_NEW_PLANT_3_PLANT CGRectMake(180, 220, 120, 120)
+#define INITIAL_POINT_Y 80
+#define FRAME_NEW_PLANT CGRectMake(80, 130, WIDTH_PLANT, HEIGHT_PLANT)
+#define FRAME_NEW_PLANT_1_PLANT CGRectMake(80, 260, WIDTH_PLANT, HEIGHT_PLANT)
+#define FRAME_NEW_PLANT_2_PLANT CGRectMake(80, 260, WIDTH_PLANT, HEIGHT_PLANT)
+#define FRAME_NEW_PLANT_3_PLANT CGRectMake(180, 260, 120, 120)
 
 @implementation MainViewController
 
@@ -94,14 +94,15 @@
     
     [self.view addSubview: newPlantButton];
     
-    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"title.png"] forBarMetrics:UIBarMetricsDefault];
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    [[UINavigationBar appearance] setShadowImage:[UIImage new]];
+    [[UINavigationBar appearance] setTranslucent: YES];
     [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
                                                            [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0], NSForegroundColorAttributeName,
                                                             nil]];
     
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
-    
-    
+
     UIImage* deleteImage = [UIImage imageNamed:@"info.png"];
     CGRect frameimg = CGRectMake(0, 0, deleteImage.size.width, deleteImage.size.height);
     UIButton *infoButton = [[UIButton alloc] initWithFrame:frameimg];
@@ -121,8 +122,8 @@
 }
 
 
--(void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear: animated];
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
 }
 
 - (void)didReceiveMemoryWarning {

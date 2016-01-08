@@ -10,6 +10,11 @@
 
 @interface AskHuiViewController (){
     //TODO, MUTE
+
+    CoreServices* _coreServices;
+    
+    IBOutlet UILabel * _responseTitle;
+    IBOutlet UILabel * _testLabel;
 }
 
 @end
@@ -23,13 +28,17 @@ const unsigned char SpeechKitApplicationKey[] = {0x2b, 0x68, 0xea, 0x70, 0x07, 0
             , searchBox
             , vuMeter
             , voiceSearch
-            , textToRead
             , speakButton
             , vocalizer;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    _coreServices = [[CoreServices alloc] init];
+    [_coreServices setDelegate:self];
+    
+    [_responseTitle setAlpha: 0.0f];
+    [speakButton setAlpha: 0.0f];
     
     [SpeechKit setupWithID:@"NMDPPRODUCTION_Joaquin_Giraldez_HUI_20151202041237"
                       host:@"fvr.nmdp.nuancemobility.net"
@@ -106,7 +115,6 @@ const unsigned char SpeechKitApplicationKey[] = {0x2b, 0x68, 0xea, 0x70, 0x07, 0
 
 
 - (IBAction)speakOrStopAction: (id) sender {
-    [textToRead resignFirstResponder];
     
     if (isSpeaking) {
         [vocalizer cancel];
@@ -124,7 +132,7 @@ const unsigned char SpeechKitApplicationKey[] = {0x2b, 0x68, 0xea, 0x70, 0x07, 0
         // vocalizer = [[SKVocalizer alloc] initWithVoice:@"Samantha" delegate:self];
         
         // Speaks the string text
-        [vocalizer speakString:textToRead.text];
+        [vocalizer speakString:_labelToRead.text];
         
         // Speaks the markup text with language For multiple languages, add <s></s> tags to markup string
         // NSString * textToReadString = [[[[NSString alloc] initWithCString:"<?xml version=\"1.0\"?> <speak version=\"1.0\" xmlns=\"http://www.w3.org/2001/10/synthesis\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://www.w3.org/2001/10/synthesis http://www.w3.org/TR/speech-synthesis/synthesis.xsd\" xml:lang=\"en-us\"> <s xml:lang=\"fr\"> "] stringByAppendingString:textToRead.text] stringByAppendingString:@"</s></speak>"];
@@ -200,9 +208,11 @@ const unsigned char SpeechKitApplicationKey[] = {0x2b, 0x68, 0xea, 0x70, 0x07, 0
     transactionState = TS_IDLE;
     [recordButton setImage:[UIImage imageNamed:@"mic_off.png"] forState:UIControlStateNormal];
     
-    if (numOfResults > 0)
+    if (numOfResults > 0){
         searchBox.text = [results firstResult];
-    
+        // send to server the question
+        [_coreServices postQuestion:searchBox.text andHUIID:@"HUIA"];
+    }
     if (results.suggestion){
         UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Suggestion"
                                                                        message:results.suggestion
@@ -261,6 +271,25 @@ const unsigned char SpeechKitApplicationKey[] = {0x2b, 0x68, 0xea, 0x70, 0x07, 0
 
 - (void)vocalizer:(SKVocalizer *)vocalizer willBeginSpeakingString:(NSString *)text {
     isSpeaking = YES;
+    
+    [_responseTitle setAlpha:1];
+    
+    [Utils fadeIn: _responseTitle completion:^(BOOL finished){
+        _testLabel.text = _labelToRead.text;
+        UIFont *fontText = [UIFont fontWithName:@"Helvetica" size:16];
+        _testLabel.textColor = [UIColor whiteColor];
+
+        CGSize maximumLabelSize = CGSizeMake(310, CGFLOAT_MAX);
+        CGRect textRect = [_testLabel.text boundingRectWithSize:maximumLabelSize
+                                                 options:NSStringDrawingUsesLineFragmentOrigin| NSStringDrawingUsesFontLeading
+                                              attributes:@{NSFontAttributeName:fontText}
+                                                 context:nil];
+        
+        [_testLabel setFrame:CGRectMake(_testLabel.frame.origin.x, _testLabel.frame.origin.y, _testLabel.frame.size.width, textRect.size.height + 10.0)];
+        
+        [speakButton setAlpha: 1.0f];
+    }];
+    
     [speakButton setTitle:@"Stop" forState:UIControlStateNormal];
 }
 
@@ -271,7 +300,7 @@ const unsigned char SpeechKitApplicationKey[] = {0x2b, 0x68, 0xea, 0x70, 0x07, 0
 - (void)vocalizer:(SKVocalizer *)vocalizer didFinishSpeakingString:(NSString *)text withError:(NSError *)error {
     NSLog(@"Session id [%@].", [SpeechKit sessionID]); // for debugging purpose: printing out the speechkit session id
     isSpeaking = NO;
-    [speakButton setTitle:@"Read It" forState:UIControlStateNormal];
+    [speakButton setTitle:@"Read it again" forState:UIControlStateNormal];
     if (error !=nil)
     {
         UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Error"
@@ -297,8 +326,24 @@ const unsigned char SpeechKitApplicationKey[] = {0x2b, 0x68, 0xea, 0x70, 0x07, 0
     if (textField == searchBox)
     {
         [searchBox resignFirstResponder];
+        [_coreServices postQuestion:searchBox.text andHUIID:@"HUIA"];
     }
     return YES;
+}
+
+
+#pragma  mark - CoreServicesDelegate
+
+
+-(void)answerFromServer:(NSDictionary *)response{
+
+    NSLog(@"Respuesta delegada: %@", response);
+    
+    if ([response objectForKey:@"speechResult"]){
+        _labelToRead.text = [response objectForKey:@"speechResult"];
+        [self speakOrStopAction:nil];
+    }
+
 }
 
 

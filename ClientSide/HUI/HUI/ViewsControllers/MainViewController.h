@@ -12,7 +12,7 @@
 #import "PlantViewController.h"
 #import "DetailPlantViewController.h"
 #import "AskHuiViewController.h"
-#import "MBProgressHUD.h"
+
 
 @interface MainViewController : BaseViewController <
   WalkthroughViewControllerDelegate

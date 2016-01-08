@@ -104,10 +104,48 @@
 
 - (IBAction)onDeletePlantTouchUpInside:(id)sender{
     
-    [self.delegate deletePlant: self.position withId:[self.plantViewModel getIdentify]];
-    
-    [[self navigationController] popViewControllerAnimated:YES];
 
+    UIAlertController * alert=   [UIAlertController
+                                  alertControllerWithTitle:NSLocalizedString(@"Warning", nil)
+                                  message:NSLocalizedString(@"Are you sure you want to delete this plant?", nil)
+                                  preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* yesButton = [UIAlertAction
+                                actionWithTitle:NSLocalizedString(@"Yes", nil)
+                                style:UIAlertActionStyleDefault
+                                handler:^(UIAlertAction * action)
+                                {
+                                    [alert dismissViewControllerAnimated:YES completion:nil];
+                                    //Handel your yes please button action here
+                                    [self.delegate deletePlant: self.position withId:[self.plantViewModel getIdentify]];
+                                    [[self navigationController] popViewControllerAnimated:YES];
+                                    
+                                }];
+    UIAlertAction* noButton = [UIAlertAction
+                               actionWithTitle:NSLocalizedString(@"No", nil)
+                               style:UIAlertActionStyleDefault
+                               handler:^(UIAlertAction * action)
+                               {
+                                   [alert dismissViewControllerAnimated:YES completion:nil];
+                                   
+                               }];
+    
+    [alert addAction:noButton];
+    [alert addAction:yesButton];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+
+}
+
+#pragma mark - alert view delegate methods
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 0) {
+        NSLog(@"Cancel Tapped.");
+    }
+    else if (buttonIndex == 1) {
+        NSLog(@"OK Tapped. Hello World!");
+    }
 }
 
 

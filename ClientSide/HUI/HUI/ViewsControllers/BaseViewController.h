@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Utils.h"
+#import "MBProgressHUD.h"
 
 @interface BaseViewController : UIViewController{
     enum {

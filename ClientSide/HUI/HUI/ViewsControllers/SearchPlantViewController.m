@@ -9,6 +9,10 @@
 #import "SearchPlantViewController.h"
 
 @interface SearchPlantViewController ()
+{
+    CoreServices *_coreServices;
+    MBProgressHUD* _HUD;
+}
 
 @property (assign, nonatomic) IBOutlet UITableView *tableView;
 
@@ -24,6 +28,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self customInit];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -32,7 +37,23 @@
 }
 
 - (void)customInit{
-    self.data = @[@"apple",@"broccoli",@"endive",@"orange",@"carrot",@"tomato",@"lettuce",@"onion",@"potato",@"lemon",@"soja"];
+    
+    _coreServices = [[CoreServices alloc] init];
+    
+    [_coreServices setDelegate: self];
+}
+
+-(void) viewWillAppear:(BOOL)animated{
+    [super viewWillAppear: animated];
+    
+    _HUD = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.view addSubview:_HUD];
+    
+    _HUD.delegate = self;
+    _HUD.labelText = @"Loading plants";
+    
+    [_HUD show:YES];
+    [_coreServices getPlantListWithHUID:@"HUIA"];
 }
 
 #pragma mark - Instantiate method
@@ -91,8 +112,34 @@
     else {
         backgroundColorView.frame = backgroundFrame;
     }
+}
+
+
+#pragma  mark - CoreServicesDelegate
+
+
+-(void)answerFromServer:(NSDictionary *)response{
+    
+    self.data = [[NSMutableArray alloc] init];
+    
+    if ([response objectForKey:@"plantList"]){
+    
+        for (NSString* data in [response objectForKey:@"plantList"]){
+            [self.data addObject: [data capitalizedString]];
+        }
+    }else{
+        self.data = [[NSMutableArray alloc] initWithArray:@[@"apple",@"broccoli",@"endive",@"orange",@"carrot",@"Tomato",@"lettuce",@"onion",@"potato",@"lemon",@"soja"]];
+    }
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.tableView reloadData];
+        [_HUD hide:YES];
+    });
+    
     
 }
+
+
 
 
 @end
