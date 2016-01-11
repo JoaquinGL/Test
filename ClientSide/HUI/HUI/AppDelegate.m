@@ -30,6 +30,20 @@
     //enabling detectSpeechStop will automatically stop listening the microphone when the user stop talking
     [Wit sharedInstance].detectSpeechStop = WITVadConfigDetectSpeechStop;
     
+    
+    /* Set this in the begining of the app, so we can check any time the connection */
+    
+    Reachability *reachability = [Reachability reachabilityWithHostname:@"www.apple.com"];
+    reachability.reachableBlock = ^(Reachability * reachability){
+        NSLog(@"Network is available");
+    };
+    
+    reachability.unreachableBlock = ^(Reachability * reachability){
+        NSLog(@"Network is disable");
+    };
+    
+    [reachability startNotifier];
+    
     return YES;
 }
 

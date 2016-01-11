@@ -19,6 +19,7 @@
 
 #import "CoreServices.h"
 
+
 #define kBgQueue dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0) //1
 
 // post server
@@ -32,73 +33,127 @@
 @implementation CoreServices
 
 
+-(BOOL) isNetWorkAvailable{
+    
+    BOOL returnValue = false;
+    
+    Reachability *reachability = [Reachability reachabilityWithHostname:@"www.apple.com"];
+    
+    returnValue = [reachability currentReachabilityStatus] != NotReachable;
+    
+    return reachability.isReachable;
+
+}
+
 - (void) postQuestion:(NSString* )question andHUIID:(NSString* )huiId{
     
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL: ASK_HUI_POST_URL];
-    [request setHTTPMethod:@"POST"];
-    
-    NSDictionary *postDictionary = @{
-                        @"speech": question,
-                        @"id": huiId
-                        };
-    
-    NSError *error;
-    NSData *postData = [NSJSONSerialization dataWithJSONObject:postDictionary options:0 error:&error];
-    [request setHTTPBody:postData];
-   
-
-    NSURLSession *session = [NSURLSession sharedSession];
-    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
-                                                completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
-                                      {
-                                          NSDictionary* json = [NSJSONSerialization JSONObjectWithData:data
-                                                                                               options:kNilOptions
-                                                                                                 error:&error];
-                                          if (!error){
-                                              NSLog(@"Data: %@", json);
+    if( [self isNetWorkAvailable]){
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL: ASK_HUI_POST_URL];
+        [request setHTTPMethod:@"POST"];
+        
+        NSDictionary *postDictionary = @{
+                                         @"speech": question,
+                                         @"id": huiId
+                                         };
+        
+        NSError *error;
+        NSData *postData = [NSJSONSerialization dataWithJSONObject:postDictionary options:0 error:&error];
+        [request setHTTPBody:postData];
+        
+        
+        NSURLSession *session = [NSURLSession sharedSession];
+        NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                                    completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
+                                          {
+                                              NSDictionary* json = [NSJSONSerialization JSONObjectWithData:data
+                                                                                                   options:kNilOptions
+                                                                                                     error:&error];
+                                              if (error){
+                                                  NSLog(@"Error in the connection: %@", error);
+                                              }
+                                              
                                               [self.delegate answerFromServer: json];
                                               
-                                          }else{
-                                              NSLog(@"Error in the connection: %@", error);
-                                          }
-                                          
-                                      }];
-    [dataTask resume];
-    
+                                          }];
+        [dataTask resume];
+    }else{
+        [self.delegate answerFromServer: nil];
+    }
 }
 
 - (void) getPlantListWithHUID:(NSString* )huiId{
     
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL: PLANT_LIST_POST_URL];
-    [request setHTTPMethod:@"POST"];
-    
-    NSDictionary *postDictionary = @{
-                                     @"suitablePlants": @"false",
-                                     @"huiID": huiId
-                                     };
-    
-    NSError *error;
-    NSData *postData = [NSJSONSerialization dataWithJSONObject:postDictionary options:0 error:&error];
-    [request setHTTPBody:postData];
-    
-    
-    NSURLSession *session = [NSURLSession sharedSession];
-    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
-                                                completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
-                                      {
-                                          NSDictionary* json = [NSJSONSerialization JSONObjectWithData:data
-                                                                                               options:kNilOptions
-                                                                                                 error:&error];
-                                          if (!error){
+    if( [self isNetWorkAvailable]){
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL: PLANT_LIST_POST_URL];
+        [request setHTTPMethod:@"POST"];
+        
+        NSDictionary *postDictionary = @{
+                                         @"suitablePlants": @"false",
+                                         @"huiID": huiId
+                                         };
+        
+        NSError *error;
+        NSData *postData = [NSJSONSerialization dataWithJSONObject:postDictionary options:0 error:&error];
+        [request setHTTPBody:postData];
+        
+        
+        NSURLSession *session = [NSURLSession sharedSession];
+        NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                                    completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
+                                          {
+                                              NSDictionary* json = [NSJSONSerialization JSONObjectWithData:data
+                                                                                                   options:kNilOptions
+                                                                                                     error:&error];
+                                              if (error){
+                                                  NSLog(@"Error in the connection: %@", error);
+                                              }
+                                              
                                               [self.delegate answerFromServer: json];
-                                          }else{
-                                              NSLog(@"Error in the connection: %@", error);
-                                          }
-                                          
-                                      }];
-    [dataTask resume];
+                                              
+                                          }];
+        [dataTask resume];
 
+    }else{
+        [self.delegate answerFromServer: nil];
+    }
 }
+
+- (void) getPlantState:(NSString* )plantName withHUID:(NSString* )huiId{
+    
+    if( [self isNetWorkAvailable]){
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL: PLANT_STATE_POST_URL];
+        [request setHTTPMethod:@"POST"];
+        
+        NSDictionary *postDictionary = @{
+                                         @"suitablePlants": @"false",
+                                         @"huiID": huiId
+                                         };
+        
+        NSError *error;
+        NSData *postData = [NSJSONSerialization dataWithJSONObject:postDictionary options:0 error:&error];
+        [request setHTTPBody:postData];
+        
+        
+        NSURLSession *session = [NSURLSession sharedSession];
+        NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                                    completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
+                                          {
+                                              NSDictionary* json = [NSJSONSerialization JSONObjectWithData:data
+                                                                                                   options:kNilOptions
+                                                                                                     error:&error];
+                                              if (error){
+                                                  NSLog(@"Error in the connection: %@", error);
+                                              }
+                                              
+                                              [self.delegate answerFromServer: json];
+                                              
+                                          }];
+        [dataTask resume];
+    }else{
+        [self.delegate answerFromServer: nil];
+    }
+}
+
 
 
 @end

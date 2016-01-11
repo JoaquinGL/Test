@@ -17,7 +17,7 @@
 
 @end
 
-@interface ConfigureViewController : BaseViewController<UITextFieldDelegate>
+@interface ConfigureViewController : BaseViewController<UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
 
 @property (nonatomic, assign) id <ConfigureViewControllerDelegate> delegate;
 
