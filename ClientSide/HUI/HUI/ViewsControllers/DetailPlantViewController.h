@@ -18,8 +18,7 @@
 
 @end
 
-
-@interface DetailPlantViewController : BaseViewController<ConfigureViewControllerDelegate, UIAlertViewDelegate>{
+@interface DetailPlantViewController : BaseViewController<ConfigureViewControllerDelegate, UIAlertViewDelegate, MBProgressHUDDelegate>{
 }
 
 @property (nonatomic, assign) id <DetailPlantViewControllerDelegate> delegate;

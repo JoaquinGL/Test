@@ -8,6 +8,7 @@
 
 #import "Manager.h"
 
+
 @implementation Manager
 
 @synthesize managedObjectContext = _managedObjectContext;
@@ -34,21 +35,6 @@
     [plantInfo setValue:[plantViewModel getWaterValue] forKey:@"waterValue"];
     [plantInfo setValue:[plantViewModel getTemperatureValue] forKey:@"temperatureValue"];
     
-    
-    /* HUI object */
-    NSManagedObject *huiInfo = [NSEntityDescription
-                                          insertNewObjectForEntityForName:@"HUI"
-                                          inManagedObjectContext:context];
-    [huiInfo setValue:[[NSUUID UUID] UUIDString] forKey:@"id"];
-    [huiInfo setValue:@"" forKey:@"name"];
-    [huiInfo setValue:[NSNumber numberWithInt:-1] forKey:@"status"];
-    [huiInfo setValue:@"" forKey:@"wifiKey"];
-    [huiInfo setValue:@"" forKey:@"wifiName"];
-    [huiInfo setValue:plantInfo forKey:@"plant"];
-
-    [plantInfo setValue:huiInfo forKey:@"hui"];
-    
-    
     NSError *error;
     if (![context save:&error]) {
         NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
@@ -65,8 +51,46 @@
     }
 }
 
+- (void) setHUI:(HUIViewModel* )huiViewModel withPlantViewModel:(PlantViewModel* )plantViewModel{
+    NSManagedObjectContext *context = [self managedObjectContext];
+    
+    NSString* huiId = [[NSUUID UUID] UUIDString];
+    
+    [huiViewModel setHuiId: huiId];
+    
+    /* HUI object */
+    NSManagedObject *huiInfo = [NSEntityDescription
+                                          insertNewObjectForEntityForName:@"HUI"
+                                          inManagedObjectContext:context];
+    [huiInfo setValue:huiId forKey:@"id"];
+    [huiInfo setValue:[huiViewModel getName] forKey:@"name"];
+    [huiInfo setValue:[NSNumber numberWithInt:-1] forKey:@"status"];
+    [huiInfo setValue:[huiViewModel getWifiKey] forKey:@"wifiKey"];
+    [huiInfo setValue:[huiViewModel getWifiName] forKey:@"wifiName"];
+    [huiInfo setValue:[huiViewModel getNotificationTime] forKey:@"notification"];
+    
+    NSError *error;
+    if (![context save:&error]) {
+        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+    }
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"Plant" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+    for (NSManagedObject *info in fetchedObjects) {
+        NSLog(@"id: %@", [info valueForKey:@"id"]);
+        NSLog(@"Name: %@", [info valueForKey:@"name"]);
+    }
+    
+    /* UPDATE PLANT WITH HUIID */
+    [self setHuiId:huiId inPlantViewModel:plantViewModel];
+    
+}
 
--(void)setHUI:(HUIViewModel* )huiViewModel withPlant:(PlantViewModel* )plantViewModel{
+-(void) setHuiId:(NSString* )huiId inPlantViewModel:(PlantViewModel* )plantViewModel
+{
     
     NSManagedObjectContext *context = [self managedObjectContext];
     
@@ -84,19 +108,108 @@
     }else if (!error && results.count > 0) {
         for(NSManagedObject *managedObject in results){
             
-            HUIViewModel* huiResult = [managedObject valueForKey:@"hui"];
-            [huiResult.innerState setObject:[huiViewModel getName] forKey:@"name"];
-            [huiResult.innerState setObject:[huiViewModel getStatus] forKey:@"status"];
-            [huiResult.innerState setObject:[huiViewModel getWifiName] forKey:@"wifiName"];
-            [huiResult.innerState setObject:[huiViewModel getWifiKey] forKey:@"wifiKey"];
-            
-            [managedObject setValue:huiResult forKey:@"hui"];
+           [managedObject setValue:huiId forKey:@"huiId"];
         }
         
         //Save context to write to store
         [context save:nil];
     }
 }
+
+
+- (void) updateHui:(HUIViewModel* )huiViewModel withPlantViewModel:(PlantViewModel *)plantViewModel
+{
+    NSManagedObjectContext *context = [self managedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:[NSEntityDescription entityForName:@"HUI" inManagedObjectContext:context]];
+    
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"id == %@", [huiViewModel getIdentify]]];
+    
+    NSError *error = nil;
+    NSArray* results = [context executeFetchRequest:fetchRequest error:&error];
+    
+    if ([context save:&error] == NO) {
+        NSAssert(NO, @"Save should not fail\n%@", [error localizedDescription]);
+        abort();
+    }else if (!error && results.count > 0) {
+        for(NSManagedObject *managedObject in results){
+            [managedObject setValue:[huiViewModel getName] forKey:@"name"];
+            [managedObject setValue:[NSNumber numberWithInt:-1] forKey:@"status"];
+            [managedObject setValue:[huiViewModel getWifiKey] forKey:@"wifiKey"];
+            [managedObject setValue:[huiViewModel getWifiName] forKey:@"wifiName"];
+            [managedObject setValue:[huiViewModel getNotificationTime] forKey:@"notification"];
+        }
+        
+        //Save context to write to store
+        [context save:nil];
+    }
+    
+    [self setHuiId:[huiViewModel getIdentify] inPlantViewModel:plantViewModel];
+
+}
+
+- (HUIViewModel*) getHuiWithName:(NSString* )huiName{
+    
+    HUIViewModel* huiResult = [[HUIViewModel alloc] init];
+    
+    NSManagedObjectContext *context = [self managedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:[NSEntityDescription entityForName:@"HUI" inManagedObjectContext:context]];
+    
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"name == %@", huiName]];
+    
+    NSError *error = nil;
+    NSArray* results = [context executeFetchRequest:fetchRequest error:&error];
+    
+    if ([context save:&error] == NO) {
+        NSAssert(NO, @"Save should not fail\n%@", [error localizedDescription]);
+        abort();
+    }else if (!error && results.count > 0) {
+        for(NSManagedObject *managedObject in results){
+            
+            huiResult = [self getHUIFromObject: managedObject];
+        }
+        
+        //Save context to write to store
+        [context save:nil];
+    }
+    
+    return huiResult;
+}
+
+- (HUIViewModel*) getHuiWithId:(NSString* )huiId{
+    
+    HUIViewModel* huiResult = [[HUIViewModel alloc] init];
+    
+    NSManagedObjectContext *context = [self managedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:[NSEntityDescription entityForName:@"HUI" inManagedObjectContext:context]];
+    
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"id == %@", huiId]];
+    
+    NSError *error = nil;
+    NSArray* results = [context executeFetchRequest:fetchRequest error:&error];
+    
+    if ([context save:&error] == NO) {
+        NSAssert(NO, @"Save should not fail\n%@", [error localizedDescription]);
+        abort();
+    }else if (!error && results.count > 0) {
+        for(NSManagedObject *managedObject in results){
+            
+            huiResult = [self getHUIFromObject: managedObject];
+        }
+        
+        //Save context to write to store
+        [context save:nil];
+    }
+    
+    return huiResult;
+}
+
+
 
 
 - (void) removePlant:(PlantViewModel* )plantViewModel{
@@ -148,6 +261,32 @@
     
     return returnObject;
 }
+
+- (NSMutableArray* )getHuisFromBBDD{
+    NSMutableArray* returnObject = [[NSMutableArray alloc] init];
+    
+    NSManagedObjectContext *context = [self managedObjectContext];
+    
+    NSError *error;
+    if (![context save:&error]) {
+        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+    }
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"HUI" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+    for (NSManagedObject *info in fetchedObjects) {
+        NSLog(@"id: %@", [info valueForKey:@"id"]);
+        NSLog(@"Name: %@", [info valueForKey:@"name"]);
+        
+        [returnObject addObject: [self getHUIFromObject:info]];
+    }
+    
+    return returnObject;
+}
+
 
 - (PlantViewModel* )getPlantFromObject:(NSManagedObject* )object{
     return [PlantViewModel getPlantFromObject:object];

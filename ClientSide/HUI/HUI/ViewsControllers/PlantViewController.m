@@ -7,7 +7,6 @@
 //
 
 #import "PlantViewController.h"
-#import "PlantViewModel.h"
 
 
 @interface PlantViewController (){

@@ -24,6 +24,7 @@
                               ,@"sunStatus": [NSNumber numberWithInt:-1]
                               ,@"waterStatus": [NSNumber numberWithInt:-1]
                               ,@"temperatureStatus": [NSNumber numberWithInt:-1]
+                              ,@"huiId": @""
                               };
     
     [emptyPlant.innerState setDictionary: localState];
@@ -46,7 +47,7 @@
                                  ,@"sunStatus": [object valueForKey:@"sunStatus"]
                                  ,@"waterStatus": [object valueForKey:@"waterStatus"]
                                  ,@"temperatureStatus": [object valueForKey:@"temperatureStatus"]
-                                 ,@"hui":[object valueForKey:@"hui"]
+                                 ,@"huiId":[object valueForKey:@"huiId"]? [object valueForKey:@"huiId"] : @""
                                  };
     
     [returnPlant.innerState setDictionary: localState];
@@ -94,6 +95,10 @@
 
 - (NSString* )getTemperatureValue{
     return [ self.innerState valueForKey: @"temperatureValue" ];
+}
+
+- (NSString* )getHuiId{
+    return [ self.innerState valueForKey: @"huiId" ];
 }
 
 - (NSString*)getName
@@ -148,6 +153,11 @@
     
     return returnValue;
     
+}
+
+- (void)setHuiId:(NSString* )huiId
+{
+    [self.innerState setObject:huiId forKey:@"huiId" ];
 }
 
 

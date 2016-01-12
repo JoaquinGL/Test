@@ -8,6 +8,7 @@
 
 #import "ConfigureViewController.h"
 #import "Manager.h"
+#import "HUIViewModel.h"
 
 @interface ConfigureViewController ()
 {
@@ -22,15 +23,30 @@
     IBOutlet UILabel* _wifiKeyLabel;
     IBOutlet UILabel* _dateLabel;
     
+    IBOutlet UIButton* _editNameButton;
+    IBOutlet UIButton* _editWifiButton;
+    IBOutlet UIButton* _editKeyButton;
+    IBOutlet UIButton* _editDateButton;
+    
+    IBOutlet UIImageView* _editNameImageView;
+    IBOutlet UIImageView* _editWifiImageView;
+    IBOutlet UIImageView* _editKeyImageView;
+    IBOutlet UIImageView* _editDateImageView;
+    
     IBOutlet UIView* _datePickerView;
     
     IBOutlet UIDatePicker* _datePicker;
     
     IBOutlet UIPickerView* _huiSelectorPickerView;
     
-    NSMutableDictionary *_huiSelection;
+    IBOutletCollection(UIImageView ) NSArray *_editImagesButtons;
+    IBOutletCollection(UIButton ) NSArray *_editButtons;
     
-    NSArray* _huisFromBBDD;
+    BOOL _isEditing;
+    
+    HUIViewModel *_huiSelectionViewModel;
+    
+    NSMutableArray* _huisFromBBDD;
     
     Manager *_manager;
     
@@ -54,6 +70,8 @@
 @implementation ConfigureViewController
 
 
+@synthesize  plantViewModel   = _plantViewModel;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 }
@@ -65,6 +83,12 @@
 
 - (void) initConfigureView{
     
+//    _HUD = [[MBProgressHUD alloc] initWithView:self.view];
+//    [self.view addSubview:_HUD];
+//    _HUD.delegate = self;
+//    _HUD.labelText = NSLocalizedString(@"Loading", nil);
+//    [_HUD show:YES];
+    
     [configureTextField setAlpha:0.0];
     [configureButton setAlpha:0.0];
     [_datePickerView setAlpha:0.0];
@@ -74,52 +98,70 @@
     [_wifiKeyLabel setAlpha:0.0];
     [_dateLabel setAlpha:0.0];
     
-    _huisFromBBDD = @[@"HUIA", @"HUIB", @"New HUI"];
+    _manager = [[Manager alloc]init];
     
-    _huiSelection = [[NSMutableDictionary alloc] initWithDictionary:@{
-                                                                      @"name": @"HUIA",
-                                                                      @"wifi": @"ITCROM",
-                                                                      @"wifikey": @"1234",
-                                                                      @"date": @"12:00 AM"
-                                                                      }];
+    // return HuiViewModel
+    _huisFromBBDD = [_manager getHuisFromBBDD];
     
-    [configureLabel setAlpha:1.0];
+    _huiSelectionViewModel = [[HUIViewModel alloc] init];
     
-    configureLabel.text = NSLocalizedString(@"Select HUI: ", nil);
+    [_huiSelectionViewModel setName:NSLocalizedString(@"New HUI", nil)];
+    [_huisFromBBDD addObject:_huiSelectionViewModel];
     
-    [_huiSelectorPickerView setAlpha:1.0f];
-    [_selectionHUIButton setAlpha:1.0f];
+    [_huiSelectorPickerView reloadAllComponents];
     
-    if( _huisFromBBDD.count == 0){
+    for (UIImageView  *imageView in _editImagesButtons){
+        [imageView setAlpha:0.0];
+    }
+    for (UIButton  *button in _editButtons){
+        [button setAlpha:0.0];
+    }
+    
+    [configureTextField setDelegate:self];
+    
+    if( (_huisFromBBDD.count == 1) && (!self.huiViewModel)){
+        _isEditing = NO;
+        [_selectionHUIButton setAlpha: 0.0];
         [self showConfigureNewHUI];
+    }else{
+        
+        if(!self.huiViewModel)
+        {
+            [_huiSelectorPickerView setAlpha:1.0f];
+            [_selectionHUIButton setAlpha:1.0f];
+            [configureLabel setAlpha:1.0];
+            
+            configureLabel.text = NSLocalizedString(@"Select HUI: ", nil);
+        }else{
+            //HUI PREVIOUS SELECTED
+            _huiSelectionViewModel = self.huiViewModel;
+            [self showHuiSelection];
+            [_selectionHUIButton setAlpha:0.0];
+        }
     }
 }
 
 - (void) showConfigureNewHUI{
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-        configureLabel.text = NSLocalizedString(HUI_NAME, nil);
-        [configureButton setTitle:HUI_CONTINUE forState:UIControlStateNormal];
-        step = 0;
-        
-        [configureTextField setAlpha:1.0];
-        [configureButton setAlpha:1.0];
-        
-        [Utils fadeIn:configureTextField completion:nil];
-        [Utils fadeIn:configureLabel completion:nil];
-        [Utils fadeIn:configureButton completion:nil];
-        
-        configureTextField.userInteractionEnabled = YES;
-        [configureTextField becomeFirstResponder];
-        
-        [_huiSelectorPickerView setAlpha: 0.0];
-        
-        _datePicker.datePickerMode=UIDatePickerModeTime;
-        [_datePicker addTarget:self action:@selector(labelTitle:) forControlEvents:UIControlEventValueChanged];
-        
-        [configureTextField setDelegate:self];
-    });
+    _isEditing = NO;
+    configureLabel.text = NSLocalizedString(HUI_NAME, nil);
+    [configureButton setTitle:HUI_CONTINUE forState:UIControlStateNormal];
+    step = 0;
     
+    [configureTextField setAlpha:1.0];
+    [configureButton setAlpha:1.0];
+    
+    [Utils fadeIn:configureTextField completion:nil];
+    [Utils fadeIn:configureLabel completion:nil];
+    [Utils fadeIn:configureButton completion:nil];
+    
+    configureTextField.userInteractionEnabled = YES;
+    [configureTextField becomeFirstResponder];
+    
+    [_huiSelectorPickerView setAlpha: 0.0];
+    
+    _datePicker.datePickerMode=UIDatePickerModeTime;
+    [_datePicker addTarget:self action:@selector(labelTitle:) forControlEvents:UIControlEventValueChanged];
 }
 
 - (void) showHuiSelection{
@@ -127,10 +169,18 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         
         [Utils fadeOut:_huiSelectorPickerView completion:^(BOOL finished){
-            _huiNameLabel.text = [NSString stringWithFormat:@"%@%@",NSLocalizedString(HUI_NAME, nil),[_huiSelection objectForKey:@"name"] ];
-            _wifiNameLabel.text = [NSString stringWithFormat:@"%@%@",NSLocalizedString(HUI_WIFI, nil),[_huiSelection objectForKey:@"wifi"]];
-            _wifiKeyLabel.text = [NSString stringWithFormat:@"%@%@",NSLocalizedString(HUI_WIFIKEY, nil),[_huiSelection objectForKey:@"wifikey"]];
-            _dateLabel.text = [NSString stringWithFormat:@"%@%@",NSLocalizedString(HUI_DATE, nil),[_huiSelection objectForKey:@"date"]];
+            _huiNameLabel.text = [NSString stringWithFormat:@"%@%@",NSLocalizedString(HUI_NAME, nil),[_huiSelectionViewModel getName] ];
+            _wifiNameLabel.text = [NSString stringWithFormat:@"%@%@",NSLocalizedString(HUI_WIFI, nil),[_huiSelectionViewModel getWifiName]];
+            _wifiKeyLabel.text = [NSString stringWithFormat:@"%@%@",NSLocalizedString(HUI_WIFIKEY, nil),[_huiSelectionViewModel getWifiKey]];
+            _dateLabel.text = [NSString stringWithFormat:@"%@%@",NSLocalizedString(HUI_DATE, nil),[_huiSelectionViewModel getNotificationTime]];
+            
+            for (UIImageView* imageView in _editImagesButtons){
+                [imageView setAlpha:1.0];
+            }
+            
+            for (UIButton  *button in _editButtons){
+                [button setAlpha:1.0];
+            }
             
             [Utils fadeIn:_huiNameLabel completion:nil];
             [Utils fadeIn:_wifiNameLabel completion:nil];
@@ -175,7 +225,7 @@
 
 -(void)saveHuiData{
     
-    [self.delegate closeConfiguration:nil];
+    [self.delegate closeConfiguration:_huiSelectionViewModel];
 }
 
 #pragma mark - Actions
@@ -183,7 +233,15 @@
 -(IBAction)onCloseButtonTouchUpInside:(id)sender{
     
     // dont save
-    [self.delegate closeConfiguration:nil];
+    
+    [self.delegate closeConfiguration:_huiSelectionViewModel];
+}
+
+-(void) initTextField{
+    if(!_isEditing){
+        configureTextField.text = @"";
+        [configureTextField becomeFirstResponder];
+    }
 }
 
 - (IBAction)onNextButtonTouchUpInside:(id)sender{
@@ -191,37 +249,50 @@
     
     switch (step) {
         case 1: {
+            [_huiSelectionViewModel setName: configureTextField.text];
             _huiNameLabel.text = [NSString stringWithFormat:@"%@%@", NSLocalizedString(HUI_NAME, nil), configureTextField.text];
             [Utils fadeIn:_huiNameLabel completion:^(BOOL finished){
-                configureTextField.text = @"";
-                [configureTextField becomeFirstResponder];
+                [self initTextField];
             }];
-            configureLabel.text = NSLocalizedString(@"Wifi Name: ", nil);
+            configureLabel.text = NSLocalizedString(HUI_WIFI, nil);
             break;
         }
         case 2: {
+            [_huiSelectionViewModel setWifiName: configureTextField.text];
             _wifiNameLabel.text = [NSString stringWithFormat:@"%@%@", NSLocalizedString(HUI_WIFI, nil), configureTextField.text];
             [Utils fadeIn:_wifiNameLabel completion:^(BOOL finished){
-                configureTextField.text = @"";
-                [configureTextField becomeFirstResponder];
+                [self initTextField];
             }];
-            configureLabel.text = NSLocalizedString(@"Wifi Key: ", nil);
+            configureLabel.text = NSLocalizedString(HUI_WIFIKEY, nil);
             break;
         }
         case 3: {
+            [_huiSelectionViewModel setWifiKey: configureTextField.text];
             _wifiKeyLabel.text = [NSString stringWithFormat:@"%@%@", NSLocalizedString(HUI_WIFIKEY, nil), configureTextField.text];
             [Utils fadeIn:_wifiKeyLabel completion:^(BOOL finished){
-                [Utils fadeIn:_datePickerView completion:nil];
-                configureTextField.text = @"";
-                configureTextField.userInteractionEnabled = NO;
-                [self labelTitle:nil];
+                
+                if(!_isEditing){
+                    [Utils fadeIn:_datePickerView completion:nil];
+                    configureTextField.text = @"";
+                    configureTextField.userInteractionEnabled = NO;
+                    [self labelTitle:nil];
+
+                }
             }];
-            configureLabel.text = NSLocalizedString(@"Notification Date: ", nil);
+            configureLabel.text = NSLocalizedString(HUI_DATE, nil);
             [configureButton setTitle:HUI_DONE forState:UIControlStateNormal];
             
             break;
         }
         case 4: {
+            [_huiSelectionViewModel setNotificationTime: configureTextField.text];
+            for (UIImageView  *imageView in _editImagesButtons){
+                [imageView setAlpha:1.0];
+            }
+            for (UIButton  *button in _editButtons){
+                [button setAlpha:1.0];
+            }
+            
             _dateLabel.text = [NSString stringWithFormat:@"%@%@", NSLocalizedString(HUI_DATE, nil), configureTextField.text];
             [Utils fadeIn:_dateLabel completion:^(BOOL finished){
                 configureTextField.text = @"";
@@ -236,6 +307,15 @@
         default:
             [self saveHuiData];
             break;
+    }
+    
+    // hideTextField
+    if(_isEditing){
+        configureTextField.text = @"";
+        [configureLabel setAlpha:0.0];
+        [configureTextField setAlpha:0.0];
+        [configureTextField resignFirstResponder];
+        [configureButton setAlpha:0.0];
     }
 }
 
@@ -258,7 +338,7 @@ numberOfRowsInComponent:(NSInteger)component
 
 - (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    NSString *title = _huisFromBBDD[row];
+    NSString *title = [_huisFromBBDD[row] getName];
     NSAttributedString *attString = [[NSAttributedString alloc] initWithString:title attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
     
     return attString;
@@ -271,12 +351,14 @@ numberOfRowsInComponent:(NSInteger)component
       inComponent:(NSInteger)component
 {
     NSLog(@"Selection: %@", _huisFromBBDD[row]);
-    [_huiSelection setObject:_huisFromBBDD[row] forKey:@"name"];
+    
+    _huiSelectionViewModel = _huisFromBBDD[row];
+
 }
 
 
 -(IBAction)onSelectorTouchUpInside:(id)sender{
-    if([[_huiSelection objectForKey:@"name"] isEqualToString:@"New HUI"]){
+    if([[_huiSelectionViewModel getName] isEqualToString:@"New HUI"]){
         [self showConfigureNewHUI];
     }else{
         // set configureHUI dictionary
@@ -285,6 +367,46 @@ numberOfRowsInComponent:(NSInteger)component
     }
     
     [_selectionHUIButton setAlpha:0.0];
+}
+
+#pragma mark - Edit Button Action
+
+-(IBAction)onEditTouchUpInside:(id)sender{
+    
+    _isEditing = YES;
+    
+    [configureButton setAlpha:1.0f];
+    [configureButton setTitle:HUI_DONE forState:UIControlStateNormal];
+    
+    [configureTextField setAlpha:1.0f];
+    [configureLabel setAlpha:1.0f];
+    
+    if( sender == _editNameButton){
+      configureLabel.text = NSLocalizedString(HUI_NAME, nil);
+        step = 0;
+    }
+    
+    if( sender == _editWifiButton){
+        configureLabel.text = NSLocalizedString(HUI_WIFI, nil);
+        step = 1;
+    }
+    
+    if( sender == _editKeyButton){
+        configureLabel.text = NSLocalizedString(HUI_WIFIKEY, nil);
+        step = 2;
+    }
+    
+    if( sender != _editDateButton){
+        configureTextField.userInteractionEnabled = YES;
+        [configureTextField becomeFirstResponder];
+    }else{
+        [Utils fadeIn:_datePickerView completion:nil];
+        configureTextField.text = @"";
+        configureTextField.userInteractionEnabled = NO;
+        [self labelTitle:nil];
+        configureLabel.text = NSLocalizedString(HUI_DATE, nil);
+        step = 3;
+    }
 }
 
 @end

@@ -35,6 +35,35 @@
 {
     return [ self.innerState valueForKey: @"wifiKey" ];
 }
+- (NSString*)getNotificationTime
+{
+    return [ self.innerState valueForKey: @"notification" ];
+}
+
+- (void)setName:(NSString*) name
+{
+    [ self.innerState setObject:name forKey:@"name"];
+}
+
+- (void)setWifiName:(NSString *)wifiName
+{
+    [ self.innerState setObject:wifiName forKey:@"wifiName"];
+}
+
+- (void)setWifiKey:(NSString *)wifiKey
+{
+    [ self.innerState setObject:wifiKey forKey:@"wifiKey"];
+}
+
+- (void)setNotificationTime:(NSString *)notificationTime
+{
+    [ self.innerState setObject:notificationTime forKey:@"notification"];
+}
+
+- (void)setHuiId:(NSString *)identify
+{
+    [ self.innerState setObject:identify forKey:@"id"];
+}
 
 + (HUIViewModel* )getHUIFromObject:(id) object{
     HUIViewModel * returnHUI = [[HUIViewModel alloc] init];
@@ -42,15 +71,10 @@
     NSDictionary* localState = @{
                                  @"id":[object valueForKey:@"id"]
                                  ,@"name":[object valueForKey:@"name"]
-                                 ,@"position": [object valueForKey:@"position"]
-                                 //,@"image": [object valueForKey:@"image"]
-                                 ,@"sunValue": [object valueForKey:@"sunValue"]
-                                 ,@"waterValue": [object valueForKey:@"waterValue"]
-                                 ,@"temperatureValue": [object valueForKey:@"temperatureValue"]
-                                 ,@"sunStatus": [object valueForKey:@"sunStatus"]
-                                 ,@"waterStatus": [object valueForKey:@"waterStatus"]
-                                 ,@"temperatureStatus": [object valueForKey:@"temperatureStatus"]
-                                 ,@"hui":[object valueForKey:@"hui"]
+                                 ,@"status": [object valueForKey:@"status"]
+                                 ,@"wifiName": [object valueForKey:@"wifiName"]
+                                 ,@"wifiKey": [object valueForKey:@"wifiKey"]
+                                 ,@"notification": [object valueForKey:@"notification"]
                                  };
     
     [returnHUI.innerState setDictionary: localState];

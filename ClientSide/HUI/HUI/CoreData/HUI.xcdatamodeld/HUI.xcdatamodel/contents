@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9057" systemVersion="14F1021" minimumToolsVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="14F1021" minimumToolsVersion="Automatic">
     <entity name="HUI" syncable="YES">
         <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="notification" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="status" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="wifiKey" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="wifiName" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="plant" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Plant" inverseName="hui" inverseEntity="Plant" syncable="YES"/>
     </entity>
     <entity name="Plant" syncable="YES">
+        <attribute name="huiId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="image" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
@@ -23,7 +25,7 @@
         <relationship name="hui" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="HUI" inverseName="plant" inverseEntity="HUI" syncable="YES"/>
     </entity>
     <elements>
-        <element name="HUI" positionX="151" positionY="-18" width="128" height="133"/>
-        <element name="Plant" positionX="-335" positionY="-97" width="128" height="225"/>
+        <element name="HUI" positionX="151" positionY="-18" width="128" height="150"/>
+        <element name="Plant" positionX="-335" positionY="-97" width="128" height="240"/>
     </elements>
 </model>

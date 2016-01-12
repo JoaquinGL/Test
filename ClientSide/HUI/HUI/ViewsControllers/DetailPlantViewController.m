@@ -22,7 +22,7 @@
 
 #import "DetailPlantViewController.h"
 #import "SearchPlantViewController.h"
-
+#import "Manager.h"
 
 @interface DetailPlantViewController (){
 
@@ -35,8 +35,10 @@
     IBOutlet UIImageView* waterStatusImageView;
     IBOutlet UIImageView* temperatureStatusImageView;
     IBOutlet UIButton* configureHUIButton;
-    
+    Manager* _manager;
     ConfigureViewController* _configureViewController;
+    
+    MBProgressHUD* _HUD;
 }
 
 @end
@@ -69,8 +71,6 @@
     _configureViewController = [[ConfigureViewController alloc] initWithNibName:@"ConfigureView" bundle:nil];
     
     [_configureViewController setDelegate:self];
-    
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -137,18 +137,6 @@
 
 }
 
-#pragma mark - alert view delegate methods
-
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
-    if (buttonIndex == 0) {
-        NSLog(@"Cancel Tapped.");
-    }
-    else if (buttonIndex == 1) {
-        NSLog(@"OK Tapped. Hello World!");
-    }
-}
-
-
 #pragma mark - Plant methods
 
 - (UIImage *)getPlantImageFromName:(NSString* )imageName{
@@ -181,6 +169,19 @@
     
     [_configureViewController.view setAlpha: 0.0];
     [self.navigationController.view addSubview:_configureViewController.view];
+    _configureViewController.plantViewModel = self.plantViewModel;
+    
+    if(!_manager){
+        _manager = [[Manager alloc] init];
+    }
+    
+    if(![[self.plantViewModel getHuiId] isEqualToString:@""])
+    {
+        _configureViewController.huiViewModel = [_manager getHuiWithId:[self.plantViewModel getHuiId]];
+    }else{
+        _configureViewController.huiViewModel = nil;
+    }
+    
     [_configureViewController initConfigureView];
     
     [Utils fadeIn:_configureViewController.view completion:nil];
@@ -191,8 +192,22 @@
 
 -(void)closeConfiguration:(HUIViewModel*)huiViewModel{
     
-    /* Save HUI DATA */
-    
+    if(huiViewModel){
+        if([huiViewModel getIdentify]){
+            /* UPDATE DATA */
+            [_manager updateHui:huiViewModel withPlantViewModel:self.plantViewModel];
+            [self.plantViewModel setHuiId:[huiViewModel getIdentify]];
+        }else{
+            /* Save HUI DATA */
+            if(!_manager){
+                _manager = [[Manager alloc] init];
+            }
+            
+            [_manager setHUI:huiViewModel withPlantViewModel:self.plantViewModel];
+            
+            [self.plantViewModel setHuiId:[huiViewModel getIdentify]];
+        }
+    }
     
     [Utils fadeOut:_configureViewController.view
         completion:^(BOOL completion){

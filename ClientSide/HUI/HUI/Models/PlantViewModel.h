@@ -22,6 +22,7 @@
 @property (nonatomic, assign, getter = getSunValue) NSString* sunValue;
 @property (nonatomic, assign, getter = getWaterValue) NSString* waterValue;
 @property (nonatomic, assign, getter = getTemperatureValue) NSString* temperatureValue;
+@property (nonatomic, assign, getter = getHuiId, setter = setHuiId:) NSString* huiId;
 
 @property ( nonatomic, retain, getter = getImage ) UIImage* image;
 @property (nonatomic, assign, getter = getWaterImage) IBOutlet UIImage* waterImage;

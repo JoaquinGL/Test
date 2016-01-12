@@ -50,7 +50,7 @@
     [self.view addSubview:_HUD];
     
     _HUD.delegate = self;
-    _HUD.labelText = @"Loading plants";
+    _HUD.labelText = NSLocalizedString(@"Loading plants", nil);
     
     [_HUD show:YES];
     [_coreServices getPlantListWithHUID:@"HUIA"];

@@ -8,6 +8,7 @@
 
 #import "BaseViewController.h"
 #import "HUIViewModel.h"
+#import "PlantViewModel.h"
 
 @protocol ConfigureViewControllerDelegate <NSObject>
 
@@ -20,6 +21,8 @@
 @interface ConfigureViewController : BaseViewController<UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
 
 @property (nonatomic, assign) id <ConfigureViewControllerDelegate> delegate;
+@property (nonatomic, retain) PlantViewModel* plantViewModel;
+@property (nonatomic, retain) HUIViewModel* huiViewModel;
 
 + ( ConfigureViewController* )instantiate;
 

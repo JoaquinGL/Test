@@ -11,11 +11,12 @@
 @interface HUIViewModel : BaseViewModel
 
 
-@property (nonatomic, assign, getter = getIdentify) NSString* identify;
-@property (nonatomic, assign, getter = getName) NSString* name;
+@property (nonatomic, assign, getter = getIdentify, setter= setHuiId:) NSString* identify;
+@property (nonatomic, assign, getter = getName, setter = setName:) NSString* name;
 @property (nonatomic, assign, getter = getStatus) NSNumber* status;
-@property (nonatomic, assign, getter = getWifiName) NSString* wifiName;
-@property (nonatomic, assign, getter = getWifiKey) NSString* wifiKey;
+@property (nonatomic, assign, getter = getWifiName, setter = setWifiName:) NSString* wifiName;
+@property (nonatomic, assign, getter = getWifiKey, setter = setWifiKey:) NSString* wifiKey;
+@property (nonatomic, assign, getter = getNotificationTime, setter=setNotificationTime:) NSString* notificationTime;
 
 + (HUIViewModel* )getHUIFromObject:(id) object;
 

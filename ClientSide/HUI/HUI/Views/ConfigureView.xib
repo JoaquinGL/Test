@@ -10,6 +10,14 @@
                 <outlet property="_dateLabel" destination="iNI-Lc-Rj5" id="h8A-cE-kDY"/>
                 <outlet property="_datePicker" destination="3rl-li-WS3" id="8Y7-YG-Khx"/>
                 <outlet property="_datePickerView" destination="aLV-7L-PGw" id="FGf-Iq-cnW"/>
+                <outlet property="_editDateButton" destination="8ax-bM-PTc" id="Xe7-9L-wbP"/>
+                <outlet property="_editDateImageView" destination="bn7-ui-QY4" id="VbK-bz-f7i"/>
+                <outlet property="_editKeyButton" destination="9se-gw-Zyo" id="T7F-dw-CeN"/>
+                <outlet property="_editKeyImageView" destination="mbP-Gd-nC1" id="qgG-CS-hO5"/>
+                <outlet property="_editNameButton" destination="cB2-tD-m69" id="FbN-qY-sgR"/>
+                <outlet property="_editNameImageView" destination="iEU-A5-goA" id="yHP-Je-Nyg"/>
+                <outlet property="_editWifiButton" destination="6a8-vl-5aL" id="zSE-Zs-hyg"/>
+                <outlet property="_editWifiImageView" destination="wN6-1w-787" id="9vr-MU-vh3"/>
                 <outlet property="_huiNameLabel" destination="xGE-y4-Ffq" id="wcL-EK-6lw"/>
                 <outlet property="_huiSelectorPickerView" destination="vcX-iN-9MB" id="kGP-zJ-4rP"/>
                 <outlet property="_selectionHUIButton" destination="3Mb-Ox-7x2" id="fMr-5s-9Mo"/>
@@ -19,6 +27,14 @@
                 <outlet property="configureLabel" destination="pPV-Nh-QQE" id="oGn-QN-0Oa"/>
                 <outlet property="configureTextField" destination="M0t-ZL-OIf" id="4ux-3K-sY7"/>
                 <outlet property="view" destination="dgH-3e-cy1" id="Idk-pl-JHf"/>
+                <outletCollection property="_editButtons" destination="cB2-tD-m69" id="q2x-Bk-Dnv"/>
+                <outletCollection property="_editButtons" destination="6a8-vl-5aL" id="xpC-72-myg"/>
+                <outletCollection property="_editButtons" destination="9se-gw-Zyo" id="MTm-ez-vlb"/>
+                <outletCollection property="_editButtons" destination="8ax-bM-PTc" id="IDm-nF-Sto"/>
+                <outletCollection property="_editImagesButtons" destination="iEU-A5-goA" id="qX5-Hw-x2L"/>
+                <outletCollection property="_editImagesButtons" destination="wN6-1w-787" id="XOI-py-O2Y"/>
+                <outletCollection property="_editImagesButtons" destination="mbP-Gd-nC1" id="bjR-GB-tZm"/>
+                <outletCollection property="_editImagesButtons" destination="bn7-ui-QY4" id="qC1-2D-cnM"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -49,25 +65,25 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xGE-y4-Ffq">
-                                <rect key="frame" x="26" y="193" width="269" height="24"/>
+                                <rect key="frame" x="55" y="193" width="240" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Wifi Name:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eHR-uH-JvQ">
-                                <rect key="frame" x="26" y="225" width="269" height="24"/>
+                                <rect key="frame" x="55" y="225" width="240" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Wifi Key:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rZy-II-3iR">
-                                <rect key="frame" x="26" y="257" width="269" height="24"/>
+                                <rect key="frame" x="55" y="257" width="240" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Notification Date:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iNI-Lc-Rj5">
-                                <rect key="frame" x="26" y="289" width="269" height="24"/>
+                                <rect key="frame" x="55" y="289" width="240" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -129,6 +145,42 @@
                                     <action selector="onSelectorTouchUpInside:" destination="-1" eventType="touchUpInside" id="B0Q-eA-FPz"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cB2-tD-m69" userLabel="EditName">
+                                <rect key="frame" x="20" y="190" width="269" height="30"/>
+                                <connections>
+                                    <action selector="onEditTouchUpInside:" destination="-1" eventType="touchUpInside" id="q2P-yL-buX"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6a8-vl-5aL" userLabel="EditWifi">
+                                <rect key="frame" x="20" y="222" width="269" height="30"/>
+                                <connections>
+                                    <action selector="onEditTouchUpInside:" destination="-1" eventType="touchUpInside" id="bz8-Lx-DYL"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9se-gw-Zyo" userLabel="EditKey">
+                                <rect key="frame" x="20" y="254" width="269" height="30"/>
+                                <connections>
+                                    <action selector="onEditTouchUpInside:" destination="-1" eventType="touchUpInside" id="W0H-00-gIN"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8ax-bM-PTc" userLabel="EditDate">
+                                <rect key="frame" x="20" y="286" width="269" height="30"/>
+                                <connections>
+                                    <action selector="onEditTouchUpInside:" destination="-1" eventType="touchUpInside" id="Jqk-xn-ZZi"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="editButton" translatesAutoresizingMaskIntoConstraints="NO" id="iEU-A5-goA">
+                                <rect key="frame" x="27" y="193" width="20" height="20"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="editButton" translatesAutoresizingMaskIntoConstraints="NO" id="wN6-1w-787">
+                                <rect key="frame" x="27" y="227" width="20" height="20"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="editButton" translatesAutoresizingMaskIntoConstraints="NO" id="mbP-Gd-nC1">
+                                <rect key="frame" x="26" y="259" width="20" height="20"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="editButton" translatesAutoresizingMaskIntoConstraints="NO" id="bn7-ui-QY4">
+                                <rect key="frame" x="26" y="291" width="20" height="20"/>
+                            </imageView>
                         </subviews>
                     </view>
                     <blurEffect style="dark"/>
@@ -139,4 +191,7 @@
             <point key="canvasLocation" x="500" y="332"/>
         </view>
     </objects>
+    <resources>
+        <image name="editButton" width="313" height="313"/>
+    </resources>
 </document>
