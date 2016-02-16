@@ -20,13 +20,14 @@
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
-- (void)setPlant:(PlantViewModel* )plantViewModel;
+- (void) setPlant:(PlantViewModel* )plantViewModel;
 - (void) setHUI:(HUIViewModel* )huiViewModel withPlantViewModel:(PlantViewModel* )plantViewModel;
-- (void)removePlant:(PlantViewModel* )plantViewModel;
-- (NSMutableArray* )getPlantsFromBBDD;
-- (NSMutableArray* )getHuisFromBBDD;
+- (void) removePlant:(PlantViewModel* )plantViewModel;
+- (void) updateHui:(HUIViewModel* )huiViewModel withPlantViewModel:(PlantViewModel *)plantViewModel;
+- (void) setStatusPlant:(NSString *)status inPlant:(PlantViewModel*) plantViewModel;
+- (NSMutableArray* ) getPlantsFromBBDD;
+- (NSMutableArray* ) getHuisFromBBDD;
 - (HUIViewModel*) getHuiWithName:(NSString* )huiName;
 - (HUIViewModel*) getHuiWithId:(NSString* )huiId;
-- (void) updateHui:(HUIViewModel* )huiViewModel withPlantViewModel:(PlantViewModel *)plantViewModel;
 
 @end

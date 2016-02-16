@@ -9,6 +9,7 @@
 #import "BaseViewController.h"
 #import "HUIViewModel.h"
 #import "PlantViewModel.h"
+#import "MBProgressHUD.h"
 
 @protocol ConfigureViewControllerDelegate <NSObject>
 
@@ -18,7 +19,7 @@
 
 @end
 
-@interface ConfigureViewController : BaseViewController<UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
+@interface ConfigureViewController : BaseViewController<UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate, MBProgressHUDDelegate>
 
 @property (nonatomic, assign) id <ConfigureViewControllerDelegate> delegate;
 @property (nonatomic, retain) PlantViewModel* plantViewModel;

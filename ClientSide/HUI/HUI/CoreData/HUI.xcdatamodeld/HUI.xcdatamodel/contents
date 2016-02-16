@@ -4,6 +4,7 @@
         <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="notification" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="number" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="status" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="wifiKey" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="wifiName" optional="YES" attributeType="String" syncable="YES"/>
@@ -15,7 +16,7 @@
         <attribute name="image" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="position" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <attribute name="status" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="status" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="sunStatus" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="sunValue" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="temperatureStatus" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
@@ -25,7 +26,7 @@
         <relationship name="hui" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="HUI" inverseName="plant" inverseEntity="HUI" syncable="YES"/>
     </entity>
     <elements>
-        <element name="HUI" positionX="151" positionY="-18" width="128" height="150"/>
+        <element name="HUI" positionX="151" positionY="-18" width="128" height="165"/>
         <element name="Plant" positionX="-335" positionY="-97" width="128" height="240"/>
     </elements>
 </model>

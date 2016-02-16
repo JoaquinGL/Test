@@ -9,6 +9,7 @@
 #import "BaseViewController.h"
 #import "PlantViewModel.h"
 #import "ConfigureViewController.h"
+#import "CoreServices.h"
 
 @protocol DetailPlantViewControllerDelegate <NSObject>
 
@@ -16,9 +17,14 @@
 
 -(void)deletePlant:(NSNumber*) identify withId:(NSString* ) plantId;
 
+-(void)globalStatus:(int) status withPlantViewModel:(PlantViewModel* )plantViewModel;
+
 @end
 
-@interface DetailPlantViewController : BaseViewController<ConfigureViewControllerDelegate, UIAlertViewDelegate, MBProgressHUDDelegate>{
+@interface DetailPlantViewController : BaseViewController < ConfigureViewControllerDelegate
+                                                                ,UIAlertViewDelegate
+                                                                ,MBProgressHUDDelegate
+                                                                ,CoreServicesDelegate >{
 }
 
 @property (nonatomic, assign) id <DetailPlantViewControllerDelegate> delegate;

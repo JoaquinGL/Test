@@ -15,6 +15,7 @@
     
     NSDictionary* localState = @{
                               @"id":[[NSUUID UUID] UUIDString]
+                              ,@"status": @""
                               ,@"name":name
                               ,@"position": position
                               ,@"image": [UIImage imageNamed:@"plant.png"]
@@ -38,6 +39,7 @@
     
     NSDictionary* localState = @{
                                  @"id":[object valueForKey:@"id"]
+                                 ,@"status":[object valueForKey:@"status"]
                                  ,@"name":[object valueForKey:@"name"]
                                  ,@"position": [object valueForKey:@"position"]
                                  //,@"image": [object valueForKey:@"image"]

@@ -21,6 +21,11 @@
     return [ self.innerState valueForKey: @"name" ];
 }
 
+- (NSString*)getNumber
+{
+    return [ self.innerState valueForKey: @"number" ];
+}
+
 - (NSNumber*)getStatus
 {
     return [ self.innerState valueForKey: @"status" ];
@@ -43,6 +48,11 @@
 - (void)setName:(NSString*) name
 {
     [ self.innerState setObject:name forKey:@"name"];
+}
+
+- (void)setNumber:(NSString *)number
+{
+    [ self.innerState setObject:number forKey:@"number"];
 }
 
 - (void)setWifiName:(NSString *)wifiName
@@ -71,6 +81,7 @@
     NSDictionary* localState = @{
                                  @"id":[object valueForKey:@"id"]
                                  ,@"name":[object valueForKey:@"name"]
+                                 ,@"number":[object valueForKey:@"number"]
                                  ,@"status": [object valueForKey:@"status"]
                                  ,@"wifiName": [object valueForKey:@"wifiName"]
                                  ,@"wifiKey": [object valueForKey:@"wifiKey"]

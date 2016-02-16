@@ -29,5 +29,6 @@
 
 - (void) postQuestion:(NSString* )question andHUIID:(NSString* )huiId;
 - (void) getPlantListWithHUID:(NSString* )huiId;
+- (void) getPlantStateWithHuiName:(NSString* )huiId;
 
 @end

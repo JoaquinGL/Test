@@ -36,6 +36,10 @@
     [super viewDidLoad];
     
     _plantNameLabel.text = self.plantName;
+    
+    UIFont *customFont = [UIFont fontWithName:@"Multicolore" size:14];
+    
+    [_plantNameLabel setFont: customFont];
 }
 
 - (void)didReceiveMemoryWarning {

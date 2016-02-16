@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4B2B1C77E740DF2BDFD871D5 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FAA76153111D0C70615F45B4 /* libPods.a */; };
 		E308168E1C04558D0007D896 /* WalkthroughPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E308168B1C04558D0007D896 /* WalkthroughPageViewController.m */; };
 		E308168F1C04558D0007D896 /* WalkThroughViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E308168D1C04558D0007D896 /* WalkThroughViewController.m */; };
 		E30816921C0455CB0007D896 /* CustomPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E30816911C0455CB0007D896 /* CustomPageViewController.m */; };
@@ -16,6 +17,7 @@
 		E308169B1C0457EA0007D896 /* WalkTwo.xib in Resources */ = {isa = PBXBuildFile; fileRef = E30816961C0457EA0007D896 /* WalkTwo.xib */; };
 		E308169C1C0457EA0007D896 /* WalkZero.xib in Resources */ = {isa = PBXBuildFile; fileRef = E30816971C0457EA0007D896 /* WalkZero.xib */; };
 		E3190EEB1C06F36800F8C390 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3190EEA1C06F36800F8C390 /* BaseViewController.m */; };
+		E32A47311C56725600EDF993 /* Comunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = E32A47301C56725600EDF993 /* Comunicator.m */; };
 		E33823751C1A2C310029C285 /* HUIViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E33823741C1A2C310029C285 /* HUIViewModel.m */; };
 		E36079CB1C18867D00AD6D11 /* BaseViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E36079CA1C18867D00AD6D11 /* BaseViewModel.m */; };
 		E36079D41C18887700AD6D11 /* PlantViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E36079D31C18887700AD6D11 /* PlantViewModel.m */; };
@@ -34,6 +36,7 @@
 		E39B8CA41C2A858F0015EF9F /* CoreServices.m in Sources */ = {isa = PBXBuildFile; fileRef = E39B8CA31C2A858F0015EF9F /* CoreServices.m */; };
 		E3B02EB11C09AE76005E7DF4 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3B02EB01C09AE76005E7DF4 /* MainViewController.m */; };
 		E3B02EB31C09AEB9005E7DF4 /* MainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3B02EB21C09AEB9005E7DF4 /* MainView.xib */; };
+		E3B3B0161C71E16F005C39CC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E3B3B0151C71E16F005C39CC /* GoogleService-Info.plist */; };
 		E3CE4E161C0221850096D0FB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E3CE4E151C0221850096D0FB /* main.m */; };
 		E3CE4E191C0221850096D0FB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E3CE4E181C0221850096D0FB /* AppDelegate.m */; };
 		E3CE4E241C0221850096D0FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3CE4E231C0221850096D0FB /* Assets.xcassets */; };
@@ -77,6 +80,8 @@
 		E3EFE1F31C108BF50033BB25 /* AskHuiView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3EFE1F21C108BF50033BB25 /* AskHuiView.xib */; };
 		E3EFE1F61C108C0A0033BB25 /* AskHuiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3EFE1F51C108C0A0033BB25 /* AskHuiViewController.m */; };
 		E3EFE1FA1C109CDA0033BB25 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = E3EFE1F91C109CDA0033BB25 /* Utils.m */; };
+		E3F694AB1C46ADAD008A2F3C /* GrandHotel-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E3F694A91C46ADAD008A2F3C /* GrandHotel-Regular.ttf */; };
+		E3F694AC1C46ADAD008A2F3C /* Multicolore.otf in Resources */ = {isa = PBXBuildFile; fileRef = E3F694AA1C46ADAD008A2F3C /* Multicolore.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +102,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3F50527291474C2F6DB81AED /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		6ABAA538C58AACE92BFD10EB /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		E308168A1C04558D0007D896 /* WalkthroughPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalkthroughPageViewController.h; sourceTree = "<group>"; };
 		E308168B1C04558D0007D896 /* WalkthroughPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalkthroughPageViewController.m; sourceTree = "<group>"; };
 		E308168C1C04558D0007D896 /* WalkThroughViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalkThroughViewController.h; sourceTree = "<group>"; };
@@ -110,6 +117,8 @@
 		E30816971C0457EA0007D896 /* WalkZero.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WalkZero.xib; sourceTree = "<group>"; };
 		E3190EE91C06F36800F8C390 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		E3190EEA1C06F36800F8C390 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
+		E32A472F1C56725600EDF993 /* Comunicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comunicator.h; sourceTree = "<group>"; };
+		E32A47301C56725600EDF993 /* Comunicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comunicator.m; sourceTree = "<group>"; };
 		E33823731C1A2C310029C285 /* HUIViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HUIViewModel.h; sourceTree = "<group>"; };
 		E33823741C1A2C310029C285 /* HUIViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HUIViewModel.m; sourceTree = "<group>"; };
 		E36079C91C18867D00AD6D11 /* BaseViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewModel.h; sourceTree = "<group>"; };
@@ -139,6 +148,7 @@
 		E3B02EAF1C09AE76005E7DF4 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		E3B02EB01C09AE76005E7DF4 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		E3B02EB21C09AEB9005E7DF4 /* MainView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainView.xib; sourceTree = "<group>"; };
+		E3B3B0151C71E16F005C39CC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E3CE4E111C0221850096D0FB /* HUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3CE4E151C0221850096D0FB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E3CE4E171C0221850096D0FB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -196,6 +206,9 @@
 		E3EFE1F51C108C0A0033BB25 /* AskHuiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AskHuiViewController.m; sourceTree = "<group>"; };
 		E3EFE1F81C109CDA0033BB25 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		E3EFE1F91C109CDA0033BB25 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
+		E3F694A91C46ADAD008A2F3C /* GrandHotel-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GrandHotel-Regular.ttf"; sourceTree = "<group>"; };
+		E3F694AA1C46ADAD008A2F3C /* Multicolore.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Multicolore.otf; sourceTree = "<group>"; };
+		FAA76153111D0C70615F45B4 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -219,6 +232,7 @@
 				E39B8C951C20691E0015EF9F /* Wit.framework in Frameworks */,
 				E3CE4E5F1C0226D80096D0FB /* SystemConfiguration.framework in Frameworks */,
 				E3CE4E5D1C0226B80096D0FB /* CoreData.framework in Frameworks */,
+				4B2B1C77E740DF2BDFD871D5 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,6 +253,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4A62FAF459083EEEAD191741 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3F50527291474C2F6DB81AED /* Pods.debug.xcconfig */,
+				6ABAA538C58AACE92BFD10EB /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		82D037480CD3FD520E54CFCF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FAA76153111D0C70615F45B4 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		E36079C51C18856600AD6D11 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -264,10 +295,13 @@
 		E3CE4E081C0221850096D0FB = {
 			isa = PBXGroup;
 			children = (
+				E3B3B0151C71E16F005C39CC /* GoogleService-Info.plist */,
 				E3CE4E131C0221850096D0FB /* HUI */,
 				E3CE4E301C0221850096D0FB /* HUITests */,
 				E3CE4E3B1C0221850096D0FB /* HUIUITests */,
 				E3CE4E121C0221850096D0FB /* Products */,
+				82D037480CD3FD520E54CFCF /* Frameworks */,
+				4A62FAF459083EEEAD191741 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -421,6 +455,7 @@
 		E3DA78691C0848FC00F6C06A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E3F694A81C46ADAD008A2F3C /* Fonts */,
 				E39B8C831C2062050015EF9F /* Wit */,
 				E3DDCB331C11BE2F0053E150 /* Progress */,
 				E3EFE1F71C109B550033BB25 /* Utils */,
@@ -484,8 +519,19 @@
 				E3EFE1F91C109CDA0033BB25 /* Utils.m */,
 				E39B8C961C22A0770015EF9F /* Constants.h */,
 				E39B8C9F1C23244D0015EF9F /* Test.h */,
+				E32A472F1C56725600EDF993 /* Comunicator.h */,
+				E32A47301C56725600EDF993 /* Comunicator.m */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		E3F694A81C46ADAD008A2F3C /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				E3F694A91C46ADAD008A2F3C /* GrandHotel-Regular.ttf */,
+				E3F694AA1C46ADAD008A2F3C /* Multicolore.otf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -495,9 +541,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E3CE4E411C0221850096D0FB /* Build configuration list for PBXNativeTarget "HUI" */;
 			buildPhases = (
+				C1C2EA40DC9A3FC40726EB33 /* Check Pods Manifest.lock */,
 				E3CE4E0D1C0221850096D0FB /* Sources */,
 				E3CE4E0E1C0221850096D0FB /* Frameworks */,
 				E3CE4E0F1C0221850096D0FB /* Resources */,
+				D6D857ECFBA20F62DE457111 /* Embed Pods Frameworks */,
+				07371D02AED55B3BA86AC32A /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -555,7 +604,7 @@
 				TargetAttributes = {
 					E3CE4E101C0221850096D0FB = {
 						CreatedOnToolsVersion = 7.1.1;
-						DevelopmentTeam = 5R4XNKVGPY;
+						DevelopmentTeam = MYY9TNWLB7;
 					};
 					E3CE4E2C1C0221850096D0FB = {
 						CreatedOnToolsVersion = 7.1.1;
@@ -600,6 +649,7 @@
 				E3DDCB411C11BE2F0053E150 /* Icon-Small.png in Resources */,
 				E3CE4E271C0221850096D0FB /* LaunchScreen.storyboard in Resources */,
 				E3DDCB421C11BE2F0053E150 /* Icon-Small@2x.png in Resources */,
+				E3B3B0161C71E16F005C39CC /* GoogleService-Info.plist in Resources */,
 				E3EFE1F31C108BF50033BB25 /* AskHuiView.xib in Resources */,
 				E30816981C0457EA0007D896 /* WalkOne.xib in Resources */,
 				E3DDCB441C11BE2F0053E150 /* Icon@2x.png in Resources */,
@@ -612,6 +662,8 @@
 				E3DDCB3E1C11BE2F0053E150 /* 37x-Checkmark.png in Resources */,
 				E3EFE1E41C0F51C40033BB25 /* earcon_cancel.wav in Resources */,
 				E3DDCB301C11B46E0053E150 /* Cancel.wav in Resources */,
+				E3F694AB1C46ADAD008A2F3C /* GrandHotel-Regular.ttf in Resources */,
+				E3F694AC1C46ADAD008A2F3C /* Multicolore.otf in Resources */,
 				E39B8C921C20689D0015EF9F /* Wit.bundle in Resources */,
 				E3DF6CA01C0D896200004DA2 /* PlantView.xib in Resources */,
 				E3DDCB3F1C11BE2F0053E150 /* 37x-Checkmark@2x.png in Resources */,
@@ -641,6 +693,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		07371D02AED55B3BA86AC32A /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C1C2EA40DC9A3FC40726EB33 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		D6D857ECFBA20F62DE457111 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		E3CE4E0D1C0221850096D0FB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -652,6 +752,7 @@
 				E308168E1C04558D0007D896 /* WalkthroughPageViewController.m in Sources */,
 				E3B02EB11C09AE76005E7DF4 /* MainViewController.m in Sources */,
 				E3694FDC1C07330D0036D1F1 /* DetailPlantViewController.m in Sources */,
+				E32A47311C56725600EDF993 /* Comunicator.m in Sources */,
 				E3694FDF1C0733670036D1F1 /* SearchPlantViewController.m in Sources */,
 				E3DA78621C08430600F6C06A /* PlantViewController.m in Sources */,
 				E36079D41C18887700AD6D11 /* PlantViewModel.m in Sources */,
@@ -804,9 +905,11 @@
 		};
 		E3CE4E421C0221850096D0FB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3F50527291474C2F6DB81AED /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Joaquin Giraldez Lopez (KDLWU8Z5LL)";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -814,13 +917,17 @@
 					"$(PROJECT_DIR)/HUI/Resources/Wit",
 				);
 				GCC_PREFIX_HEADER = "";
-				HEADER_SEARCH_PATHS = "";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"${PODS_ROOT}/Google/Headers",
+				);
 				INFOPLIST_FILE = HUI/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "";
-				LIBRARY_SEARCH_PATHS = "";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				ONLY_ACTIVE_ARCH = NO;
-				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = homeDevelop.HUI;
+				OTHER_LDFLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.growandhelp.huitest01;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALID_ARCHS = "arm64 armv7 armv7s i386";
 			};
@@ -828,9 +935,11 @@
 		};
 		E3CE4E431C0221850096D0FB /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6ABAA538C58AACE92BFD10EB /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Joaquin Giraldez Lopez (KDLWU8Z5LL)";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -838,12 +947,17 @@
 					"$(PROJECT_DIR)/HUI/Resources/Wit",
 				);
 				GCC_PREFIX_HEADER = "";
-				HEADER_SEARCH_PATHS = "";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"${PODS_ROOT}/Google/Headers",
+				);
 				INFOPLIST_FILE = HUI/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "";
-				LIBRARY_SEARCH_PATHS = "";
-				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = homeDevelop.HUI;
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.growandhelp.huitest01;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALID_ARCHS = "arm64 armv7 armv7s i386";
 			};

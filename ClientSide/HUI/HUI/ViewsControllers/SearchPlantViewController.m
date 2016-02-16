@@ -29,6 +29,8 @@
     // Do any additional setup after loading the view.
     [self customInit];
     
+    self.title = NSLocalizedString(@"Plants list", @"");
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -41,6 +43,8 @@
     _coreServices = [[CoreServices alloc] init];
     
     [_coreServices setDelegate: self];
+    
+    
 }
 
 -(void) viewWillAppear:(BOOL)animated{
@@ -117,8 +121,7 @@
 
 #pragma  mark - CoreServicesDelegate
 
-
--(void)answerFromServer:(NSDictionary *)response{
+- (void) answerFromServer:(NSDictionary *)response{
     
     self.data = [[NSMutableArray alloc] init];
     

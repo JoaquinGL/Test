@@ -39,6 +39,18 @@
     ConfigureViewController* _configureViewController;
     
     MBProgressHUD* _HUD;
+    
+    CoreServices* _coreServices;
+    
+    NSMutableDictionary* _dataFromServer;
+    NSMutableDictionary* _moisture;
+    NSMutableDictionary* _temperature;
+    NSMutableDictionary* _light;
+    
+    IBOutlet UIView* _moreDetailsView;
+    IBOutlet UILabel* _moreDetailsLabel;
+    IBOutlet UIImageView* _moreDetailsImageView;
+    IBOutlet UILabel* _moreDetailsTitleLabel;
 }
 
 @end
@@ -54,6 +66,10 @@
 }
 
 - (void)customInit{
+    
+    _coreServices = [[CoreServices alloc] init];
+    
+    [_coreServices setDelegate: self];
     
     UIImage* deleteImage = [UIImage imageNamed:@"trash.png"];
     CGRect frameimg = CGRectMake(0, 0, deleteImage.size.width - 10, deleteImage.size.height - 13);
@@ -71,6 +87,12 @@
     _configureViewController = [[ConfigureViewController alloc] initWithNibName:@"ConfigureView" bundle:nil];
     
     [_configureViewController setDelegate:self];
+    
+    [_moreDetailsView setAlpha: 0];
+    
+    UIFont *customFont = [UIFont fontWithName:@"Multicolore" size:14];
+    
+    [plantName setFont: customFont];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -86,6 +108,45 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self initPlantContent];
+    
+    _HUD = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.view addSubview:_HUD];
+    
+    _HUD.delegate = self;
+    _HUD.labelText = NSLocalizedString(@"Synchronize", nil);
+    
+    [_HUD show:YES];
+
+    /* The plant must have a HUID */
+    if ([self.plantViewModel getHuiId]){
+        
+        if(!_manager){
+            _manager = [[Manager alloc] init];
+        }
+        if(![[self.plantViewModel getHuiId] isEqualToString:@""]){
+            [_coreServices getPlantStateWithHuiName:[[_manager getHuiWithId:[self.plantViewModel getHuiId]] getName]];
+        }else{
+            [_HUD hide:YES];
+        }
+    }
+}
+
+#pragma mark - Init
+
+- (void) initPlantContent{
+    
+    plantName.text = [self.plantViewModel getName];
+    
+    [plantImageView setImage:[self getPlantImageFromName:[self.plantViewModel getName]]];
+    
+    [sunStatusImageView setImage:[self.plantViewModel getSunImage]];
+    [waterStatusImageView setImage:[self.plantViewModel getWaterImage]];
+    [temperatureStatusImageView setImage:[self.plantViewModel getTemperatureImage]];
+    
+    plantSun.text = [self.plantViewModel getSunValue];
+    plantWater.text = [self.plantViewModel getWaterValue];
+    plantTemperature.text = [self.plantViewModel getTemperatureValue];
+    
 }
 
 #pragma mark - Instantiate method
@@ -149,22 +210,6 @@
     return image;
 }
 
-- (void) initPlantContent{
-
-    plantName.text = [self.plantViewModel getName];
-    
-    [plantImageView setImage:[self getPlantImageFromName:[self.plantViewModel getName]]];
-
-    [sunStatusImageView setImage:[self.plantViewModel getSunImage]];
-    [waterStatusImageView setImage:[self.plantViewModel getWaterImage]];
-    [temperatureStatusImageView setImage:[self.plantViewModel getTemperatureImage]];
-    
-    plantSun.text = [self.plantViewModel getSunValue];
-    plantWater.text = [self.plantViewModel getWaterValue];
-    plantTemperature.text = [self.plantViewModel getTemperatureValue];
-    
-}
-
 -(IBAction)onConfigureTouchUpInside:(id)sender{
     
     [_configureViewController.view setAlpha: 0.0];
@@ -212,7 +257,118 @@
     [Utils fadeOut:_configureViewController.view
         completion:^(BOOL completion){
             [_configureViewController.view removeFromSuperview];
+            
+            [_HUD show:YES];
+            
+            /* The plant must have a HUID */
+            if ([self.plantViewModel getHuiId]){
+                
+                if(!_manager){
+                    _manager = [[Manager alloc] init];
+                }
+                if(![[self.plantViewModel getHuiId] isEqualToString:@""]){
+                    [_coreServices getPlantStateWithHuiName:[[_manager getHuiWithId:[self.plantViewModel getHuiId]] getName]];
+                }else{
+                    [_HUD hide:YES];
+                }
+            }
+            
         }];
+}
+
+
+#pragma  mark - CoreServicesDelegate
+
+- (void) answerFromServer:(NSDictionary *)response{
+    
+    _dataFromServer = [[NSMutableDictionary alloc] initWithDictionary:response];
+    _moisture = [[NSMutableDictionary alloc] initWithDictionary:[_dataFromServer objectForKey:@"Moisture"]];
+    _temperature = [[NSMutableDictionary alloc] initWithDictionary:[_dataFromServer objectForKey:@"Temperature"]];
+    _light = [[NSMutableDictionary alloc] initWithDictionary:[_dataFromServer objectForKey:@"Light"]];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        [_HUD hide:YES];
+        
+        NSLog(@"PLANT STATUS: ");
+        NSLog(@"Moisture ->  %@", [_dataFromServer objectForKey:@"Moisture"]);
+        NSLog(@"Temperature ->  %@", [_dataFromServer objectForKey:@"Temperature"]);
+        NSLog(@"Light ->  %@", [_dataFromServer objectForKey:@"Light"]);
+        
+        plantTemperature.text = [_temperature objectForKey:@"Measure"];
+        plantSun.text = [_light objectForKey:@"Measure"];
+        plantWater.text = [_moisture objectForKey:@"Measure"];
+        
+        // configure icon segun el alerta
+        // cuando se pulsa mostrar todo el contenido desplegando o un popup con toda la info
+        // metodo delegado que pone el icono en la home?
+        
+        [self setIconElements];
+        
+    });
+}
+
+-(void) setIconElements{
+    
+    int globalStatus = 0;
+    
+    if([_temperature objectForKey:@"Alert"]){
+        [temperatureStatusImageView setImage:[UIImage imageNamed:@"thumb_up.png"]];
+    }else{
+        globalStatus = 1;
+        [temperatureStatusImageView setImage:[UIImage imageNamed:@"thumb_down.png"]];
+    }
+    
+    if([_light objectForKey:@"Alert"]){
+        [sunStatusImageView setImage:[UIImage imageNamed:@"thumb_up.png"]];
+    }else{
+        globalStatus = 1;
+        [temperatureStatusImageView setImage:[UIImage imageNamed:@"thumb_down.png"]];
+    }
+    
+    if([_moisture objectForKey:@"Alert"]){
+        [waterStatusImageView setImage:[UIImage imageNamed:@"thumb_up.png"]];
+    }else{
+        globalStatus = 1;
+        [temperatureStatusImageView setImage:[UIImage imageNamed:@"thumb_down.png"]];
+    }
+    
+    [self.delegate globalStatus: globalStatus withPlantViewModel:self.plantViewModel];
+}
+
+
+-(IBAction)onTemperatureTouchUpInside:(id)sender{
+    
+    _moreDetailsLabel.text = [_temperature objectForKey:@"Description"];
+    [_moreDetailsLabel sizeToFit];
+    _moreDetailsTitleLabel.text = NSLocalizedString(@"Temperature", nil);
+    [_moreDetailsImageView setImage:[UIImage imageNamed:@"temperature.png"]];
+    [_moreDetailsImageView setFrame: CGRectMake(_moreDetailsImageView.frame.origin.x, _moreDetailsImageView.frame.origin.y, temperatureStatusImageView.frame.size.width, temperatureStatusImageView.frame.size.height)];
+    [Utils fadeIn:_moreDetailsView completion:nil];
+}
+
+-(IBAction)onLightTouchUpInside:(id)sender{
+    
+    _moreDetailsLabel.text = [_light objectForKey:@"Description"];
+    [_moreDetailsLabel sizeToFit];
+    _moreDetailsTitleLabel.text = NSLocalizedString(@"Light", nil);
+    [_moreDetailsImageView setImage:[UIImage imageNamed:@"sun.png"]];
+    [_moreDetailsImageView setFrame: CGRectMake(_moreDetailsImageView.frame.origin.x, _moreDetailsImageView.frame.origin.y, sunStatusImageView.frame.size.width, sunStatusImageView.frame.size.height)];
+    [Utils fadeIn:_moreDetailsView completion:nil];
+}
+
+-(IBAction)onMoistureTouchUpInside:(id)sender{
+    
+    _moreDetailsLabel.text = [_moisture objectForKey:@"Description"];
+    [_moreDetailsLabel sizeToFit];
+    _moreDetailsTitleLabel.text = NSLocalizedString(@"Moisure", nil);
+    [_moreDetailsImageView setImage:[UIImage imageNamed:@"water.png"]];
+    [_moreDetailsImageView setFrame: CGRectMake(_moreDetailsImageView.frame.origin.x, _moreDetailsImageView.frame.origin.y, waterStatusImageView.frame.size.width, waterStatusImageView.frame.size.height)];
+    [Utils fadeIn:_moreDetailsView completion:nil];
+}
+
+-(IBAction)onCloseMoreDetailsButtonTouchUpInside:(id)sender{
+    [Utils fadeOut:_moreDetailsView completion:nil];
 }
 
 

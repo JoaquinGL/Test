@@ -45,15 +45,31 @@
 
 }
 
+
+
+// HUI VOICE
+/*
+ 
+ {  
+    "speech":"tell me how to plant tomatoes",
+    "language":"en",
+    "distanceUnit":"[centimeters]", 
+    "temperatureUnit":"[Celsius]"
+ }
+ */
+
 - (void) postQuestion:(NSString* )question andHUIID:(NSString* )huiId{
     
     if( [self isNetWorkAvailable]){
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL: ASK_HUI_POST_URL];
         [request setHTTPMethod:@"POST"];
         
+        
         NSDictionary *postDictionary = @{
                                          @"speech": question,
-                                         @"id": huiId
+                                         @"language": @"en",
+                                         @"distanceUnit": @"[centimeters]",
+                                         @"temperatureUnit": @"[centimeters]"
                                          };
         
         NSError *error;
@@ -118,21 +134,20 @@
     }
 }
 
-- (void) getPlantState:(NSString* )plantName withHUID:(NSString* )huiId{
+- (void) getPlantStateWithHuiName:(NSString* )huiName{
     
     if( [self isNetWorkAvailable]){
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL: PLANT_STATE_POST_URL];
         [request setHTTPMethod:@"POST"];
         
         NSDictionary *postDictionary = @{
-                                         @"suitablePlants": @"false",
-                                         @"huiID": huiId
+                                         @"huiID": huiName
+                                         , @"moistureID": @"M1"
                                          };
         
         NSError *error;
         NSData *postData = [NSJSONSerialization dataWithJSONObject:postDictionary options:0 error:&error];
         [request setHTTPBody:postData];
-        
         
         NSURLSession *session = [NSURLSession sharedSession];
         NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request

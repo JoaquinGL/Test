@@ -37,6 +37,9 @@
     NSInteger _positionX;
     NSInteger _positionY;
     
+    IBOutlet UIScrollView* plantsScrollView;
+    NSInteger numberOfPages;
+    
 }
 
 @end
@@ -115,6 +118,25 @@
     
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithCustomView: infoButton];
     self.navigationItem.rightBarButtonItem = rightButton;
+    
+    UIFont *customFont = [UIFont fontWithName:@"GrandHotel-Regular" size:30];
+    
+    NSShadow* shadow = [NSShadow new];
+    shadow.shadowOffset = CGSizeMake(0.0f, 1.0f);
+    shadow.shadowColor = [UIColor clearColor];
+    [[UINavigationBar appearance] setTitleTextAttributes: @{
+                                                            NSForegroundColorAttributeName: [UIColor whiteColor],
+                                                            NSFontAttributeName: customFont,
+                                                            NSShadowAttributeName: shadow
+                                                            }];
+    
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithTitle:@""
+                                                                 style:UIBarButtonItemStylePlain
+                                                                target:nil
+                                                                action:nil];
+    
+    [self.navigationItem setBackBarButtonItem:backItem];
+
     
     
     /* GET CONTENT FROM BBDD */
@@ -235,8 +257,6 @@
     
     [_manager setPlant: plantViewModel];
     
-    [_plantsCollection addObject: plantViewModel];
-    
     [self addNewPlant: plantViewModel];
 }
 
@@ -289,8 +309,28 @@
     self.numberOfPlants = [NSNumber numberWithInt: 0];
     
     [self initializeContent];
-    
 }
+
+-(void)globalStatus:(int)status withPlantViewModel:(PlantViewModel *)plantViewModel{
+
+    int position = 0;
+
+    for (PlantViewModel* plant in _plantsCollection){
+        
+        if( ![[plant getIdentify] isEqualToString:[plantViewModel getIdentify]]){
+            position ++;
+        }
+    }
+
+    if(status == 1){
+        [[_plantsViewControllerCollection objectAtIndex:position] setStatusKo ];
+    }else{
+        [[_plantsViewControllerCollection objectAtIndex:position] setStatusOk ];
+    }
+    
+   [_manager setStatusPlant:[NSString stringWithFormat:@"%d", status] inPlant:[_plantsCollection objectAtIndex:position]];
+}
+
 
 #pragma mark - PlantViewsController
 
@@ -333,12 +373,24 @@
         // showWithAnimationTheView
         [self.view addSubview:newPlantViewController.view];
         
+        //[plantsScrollView addSubview:newPlantViewController.view];
+        
+        
         [newPlantViewController setPlantImageFromName:[plant getName]];
-        [newPlantViewController setStatusUndefined];
+        
+        if ([[plant getStatus]isEqual:@"0"]){
+            [newPlantViewController setStatusOk];
+        }else if ([[plant getStatus]isEqual:@"1"]){
+            [newPlantViewController setStatusKo];
+        }else{
+            [newPlantViewController setStatusUndefined];
+        }
+        
+        
         newPlantViewController.plantViewModel = plant;
         
         // add plantsViewController to collection
-        [_plantsViewControllerCollection addObject: newPlantViewController];
+        //[_plantsViewControllerCollection addObject: newPlantViewController];
         
         self.numberOfPlants = [NSNumber numberWithInt: localNumberOfPlants + 1];
        

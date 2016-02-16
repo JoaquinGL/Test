@@ -13,6 +13,7 @@
 
 @property (nonatomic, assign, getter = getIdentify, setter= setHuiId:) NSString* identify;
 @property (nonatomic, assign, getter = getName, setter = setName:) NSString* name;
+@property (nonatomic, assign, getter = getNumber, setter = setNumber:) NSString* number;
 @property (nonatomic, assign, getter = getStatus) NSNumber* status;
 @property (nonatomic, assign, getter = getWifiName, setter = setWifiName:) NSString* wifiName;
 @property (nonatomic, assign, getter = getWifiKey, setter = setWifiKey:) NSString* wifiKey;

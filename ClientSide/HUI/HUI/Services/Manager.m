@@ -64,6 +64,7 @@
                                           inManagedObjectContext:context];
     [huiInfo setValue:huiId forKey:@"id"];
     [huiInfo setValue:[huiViewModel getName] forKey:@"name"];
+    [huiInfo setValue:[huiViewModel getNumber] forKey:@"number"];
     [huiInfo setValue:[NSNumber numberWithInt:-1] forKey:@"status"];
     [huiInfo setValue:[huiViewModel getWifiKey] forKey:@"wifiKey"];
     [huiInfo setValue:[huiViewModel getWifiName] forKey:@"wifiName"];
@@ -86,8 +87,36 @@
     
     /* UPDATE PLANT WITH HUIID */
     [self setHuiId:huiId inPlantViewModel:plantViewModel];
-    
 }
+
+
+- (void)setStatusPlant:(NSString* )status inPlant:(PlantViewModel*) plantViewModel{
+    NSManagedObjectContext *context = [self managedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:[NSEntityDescription entityForName:@"Plant" inManagedObjectContext:context]];
+    
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"id == %@", [plantViewModel getIdentify]]];
+    
+    NSError *error = nil;
+    NSArray* results = [context executeFetchRequest:fetchRequest error:&error];
+    
+    if ([context save:&error] == NO) {
+        NSAssert(NO, @"Save should not fail\n%@", [error localizedDescription]);
+        abort();
+    }else if (!error && results.count > 0) {
+        for(NSManagedObject *managedObject in results){
+            
+            [managedObject setValue:status forKey:@"status"];
+        }
+        
+        //Save context to write to store
+        [context save:nil];
+    }
+
+}
+
+
 
 -(void) setHuiId:(NSString* )huiId inPlantViewModel:(PlantViewModel* )plantViewModel
 {
