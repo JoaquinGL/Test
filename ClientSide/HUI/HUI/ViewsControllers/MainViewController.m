@@ -26,6 +26,7 @@
     AskHuiViewController* _askHuiViewController;
     
     IBOutlet UIButton* newPlantButton;
+    IBOutlet UIButton* _askHuiButton;
     
     MBProgressHUD* _HUD;
     
@@ -39,6 +40,7 @@
     
     IBOutlet UIScrollView* plantsScrollView;
     NSInteger numberOfPages;
+    NSInteger plantScrollViewControllerHeight;
     
 }
 
@@ -46,12 +48,15 @@
 
 #define WIDTH_PLANT 160
 #define HEIGHT_PLANT 160
-#define INITIAL_POINT_X 20
-#define INITIAL_POINT_Y 80
+#define INITIAL_POINT_X 10
+#define INITIAL_POINT_Y 0
 #define FRAME_NEW_PLANT CGRectMake(80, 130, WIDTH_PLANT, HEIGHT_PLANT)
 #define FRAME_NEW_PLANT_1_PLANT CGRectMake(80, 260, WIDTH_PLANT, HEIGHT_PLANT)
 #define FRAME_NEW_PLANT_2_PLANT CGRectMake(80, 260, WIDTH_PLANT, HEIGHT_PLANT)
 #define FRAME_NEW_PLANT_3_PLANT CGRectMake(180, 260, 120, 120)
+#define FRAME_NEW_PLANT_4_PLANT CGRectMake(10, 475, 80, 80)
+#define FRAME_ASK_HUI_BUTTON_FIRST_POSITION CGRectMake(110, 475, 80, 80)
+#define FRAME_ASK_HUI_BUTTON_FINAL_POSITION CGRectMake(230, 475, 80, 80)
 
 @implementation MainViewController
 
@@ -136,11 +141,15 @@
                                                                 action:nil];
     
     [self.navigationItem setBackBarButtonItem:backItem];
-
     
+    [_askHuiButton setFrame:FRAME_ASK_HUI_BUTTON_FIRST_POSITION];
     
     /* GET CONTENT FROM BBDD */
     [self initializeContent];
+    
+    
+    plantScrollViewControllerHeight = 0;
+    
 }
 
 
@@ -340,7 +349,7 @@
     
     // add plant to collection
     
-    if (localNumberOfPlants < 3){
+    if (localNumberOfPlants < 16){
         
         PlantViewController* newPlantViewController = [PlantViewController instantiate];
         newPlantViewController.plantName = [plant getName];
@@ -352,11 +361,10 @@
         {
             _positionX = INITIAL_POINT_X + 70;
             _positionY = INITIAL_POINT_Y;
-        }else if ([self.numberOfPlants integerValue] % 2)
+        }else if (([self.numberOfPlants integerValue] + 1) % 2 == 0)
         {
             [((PlantViewController*) [_plantsViewControllerCollection objectAtIndex:0]).view setFrame:CGRectMake(INITIAL_POINT_X, INITIAL_POINT_Y, newPlantViewController.view.frame.size.width, newPlantViewController.view.frame.size.height)];
             _positionX = INITIAL_POINT_X + WIDTH_PLANT - 7;
-            _positionY = INITIAL_POINT_Y;
         
         }else{
             _positionX = INITIAL_POINT_X;
@@ -371,9 +379,15 @@
         [newPlantViewController.view setFrame:CGRectMake(_positionX, _positionY, newPlantViewController.view.frame.size.width, newPlantViewController.view.frame.size.height)];
         
         // showWithAnimationTheView
-        [self.view addSubview:newPlantViewController.view];
+        //[self.view addSubview:newPlantViewController.view];
         
-        //[plantsScrollView addSubview:newPlantViewController.view];
+        [plantsScrollView addSubview:newPlantViewController.view];
+        
+        if ((([self.numberOfPlants integerValue]+ 1) % 5 == 0) || (([self.numberOfPlants integerValue]+ 1) % 7 == 0)){
+            plantScrollViewControllerHeight = plantScrollViewControllerHeight + HEIGHT_PLANT;
+            
+            [plantsScrollView setContentSize:CGSizeMake(plantsScrollView.frame.size.width, plantsScrollView.frame.size.height + plantScrollViewControllerHeight)];
+        }
         
         
         [newPlantViewController setPlantImageFromName:[plant getName]];
@@ -386,7 +400,6 @@
             [newPlantViewController setStatusUndefined];
         }
         
-        
         newPlantViewController.plantViewModel = plant;
         
         // add plantsViewController to collection
@@ -394,6 +407,8 @@
         
         self.numberOfPlants = [NSNumber numberWithInt: localNumberOfPlants + 1];
        
+        [_askHuiButton setFrame: FRAME_ASK_HUI_BUTTON_FIRST_POSITION];
+        
         // calculate newPlantButton Frame
         if ([self.numberOfPlants integerValue]==0){
             [newPlantButton setFrame: FRAME_NEW_PLANT_1_PLANT];
@@ -401,8 +416,10 @@
             [newPlantButton setFrame: FRAME_NEW_PLANT_2_PLANT];
         }else if ([self.numberOfPlants integerValue] == 3){
             [newPlantButton setFrame: FRAME_NEW_PLANT_3_PLANT];
-        }else{
-            [newPlantButton setFrame: FRAME_NEW_PLANT_1_PLANT];
+        }
+        else if ([self.numberOfPlants integerValue] >= 4){
+            [_askHuiButton setFrame: FRAME_ASK_HUI_BUTTON_FINAL_POSITION];
+            [newPlantButton setFrame: FRAME_NEW_PLANT_4_PLANT];
         }
         
     }else{

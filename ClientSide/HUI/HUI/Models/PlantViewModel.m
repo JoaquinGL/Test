@@ -39,10 +39,10 @@
     
     NSDictionary* localState = @{
                                  @"id":[object valueForKey:@"id"]
-                                 ,@"status":[object valueForKey:@"status"]
+                                 ,@"status":[object valueForKey:@"status"]? [object valueForKey:@"status"] : @""
                                  ,@"name":[object valueForKey:@"name"]
                                  ,@"position": [object valueForKey:@"position"]
-                                 //,@"image": [object valueForKey:@"image"]
+                                 ,@"image": [object valueForKey:@"image"]? [object valueForKey:@"image"] : @""
                                  ,@"sunValue": [object valueForKey:@"sunValue"]
                                  ,@"waterValue": [object valueForKey:@"waterValue"]
                                  ,@"temperatureValue": [object valueForKey:@"temperatureValue"]
