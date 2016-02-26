@@ -235,6 +235,12 @@
 
 #pragma mark - delegate methods
 
+- (void) cancelConfiguration{
+    [Utils fadeOut:_configureViewController.view completion:^(BOOL finisehd){
+        
+    }];
+}
+
 -(void)closeConfiguration:(HUIViewModel*)huiViewModel{
     
     if(huiViewModel){
@@ -248,9 +254,29 @@
                 _manager = [[Manager alloc] init];
             }
             
-            [_manager setHUI:huiViewModel withPlantViewModel:self.plantViewModel];
             
-            [self.plantViewModel setHuiId:[huiViewModel getIdentify]];
+            int sensorFree = [_manager getHuiSensorFree:[huiViewModel getIdentify]];
+                              
+            if (sensorFree != -1){
+                
+                [_manager setHUI: huiViewModel
+              withPlantViewModel: self.plantViewModel
+                      withSensor: sensorFree];
+                
+                [self.plantViewModel setHuiId:[huiViewModel getIdentify]];
+            }else{
+                // assing new plant to new sensor, the user has to select the new sensor.
+                
+                // TODO, do the logic, selec one of the tree selectors.
+                
+                sensorFree = 2;
+                
+                [_manager setHUI: huiViewModel
+              withPlantViewModel: self.plantViewModel
+                      withSensor: sensorFree];
+                
+                [self.plantViewModel setHuiId:[huiViewModel getIdentify]];
+            }
         }
     }
     

@@ -35,6 +35,7 @@
     IBOutlet UIButton* _editWifiButton;
     IBOutlet UIButton* _editKeyButton;
     IBOutlet UIButton* _editDateButton;
+    IBOutlet UIButton* _doneButton;
     
     IBOutlet UIImageView* _editNameImageView;
     IBOutlet UIImageView* _editNumberImageView;
@@ -68,6 +69,7 @@
     Communicator *_comunicator;
     
     BOOL isConfigurationMode;
+    BOOL exitWithNoEditing;
 }
 
 
@@ -117,6 +119,7 @@
     [_wifiNameLabel setAlpha:0.0];
     [_wifiKeyLabel setAlpha:0.0];
     [_dateLabel setAlpha:0.0];
+    [_doneButton setAlpha:0.0];
     
     [_parametersView setAlpha:0.0];
     
@@ -212,6 +215,9 @@
             [Utils fadeIn:_wifiNameLabel completion:nil];
             [Utils fadeIn:_wifiKeyLabel completion:nil];
             [Utils fadeIn:_dateLabel completion:nil];
+            
+            [Utils fadeIn:_doneButton completion:nil];
+            
             [configureLabel setAlpha:0.0];
         }];
     });
@@ -254,7 +260,7 @@
     [self.delegate closeConfiguration:_huiSelectionViewModel];
 }
 
-#pragma mark - Actions
+#pragma mark - Delegate Actions
 
 -(IBAction)onCloseButtonTouchUpInside:(id)sender{
     
@@ -262,6 +268,14 @@
     
     [self.delegate closeConfiguration:_huiSelectionViewModel];
 }
+
+-(IBAction)onCancelButtonTouchUpInside:(id)sender{
+
+    [configureTextField resignFirstResponder];
+    [self.delegate cancelConfiguration];
+}
+
+
 
 -(void) initTextField{
     if(!_isEditing){
@@ -337,6 +351,7 @@
                 [Utils fadeOut:configureTextField completion:nil];
                 [Utils fadeOut:configureLabel completion:nil];
                 [Utils fadeOut:_datePickerView completion:nil];
+                [Utils fadeOut:_doneButton completion:nil];
                 [configureTextField resignFirstResponder];
             }];
             [configureButton setAlpha:0];
@@ -542,15 +557,43 @@ numberOfRowsInComponent:(NSInteger)component
                 [_comunicator setup];
                 [_comunicator open];
                 
+                
+                NSString *haystack = _wifiNameLabel.text;
+                NSString *haystackPrefix = @"Wifi name: ";
+                NSRange needleRange = NSMakeRange(haystackPrefix.length,
+                                                  haystack.length - haystackPrefix.length);
+                NSString *needle = [haystack substringWithRange:needleRange];
+                NSLog(@"needle: %@", needle);
+                
+                
+                NSString* wifiName = needle;
+                
+                
+                haystack = _wifiKeyLabel.text;
+                haystackPrefix = @"Wifi key: ";
+                needleRange = NSMakeRange(haystackPrefix.length,
+                                                  haystack.length - haystackPrefix.length);
+                needle = [haystack substringWithRange:needleRange];
+                NSLog(@"needle: %@", needle);
+                
+                
+                NSString* wifiKey = needle;
+                
+                
                 //"HUI:**red**\n**clave**\n"
-                NSString *messageToSetupHUI = [NSString stringWithFormat:@"HUI:%@\n%@\n", _wifiNameLabel.text, _wifiKeyLabel.text];
+                NSString *messageToSetupHUI = [NSString stringWithFormat:@"HUI:%@\n%@\n", wifiName, wifiKey];
+                
+                
+                
+                NSLog(@"HUI MESSAGE CONFIGURATION: %@", messageToSetupHUI);
                 
                 [_comunicator writeOut:messageToSetupHUI];
                 
                 [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(closeSocket) object:nil];
                 
                 [_comunicator close];
-
+                
+                //[_HUD hide:YES];
             });
             
             

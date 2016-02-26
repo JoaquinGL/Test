@@ -13,7 +13,8 @@
 #import "AskHuiViewController.h"
 #import "PlantViewModel.h"
 #import "Manager.h"
-
+#import "SocketConnectionVC.h"
+#import "ConfigureViewController.h"
 
 @interface MainViewController (){
     SearchPlantViewController* _searchPlantViewController;
@@ -24,6 +25,8 @@
     PlantViewController* _plant2ViewController;
     
     AskHuiViewController* _askHuiViewController;
+    
+    ConfigureViewController* _configureViewController;
     
     IBOutlet UIButton* newPlantButton;
     IBOutlet UIButton* _askHuiButton;
@@ -172,8 +175,26 @@
 #pragma mark - ACTIONS BUTTONS
 
 - (IBAction)showSearchPlantOnTouchUpInside:(id)sender{
-    
-    [self.navigationController pushViewController:_searchPlantViewController animated:YES];
+        
+   if(!_configureViewController){
+       _configureViewController = [ConfigureViewController instantiate];
+       [_configureViewController setDelegate:self];
+   }
+   
+   [_configureViewController.view setAlpha: 0.0];
+   [self.navigationController.view addSubview:_configureViewController.view];
+   _configureViewController.plantViewModel = nil;
+   
+   if(!_manager){
+       _manager = [[Manager alloc] init];
+   }
+   
+   _configureViewController.huiViewModel = nil;
+   
+   [_configureViewController initConfigureView];
+   
+   [Utils fadeIn:_configureViewController.view completion:nil];
+   
 }
 
 - (IBAction)showWalkthrough:(id)sender {
@@ -378,9 +399,6 @@
         
         [newPlantViewController.view setFrame:CGRectMake(_positionX, _positionY, newPlantViewController.view.frame.size.width, newPlantViewController.view.frame.size.height)];
         
-        // showWithAnimationTheView
-        //[self.view addSubview:newPlantViewController.view];
-        
         [plantsScrollView addSubview:newPlantViewController.view];
         
         if ((([self.numberOfPlants integerValue]+ 1) % 5 == 0) || (([self.numberOfPlants integerValue]+ 1) % 7 == 0)){
@@ -401,9 +419,6 @@
         }
         
         newPlantViewController.plantViewModel = plant;
-        
-        // add plantsViewController to collection
-        //[_plantsViewControllerCollection addObject: newPlantViewController];
         
         self.numberOfPlants = [NSNumber numberWithInt: localNumberOfPlants + 1];
        
@@ -449,5 +464,67 @@
         [newPlantButton setFrame: FRAME_NEW_PLANT];
     }
 }
+
+#pragma mark -socket test
+
+- (IBAction)onSocketTouchUpInside:(id)sender{
+    SocketConnectionVC * socketVC = [[SocketConnectionVC alloc] initWithNibName:@"SocketConnectionView" bundle:nil];
+    [self.navigationController pushViewController:socketVC animated:YES];
+}
+
+
+#pragma mark - Configure HUI Methods
+
+
+-(void)closeConfiguration:(HUIViewModel*)huiViewModel{
+    
+    if(huiViewModel){
+        if([huiViewModel getIdentify]){
+            /* UPDATE DATA */
+            [_manager updateHui:huiViewModel withPlantViewModel:nil];
+        }else{
+            /* Save HUI DATA */
+            if(!_manager){
+                _manager = [[Manager alloc] init];
+            }
+            
+            
+            int sensorFree = [_manager getHuiSensorFree:[huiViewModel getIdentify]];
+            
+            if (sensorFree != -1){
+                
+                [_manager setHUI: huiViewModel
+              withPlantViewModel: nil
+                      withSensor: sensorFree];
+                
+            }else{
+                // assing new plant to new sensor, the user has to select the new sensor.
+                
+                // TODO, do the logic, selec one of the tree selectors.
+                
+                sensorFree = 2;
+                
+                [_manager setHUI: huiViewModel
+              withPlantViewModel: nil
+                      withSensor: sensorFree];
+            }
+        }
+    }
+    // we update or configure the HUI, now we can set the plant.
+    // SHOW THE PLANTS LIST
+    
+    [Utils fadeOut:_configureViewController.view completion:^(BOOL finisehd){
+        [self.navigationController pushViewController:_searchPlantViewController animated:YES];
+    }];
+    
+}
+
+- (void) cancelConfiguration{
+    [Utils fadeOut:_configureViewController.view completion:^(BOOL finisehd){
+    }];
+}
+
+
+
 
 @end

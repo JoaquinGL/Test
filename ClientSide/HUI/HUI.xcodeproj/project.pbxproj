@@ -37,6 +37,8 @@
 		E3B02EB11C09AE76005E7DF4 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3B02EB01C09AE76005E7DF4 /* MainViewController.m */; };
 		E3B02EB31C09AEB9005E7DF4 /* MainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3B02EB21C09AEB9005E7DF4 /* MainView.xib */; };
 		E3B3B0161C71E16F005C39CC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E3B3B0151C71E16F005C39CC /* GoogleService-Info.plist */; };
+		E3B3B01F1C7CA8D0005C39CC /* SocketConnectionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E3B3B01E1C7CA8D0005C39CC /* SocketConnectionVC.m */; };
+		E3B3B0211C7CA974005C39CC /* SocketConnectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3B3B0201C7CA974005C39CC /* SocketConnectionView.xib */; };
 		E3CE4E161C0221850096D0FB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E3CE4E151C0221850096D0FB /* main.m */; };
 		E3CE4E191C0221850096D0FB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E3CE4E181C0221850096D0FB /* AppDelegate.m */; };
 		E3CE4E241C0221850096D0FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3CE4E231C0221850096D0FB /* Assets.xcassets */; };
@@ -149,6 +151,9 @@
 		E3B02EB01C09AE76005E7DF4 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		E3B02EB21C09AEB9005E7DF4 /* MainView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainView.xib; sourceTree = "<group>"; };
 		E3B3B0151C71E16F005C39CC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		E3B3B01D1C7CA8D0005C39CC /* SocketConnectionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketConnectionVC.h; sourceTree = "<group>"; };
+		E3B3B01E1C7CA8D0005C39CC /* SocketConnectionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocketConnectionVC.m; sourceTree = "<group>"; };
+		E3B3B0201C7CA974005C39CC /* SocketConnectionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SocketConnectionView.xib; sourceTree = "<group>"; };
 		E3CE4E111C0221850096D0FB /* HUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3CE4E151C0221850096D0FB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E3CE4E171C0221850096D0FB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -397,6 +402,7 @@
 				E3EFE1F21C108BF50033BB25 /* AskHuiView.xib */,
 				E39B8C641C1DEAB50015EF9F /* View.xib */,
 				E39B8C691C1DEB670015EF9F /* ConfigureView.xib */,
+				E3B3B0201C7CA974005C39CC /* SocketConnectionView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -521,6 +527,8 @@
 				E39B8C9F1C23244D0015EF9F /* Test.h */,
 				E32A472F1C56725600EDF993 /* Comunicator.h */,
 				E32A47301C56725600EDF993 /* Comunicator.m */,
+				E3B3B01D1C7CA8D0005C39CC /* SocketConnectionVC.h */,
+				E3B3B01E1C7CA8D0005C39CC /* SocketConnectionVC.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -654,6 +662,7 @@
 				E30816981C0457EA0007D896 /* WalkOne.xib in Resources */,
 				E3DDCB441C11BE2F0053E150 /* Icon@2x.png in Resources */,
 				E3DDCB311C11B46E0053E150 /* Robot1.wav in Resources */,
+				E3B3B0211C7CA974005C39CC /* SocketConnectionView.xib in Resources */,
 				E3CE4E241C0221850096D0FB /* Assets.xcassets in Resources */,
 				E308169A1C0457EA0007D896 /* WalkThroughViewController.xib in Resources */,
 				E308169C1C0457EA0007D896 /* WalkZero.xib in Resources */,
@@ -747,6 +756,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E3DA789B1C084F1100F6C06A /* Reachability.m in Sources */,
+				E3B3B01F1C7CA8D0005C39CC /* SocketConnectionVC.m in Sources */,
 				E3CE4E551C0222C10096D0FB /* HUI.xcdatamodeld in Sources */,
 				E3190EEB1C06F36800F8C390 /* BaseViewController.m in Sources */,
 				E308168E1C04558D0007D896 /* WalkthroughPageViewController.m in Sources */,

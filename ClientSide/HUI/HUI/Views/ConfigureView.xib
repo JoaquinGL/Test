@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ConfigureViewController">
@@ -10,6 +10,7 @@
                 <outlet property="_dateLabel" destination="iNI-Lc-Rj5" id="h8A-cE-kDY"/>
                 <outlet property="_datePicker" destination="3rl-li-WS3" id="8Y7-YG-Khx"/>
                 <outlet property="_datePickerView" destination="aLV-7L-PGw" id="FGf-Iq-cnW"/>
+                <outlet property="_doneButton" destination="c8P-xx-hFd" id="yEh-wQ-Ix4"/>
                 <outlet property="_editDateButton" destination="8ax-bM-PTc" id="Xe7-9L-wbP"/>
                 <outlet property="_editDateImageView" destination="bn7-ui-QY4" id="VbK-bz-f7i"/>
                 <outlet property="_editKeyButton" destination="9se-gw-Zyo" id="T7F-dw-CeN"/>
@@ -53,18 +54,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hhu-AE-5nO">
-                                <rect key="frame" x="258" y="11" width="53" height="35"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <state key="normal" title="CLOSE">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="onCloseButtonTouchUpInside:" destination="-1" eventType="touchUpInside" id="Eht-x2-oTf"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="HUI name:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pPV-Nh-QQE">
-                                <rect key="frame" x="26" y="63" width="269" height="49"/>
+                                <rect key="frame" x="20" y="63" width="269" height="49"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -118,7 +109,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Configure HUI" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZqB-Ll-O7p">
-                                <rect key="frame" x="97" y="4" width="128" height="49"/>
+                                <rect key="frame" x="97" y="3" width="128" height="49"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -133,15 +124,6 @@
                                     <action selector="onSelectorTouchUpInside:" destination="-1" eventType="touchUpInside" id="B0Q-eA-FPz"/>
                                 </connections>
                             </button>
-                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vcX-iN-9MB">
-                                <rect key="frame" x="1" y="109" width="320" height="172"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="-1" id="al3-rV-oBJ"/>
-                                    <outlet property="delegate" destination="-1" id="0yF-0B-mVN"/>
-                                </connections>
-                            </pickerView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cB2-tD-m69" userLabel="EditName">
                                 <rect key="frame" x="20" y="179" width="269" height="30"/>
                                 <connections>
@@ -228,6 +210,29 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jb9-hD-vW2">
+                                <rect key="frame" x="8" y="8" width="35" height="35"/>
+                                <state key="normal" backgroundImage="closeButton"/>
+                                <connections>
+                                    <action selector="onCancelButtonTouchUpInside:" destination="-1" eventType="touchUpInside" id="CFP-Y3-egW"/>
+                                </connections>
+                            </button>
+                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vcX-iN-9MB">
+                                <rect key="frame" x="1" y="109" width="320" height="172"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="-1" id="al3-rV-oBJ"/>
+                                    <outlet property="delegate" destination="-1" id="0yF-0B-mVN"/>
+                                </connections>
+                            </pickerView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c8P-xx-hFd">
+                                <rect key="frame" x="276" y="8" width="35" height="35"/>
+                                <state key="normal" backgroundImage="doneButton"/>
+                                <connections>
+                                    <action selector="onCloseButtonTouchUpInside:" destination="-1" eventType="touchUpInside" id="TO7-EX-geI"/>
+                                </connections>
+                            </button>
                         </subviews>
                     </view>
                     <blurEffect style="dark"/>
@@ -239,7 +244,9 @@
         </view>
     </objects>
     <resources>
+        <image name="closeButton" width="113" height="113"/>
         <image name="configureHui" width="256" height="256"/>
+        <image name="doneButton" width="113" height="113"/>
         <image name="editButton" width="313" height="313"/>
     </resources>
 </document>

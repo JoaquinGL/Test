@@ -12,6 +12,7 @@
 #import "PlantViewController.h"
 #import "DetailPlantViewController.h"
 #import "AskHuiViewController.h"
+#import "ConfigureViewController.h"
 
 
 @interface MainViewController : BaseViewController <
@@ -21,6 +22,7 @@
 , DetailPlantViewControllerDelegate
 , AskHuiViewControllerDelegate
 , MBProgressHUDDelegate
+, ConfigureViewControllerDelegate
                                 >
 
 @property (nonatomic, assign) UINavigationController* navigationController;

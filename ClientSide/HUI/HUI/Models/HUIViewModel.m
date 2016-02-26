@@ -45,6 +45,23 @@
     return [ self.innerState valueForKey: @"notification" ];
 }
 
+- (NSString*)getSensor1
+{
+    return [ self.innerState valueForKey: @"sensor1" ];
+}
+
+- (NSString*)getSensor2
+{
+    return [ self.innerState valueForKey: @"sensor2" ];
+}
+
+- (NSString*)getSensor3
+{
+    return [ self.innerState valueForKey: @"sensor3" ];
+}
+
+#pragma mark - SETTERS
+
 - (void)setName:(NSString*) name
 {
     [ self.innerState setObject:name forKey:@"name"];
@@ -75,6 +92,22 @@
     [ self.innerState setObject:identify forKey:@"id"];
 }
 
+- (void)setSensor1:(NSString *)sensor1
+{
+    [ self.innerState setObject:sensor1 forKey:@"sensor1"];
+}
+
+- (void)setSensor2:(NSString *)sensor2
+{
+    [ self.innerState setObject:sensor2 forKey:@"sensor2"];
+}
+
+- (void)setSensor3:(NSString *)sensor3
+{
+    [ self.innerState setObject:sensor3 forKey:@"sensor3"];
+}
+
+
 + (HUIViewModel* )getHUIFromObject:(id) object{
     HUIViewModel * returnHUI = [[HUIViewModel alloc] init];
     
@@ -86,6 +119,9 @@
                                  ,@"wifiName": [object valueForKey:@"wifiName"]
                                  ,@"wifiKey": [object valueForKey:@"wifiKey"]
                                  ,@"notification": [object valueForKey:@"notification"]
+                                 ,@"sensor1": [object valueForKey:@"sensor1"] ? [object valueForKey:@"sensor1"] : @""
+                                 ,@"sensor2": [object valueForKey:@"sensor2"] ? [object valueForKey:@"sensor2"] : @""
+                                 ,@"sensor3": [object valueForKey:@"sensor3"] ? [object valueForKey:@"sensor3"] : @""
                                  };
     
     [returnHUI.innerState setDictionary: localState];

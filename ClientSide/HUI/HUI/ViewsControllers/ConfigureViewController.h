@@ -16,6 +16,7 @@
 @required
 
 -(void)closeConfiguration:(HUIViewModel* )huiViewModel;
+-(void)cancelConfiguration;
 
 @end
 

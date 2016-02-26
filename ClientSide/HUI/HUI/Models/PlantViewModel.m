@@ -17,6 +17,7 @@
                               @"id":[[NSUUID UUID] UUIDString]
                               ,@"status": @""
                               ,@"name":name
+                              ,@"plantId":@""
                               ,@"position": position
                               ,@"image": [UIImage imageNamed:@"plant.png"]
                               ,@"sunValue": @"undefined"
@@ -41,6 +42,7 @@
                                  @"id":[object valueForKey:@"id"]
                                  ,@"status":[object valueForKey:@"status"]? [object valueForKey:@"status"] : @""
                                  ,@"name":[object valueForKey:@"name"]
+                                 ,@"plantId":[object valueForKey:@"plantId"]? [object valueForKey:@"plantId"] : @""
                                  ,@"position": [object valueForKey:@"position"]
                                  ,@"image": [object valueForKey:@"image"]? [object valueForKey:@"image"] : @""
                                  ,@"sunValue": [object valueForKey:@"sunValue"]
@@ -106,6 +108,11 @@
 - (NSString*)getName
 {
     return [ self.innerState valueForKey: @"name" ];
+}
+
+- (NSString*)getPlantId
+{
+    return [ self.innerState valueForKey: @"plantId" ];
 }
 
 - (UIImage*)getImage

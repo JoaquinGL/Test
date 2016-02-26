@@ -21,13 +21,20 @@
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 - (void) setPlant:(PlantViewModel* )plantViewModel;
-- (void) setHUI:(HUIViewModel* )huiViewModel withPlantViewModel:(PlantViewModel* )plantViewModel;
 - (void) removePlant:(PlantViewModel* )plantViewModel;
-- (void) updateHui:(HUIViewModel* )huiViewModel withPlantViewModel:(PlantViewModel *)plantViewModel;
-- (void) setStatusPlant:(NSString *)status inPlant:(PlantViewModel*) plantViewModel;
 - (NSMutableArray* ) getPlantsFromBBDD;
 - (NSMutableArray* ) getHuisFromBBDD;
 - (HUIViewModel*) getHuiWithName:(NSString* )huiName;
 - (HUIViewModel*) getHuiWithId:(NSString* )huiId;
+- (int) getHuiSensorFree:(NSString* )huiId;
 
+- (void)    setHUI: ( HUIViewModel* )huiViewModel
+withPlantViewModel: ( PlantViewModel* )plantViewModel
+        withSensor: ( int )sensor;
+
+- (void) updateHui:(HUIViewModel* )huiViewModel
+withPlantViewModel:(PlantViewModel *)plantViewModel;
+
+- (void) setStatusPlant:(NSString *)status
+                inPlant:(PlantViewModel*) plantViewModel;
 @end

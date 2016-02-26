@@ -82,7 +82,7 @@ NSOutputStream *outputStream;
                 NSLog(@"inputStream is ready.");
                 
                 uint8_t buf[1024];
-                unsigned int len = 0;
+                unsigned long len = 0;
                 
                 len = [inputStream read:buf maxLength:1024];
                 

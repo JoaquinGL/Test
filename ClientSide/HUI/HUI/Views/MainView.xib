@@ -31,6 +31,13 @@
                         <action selector="onAskHuiTouchUpInside:" destination="-1" eventType="touchUpInside" id="IGC-Nk-e7n"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ryg-9R-Yp4">
+                    <rect key="frame" x="264" y="507" width="48" height="30"/>
+                    <state key="normal" title="Socket"/>
+                    <connections>
+                        <action selector="onSocketTouchUpInside:" destination="-1" eventType="touchUpInside" id="G5d-oT-g2r"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
