@@ -22,6 +22,7 @@
 
 #import "DetailPlantViewController.h"
 #import "SearchPlantViewController.h"
+#import "HUIViewModel.h"
 #import "Manager.h"
 
 @interface DetailPlantViewController (){
@@ -36,7 +37,6 @@
     IBOutlet UIImageView* temperatureStatusImageView;
     IBOutlet UIButton* configureHUIButton;
     Manager* _manager;
-    ConfigureViewController* _configureViewController;
     
     MBProgressHUD* _HUD;
     
@@ -51,6 +51,9 @@
     IBOutlet UILabel* _moreDetailsLabel;
     IBOutlet UIImageView* _moreDetailsImageView;
     IBOutlet UILabel* _moreDetailsTitleLabel;
+    
+    IBOutlet UILabel* _sensorLabel;
+    IBOutlet UILabel* _huiNameLabel;
 }
 
 @end
@@ -58,7 +61,8 @@
 
 @implementation DetailPlantViewController
 
-@synthesize position = _position, plantViewModel = _plantViewModel;
+@synthesize position = _position,
+plantViewModel = _plantViewModel;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -84,15 +88,14 @@
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithCustomView: deleteButton];
     self.navigationItem.rightBarButtonItem = rightButton;
     
-    _configureViewController = [[ConfigureViewController alloc] initWithNibName:@"ConfigureView" bundle:nil];
-    
-    [_configureViewController setDelegate:self];
-    
     [_moreDetailsView setAlpha: 0];
     
     UIFont *customFont = [UIFont fontWithName:@"Multicolore" size:14];
     
     [plantName setFont: customFont];
+    
+    [_huiNameLabel setFont: customFont];
+    [_sensorLabel setFont: customFont];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -123,8 +126,28 @@
         if(!_manager){
             _manager = [[Manager alloc] init];
         }
+        
+        // if HUI is configurate
         if(![[self.plantViewModel getHuiId] isEqualToString:@""]){
-            [_coreServices getPlantStateWithHuiName:[[_manager getHuiWithId:[self.plantViewModel getHuiId]] getName]];
+            
+            HUIViewModel* huiViewModel = [_manager getHuiWithId:[self.plantViewModel getHuiId]];
+            StatusViewModel* statusViewModel = [[StatusViewModel alloc] init];
+            
+            statusViewModel = [_manager getStatus];
+            
+            [_coreServices getPlantState:self.plantViewModel withHui: huiViewModel withStatus: statusViewModel];
+            
+            _huiNameLabel.text = [huiViewModel getName];
+            
+            if( [[self.plantViewModel getIdentify] isEqualToString:[huiViewModel getSensor1]]){
+                _sensorLabel.text = @"1";
+            }else if( [[self.plantViewModel getIdentify] isEqualToString:[huiViewModel getSensor2]]){
+                _sensorLabel.text = @"2";
+            }else if( [[self.plantViewModel getIdentify] isEqualToString:[huiViewModel getSensor3]]){
+                _sensorLabel.text = @"3";
+            }
+            
+        // this case never happend
         }else{
             [_HUD hide:YES];
         }
@@ -209,99 +232,6 @@
     
     return image;
 }
-
--(IBAction)onConfigureTouchUpInside:(id)sender{
-    
-    [_configureViewController.view setAlpha: 0.0];
-    [self.navigationController.view addSubview:_configureViewController.view];
-    _configureViewController.plantViewModel = self.plantViewModel;
-    
-    if(!_manager){
-        _manager = [[Manager alloc] init];
-    }
-    
-    if(![[self.plantViewModel getHuiId] isEqualToString:@""])
-    {
-        _configureViewController.huiViewModel = [_manager getHuiWithId:[self.plantViewModel getHuiId]];
-    }else{
-        _configureViewController.huiViewModel = nil;
-    }
-    
-    [_configureViewController initConfigureView];
-    
-    [Utils fadeIn:_configureViewController.view completion:nil];
-    
-}
-
-#pragma mark - delegate methods
-
-- (void) cancelConfiguration{
-    [Utils fadeOut:_configureViewController.view completion:^(BOOL finisehd){
-        
-    }];
-}
-
--(void)closeConfiguration:(HUIViewModel*)huiViewModel{
-    
-    if(huiViewModel){
-        if([huiViewModel getIdentify]){
-            /* UPDATE DATA */
-            [_manager updateHui:huiViewModel withPlantViewModel:self.plantViewModel];
-            [self.plantViewModel setHuiId:[huiViewModel getIdentify]];
-        }else{
-            /* Save HUI DATA */
-            if(!_manager){
-                _manager = [[Manager alloc] init];
-            }
-            
-            
-            int sensorFree = [_manager getHuiSensorFree:[huiViewModel getIdentify]];
-                              
-            if (sensorFree != -1){
-                
-                [_manager setHUI: huiViewModel
-              withPlantViewModel: self.plantViewModel
-                      withSensor: sensorFree];
-                
-                [self.plantViewModel setHuiId:[huiViewModel getIdentify]];
-            }else{
-                // assing new plant to new sensor, the user has to select the new sensor.
-                
-                // TODO, do the logic, selec one of the tree selectors.
-                
-                sensorFree = 2;
-                
-                [_manager setHUI: huiViewModel
-              withPlantViewModel: self.plantViewModel
-                      withSensor: sensorFree];
-                
-                [self.plantViewModel setHuiId:[huiViewModel getIdentify]];
-            }
-        }
-    }
-    
-    [Utils fadeOut:_configureViewController.view
-        completion:^(BOOL completion){
-            [_configureViewController.view removeFromSuperview];
-            
-            [_HUD show:YES];
-            
-            /* The plant must have a HUID */
-            if ([self.plantViewModel getHuiId]){
-                
-                if(!_manager){
-                    _manager = [[Manager alloc] init];
-                }
-                if(![[self.plantViewModel getHuiId] isEqualToString:@""]){
-                    [_coreServices getPlantStateWithHuiName:[[_manager getHuiWithId:[self.plantViewModel getHuiId]] getName]];
-                }else{
-                    [_HUD hide:YES];
-                }
-            }
-            
-        }];
-}
-
 
 #pragma  mark - CoreServicesDelegate
 

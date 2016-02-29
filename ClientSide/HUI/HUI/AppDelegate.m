@@ -11,6 +11,7 @@
 #import <Wit/Wit.h>
 #import "Comunicator.h"
 
+
 @interface AppDelegate ()
 {
 }
@@ -91,6 +92,11 @@ NSString *const SubscriptionTopic = @"/topics/global";
         if (registrationToken != nil) {
             weakSelf.registrationToken = registrationToken;
             NSLog(@"Registration Token: %@", registrationToken);
+            
+            Manager* manager = [[Manager alloc] init];
+            
+            [manager updateStatusWithRegistrationToken: registrationToken];
+            
             [weakSelf subscribedToTopic];
             NSDictionary *userInfo = @{@"registrationToken":registrationToken};
             [[NSNotificationCenter defaultCenter] postNotificationName:weakSelf.registrationKey

@@ -14,6 +14,8 @@
         <relationship name="plant" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Plant" inverseName="hui" inverseEntity="Plant" syncable="YES"/>
     </entity>
     <entity name="Plant" syncable="YES">
+        <attribute name="descriptionPlant" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="growing" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="huiId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="image" optional="YES" attributeType="String" syncable="YES"/>
@@ -21,6 +23,7 @@
         <attribute name="plantId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="position" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="status" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="suitable" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="sunStatus" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="sunValue" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="temperatureStatus" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
@@ -30,14 +33,23 @@
         <relationship name="hui" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="HUI" inverseName="plant" inverseEntity="HUI" syncable="YES"/>
     </entity>
     <entity name="Status" syncable="YES">
+        <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="country" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="distances" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="keyGTM" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="language" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="latitude" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="measures" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="notifications" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="registrationToken" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="timeZone" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="waterAlarm" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
         <element name="HUI" positionX="151" positionY="-18" width="128" height="210"/>
-        <element name="Plant" positionX="-335" positionY="-97" width="128" height="255"/>
-        <element name="Status" positionX="-126" positionY="9" width="128" height="105"/>
+        <element name="Plant" positionX="-335" positionY="-97" width="128" height="300"/>
+        <element name="Status" positionX="-126" positionY="9" width="128" height="240"/>
     </elements>
 </model>

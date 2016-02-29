@@ -8,12 +8,16 @@
 
 #import "BaseViewController.h"
 #import "CoreServices.h"
+#import "HUIViewModel.h"
 
 @protocol SearchPlantViewControllerDelegate <NSObject>
 
 @required
 
--(void)onSelectPlant:(NSString*) plantName;
+-(void)onSelectPlant:(NSDictionary*) plantObject
+    withHuiViewModel:(HUIViewModel* )huiViewModel
+            inSensor:(int) sensor
+         plantStatus:(NSString* ) status;
 
 @end
 
@@ -22,6 +26,9 @@
 
 @property (nonatomic, assign) id <SearchPlantViewControllerDelegate> delegate;
 @property (nonatomic) NSMutableArray* data;
+
+@property (nonatomic, retain) HUIViewModel* huiViewModel;
+@property (nonatomic, assign) int sensor;
 
 + ( SearchPlantViewController* )instantiate;
 

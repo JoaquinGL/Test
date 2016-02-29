@@ -16,6 +16,7 @@
 		E308169A1C0457EA0007D896 /* WalkThroughViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E30816951C0457EA0007D896 /* WalkThroughViewController.xib */; };
 		E308169B1C0457EA0007D896 /* WalkTwo.xib in Resources */ = {isa = PBXBuildFile; fileRef = E30816961C0457EA0007D896 /* WalkTwo.xib */; };
 		E308169C1C0457EA0007D896 /* WalkZero.xib in Resources */ = {isa = PBXBuildFile; fileRef = E30816971C0457EA0007D896 /* WalkZero.xib */; };
+		E30982EE1C845978008F0376 /* StatusViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E30982ED1C845978008F0376 /* StatusViewModel.m */; };
 		E3190EEB1C06F36800F8C390 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3190EEA1C06F36800F8C390 /* BaseViewController.m */; };
 		E32A47311C56725600EDF993 /* Comunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = E32A47301C56725600EDF993 /* Comunicator.m */; };
 		E33823751C1A2C310029C285 /* HUIViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E33823741C1A2C310029C285 /* HUIViewModel.m */; };
@@ -117,6 +118,8 @@
 		E30816951C0457EA0007D896 /* WalkThroughViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WalkThroughViewController.xib; sourceTree = "<group>"; };
 		E30816961C0457EA0007D896 /* WalkTwo.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WalkTwo.xib; sourceTree = "<group>"; };
 		E30816971C0457EA0007D896 /* WalkZero.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WalkZero.xib; sourceTree = "<group>"; };
+		E30982EC1C845978008F0376 /* StatusViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusViewModel.h; sourceTree = "<group>"; };
+		E30982ED1C845978008F0376 /* StatusViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusViewModel.m; sourceTree = "<group>"; };
 		E3190EE91C06F36800F8C390 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		E3190EEA1C06F36800F8C390 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		E32A472F1C56725600EDF993 /* Comunicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comunicator.h; sourceTree = "<group>"; };
@@ -284,6 +287,8 @@
 				E36079D31C18887700AD6D11 /* PlantViewModel.m */,
 				E33823731C1A2C310029C285 /* HUIViewModel.h */,
 				E33823741C1A2C310029C285 /* HUIViewModel.m */,
+				E30982EC1C845978008F0376 /* StatusViewModel.h */,
+				E30982ED1C845978008F0376 /* StatusViewModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -773,6 +778,7 @@
 				E30816921C0455CB0007D896 /* CustomPageViewController.m in Sources */,
 				E39B8CA41C2A858F0015EF9F /* CoreServices.m in Sources */,
 				E3CE4E581C0222CD0096D0FB /* ViewController.m in Sources */,
+				E30982EE1C845978008F0376 /* StatusViewModel.m in Sources */,
 				E36079CB1C18867D00AD6D11 /* BaseViewModel.m in Sources */,
 				E3DDCB451C11BE2F0053E150 /* MBProgressHUD.m in Sources */,
 				E308168F1C04558D0007D896 /* WalkThroughViewController.m in Sources */,

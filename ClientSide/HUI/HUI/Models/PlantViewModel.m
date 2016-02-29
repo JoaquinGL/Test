@@ -10,14 +10,16 @@
 
 @implementation PlantViewModel
 
-+ (PlantViewModel* )initEmptyPlantWithName:(NSString* )name andPosition:(NSNumber* )position{
++ (PlantViewModel* )initEmptyPlant:(NSDictionary* )plantObject andPosition:(NSNumber* )position{
     PlantViewModel * emptyPlant = [[PlantViewModel alloc] init];
     
     NSDictionary* localState = @{
                               @"id":[[NSUUID UUID] UUIDString]
                               ,@"status": @""
-                              ,@"name":name
-                              ,@"plantId":@""
+                              ,@"name":[plantObject objectForKey:@"name"]
+                              ,@"descriptionPlant":[plantObject objectForKey:@"description"]
+                              ,@"suitable":[plantObject objectForKey:@"suitable"]
+                              ,@"plantId":[plantObject objectForKey:@"plantID"]
                               ,@"position": position
                               ,@"image": [UIImage imageNamed:@"plant.png"]
                               ,@"sunValue": @"undefined"
@@ -27,6 +29,7 @@
                               ,@"waterStatus": [NSNumber numberWithInt:-1]
                               ,@"temperatureStatus": [NSNumber numberWithInt:-1]
                               ,@"huiId": @""
+                              ,@"growing": @"germinating"
                               };
     
     [emptyPlant.innerState setDictionary: localState];
@@ -43,7 +46,9 @@
                                  ,@"status":[object valueForKey:@"status"]? [object valueForKey:@"status"] : @""
                                  ,@"name":[object valueForKey:@"name"]
                                  ,@"plantId":[object valueForKey:@"plantId"]? [object valueForKey:@"plantId"] : @""
+                                 ,@"descriptionPlant":[object valueForKey:@"descriptionPlant"]? [object valueForKey:@"descriptionPlant"] : @""
                                  ,@"position": [object valueForKey:@"position"]
+                                 ,@"suitable": [object valueForKey:@"suitable"]? [object valueForKey:@"suitable"] : @""
                                  ,@"image": [object valueForKey:@"image"]? [object valueForKey:@"image"] : @""
                                  ,@"sunValue": [object valueForKey:@"sunValue"]
                                  ,@"waterValue": [object valueForKey:@"waterValue"]
@@ -52,6 +57,7 @@
                                  ,@"waterStatus": [object valueForKey:@"waterStatus"]
                                  ,@"temperatureStatus": [object valueForKey:@"temperatureStatus"]
                                  ,@"huiId":[object valueForKey:@"huiId"]? [object valueForKey:@"huiId"] : @""
+                                 ,@"growing":[object valueForKey:@"growing"]? [object valueForKey:@"growing"] : @""
                                  };
     
     [returnPlant.innerState setDictionary: localState];
@@ -87,6 +93,10 @@
 
 - (NSNumber*) getIdentify{
     return [ self.innerState valueForKey: @"id" ];
+}
+
+- (NSString* )getGrowing{
+    return [ self.innerState valueForKey: @"growing" ];
 }
 
 - (NSString* )getSunValue{
@@ -164,9 +174,22 @@
     
 }
 
+- (NSString* )getDescriptionPlant{
+    return [ self.innerState valueForKey: @"descriptionPlant" ];
+}
+
+- (NSString* )getSuitable{
+    return [ self.innerState valueForKey: @"suitable" ];
+}
+
 - (void)setHuiId:(NSString* )huiId
 {
     [self.innerState setObject:huiId forKey:@"huiId" ];
+}
+
+- (void)setGrowing:(NSString *)growing
+{
+    [self.innerState setObject:growing forKey:@"growing" ];
 }
 
 

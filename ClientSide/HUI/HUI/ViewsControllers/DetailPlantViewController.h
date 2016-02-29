@@ -8,8 +8,8 @@
 
 #import "BaseViewController.h"
 #import "PlantViewModel.h"
-#import "ConfigureViewController.h"
 #import "CoreServices.h"
+#import "StatusViewModel.h"
 
 @protocol DetailPlantViewControllerDelegate <NSObject>
 
@@ -21,10 +21,9 @@
 
 @end
 
-@interface DetailPlantViewController : BaseViewController < ConfigureViewControllerDelegate
-                                                                ,UIAlertViewDelegate
-                                                                ,MBProgressHUDDelegate
-                                                                ,CoreServicesDelegate >{
+@interface DetailPlantViewController : BaseViewController < UIAlertViewDelegate
+                                                            ,MBProgressHUDDelegate
+                                                            ,CoreServicesDelegate >{
 }
 
 @property (nonatomic, assign) id <DetailPlantViewControllerDelegate> delegate;

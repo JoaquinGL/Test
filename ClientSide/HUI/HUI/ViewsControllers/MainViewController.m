@@ -15,6 +15,7 @@
 #import "Manager.h"
 #import "SocketConnectionVC.h"
 #import "ConfigureViewController.h"
+#import "StatusViewModel.h"
 
 @interface MainViewController (){
     SearchPlantViewController* _searchPlantViewController;
@@ -44,7 +45,7 @@
     IBOutlet UIScrollView* plantsScrollView;
     NSInteger numberOfPages;
     NSInteger plantScrollViewControllerHeight;
-    
+    CoreServices* _coreServices;
 }
 
 @end
@@ -271,23 +272,61 @@
 
 #pragma mark - Delegate Search
 
-- (void)onSelectPlant:(NSString*) plantName{
-    
+- (void)onSelectPlant:(NSDictionary*) plantObject
+     withHuiViewModel:(HUIViewModel *) huiViewModel
+             inSensor:(int) sensor
+          plantStatus:(NSString* ) status {
+
     /* create the new plant with empty values */
-    
     PlantViewModel* plantViewModel = [[PlantViewModel alloc] init];
+    plantViewModel = [PlantViewModel initEmptyPlant:plantObject andPosition: [NSNumber numberWithLong: 0]];
     
-    plantViewModel = [PlantViewModel initEmptyPlantWithName: plantName andPosition: [NSNumber numberWithLong: 0]];
+    // set newHUI with the plant in the sensor
+    switch (sensor) {
+        case 1:
+            [huiViewModel setSensor1:[plantViewModel getIdentify]];
+            break;
+            
+        case 2:
+            [huiViewModel setSensor2:[plantViewModel getIdentify]];
+            break;
+            
+        case 3:
+            [huiViewModel setSensor3:[plantViewModel getIdentify]];
+            break;
+    }
     
-    /* Add empty plant*/
-    if(!_manager)
-    {
+    if(!_manager){
         _manager = [[Manager alloc] init];
     }
+    
+    // HUI CONFIGURATE check if HUI exists
+    if([_manager getHuiWithId:[huiViewModel getIdentify]]){
+        /* UPDATE DATA */
+        [_manager updateHui: huiViewModel
+         withPlantViewModel: plantViewModel
+                   inSensor: sensor];
+    }else{
+        /* Save HUI DATA */
+        [_manager setHUI: huiViewModel
+      withPlantViewModel: plantViewModel
+              withSensor: sensor];
+    }
+    
+    // set HUI in plant
+    [plantViewModel setHuiId:[huiViewModel getIdentify]];
+    
+    [plantViewModel setGrowing: status];
     
     [_manager setPlant: plantViewModel];
     
     [self addNewPlant: plantViewModel];
+    
+    // send HUI CONFIGURATION
+    
+    [self saveHUIInServer: huiViewModel];
+    
+    [_coreServices postNewPlant: plantViewModel withHuiModel: huiViewModel];
 }
 
 #pragma mark - Delegate PlantView
@@ -306,7 +345,10 @@
     
     for (PlantViewModel *plant in _plantsCollection) {
         
-        if([plant getIdentify] == plantId){
+        if([[plant getIdentify] isEqualToString: plantId]){
+            //remove HUI sensor
+            [_manager removePlantInHUISensor:plant];
+            
             // remove from BBDD
             [_manager removePlant:plant];
             
@@ -463,6 +505,10 @@
         //initialize button AddNewPlant
         [newPlantButton setFrame: FRAME_NEW_PLANT];
     }
+    
+    
+    // setinitialStatus
+    [_manager setInitialStatus];
 }
 
 #pragma mark -socket test
@@ -476,44 +522,13 @@
 #pragma mark - Configure HUI Methods
 
 
--(void)closeConfiguration:(HUIViewModel*)huiViewModel{
-    
-    if(huiViewModel){
-        if([huiViewModel getIdentify]){
-            /* UPDATE DATA */
-            [_manager updateHui:huiViewModel withPlantViewModel:nil];
-        }else{
-            /* Save HUI DATA */
-            if(!_manager){
-                _manager = [[Manager alloc] init];
-            }
-            
-            
-            int sensorFree = [_manager getHuiSensorFree:[huiViewModel getIdentify]];
-            
-            if (sensorFree != -1){
-                
-                [_manager setHUI: huiViewModel
-              withPlantViewModel: nil
-                      withSensor: sensorFree];
-                
-            }else{
-                // assing new plant to new sensor, the user has to select the new sensor.
-                
-                // TODO, do the logic, selec one of the tree selectors.
-                
-                sensorFree = 2;
-                
-                [_manager setHUI: huiViewModel
-              withPlantViewModel: nil
-                      withSensor: sensorFree];
-            }
-        }
-    }
-    // we update or configure the HUI, now we can set the plant.
-    // SHOW THE PLANTS LIST
+-(void)closeConfiguration:(HUIViewModel*)huiViewModel withSensor:(int)sensor{
     
     [Utils fadeOut:_configureViewController.view completion:^(BOOL finisehd){
+        
+        _searchPlantViewController.sensor = sensor;
+        _searchPlantViewController.huiViewModel = huiViewModel;
+        
         [self.navigationController pushViewController:_searchPlantViewController animated:YES];
     }];
     
@@ -524,7 +539,58 @@
     }];
 }
 
+//[self.delegate removePlantInSensor:[_huiSelectionViewModel getSensor1]];
+- (void) removePlantInSensor:(NSString *)plantId{
+    
+    //PlantViewModel *plantViewModel = [[PlantViewModel alloc] init];
+    
+    // Obtener de BBDD con el plantID la planta a borrar, ver si tambien se guarda la posicion.
 
+    [self deletePlant:0 withId:plantId];
+}
 
+#pragma mark SERVICE METHODS
+
+- (void) saveHUIInServer:(HUIViewModel *)huiViewModel {
+    
+    if (!_coreServices){
+        _coreServices = [[CoreServices alloc] init];
+        [_coreServices setDelegate: self];
+    }
+    
+    // cut the last a.m
+    NSString* notificationTime = [huiViewModel getNotificationTime];
+    NSString *notificationTimeSort = [notificationTime substringToIndex:[notificationTime length] - 6];
+    
+    
+    StatusViewModel* statusFromBBDD = [[StatusViewModel alloc] init];
+    
+    statusFromBBDD = [_manager getStatus];
+    
+    
+    NSMutableDictionary* postNewHuiObject = [[NSMutableDictionary alloc]
+                                             initWithDictionary:
+                                             @{@"notificationTime": notificationTimeSort,
+                                               @"deviceID": [statusFromBBDD getIdentify],
+                                               @"countryCode": [statusFromBBDD getCountry],
+                                               @"huiID": [huiViewModel getName],
+                                               @"waterAlarm": [statusFromBBDD getWaterAlarm],
+                                               @"timeZone": [statusFromBBDD getTimeZone],
+                                               @"longitude": [statusFromBBDD getLongitude],
+                                               @"latitude": [statusFromBBDD getLatitude],
+                                               @"keyGCM": [statusFromBBDD getKeyGTM],
+                                               @"city": [statusFromBBDD getCity],
+                                               @"country": [statusFromBBDD getCountry],
+                                               }
+                                             ];
+    
+    [_coreServices postNewHUI: postNewHuiObject];
+}
+
+#pragma mark - Delegate CoreServices
+
+-(void)answerFromServer:(NSDictionary *)response{
+    NSLog(@"Response from Server NEW HUI: %@", response);
+}
 
 @end

@@ -10,14 +10,15 @@
 #import "HUIViewModel.h"
 #import "PlantViewModel.h"
 #import "MBProgressHUD.h"
+#import "Manager.h"
 
 @protocol ConfigureViewControllerDelegate <NSObject>
 
 @required
 
--(void)closeConfiguration:(HUIViewModel* )huiViewModel;
+-(void)closeConfiguration:(HUIViewModel* )huiViewModel withSensor:(int)sensor;
 -(void)cancelConfiguration;
-
+-(void)removePlantInSensor:(NSString* )plantId;
 @end
 
 @interface ConfigureViewController : BaseViewController<UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate, MBProgressHUDDelegate>

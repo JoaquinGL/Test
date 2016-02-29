@@ -7,11 +7,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DetailPlantViewController">
             <connections>
+                <outlet property="_huiNameLabel" destination="OXp-qm-5pQ" id="4LZ-Tj-PB4"/>
                 <outlet property="_moreDetailsImageView" destination="ofd-iS-LmG" id="u8o-MI-8xq"/>
                 <outlet property="_moreDetailsLabel" destination="SGU-rz-oEQ" id="day-rJ-eB9"/>
                 <outlet property="_moreDetailsTitleLabel" destination="Xh4-lA-3ER" id="DV1-rP-fcq"/>
                 <outlet property="_moreDetailsView" destination="kdj-td-liz" id="72n-ew-Hy4"/>
-                <outlet property="configureHUIButton" destination="1ih-Jh-gg2" id="Gbd-io-4Wt"/>
+                <outlet property="_sensorLabel" destination="sM1-PE-RWZ" id="pRC-jL-IcH"/>
                 <outlet property="plantImageView" destination="Eez-LP-gsu" id="2n1-2x-vcY"/>
                 <outlet property="plantName" destination="ila-C5-IXQ" id="XKQ-Hm-qz0"/>
                 <outlet property="plantSun" destination="0E1-WP-ApJ" id="exn-ga-Sqf"/>
@@ -28,24 +29,6 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1ih-Jh-gg2">
-                    <rect key="frame" x="53" y="497" width="213" height="54"/>
-                    <color key="backgroundColor" red="0.96862745098039216" green="0.90196078431372551" blue="0.039215686274509803" alpha="1" colorSpace="calibratedRGB"/>
-                    <state key="normal">
-                        <attributedString key="attributedTitle">
-                            <fragment content="    Configure HUI">
-                                <attributes>
-                                    <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <font key="NSFont" size="18" name="HelveticaNeue"/>
-                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                </attributes>
-                            </fragment>
-                        </attributedString>
-                    </state>
-                    <connections>
-                        <action selector="onConfigureTouchUpInside:" destination="-1" eventType="touchUpInside" id="r1c-zl-H8j"/>
-                    </connections>
-                </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="sun" translatesAutoresizingMaskIntoConstraints="NO" id="lhZ-jA-qMa">
                     <rect key="frame" x="42" y="253" width="40" height="43"/>
                 </imageView>
@@ -82,9 +65,6 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="configureHui" translatesAutoresizingMaskIntoConstraints="NO" id="ubE-GI-MTU">
-                    <rect key="frame" x="63" y="505" width="37" height="37"/>
-                </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="title" translatesAutoresizingMaskIntoConstraints="NO" id="2MJ-Mx-1hS">
                     <rect key="frame" x="0.0" y="-18" width="320" height="80"/>
                 </imageView>
@@ -116,8 +96,23 @@
                         <action selector="onTemperatureTouchUpInside:" destination="-1" eventType="touchUpInside" id="0L4-Cz-ve0"/>
                     </connections>
                 </button>
+                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="huiNormal" translatesAutoresizingMaskIntoConstraints="NO" id="zSG-LS-TCr">
+                    <rect key="frame" x="24" y="455" width="81" height="105"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sM1-PE-RWZ">
+                    <rect key="frame" x="60" y="492" width="16" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OXp-qm-5pQ">
+                    <rect key="frame" x="94" y="492" width="188" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kdj-td-liz">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                     <subviews>
                         <button opaque="NO" alpha="0.59999999999999998" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GZe-Mc-CcP">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -164,7 +159,7 @@
     </objects>
     <resources>
         <image name="closeButton" width="113" height="113"/>
-        <image name="configureHui" width="256" height="256"/>
+        <image name="huiNormal" width="38" height="85"/>
         <image name="question_mark" width="20" height="20"/>
         <image name="sun" width="25" height="25"/>
         <image name="temperature" width="12" height="27"/>

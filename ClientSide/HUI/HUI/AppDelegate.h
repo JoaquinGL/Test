@@ -10,6 +10,7 @@
 #import <CoreData/CoreData.h>
 #import "Reachability.h"
 #import <Google/CloudMessaging.h>
+#import "Manager.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate, GGLInstanceIDDelegate, GCMReceiverDelegate>
 

@@ -54,6 +54,14 @@
     
     IBOutlet UIView *_parametersView;
     
+    IBOutlet UIView *_configurationView;
+    
+    IBOutlet UIView *_sensorConfigureView;
+    IBOutlet UIButton *_sensor1Button;
+    IBOutlet UIButton *_sensor2Button;
+    IBOutlet UIButton *_sensor3Button;
+    IBOutlet UIButton *_continueSensorButton;
+    
     BOOL _isEditing;
     
     HUIViewModel *_huiSelectionViewModel;
@@ -63,6 +71,8 @@
     Manager *_manager;
     
     int step;
+    
+    int sensorToSave;
     
     MBProgressHUD* _HUD;
     
@@ -114,6 +124,8 @@
     [configureButton setAlpha:0.0];
     [_datePickerView setAlpha:0.0];
     
+    [_configurationView setAlpha:0.0];
+    
     [_huiNameLabel setAlpha:0.0];
     [_huiIdLabel setAlpha:0.0];
     [_wifiNameLabel setAlpha:0.0];
@@ -122,6 +134,8 @@
     [_doneButton setAlpha:0.0];
     
     [_parametersView setAlpha:0.0];
+    [_sensorConfigureView setAlpha:0.0];
+    [_continueSensorButton setAlpha:0.0];
     
     _manager = [[Manager alloc]init];
     
@@ -155,7 +169,7 @@
             [_huiSelectorPickerView setAlpha:1.0f];
             [_selectionHUIButton setAlpha:1.0f];
             [configureLabel setAlpha:1.0];
-            
+            _huiSelectionViewModel = _huisFromBBDD[0];
             configureLabel.text = NSLocalizedString(@"Select HUI: ", nil);
         }else{
             //HUI PREVIOUS SELECTED
@@ -164,6 +178,13 @@
             [_selectionHUIButton setAlpha:0.0];
         }
     }
+    
+    sensorToSave = 2;
+    
+    [_sensor1Button setSelected: NO];
+    [_sensor2Button setSelected: NO];
+    [_sensor3Button setSelected: NO];
+
 }
 
 - (void) showConfigureNewHUI{
@@ -217,6 +238,7 @@
             [Utils fadeIn:_dateLabel completion:nil];
             
             [Utils fadeIn:_doneButton completion:nil];
+            [Utils fadeIn:_configurationView completion:nil];
             
             [configureLabel setAlpha:0.0];
         }];
@@ -257,7 +279,7 @@
 
 -(void)saveHuiData{
     
-    [self.delegate closeConfiguration:_huiSelectionViewModel];
+    [self.delegate closeConfiguration:_huiSelectionViewModel withSensor: sensorToSave];
 }
 
 #pragma mark - Delegate Actions
@@ -266,7 +288,7 @@
     
     // dont save
     
-    [self.delegate closeConfiguration:_huiSelectionViewModel];
+    [self.delegate closeConfiguration:_huiSelectionViewModel withSensor:sensorToSave];
 }
 
 -(IBAction)onCancelButtonTouchUpInside:(id)sender{
@@ -286,7 +308,7 @@
 
 - (IBAction)onNextButtonTouchUpInside:(id)sender{
     step ++;
-    
+    [Utils fadeIn:_configurationView completion:nil];
     switch (step) {
         case 1: {
             [_huiSelectionViewModel setName: configureTextField.text];
@@ -295,38 +317,22 @@
                 [self initTextField];
             }];
             configureLabel.text = NSLocalizedString(HUI_ID, nil);
+            
             break;
         }
         case 2:{
             
             [_huiSelectionViewModel setNumber: configureTextField.text];
             _huiIdLabel.text = [NSString stringWithFormat:@"%@%@", NSLocalizedString(HUI_ID, nil), configureTextField.text];
+            
             [Utils fadeIn:_huiIdLabel completion:^(BOOL finished){
-                [self initTextField];
-            }];
-            configureLabel.text = NSLocalizedString(HUI_WIFI, nil);
-            break;
-        }
-        case 3: {
-            [_huiSelectionViewModel setWifiName: configureTextField.text];
-            _wifiNameLabel.text = [NSString stringWithFormat:@"%@%@", NSLocalizedString(HUI_WIFI, nil), configureTextField.text];
-            [Utils fadeIn:_wifiNameLabel completion:^(BOOL finished){
-                [self initTextField];
-            }];
-            configureLabel.text = NSLocalizedString(HUI_WIFIKEY, nil);
-            break;
-        }
-        case 4: {
-            [_huiSelectionViewModel setWifiKey: configureTextField.text];
-            _wifiKeyLabel.text = [NSString stringWithFormat:@"%@%@", NSLocalizedString(HUI_WIFIKEY, nil), configureTextField.text];
-            [Utils fadeIn:_wifiKeyLabel completion:^(BOOL finished){
                 
                 if(!_isEditing){
                     [Utils fadeIn:_datePickerView completion:nil];
                     configureTextField.text = @"";
                     configureTextField.userInteractionEnabled = NO;
                     [self labelTitle:nil];
-
+                    
                 }
             }];
             configureLabel.text = NSLocalizedString(HUI_DATE, nil);
@@ -334,8 +340,13 @@
             
             break;
         }
-        case 5: {
+        case 3: {
             [_huiSelectionViewModel setNotificationTime: configureTextField.text];
+            
+            // provisional
+            [_huiSelectionViewModel setWifiKey:@"undefined"];
+            [_huiSelectionViewModel setWifiName:@"undefined"];
+            
             for (UIImageView  *imageView in _editImagesButtons){
                 [imageView setAlpha:1.0];
             }
@@ -351,11 +362,13 @@
                 [Utils fadeOut:configureTextField completion:nil];
                 [Utils fadeOut:configureLabel completion:nil];
                 [Utils fadeOut:_datePickerView completion:nil];
-                [Utils fadeOut:_doneButton completion:nil];
+                [Utils fadeIn:_doneButton completion:nil];
                 [configureTextField resignFirstResponder];
+                
             }];
             [configureButton setAlpha:0];
             break;
+        
         }
         default:
             [self saveHuiData];
@@ -416,7 +429,7 @@ numberOfRowsInComponent:(NSInteger)component
     }else{
         // set configureHUI dictionary
         
-        [self showHuiSelection];
+        [Utils fadeIn:_sensorConfigureView completion:nil];
     }
     
     [_selectionHUIButton setAlpha:0.0];
@@ -444,15 +457,15 @@ numberOfRowsInComponent:(NSInteger)component
         step = 1;
     }
     
-    if( sender == _editWifiButton){
-        configureLabel.text = NSLocalizedString(HUI_WIFI, nil);
-        step = 2;
-    }
-    
-    if( sender == _editKeyButton){
-        configureLabel.text = NSLocalizedString(HUI_WIFIKEY, nil);
-        step = 3;
-    }
+//    if( sender == _editWifiButton){
+//        configureLabel.text = NSLocalizedString(HUI_WIFI, nil);
+//        step = 2;
+//    }
+//    
+//    if( sender == _editKeyButton){
+//        configureLabel.text = NSLocalizedString(HUI_WIFIKEY, nil);
+//        step = 3;
+//    }
     
     if( sender != _editDateButton){
         configureTextField.userInteractionEnabled = YES;
@@ -463,7 +476,7 @@ numberOfRowsInComponent:(NSInteger)component
         configureTextField.userInteractionEnabled = NO;
         [self labelTitle:nil];
         configureLabel.text = NSLocalizedString(HUI_DATE, nil);
-        step = 4;
+        step = 2;
     }
 }
 
@@ -617,8 +630,105 @@ numberOfRowsInComponent:(NSInteger)component
 
     NSArray * networkInterfaces = [NEHotspotHelper supportedNetworkInterfaces];
     NSLog(@"Networks %@",networkInterfaces);
+}
+
+
+#pragma mark - SENSOR METHODS
+
+- (IBAction) onContinueSensorTouchUpInside:(id)sender{
     
+    [Utils fadeOut:_sensorConfigureView completion:^(BOOL finished){
+        [self showHuiSelection];
+    } ];
+}
+
+
+- (IBAction)onSensorTouchUpInside:(id)sender{
     
+    NSString* sensor1Selected = [_huiSelectionViewModel getSensor1];
+    NSString* sensor2Selected = [_huiSelectionViewModel getSensor2];
+    NSString* sensor3Selected = [_huiSelectionViewModel getSensor3];
+    
+    [Utils fadeIn:_continueSensorButton completion:nil];
+    
+    if (sender == _sensor1Button){
+        [_sensor1Button setSelected: YES];
+        [_sensor2Button setSelected: NO];
+        [_sensor3Button setSelected: NO];
+        sensorToSave = 1;
+        if (! [sensor1Selected isEqualToString:@""]){
+            //show Alert, sensor already taken
+            [self showSensorAlert: sensorToSave];
+        }
+        
+    } else if (sender == _sensor2Button){
+        [_sensor2Button setSelected: YES];
+        [_sensor1Button setSelected: NO];
+        [_sensor3Button setSelected: NO];
+        sensorToSave = 2;
+        if (! [sensor2Selected isEqualToString:@""]){
+            //show Alert, sensor already taken
+            [self showSensorAlert: sensorToSave];
+        }
+        
+    } else if (sender == _sensor3Button){
+        [_sensor3Button setSelected: YES];
+        [_sensor1Button setSelected: NO];
+        [_sensor2Button setSelected: NO];
+        sensorToSave = 3;
+        if (! [sensor3Selected isEqualToString:@""]){
+            //show Alert, sensor already taken
+            [self showSensorAlert: sensorToSave];
+        }
+    }
+}
+
+- (void) showSensorAlert:(int)sensor{
+    UIAlertController * alert=   [UIAlertController
+                                  alertControllerWithTitle:NSLocalizedString(@"Attention", nil)
+                                  message:NSLocalizedString(@"The selected sensor has one plant assign, ¿Do you want to remove the previous plant? this action can't undo", nil)
+                                  preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* yesButton = [UIAlertAction
+                                actionWithTitle:NSLocalizedString(@"Yes, remove the plant", nil)
+                                style:UIAlertActionStyleDefault
+                                handler:^(UIAlertAction * action)
+                                {
+                                    [alert dismissViewControllerAnimated:YES completion:nil];
+                                    
+                                    switch (sensor) {
+                                        case 1:
+                                            [self.delegate removePlantInSensor:[_huiSelectionViewModel getSensor1]];
+                                            break;
+                                        case 2:
+                                            [self.delegate removePlantInSensor:[_huiSelectionViewModel getSensor2]];
+                                            break;
+                                        case 3:
+                                            [self.delegate removePlantInSensor:[_huiSelectionViewModel getSensor3]];
+                                            break;
+                                            
+                                        default:
+                                            break;
+                                    }
+                                    
+                                
+                                }];
+    UIAlertAction* noButton = [UIAlertAction
+                               actionWithTitle:NSLocalizedString(@"No, I select other sensor", nil)
+                               style:UIAlertActionStyleDefault
+                               handler:^(UIAlertAction * action)
+                               {
+                                   [alert dismissViewControllerAnimated:YES completion:nil];
+                                   [_sensor1Button setSelected:NO];
+                                   [_sensor2Button setSelected:NO];
+                                   [_sensor3Button setSelected:NO];
+                               }];
+    
+    [alert addAction:noButton];
+    [alert addAction:yesButton];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+
 }
 
 

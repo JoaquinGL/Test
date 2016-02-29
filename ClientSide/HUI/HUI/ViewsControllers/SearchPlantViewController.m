@@ -6,12 +6,22 @@
 //  Copyright © 2015 Giraldez Lopez SL. All rights reserved.
 //
 
+/* PLANT OBJECT
+ description = "Wait 24h to know if you can grow this plant";
+ name = basil;
+ plantID = basil;
+ suitable = unknown;
+ */
+
 #import "SearchPlantViewController.h"
+#import "Manager.h"
+#import "StatusViewModel.h"
 
 @interface SearchPlantViewController ()
 {
     CoreServices *_coreServices;
     MBProgressHUD* _HUD;
+    NSString* _status;
 }
 
 @property (assign, nonatomic) IBOutlet UITableView *tableView;
@@ -22,7 +32,7 @@
 
 @implementation SearchPlantViewController
 
-@synthesize data = _data;
+@synthesize data = _data, sensor = _sensor, huiViewModel = _huiViewModel;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -43,8 +53,6 @@
     _coreServices = [[CoreServices alloc] init];
     
     [_coreServices setDelegate: self];
-    
-    
 }
 
 -(void) viewWillAppear:(BOOL)animated{
@@ -57,7 +65,12 @@
     _HUD.labelText = NSLocalizedString(@"Loading plants", nil);
     
     [_HUD show:YES];
-    [_coreServices getPlantListWithHUID:@"HUIA"];
+    
+    Manager* _manager = [[Manager alloc] init];
+    StatusViewModel* statusViewModel = [[StatusViewModel alloc] init];
+    statusViewModel = [_manager getStatus];
+    
+    [_coreServices getPlantListWithHUID:[self.huiViewModel getName] withLanguage:[statusViewModel getLanguage]];
 }
 
 #pragma mark - Instantiate method
@@ -82,7 +95,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
-    cell.textLabel.text = self.data[indexPath.row];
+    cell.textLabel.text = [self.data[indexPath.row] objectForKey:@"name"];
     
     return cell;
 }
@@ -91,12 +104,52 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+
+
+    UIAlertController * alert=   [UIAlertController
+                                  alertControllerWithTitle:NSLocalizedString(@"Plant Status", nil)
+                                  message:NSLocalizedString(@"What is the status of the plant?", nil)
+                                  preferredStyle:UIAlertControllerStyleAlert];
     
-    //TODO: GENERATE GUID
+    UIAlertAction* yesButton = [UIAlertAction
+                                actionWithTitle:NSLocalizedString(@"Seeds", nil)
+                                style:UIAlertActionStyleDefault
+                                handler:^(UIAlertAction * action)
+                                {
+                                    [alert dismissViewControllerAnimated:YES completion:nil];
+                                    _status = @"germinating";
+                                    
+                                    [self setPlantStatus: indexPath];
+                                    
+                                }];
+    UIAlertAction* noButton = [UIAlertAction
+                               actionWithTitle:NSLocalizedString(@"Shoots", nil)
+                               style:UIAlertActionStyleDefault
+                               handler:^(UIAlertAction * action)
+                               {
+                                   [alert dismissViewControllerAnimated:YES completion:nil];
+                                   _status = @"shoot";
+                                   
+                                   [self setPlantStatus: indexPath];
+                               }];
     
-    [self.delegate onSelectPlant: self.data[indexPath.row]];
+    [alert addAction:noButton];
+    [alert addAction:yesButton];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+
+
+}
+
+- (void) setPlantStatus: (NSIndexPath *)indexPath{
+
+    [self.delegate onSelectPlant: self.data[indexPath.row]
+                withHuiViewModel: self.huiViewModel
+                        inSensor: self.sensor
+                     plantStatus: _status];
     
     [[self navigationController] popViewControllerAnimated:YES];
+
 }
 
 - (void)customiseTableViewCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
@@ -126,10 +179,9 @@
     self.data = [[NSMutableArray alloc] init];
     
     if ([response objectForKey:@"plantList"]){
-    
-        for (NSString* data in [response objectForKey:@"plantList"]){
-            [self.data addObject: [data capitalizedString]];
-        }
+        
+        self.data = [response objectForKey:@"plantList"];
+        
     }else{
         self.data = [[NSMutableArray alloc] initWithArray:@[@"apple",@"broccoli",@"endive",@"orange",@"carrot",@"Tomato",@"lettuce",@"onion",@"potato",@"lemon",@"soja"]];
     }
@@ -138,8 +190,6 @@
         [self.tableView reloadData];
         [_HUD hide:YES];
     });
-    
-    
 }
 
 

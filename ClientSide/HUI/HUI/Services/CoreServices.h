@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "Reachability.h"
+#import "PlantViewModel.h"
+#import "HUIViewModel.h"
+#import "StatusViewModel.h"
 
 @protocol CoreServicesDelegate <NSObject>
 
@@ -24,11 +27,19 @@
 
 @property (nonatomic, assign) id <CoreServicesDelegate> delegate;
 
+- (void) postQuestion:(NSString* )question
+             andHUIID:(NSString* )huiId;
 
+- (void) getPlantListWithHUID:(NSString* )huiId
+                 withLanguage:(NSString* )language;
 
+- (void) getPlantState:(PlantViewModel* )plantViewModel
+               withHui:(HUIViewModel* )huiViewModel
+            withStatus:(StatusViewModel* )statusViewModel;
 
-- (void) postQuestion:(NSString* )question andHUIID:(NSString* )huiId;
-- (void) getPlantListWithHUID:(NSString* )huiId;
-- (void) getPlantStateWithHuiName:(NSString* )huiId;
+- (void) postNewHUI:(NSMutableDictionary* )objectToPost;
+
+- (void) postNewPlant:(PlantViewModel* )plant
+         withHuiModel:(HUIViewModel* )huiViewModel;
 
 @end
