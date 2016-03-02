@@ -413,6 +413,7 @@ withPlantViewModel: ( PlantViewModel* )plantViewModel
     [plantInfo setValue:[plantViewModel getTemperatureValue] forKey:@"temperatureValue"];
     [plantInfo setValue:[plantViewModel getHuiId] forKey:@"huiId"];
     [plantInfo setValue:[plantViewModel getGrowing] forKey:@"growing"];
+    [plantInfo setValue:[plantViewModel getDescriptionPlant] forKey:@"descriptionPlant"];
     
     NSError *error;
     if (![context save:&error]) {
@@ -449,6 +450,32 @@ withPlantViewModel: ( PlantViewModel* )plantViewModel
         for(NSManagedObject *managedObject in results){
             
             [managedObject setValue:status forKey:@"status"];
+        }
+        
+        //Save context to write to store
+        [context save:nil];
+    }
+    
+}
+
+- (void)setGrowing:(NSString* )growing inPlant:(PlantViewModel*) plantViewModel{
+    NSManagedObjectContext *context = [self managedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:[NSEntityDescription entityForName:@"Plant" inManagedObjectContext:context]];
+    
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"id == %@", [plantViewModel getIdentify]]];
+    
+    NSError *error = nil;
+    NSArray* results = [context executeFetchRequest:fetchRequest error:&error];
+    
+    if ([context save:&error] == NO) {
+        NSAssert(NO, @"Save should not fail\n%@", [error localizedDescription]);
+        abort();
+    }else if (!error && results.count > 0) {
+        for(NSManagedObject *managedObject in results){
+            
+            [managedObject setValue:growing forKey:@"growing"];
         }
         
         //Save context to write to store

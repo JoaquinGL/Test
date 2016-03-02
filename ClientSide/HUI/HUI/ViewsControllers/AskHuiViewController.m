@@ -7,6 +7,8 @@
 //
 
 #import "AskHuiViewController.h"
+#import "Manager.h"
+#import "StatusViewModel.h"
 
 @interface AskHuiViewController (){
     //TODO, MUTE
@@ -15,6 +17,9 @@
     
     IBOutlet UILabel * _responseTitle;
     IBOutlet UILabel * _testLabel;
+    
+    StatusViewModel* _statusViewModel;
+    Manager* _manager;
 }
 
 @end
@@ -54,6 +59,17 @@ const unsigned char SpeechKitApplicationKey[] = {0x2b, 0x68, 0xea, 0x70, 0x07, 0
     [SpeechKit setEarcon:earconStart forType:SKStartRecordingEarconType];
     [SpeechKit setEarcon:earconStop forType:SKStopRecordingEarconType];
     [SpeechKit setEarcon:earconCancel forType:SKCancelRecordingEarconType];
+    
+    if( !_statusViewModel ){
+        _statusViewModel  = [[StatusViewModel alloc ] init];
+    }
+    
+    if( !_manager ){
+        _manager  = [[Manager alloc ] init];
+    }
+    
+    _statusViewModel = [_manager getStatus];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -211,7 +227,7 @@ const unsigned char SpeechKitApplicationKey[] = {0x2b, 0x68, 0xea, 0x70, 0x07, 0
     if (numOfResults > 0){
         searchBox.text = [results firstResult];
         // send to server the question
-        [_coreServices postQuestion:searchBox.text andHUIID:@"HUIA"];
+        [_coreServices postQuestion:searchBox.text andStatus:_statusViewModel];
     }
     if (results.suggestion){
         UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Suggestion"
@@ -326,7 +342,7 @@ const unsigned char SpeechKitApplicationKey[] = {0x2b, 0x68, 0xea, 0x70, 0x07, 0
     if (textField == searchBox)
     {
         [searchBox resignFirstResponder];
-        [_coreServices postQuestion:searchBox.text andHUIID:@"HUIA"];
+        [_coreServices postQuestion:searchBox.text andStatus:_statusViewModel];
     }
     return YES;
 }

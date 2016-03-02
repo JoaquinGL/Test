@@ -14,5 +14,9 @@
 + (void) fadeIn: (UIView* )view completion:(void (^)(BOOL finished))completion;
 + (void) fadeOut: (UIView* )view completion:(void (^)(BOOL finished))completion;
 
++ (void) resizeLabel:( UILabel* )label
+            withText:( NSString* )text
+            withFont:( UIFont* )font
+           withWidth:( CGFloat )width;
 
 @end

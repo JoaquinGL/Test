@@ -28,6 +28,9 @@
 - (void) removePlantWithId:(NSString *) plantId;
 - (void) removePlantInHUISensor: (PlantViewModel* )plantViewModel;
 
+- (void)setGrowing:(NSString* )growing
+           inPlant:(PlantViewModel*) plantViewModel;
+
 - (void) setStatusPlant:(NSString *)status
                 inPlant:(PlantViewModel*) plantViewModel;
 //-------------------------------------------------------------------------------------- HUI Methods

@@ -11,7 +11,7 @@
 @interface PlantViewModel : BaseViewModel
 
 @property ( nonatomic, retain, getter = getStatus) NSString* status;
-@property ( nonatomic, retain, getter = getDescriptionPlant ) NSString* descriptionPlant;
+@property ( nonatomic, retain, getter = getDescriptionPlant, setter=setDescriptionPlant: ) NSString* descriptionPlant;
 @property ( nonatomic, retain, getter = getSuitable ) NSString* suitable;
 @property ( nonatomic, retain, getter = getPosition, setter=setPosition:) NSNumber* position;
 @property ( nonatomic, retain, getter = getSunStatus ) NSNumber* sunStatus;

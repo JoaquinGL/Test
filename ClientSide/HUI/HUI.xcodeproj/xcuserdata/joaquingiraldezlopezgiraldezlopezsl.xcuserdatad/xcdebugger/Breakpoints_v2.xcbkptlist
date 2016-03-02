@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HUI/ViewsControllers/AskHuiViewController.m"
-            timestampString = "473869882.03522"
+            timestampString = "478540401.15175"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "288"
-            endingLineNumber = "288"
+            startingLineNumber = "304"
+            endingLineNumber = "304"
             landmarkName = "-vocalizer:willBeginSpeakingString:"
             landmarkType = "5">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HUI/ViewsControllers/AskHuiViewController.m"
-            timestampString = "473869652.052148"
+            timestampString = "478540401.15175"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "278"
-            endingLineNumber = "278"
+            startingLineNumber = "294"
+            endingLineNumber = "294"
             landmarkName = "-vocalizer:willBeginSpeakingString:"
             landmarkType = "5">
          </BreakpointContent>

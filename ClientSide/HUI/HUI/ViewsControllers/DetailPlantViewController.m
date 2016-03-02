@@ -54,6 +54,9 @@
     
     IBOutlet UILabel* _sensorLabel;
     IBOutlet UILabel* _huiNameLabel;
+    
+    IBOutlet UILabel* _growingLabel;
+    IBOutlet UISwitch* _growingSwitch;
 }
 
 @end
@@ -70,6 +73,9 @@ plantViewModel = _plantViewModel;
 }
 
 - (void)customInit{
+    
+    [_growingLabel setAlpha: 0.0f];
+    [_growingSwitch setAlpha: 0.0f];
     
     _coreServices = [[CoreServices alloc] init];
     
@@ -96,6 +102,7 @@ plantViewModel = _plantViewModel;
     
     [_huiNameLabel setFont: customFont];
     [_sensorLabel setFont: customFont];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -169,7 +176,6 @@ plantViewModel = _plantViewModel;
     plantSun.text = [self.plantViewModel getSunValue];
     plantWater.text = [self.plantViewModel getWaterValue];
     plantTemperature.text = [self.plantViewModel getTemperatureValue];
-    
 }
 
 #pragma mark - Instantiate method
@@ -293,39 +299,95 @@ plantViewModel = _plantViewModel;
 }
 
 
--(IBAction)onTemperatureTouchUpInside:(id)sender{
+#pragma mark IBACTIONS
+
+- (void) setMoreDetailsViewWithImageName: ( NSString *)imageName
+                                   title: ( NSString *)title
+                             description: ( NSString *)description {
     
-    _moreDetailsLabel.text = [_temperature objectForKey:@"Description"];
-    [_moreDetailsLabel sizeToFit];
-    _moreDetailsTitleLabel.text = NSLocalizedString(@"Temperature", nil);
-    [_moreDetailsImageView setImage:[UIImage imageNamed:@"temperature.png"]];
-    [_moreDetailsImageView setFrame: CGRectMake(_moreDetailsImageView.frame.origin.x, _moreDetailsImageView.frame.origin.y, temperatureStatusImageView.frame.size.width, temperatureStatusImageView.frame.size.height)];
+    _moreDetailsLabel.text = description;
+    _moreDetailsTitleLabel.text = title;
+    [_moreDetailsImageView setImage:[UIImage imageNamed: imageName]];
+    [_moreDetailsImageView setFrame:
+                CGRectMake(_moreDetailsImageView.frame.origin.x
+                           , _moreDetailsImageView.frame.origin.y
+                           , temperatureStatusImageView.frame.size.width
+                           , temperatureStatusImageView.frame.size.height)];
+    
     [Utils fadeIn:_moreDetailsView completion:nil];
+    
+    [Utils resizeLabel: _moreDetailsLabel withText:description withFont:[_moreDetailsLabel font] withWidth:220.0f];
 }
 
--(IBAction)onLightTouchUpInside:(id)sender{
+- ( IBAction )onHUITouchUpInside:(id)sender {
+    HUIViewModel* huiViewModel = [_manager getHuiWithId:[self.plantViewModel getHuiId]];
     
-    _moreDetailsLabel.text = [_light objectForKey:@"Description"];
-    [_moreDetailsLabel sizeToFit];
-    _moreDetailsTitleLabel.text = NSLocalizedString(@"Light", nil);
-    [_moreDetailsImageView setImage:[UIImage imageNamed:@"sun.png"]];
-    [_moreDetailsImageView setFrame: CGRectMake(_moreDetailsImageView.frame.origin.x, _moreDetailsImageView.frame.origin.y, sunStatusImageView.frame.size.width, sunStatusImageView.frame.size.height)];
-    [Utils fadeIn:_moreDetailsView completion:nil];
+    [self setMoreDetailsViewWithImageName: @"huiNormal.png"
+                                    title: _huiNameLabel.text
+                              description: [NSString stringWithFormat:@"%@%@ \n%@%@"
+                                            , NSLocalizedString(@"Number: ", nil)
+                                            , [huiViewModel getNumber]
+                                            , NSLocalizedString(@"Sensor: ", nil)
+                                            , _sensorLabel.text]];
 }
 
--(IBAction)onMoistureTouchUpInside:(id)sender{
+- ( IBAction )onPlantDescriptionTouchUpInside:(id)sender {
     
-    _moreDetailsLabel.text = [_moisture objectForKey:@"Description"];
-    [_moreDetailsLabel sizeToFit];
-    _moreDetailsTitleLabel.text = NSLocalizedString(@"Moisure", nil);
-    [_moreDetailsImageView setImage:[UIImage imageNamed:@"water.png"]];
-    [_moreDetailsImageView setFrame: CGRectMake(_moreDetailsImageView.frame.origin.x, _moreDetailsImageView.frame.origin.y, waterStatusImageView.frame.size.width, waterStatusImageView.frame.size.height)];
-    [Utils fadeIn:_moreDetailsView completion:nil];
+    [self setMoreDetailsViewWithImageName: @"plant.png"
+                                    title: [self.plantViewModel getName]
+                              description: [self.plantViewModel getDescriptionPlant]];
+    
+    if([[self.plantViewModel getGrowing] isEqualToString: @"germinating"]){
+        
+        _growingLabel.text = NSLocalizedString(@"Growth phase :", nil);
+        [_growingSwitch setOn:NO];
+        [_growingLabel setAlpha: 1.0f];
+        [_growingSwitch setAlpha: 1.0f];
+    }else{
+        [_growingLabel setAlpha: 0.0f];
+    }
+    
 }
 
--(IBAction)onCloseMoreDetailsButtonTouchUpInside:(id)sender{
+- ( IBAction )onTemperatureTouchUpInside:(id)sender {
+    
+    [self setMoreDetailsViewWithImageName: @"temperature.png"
+                                    title: NSLocalizedString(@"Temperature", nil)
+                              description: [_temperature objectForKey:@"Description"]];
+    
+}
+
+- ( IBAction )onLightTouchUpInside:(id)sender {
+    
+    [self setMoreDetailsViewWithImageName: @"sun.png"
+                                    title: NSLocalizedString(@"Light", nil)
+                              description: [_light objectForKey:@"Description"]];
+}
+
+- ( IBAction )onMoistureTouchUpInside:(id)sender {
+    
+    [self setMoreDetailsViewWithImageName: @"water.png"
+                                    title: NSLocalizedString(@"Moisure", nil)
+                              description: [_moisture objectForKey:@"Description"]];
+}
+
+- ( IBAction )onCloseMoreDetailsButtonTouchUpInside:(id)sender{
     [Utils fadeOut:_moreDetailsView completion:nil];
 }
 
+- (IBAction) onSwitchTouchUpInside:(id)sender{
+    
+    [Utils fadeOut:_growingSwitch completion:^(BOOL finished){
+        _growingLabel.text = NSLocalizedString(@"Congrats,\nyour plant is growing!", nil);
+    }];
+    
+    [self.plantViewModel setGrowing:@"growing"];
+    
+    //SAVE PLANT IN BBDD
+    [_manager setGrowing:@"growing" inPlant:self.plantViewModel];
+    
+    
+    
+}
 
 @end

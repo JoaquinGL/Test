@@ -7,7 +7,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MainViewController">
             <connections>
-                <outlet property="_askHuiButton" destination="S44-EE-pjg" id="rCm-hX-h2O"/>
                 <outlet property="plantsScrollView" destination="BCL-sZ-xkh" id="WNM-CP-U5N"/>
                 <outlet property="view" destination="iN0-l3-epB" id="pfq-WX-1ta"/>
             </connections>
@@ -24,13 +23,6 @@
                     <rect key="frame" x="8" y="70" width="304" height="389"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </scrollView>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S44-EE-pjg">
-                    <rect key="frame" x="120" y="475" width="80" height="80"/>
-                    <state key="normal" backgroundImage="askHUI"/>
-                    <connections>
-                        <action selector="onAskHuiTouchUpInside:" destination="-1" eventType="touchUpInside" id="IGC-Nk-e7n"/>
-                    </connections>
-                </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ryg-9R-Yp4">
                     <rect key="frame" x="264" y="507" width="48" height="30"/>
                     <state key="normal" title="Socket"/>
@@ -45,7 +37,6 @@
         </view>
     </objects>
     <resources>
-        <image name="askHUI" width="84" height="84"/>
         <image name="title" width="320" height="44"/>
     </resources>
 </document>

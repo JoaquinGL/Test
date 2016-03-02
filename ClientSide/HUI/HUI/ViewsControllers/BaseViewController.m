@@ -36,7 +36,6 @@
 
 - (IBAction)onCloseButtonTouchUpInside:(id)sender
 {
-
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

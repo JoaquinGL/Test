@@ -73,6 +73,8 @@
 		E3DDCB451C11BE2F0053E150 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = E3DDCB3D1C11BE2F0053E150 /* MBProgressHUD.m */; };
 		E3DDCB471C11F5BC0053E150 /* Play.wav in Resources */ = {isa = PBXBuildFile; fileRef = E3DDCB461C11F5BC0053E150 /* Play.wav */; };
 		E3DF6CA01C0D896200004DA2 /* PlantView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3DF6C9F1C0D896200004DA2 /* PlantView.xib */; };
+		E3E81E421C85ACCE0042ADC9 /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3E81E411C85ACCE0042ADC9 /* SettingsView.xib */; };
+		E3E81E451C85AF5D0042ADC9 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3E81E441C85AF5D0042ADC9 /* SettingsViewController.m */; };
 		E3EFE1D21C0F48CD0033BB25 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3EFE1D11C0F48CD0033BB25 /* AudioToolbox.framework */; };
 		E3EFE1D41C0F48DC0033BB25 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3EFE1D31C0F48DC0033BB25 /* AVFoundation.framework */; };
 		E3EFE1D61C0F48F10033BB25 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3EFE1D51C0F48F10033BB25 /* Security.framework */; };
@@ -202,6 +204,9 @@
 		E3DDCB3D1C11BE2F0053E150 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		E3DDCB461C11F5BC0053E150 /* Play.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Play.wav; sourceTree = "<group>"; };
 		E3DF6C9F1C0D896200004DA2 /* PlantView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlantView.xib; sourceTree = "<group>"; };
+		E3E81E411C85ACCE0042ADC9 /* SettingsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsView.xib; sourceTree = "<group>"; };
+		E3E81E431C85AF5D0042ADC9 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		E3E81E441C85AF5D0042ADC9 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		E3EFE1D11C0F48CD0033BB25 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		E3EFE1D31C0F48DC0033BB25 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		E3EFE1D51C0F48F10033BB25 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -408,6 +413,7 @@
 				E39B8C641C1DEAB50015EF9F /* View.xib */,
 				E39B8C691C1DEB670015EF9F /* ConfigureView.xib */,
 				E3B3B0201C7CA974005C39CC /* SocketConnectionView.xib */,
+				E3E81E411C85ACCE0042ADC9 /* SettingsView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -437,6 +443,8 @@
 				E30816911C0455CB0007D896 /* CustomPageViewController.m */,
 				E39B8C661C1DEAFF0015EF9F /* ConfigureViewController.h */,
 				E39B8C671C1DEAFF0015EF9F /* ConfigureViewController.m */,
+				E3E81E431C85AF5D0042ADC9 /* SettingsViewController.h */,
+				E3E81E441C85AF5D0042ADC9 /* SettingsViewController.m */,
 			);
 			path = ViewsControllers;
 			sourceTree = "<group>";
@@ -660,6 +668,7 @@
 				E3DA78AE1C086B5100F6C06A /* Main.storyboard in Resources */,
 				E3DDCB321C11B46E0053E150 /* Robot2.wav in Resources */,
 				E3DDCB411C11BE2F0053E150 /* Icon-Small.png in Resources */,
+				E3E81E421C85ACCE0042ADC9 /* SettingsView.xib in Resources */,
 				E3CE4E271C0221850096D0FB /* LaunchScreen.storyboard in Resources */,
 				E3DDCB421C11BE2F0053E150 /* Icon-Small@2x.png in Resources */,
 				E3B3B0161C71E16F005C39CC /* GoogleService-Info.plist in Resources */,
@@ -785,6 +794,7 @@
 				E3CE4E161C0221850096D0FB /* main.m in Sources */,
 				E3EFE1FA1C109CDA0033BB25 /* Utils.m in Sources */,
 				E39B8C681C1DEAFF0015EF9F /* ConfigureViewController.m in Sources */,
+				E3E81E451C85AF5D0042ADC9 /* SettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

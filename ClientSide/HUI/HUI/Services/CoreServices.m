@@ -58,7 +58,8 @@
  }
  */
 
-- (void) postQuestion:(NSString* )question andHUIID:(NSString* )huiId{
+- (void) postQuestion:(NSString* )question
+            andStatus:(StatusViewModel* )status{
     
     if( [self isNetWorkAvailable]){
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL: ASK_HUI_POST_URL];
@@ -67,9 +68,9 @@
         
         NSDictionary *postDictionary = @{
                                          @"speech": question,
-                                         @"language": @"en",
-                                         @"distanceUnit": @"[centimeters]",
-                                         @"temperatureUnit": @"[centimeters]"
+                                         @"language": [status getLanguage],
+                                         @"distanceUnit": [status getDistances],
+                                         @"temperatureUnit": [status getMeasures]
                                          };
         
         NSError *error;

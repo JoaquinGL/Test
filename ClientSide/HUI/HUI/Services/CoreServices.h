@@ -28,7 +28,7 @@
 @property (nonatomic, assign) id <CoreServicesDelegate> delegate;
 
 - (void) postQuestion:(NSString* )question
-             andHUIID:(NSString* )huiId;
+            andStatus:(StatusViewModel* )status;
 
 - (void) getPlantListWithHUID:(NSString* )huiId
                  withLanguage:(NSString* )language;

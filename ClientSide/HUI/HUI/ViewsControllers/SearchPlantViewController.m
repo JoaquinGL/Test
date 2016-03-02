@@ -108,7 +108,7 @@
 
     UIAlertController * alert=   [UIAlertController
                                   alertControllerWithTitle:NSLocalizedString(@"Plant Status", nil)
-                                  message:NSLocalizedString(@"What is the status of the plant?", nil)
+                                  message:NSLocalizedString(@"What are you going to plant?", nil)
                                   preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction* yesButton = [UIAlertAction
@@ -128,7 +128,7 @@
                                handler:^(UIAlertAction * action)
                                {
                                    [alert dismissViewControllerAnimated:YES completion:nil];
-                                   _status = @"shoot";
+                                   _status = @"growing";
                                    
                                    [self setPlantStatus: indexPath];
                                }];

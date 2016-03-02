@@ -16,6 +16,7 @@
 #import "SocketConnectionVC.h"
 #import "ConfigureViewController.h"
 #import "StatusViewModel.h"
+#import "SettingsViewController.h"
 
 @interface MainViewController (){
     SearchPlantViewController* _searchPlantViewController;
@@ -28,6 +29,8 @@
     AskHuiViewController* _askHuiViewController;
     
     ConfigureViewController* _configureViewController;
+    
+    SettingsViewController* _settingsView;
     
     IBOutlet UIButton* newPlantButton;
     IBOutlet UIButton* _askHuiButton;
@@ -59,8 +62,9 @@
 #define FRAME_NEW_PLANT_2_PLANT CGRectMake(80, 260, WIDTH_PLANT, HEIGHT_PLANT)
 #define FRAME_NEW_PLANT_3_PLANT CGRectMake(180, 260, 120, 120)
 #define FRAME_NEW_PLANT_4_PLANT CGRectMake(10, 475, 80, 80)
-#define FRAME_ASK_HUI_BUTTON_FIRST_POSITION CGRectMake(110, 475, 80, 80)
+#define FRAME_ASK_HUI_BUTTON_FIRST_POSITION CGRectMake(120, 475, 80, 80)
 #define FRAME_ASK_HUI_BUTTON_FINAL_POSITION CGRectMake(230, 475, 80, 80)
+
 
 @implementation MainViewController
 
@@ -104,7 +108,13 @@
     [newPlantButton addTarget:self action:@selector(showSearchPlantOnTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
     [newPlantButton setBackgroundImage:[UIImage imageNamed:@"plant_something_new.png"] forState:UIControlStateNormal];
     
+    
+    _askHuiButton = [[UIButton alloc] initWithFrame: FRAME_ASK_HUI_BUTTON_FIRST_POSITION];
+    [_askHuiButton addTarget:self action:@selector(onAskHuiTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
+    [_askHuiButton setBackgroundImage:[UIImage imageNamed:@"askHUI"] forState:UIControlStateNormal];
+    
     [self.view addSubview: newPlantButton];
+    [self.view addSubview: _askHuiButton];
     
     [[UINavigationBar appearance] setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     [[UINavigationBar appearance] setShadowImage:[UIImage new]];
@@ -127,6 +137,23 @@
     
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithCustomView: infoButton];
     self.navigationItem.rightBarButtonItem = rightButton;
+    
+    
+    
+    UIImage* settingImage = [UIImage imageNamed:@"settingsInfo.png"];
+    UIButton *settingButton = [[UIButton alloc] initWithFrame:frameimg];
+    [settingButton setBackgroundImage:settingImage forState:UIControlStateNormal];
+    
+    [settingButton addTarget:self action:@selector(showSettingView:)
+         forControlEvents:UIControlEventTouchUpInside];
+    
+    [settingButton setShowsTouchWhenHighlighted:YES];
+    
+    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithCustomView: settingButton];
+    self.navigationItem.leftBarButtonItem = leftButton;
+
+    
+    
     
     UIFont *customFont = [UIFont fontWithName:@"GrandHotel-Regular" size:30];
     
@@ -174,6 +201,20 @@
 }
 
 #pragma mark - ACTIONS BUTTONS
+
+- (IBAction)showSettingView:(id)sender {
+    
+    if( !_settingsView ){
+        _settingsView = [SettingsViewController instantiate];
+    }
+    
+    [_settingsView.view setAlpha:0.0f];
+    
+    [self.view addSubview: _settingsView.view];
+    
+    [Utils fadeIn:_settingsView.view completion:nil];
+}
+
 
 - (IBAction)showSearchPlantOnTouchUpInside:(id)sender{
         
@@ -507,8 +548,10 @@
     }
     
     
-    // setinitialStatus
-    [_manager setInitialStatus];
+    // setinitialStatus if there is no status
+    if(![_manager getStatus]){
+        [_manager setInitialStatus];
+    }
 }
 
 #pragma mark -socket test

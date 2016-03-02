@@ -34,4 +34,22 @@
     
 }
 
++ (void) resizeLabel:( UILabel* )label
+            withText:( NSString* )text
+            withFont:( UIFont* )font
+           withWidth:( CGFloat )width {
+
+
+    NSAttributedString *attributedText = [[NSAttributedString alloc] initWithString:text attributes:@{ NSFontAttributeName: font}];
+    
+    CGRect rect = [attributedText boundingRectWithSize:(CGSize){width, CGFLOAT_MAX}
+                                               options:NSStringDrawingUsesLineFragmentOrigin
+                                               context:nil];
+    
+    CGSize size = rect.size;
+    
+    [label setFrame: CGRectMake(label.frame.origin.x, label.frame.origin.y, size.width, size.height)];
+}
+
+
 @end

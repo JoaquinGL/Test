@@ -192,5 +192,9 @@
     [self.innerState setObject:growing forKey:@"growing" ];
 }
 
+- (void)setDescriptionPlant:(NSString *)descriptionPlant
+{
+    [self.innerState setObject:descriptionPlant forKey:@"descriptionPlant" ];
+}
 
 @end

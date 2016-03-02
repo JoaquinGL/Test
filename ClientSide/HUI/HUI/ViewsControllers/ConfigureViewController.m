@@ -722,6 +722,8 @@ numberOfRowsInComponent:(NSInteger)component
                                    [_sensor1Button setSelected:NO];
                                    [_sensor2Button setSelected:NO];
                                    [_sensor3Button setSelected:NO];
+                                   
+                                   [Utils fadeOut:_continueSensorButton completion:nil];
                                }];
     
     [alert addAction:noButton];
