@@ -24,11 +24,14 @@
 
 // post server
 
-#define ASK_HUI_POST_URL        [NSURL URLWithString: @"http://www.growandhelp.com/huiWebApp/HuiServer?speech"]
-#define NEW_HUI_POST_URL        [NSURL URLWithString: @"http://www.growandhelp.com/huiWebApp/HuiServer?newHUI"]
-#define PLANT_LIST_POST_URL     [NSURL URLWithString: @"http://www.growandhelp.com/huiWebApp/HuiServer?getPlantList"]
-#define NEW_PLANT_POST_URL      [NSURL URLWithString: @"http://www.growandhelp.com/huiWebApp/HuiServer?newPlant"]
-#define PLANT_STATE_POST_URL    [NSURL URLWithString: @"http://www.growandhelp.com/huiWebApp/HuiServer?getState"]
+#define ASK_HUI_POST_URL                [NSURL URLWithString: @"http://hui-growandhelp.rhcloud.com/huiWebApp/HuiServer?speech"]
+#define NEW_HUI_POST_URL                [NSURL URLWithString: @"http://www.growandhelp.com/huiWebApp/HuiServer?newHUI"]
+#define PLANT_LIST_POST_URL             [NSURL URLWithString: @"http://www.growandhelp.com/huiWebApp/HuiServer?getPlantList"]
+#define NEW_PLANT_POST_URL              [NSURL URLWithString: @"http://www.growandhelp.com/huiWebApp/HuiServer?newPlant"]
+#define PLANT_STATE_POST_URL            [NSURL URLWithString: @"http://www.growandhelp.com/huiWebApp/HuiServer?getState"]
+#define PLANT_IMAGE_URL                 @"http://growandhelp.com/plants/%@.png"
+#define CHANGE_PLANT_STATE_POST_URL     [NSURL URLWithString: @"http://www.growandhelp.com/huiWebApp/HuiServer?changePlantStage"]
+#define DELETE_PLANT_POST_URL           [NSURL URLWithString: @" http://www.growandhelp.com/huiWebApp/HuiServer?removePlant"]
 
 @implementation CoreServices
 
@@ -46,17 +49,33 @@
 }
 
 
+- (void) postDictionary:(NSDictionary *)dict inRequest:(NSMutableURLRequest* )request {
 
-// HUI VOICE
-/*
- 
- {  
-    "speech":"tell me how to plant tomatoes",
-    "language":"en",
-    "distanceUnit":"[centimeters]", 
-    "temperatureUnit":"[Celsius]"
- }
- */
+    NSError *error;
+    NSData *postData = [NSJSONSerialization dataWithJSONObject:dict options:0 error:&error];
+    [request setHTTPBody:postData];
+    
+    
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                                completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
+                                      {
+                                          NSDictionary* json = [NSJSONSerialization JSONObjectWithData:data
+                                                                                               options:kNilOptions
+                                                                                                 error:&error];
+                                          if (error){
+                                              NSLog(@"Error in the connection: %@", error);
+                                          }
+                                          
+                                          [self.delegate answerFromServer: json];
+                                          
+                                      }];
+    [dataTask resume];
+
+
+}
+
+
 
 - (void) postQuestion:(NSString* )question
             andStatus:(StatusViewModel* )status{
@@ -73,26 +92,9 @@
                                          @"temperatureUnit": [status getMeasures]
                                          };
         
-        NSError *error;
-        NSData *postData = [NSJSONSerialization dataWithJSONObject:postDictionary options:0 error:&error];
-        [request setHTTPBody:postData];
         
+        [self postDictionary:postDictionary inRequest:request];
         
-        NSURLSession *session = [NSURLSession sharedSession];
-        NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
-                                                    completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
-                                          {
-                                              NSDictionary* json = [NSJSONSerialization JSONObjectWithData:data
-                                                                                                   options:kNilOptions
-                                                                                                     error:&error];
-                                              if (error){
-                                                  NSLog(@"Error in the connection: %@", error);
-                                              }
-                                              
-                                              [self.delegate answerFromServer: json];
-                                              
-                                          }];
-        [dataTask resume];
     }else{
         [self.delegate answerFromServer: nil];
     }
@@ -109,27 +111,7 @@
                                          , @"language": language
                                          };
         
-        NSError *error;
-        NSData *postData = [NSJSONSerialization dataWithJSONObject:postDictionary options:0 error:&error];
-        [request setHTTPBody:postData];
-        
-        
-        NSURLSession *session = [NSURLSession sharedSession];
-        NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
-                                                    completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
-                                          {
-                                              NSDictionary* json = [NSJSONSerialization JSONObjectWithData:data
-                                                                                                   options:kNilOptions
-                                                                                                     error:&error];
-                                              if (error){
-                                                  NSLog(@"Error in the connection: %@", error);
-                                              }
-                                              
-                                              [self.delegate answerFromServer: json];
-                                              
-                                          }];
-        [dataTask resume];
-
+        [self postDictionary:postDictionary inRequest:request];
     }else{
         [self.delegate answerFromServer: nil];
     }
@@ -159,25 +141,7 @@
                                          , @"distanceUnit": [statusViewModel getDistances]
                                          };
         
-        NSError *error;
-        NSData *postData = [NSJSONSerialization dataWithJSONObject:postDictionary options:0 error:&error];
-        [request setHTTPBody:postData];
-        
-        NSURLSession *session = [NSURLSession sharedSession];
-        NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
-                                                    completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
-                                          {
-                                              NSDictionary* json = [NSJSONSerialization JSONObjectWithData:data
-                                                                                                   options:kNilOptions
-                                                                                                     error:&error];
-                                              if (error){
-                                                  NSLog(@"Error in the connection: %@", error);
-                                              }
-                                              
-                                              [self.delegate answerFromServer: json];
-                                              
-                                          }];
-        [dataTask resume];
+        [self postDictionary:postDictionary inRequest:request];
     }else{
         [self.delegate answerFromServer: nil];
     }
@@ -191,25 +155,7 @@
         
         NSDictionary *postDictionary = objectToPost;
         
-        NSError *error;
-        NSData *postData = [NSJSONSerialization dataWithJSONObject:postDictionary options:0 error:&error];
-        [request setHTTPBody:postData];
-        
-        NSURLSession *session = [NSURLSession sharedSession];
-        NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
-                                                    completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
-                                          {
-                                              NSDictionary* json = [NSJSONSerialization JSONObjectWithData:data
-                                                                                                   options:kNilOptions
-                                                                                                     error:&error];
-                                              if (error){
-                                                  NSLog(@"Error in the connection: %@", error);
-                                              }
-                                              
-                                              [self.delegate answerFromServer: json];
-                                              
-                                          }];
-        [dataTask resume];
+        [self postDictionary:postDictionary inRequest:request];
     }else{
         [self.delegate answerFromServer: nil];
     }
@@ -241,25 +187,80 @@
                                          , @"moistureID": moisture
                                          };;
         
-        NSError *error;
-        NSData *postData = [NSJSONSerialization dataWithJSONObject:postDictionary options:0 error:&error];
-        [request setHTTPBody:postData];
+        [self postDictionary:postDictionary inRequest:request];
+    }else{
+        [self.delegate answerFromServer: nil];
+    }
+}
+
+
+
+- (UIImage* )imageFromServer:(PlantViewModel* )plant {
+    
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: PLANT_IMAGE_URL, [plant getPlantId]]];
+    
+    NSData *data = [[NSData alloc] initWithContentsOfURL:url];
+    
+    UIImage *tmpImage = [[UIImage alloc] initWithData:data];
+    
+    return tmpImage;
+}
+
+
+- (void) postChangeStatusPlant:(PlantViewModel* )plant withHuiModel:(HUIViewModel* )huiViewModel {
+    
+    if( [self isNetWorkAvailable]){
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL: CHANGE_PLANT_STATE_POST_URL];
+        [request setHTTPMethod:@"POST"];
         
-        NSURLSession *session = [NSURLSession sharedSession];
-        NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
-                                                    completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
-                                          {
-                                              NSDictionary* json = [NSJSONSerialization JSONObjectWithData:data
-                                                                                                   options:kNilOptions
-                                                                                                     error:&error];
-                                              if (error){
-                                                  NSLog(@"Error in the connection: %@", error);
-                                              }
-                                              
-                                              [self.delegate answerFromServer: json];
-                                              
-                                          }];
-        [dataTask resume];
+        
+        NSString* moisture = @"M2";
+        
+        if( [[plant getIdentify] isEqualToString: [huiViewModel getSensor1]]){
+            moisture = @"M1";
+        } else if( [[plant getIdentify] isEqualToString: [huiViewModel getSensor2]]){
+            moisture = @"M2";
+        } else if( [[plant getIdentify] isEqualToString: [huiViewModel getSensor3]]){
+            moisture = @"M3";
+        }
+        
+        
+        NSDictionary *postDictionary = @{
+                                           @"plantStage": @"growing"
+                                         , @"huiID": [huiViewModel getName]
+                                         , @"moistureID": moisture
+                                         };;
+        
+        [self postDictionary:postDictionary inRequest:request];
+    }else{
+        [self.delegate answerFromServer: nil];
+    }
+}
+
+- (void) deletePlant:(PlantViewModel* )plant withHuiModel:(HUIViewModel* )huiViewModel {
+    
+    if( [self isNetWorkAvailable]){
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL: DELETE_PLANT_POST_URL];
+        [request setHTTPMethod:@"POST"];
+        
+        
+        NSString* moisture = @"M2";
+        
+        if( [[plant getIdentify] isEqualToString: [huiViewModel getSensor1]]){
+            moisture = @"M1";
+        } else if( [[plant getIdentify] isEqualToString: [huiViewModel getSensor2]]){
+            moisture = @"M2";
+        } else if( [[plant getIdentify] isEqualToString: [huiViewModel getSensor3]]){
+            moisture = @"M3";
+        }
+        
+        
+        NSDictionary *postDictionary = @{
+                                           @"huiID": [huiViewModel getName]
+                                         , @"moistureID": moisture
+                                         };;
+        
+        [self postDictionary:postDictionary inRequest:request];
     }else{
         [self.delegate answerFromServer: nil];
     }

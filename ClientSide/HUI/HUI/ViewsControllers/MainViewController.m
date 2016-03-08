@@ -364,10 +364,11 @@
     [self addNewPlant: plantViewModel];
     
     // send HUI CONFIGURATION
-    
     [self saveHUIInServer: huiViewModel];
     
+    // send plant to server
     [_coreServices postNewPlant: plantViewModel withHuiModel: huiViewModel];
+    
 }
 
 #pragma mark - Delegate PlantView
@@ -402,6 +403,23 @@
 
 #pragma mark - Delegate DetailPlant
 - (void)deletePlant:(NSNumber *)identify withId:(NSString *)plantId{
+    
+    /* DELETE PLANT FROM SERVER */
+    
+    if(!_coreServices){
+        _coreServices = [[CoreServices alloc] init];
+    }
+    
+    if(!_manager){
+        _manager = [[Manager alloc] init];
+    }
+    
+    for (PlantViewModel *plant in _plantsCollection) {
+        if([[plant getIdentify] isEqualToString: plantId]){
+            
+            [_coreServices deletePlant: plant withHuiModel:[_manager getHuiWithId:[plant getHuiId]]];
+        }
+    }
     
     [self removePlantFromBBDDAndCollectionWithId:plantId];
     
@@ -490,8 +508,7 @@
             [plantsScrollView setContentSize:CGSizeMake(plantsScrollView.frame.size.width, plantsScrollView.frame.size.height + plantScrollViewControllerHeight)];
         }
         
-        
-        [newPlantViewController setPlantImageFromName:[plant getName]];
+        [newPlantViewController setPlantImageFromServer];
         
         if ([[plant getStatus]isEqual:@"0"]){
             [newPlantViewController setStatusOk];
@@ -582,12 +599,7 @@
     }];
 }
 
-//[self.delegate removePlantInSensor:[_huiSelectionViewModel getSensor1]];
 - (void) removePlantInSensor:(NSString *)plantId{
-    
-    //PlantViewModel *plantViewModel = [[PlantViewModel alloc] init];
-    
-    // Obtener de BBDD con el plantID la planta a borrar, ver si tambien se guarda la posicion.
 
     [self deletePlant:0 withId:plantId];
 }

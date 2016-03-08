@@ -97,6 +97,14 @@
     
     cell.textLabel.text = [self.data[indexPath.row] objectForKey:@"name"];
     
+    if( [[self.data[indexPath.row] objectForKey:@"name"] isEqualToString:@"unknown"] ){
+        cell.imageView.image = [UIImage imageNamed:@"question_mark.png"];
+    }else if( [[self.data[indexPath.row] objectForKey:@"name"] isEqualToString:@"ok"] ){
+        cell.imageView.image = [UIImage imageNamed:@"thumb_up.png"];
+    }else{
+        cell.imageView.image = [UIImage imageNamed:@"thumb_down.png"];
+    }
+    
     return cell;
 }
 

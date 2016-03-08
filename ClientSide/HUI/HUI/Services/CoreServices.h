@@ -42,4 +42,12 @@
 - (void) postNewPlant:(PlantViewModel* )plant
          withHuiModel:(HUIViewModel* )huiViewModel;
 
+- (UIImage* )imageFromServer:(PlantViewModel* )plant;
+
+- (void) postChangeStatusPlant:(PlantViewModel* )plant
+                  withHuiModel:(HUIViewModel* )huiViewModel;
+
+- (void) deletePlant:(PlantViewModel* )plant
+        withHuiModel:(HUIViewModel* )huiViewModel;
+
 @end

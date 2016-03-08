@@ -52,7 +52,6 @@ NSString *const SubscriptionTopic = @"/topics/global";
     
     [reachability startNotifier];
     
-    
 //    // NOTIFICATIONS
 //    UIUserNotificationType allNotificationTypes =
 //    (UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge);

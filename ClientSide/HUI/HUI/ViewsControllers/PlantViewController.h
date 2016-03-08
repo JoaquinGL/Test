@@ -43,5 +43,6 @@
 - (void)setStatusUndefined;
 - (void)setStatusOk;
 - (void)setStatusKo;
+- (void)setPlantImageFromServer;
 
 @end

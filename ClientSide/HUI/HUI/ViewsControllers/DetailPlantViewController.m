@@ -166,8 +166,8 @@ plantViewModel = _plantViewModel;
 - (void) initPlantContent{
     
     plantName.text = [self.plantViewModel getName];
-    
-    [plantImageView setImage:[self getPlantImageFromName:[self.plantViewModel getName]]];
+
+    [self setPlantImageFromServer];
     
     [sunStatusImageView setImage:[self.plantViewModel getSunImage]];
     [waterStatusImageView setImage:[self.plantViewModel getWaterImage]];
@@ -229,6 +229,23 @@ plantViewModel = _plantViewModel;
 
 #pragma mark - Plant methods
 
+-(void) setPlantImageFromServer {
+    CoreServices* coreServices = [[CoreServices alloc] init];
+    [plantImageView setImage:[UIImage imageNamed:@"plant.png"]];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        UIImage *image = [coreServices imageFromServer: self.plantViewModel];
+        
+        if(!image){
+            image = [UIImage imageNamed:@"plant.png"];
+        }
+        [plantImageView setImage:image];
+        [_moreDetailsImageView setImage:image];
+    });
+    
+}
+
 - (UIImage *)getPlantImageFromName:(NSString* )imageName{
     UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png",imageName]];
     
@@ -274,25 +291,40 @@ plantViewModel = _plantViewModel;
     
     int globalStatus = 0;
     
-    if([_temperature objectForKey:@"Alert"]){
-        [temperatureStatusImageView setImage:[UIImage imageNamed:@"thumb_up.png"]];
+    if([[_temperature objectForKey:@"Alert"] isEqualToString:@"unknown"]){
+        globalStatus = -1;
+        [temperatureStatusImageView setImage:[UIImage imageNamed:@"question_mark.png"]];
     }else{
-        globalStatus = 1;
-        [temperatureStatusImageView setImage:[UIImage imageNamed:@"thumb_down.png"]];
+        if([[_temperature objectForKey:@"Alert"] isEqualToString:@"ok"]){
+            [temperatureStatusImageView setImage:[UIImage imageNamed:@"thumb_up.png"]];
+        }else{
+            globalStatus = 1;
+            [temperatureStatusImageView setImage:[UIImage imageNamed:@"thumb_down.png"]];
+        }
     }
     
-    if([_light objectForKey:@"Alert"]){
-        [sunStatusImageView setImage:[UIImage imageNamed:@"thumb_up.png"]];
+    if([[_light objectForKey:@"Alert"] isEqualToString:@"unknown"]){
+        globalStatus = -1;
+        [sunStatusImageView setImage:[UIImage imageNamed:@"question_mark.png"]];
     }else{
-        globalStatus = 1;
-        [temperatureStatusImageView setImage:[UIImage imageNamed:@"thumb_down.png"]];
+        if([[_light objectForKey:@"Alert"] isEqualToString:@"ok"]){
+            [sunStatusImageView setImage:[UIImage imageNamed:@"thumb_up.png"]];
+        }else{
+            globalStatus = 1;
+            [sunStatusImageView setImage:[UIImage imageNamed:@"thumb_down.png"]];
+        }
     }
     
-    if([_moisture objectForKey:@"Alert"]){
-        [waterStatusImageView setImage:[UIImage imageNamed:@"thumb_up.png"]];
+    if([[_moisture objectForKey:@"Alert"] isEqualToString:@"unknown"]){
+        globalStatus = -1;
+        [waterStatusImageView setImage:[UIImage imageNamed:@"question_mark.png"]];
     }else{
-        globalStatus = 1;
-        [temperatureStatusImageView setImage:[UIImage imageNamed:@"thumb_down.png"]];
+        if([[_moisture objectForKey:@"Alert"] isEqualToString:@"ok"]){
+            [waterStatusImageView setImage:[UIImage imageNamed:@"thumb_up.png"]];
+        }else{
+            globalStatus = 1;
+            [waterStatusImageView setImage:[UIImage imageNamed:@"thumb_down.png"]];
+        }
     }
     
     [self.delegate globalStatus: globalStatus withPlantViewModel:self.plantViewModel];
@@ -307,7 +339,10 @@ plantViewModel = _plantViewModel;
     
     _moreDetailsLabel.text = description;
     _moreDetailsTitleLabel.text = title;
-    [_moreDetailsImageView setImage:[UIImage imageNamed: imageName]];
+    
+    if( ![imageName isEqualToString:@"NO"])
+        [_moreDetailsImageView setImage:[UIImage imageNamed: imageName]];
+    
     [_moreDetailsImageView setFrame:
                 CGRectMake(_moreDetailsImageView.frame.origin.x
                            , _moreDetailsImageView.frame.origin.y
@@ -333,9 +368,10 @@ plantViewModel = _plantViewModel;
 
 - ( IBAction )onPlantDescriptionTouchUpInside:(id)sender {
     
-    [self setMoreDetailsViewWithImageName: @"plant.png"
+    [self setMoreDetailsViewWithImageName: @"NO"
                                     title: [self.plantViewModel getName]
                               description: [self.plantViewModel getDescriptionPlant]];
+    
     
     if([[self.plantViewModel getGrowing] isEqualToString: @"germinating"]){
         
@@ -345,6 +381,7 @@ plantViewModel = _plantViewModel;
         [_growingSwitch setAlpha: 1.0f];
     }else{
         [_growingLabel setAlpha: 0.0f];
+        [_growingSwitch setAlpha: 0.0f];
     }
     
 }
@@ -387,6 +424,17 @@ plantViewModel = _plantViewModel;
     [_manager setGrowing:@"growing" inPlant:self.plantViewModel];
     
     
+    HUIViewModel* huiViewModel = [_manager getHuiWithId:[self.plantViewModel getHuiId]];
+    
+    if(!_coreServices){
+        _coreServices = [[CoreServices alloc] init];
+    }
+    
+    //SEND TO SERVER THE CHANGE
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        [_coreServices postChangeStatusPlant:self.plantViewModel withHuiModel:huiViewModel];
+    });
     
 }
 

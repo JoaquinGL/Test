@@ -7,7 +7,7 @@
 //
 
 #import "PlantViewController.h"
-
+#import "CoreServices.h"
 
 @interface PlantViewController (){
 
@@ -40,6 +40,8 @@
     UIFont *customFont = [UIFont fontWithName:@"Multicolore" size:14];
     
     [_plantNameLabel setFont: customFont];
+    
+    [self.plantImage setImage:[UIImage imageNamed:@"plant.png"]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -57,19 +59,28 @@
 #pragma mark - Actions
 
 - (IBAction) onPlantButtonTouchUpInside:(id)sender{
-    
-    
-    UIImage *tempImage = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png",self.plantName]];
-    
-    if (!tempImage) {
-        tempImage = [UIImage imageNamed:@"plant.png"];
-    }
-    
+    [self setPlantImageFromServer];
     [self.delegate showPlantDetail:self.plantViewModel];
 }
 
 
 #pragma mark - Set up Images
+
+-(void) setPlantImageFromServer {
+    CoreServices* coreServices = [[CoreServices alloc] init];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        UIImage *image = [coreServices imageFromServer: self.plantViewModel];
+        
+        if(!image){
+            image = [UIImage imageNamed:@"plant.png"];
+        }
+        
+        [self.plantImage setImage:image];
+    });
+
+}
 
 - (void)setPlantImageFromName:(NSString* )imageName{
     UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png",imageName]];
