@@ -52,4 +52,14 @@
 }
 
 
++(void) scrollToBottomAnimate:(UITextView *)textView completion:(void (^)(BOOL finished))completion{
+    [UIView animateWithDuration: 0.5
+                     animations:^{
+                         [textView scrollRangeToVisible:NSMakeRange(textView.text.length - 1, 1)];
+                     }
+                     completion:completion
+     ];
+
+}
+
 @end

@@ -19,7 +19,7 @@
 
 @end
 
-@interface AskHuiViewController : BaseViewController<SpeechKitDelegate, SKRecognizerDelegate, SKVocalizerDelegate, UITextFieldDelegate, CoreServicesDelegate>{
+@interface AskHuiViewController : BaseViewController<SpeechKitDelegate, SKRecognizerDelegate, SKVocalizerDelegate, UITextFieldDelegate, CoreServicesDelegate, UITextViewDelegate>{
     
     IBOutlet UIButton* recordButton;
     IBOutlet UITextField* searchBox;

@@ -17,9 +17,14 @@
     
     IBOutlet UILabel * _responseTitle;
     IBOutlet UILabel * _testLabel;
+    IBOutlet UITextView* _textView;
     
     StatusViewModel* _statusViewModel;
     Manager* _manager;
+    
+    BOOL _isReadingAgain;
+    
+    BOOL _moveToBottom;
 }
 
 @end
@@ -72,6 +77,10 @@ const unsigned char SpeechKitApplicationKey[] = {0x0c, 0x24, 0xeb, 0xdb, 0x69, 0
     
     _statusViewModel = [_manager getStatus];
     
+    [_textView setText:@""];
+    [_textView setDelegate: self];
+    _isReadingAgain = NO;
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -86,6 +95,16 @@ const unsigned char SpeechKitApplicationKey[] = {0x0c, 0x24, 0xeb, 0xdb, 0x69, 0
 #pragma mark - ACTIONS
 
 - (IBAction)onBackTouchUpInside:(id)sender{
+    [_textView setText:@""];
+
+    if (isSpeaking) {
+        [vocalizer cancel];
+        isSpeaking = NO;
+        _isReadingAgain = NO;
+    }
+    
+    [speakButton setAlpha:0.0];
+
     [self.delegate onBackAskTouchUpInside];
 }
 
@@ -131,14 +150,21 @@ const unsigned char SpeechKitApplicationKey[] = {0x0c, 0x24, 0xeb, 0xdb, 0x69, 0
     }
 }
 
+- (IBAction)speakOrStopActionButtonTouchUpInside: (id) sender {
+    _isReadingAgain = YES;
+    [self speakOrStopAction: sender];
+
+}
 
 - (IBAction)speakOrStopAction: (id) sender {
     
     if (isSpeaking) {
         [vocalizer cancel];
         isSpeaking = NO;
+        _isReadingAgain = NO;
     }
     else {
+        
         isSpeaking = YES;
         // Initializes an english voice
         vocalizer = [[SKVocalizer alloc] initWithLanguage:@"en_US" delegate:self];
@@ -209,7 +235,7 @@ const unsigned char SpeechKitApplicationKey[] = {0x0c, 0x24, 0xeb, 0xdb, 0x69, 0
 - (void)recognizerDidFinishRecording:(SKRecognizer *)recognizer
 {
     NSLog(@"Recording finished.");
-    
+    _isReadingAgain = NO;
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(updateVUMeter) object:nil];
     [self setVUMeterWidth:0.];
     transactionState = TS_PROCESSING;
@@ -292,18 +318,25 @@ const unsigned char SpeechKitApplicationKey[] = {0x0c, 0x24, 0xeb, 0xdb, 0x69, 0
     
     [_responseTitle setAlpha:1];
     
-    [Utils fadeIn: _responseTitle completion:^(BOOL finished){
-        _testLabel.text = _labelToRead.text;
-        UIFont *fontText = [UIFont fontWithName:@"Helvetica" size:16];
-        _testLabel.textColor = [UIColor whiteColor];
-
-        CGSize maximumLabelSize = CGSizeMake(310, CGFLOAT_MAX);
-        CGRect textRect = [_testLabel.text boundingRectWithSize:maximumLabelSize
-                                                 options:NSStringDrawingUsesLineFragmentOrigin| NSStringDrawingUsesFontLeading
-                                              attributes:@{NSFontAttributeName:fontText}
-                                                 context:nil];
+    _textView.layoutManager.allowsNonContiguousLayout = NO;
+    
+    if(!_isReadingAgain) {
+        if([_textView.text isEqualToString:@""]){
+            _textView.text = [_textView.text stringByAppendingString: [NSString stringWithFormat:@"\n - \"%@\"\n\n",searchBox.text]];
+        }else{
+            _textView.text = [_textView.text stringByAppendingString: [NSString stringWithFormat:@"\n\n - \"%@\"\n\n",searchBox.text]];
+        }
         
-        [_testLabel setFrame:CGRectMake(_testLabel.frame.origin.x, _testLabel.frame.origin.y, _testLabel.frame.size.width, textRect.size.height + 30.0)];
+    }
+    
+    [Utils fadeIn: _responseTitle completion:^(BOOL finished){
+        
+        if(!_isReadingAgain) {
+            _textView.text = [_textView.text stringByAppendingString: _labelToRead.text];
+            
+            [Utils scrollToBottomAnimate:_textView completion:nil];
+            
+        }
         
         [speakButton setAlpha: 1.0f];
     }];
@@ -362,6 +395,28 @@ const unsigned char SpeechKitApplicationKey[] = {0x0c, 0x24, 0xeb, 0xdb, 0x69, 0
         [self speakOrStopAction:nil];
     }
 
+}
+
+#pragma mark textview Delegate methods
+
+- (void)textViewDidChange:(UITextView *)textView {
+    if (_moveToBottom) {
+        int y = textView.contentSize.height + _textView.contentInset.bottom + _textView.contentInset.top;
+        if(y > 0) {
+            [textView setContentOffset:CGPointMake(0, y) animated:YES];
+        }
+        _moveToBottom = NO;
+    }
+    else {
+        [textView scrollRangeToVisible:NSMakeRange([textView.text length]-1, 1)];
+    }
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    if ([text isEqualToString:@"\n"] && range.location == [textView.text length]) {
+        _moveToBottom = YES;
+    }
+    return YES;
 }
 
 

@@ -204,6 +204,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eFp-t0-yHF">
                                         <rect key="frame" x="11" y="84" width="51" height="112"/>
                                         <state key="selected" backgroundImage="huiSelected"/>
+                                        <state key="highlighted" backgroundImage="huiTaken"/>
                                         <connections>
                                             <action selector="onSensorTouchUpInside:" destination="-1" eventType="touchUpInside" id="mnH-MH-SF9"/>
                                         </connections>
@@ -211,6 +212,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3ti-gM-rlS">
                                         <rect key="frame" x="127" y="84" width="51" height="111"/>
                                         <state key="selected" backgroundImage="huiSelected"/>
+                                        <state key="highlighted" backgroundImage="huiTaken"/>
                                         <connections>
                                             <action selector="onSensorTouchUpInside:" destination="-1" eventType="touchUpInside" id="P7V-Zb-NT7"/>
                                         </connections>
@@ -218,6 +220,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wHR-MJ-5fD">
                                         <rect key="frame" x="242" y="84" width="51" height="111"/>
                                         <state key="selected" backgroundImage="huiSelected"/>
+                                        <state key="highlighted" backgroundImage="huiTaken"/>
                                         <connections>
                                             <action selector="onSensorTouchUpInside:" destination="-1" eventType="touchUpInside" id="9ma-tu-hgW"/>
                                         </connections>
@@ -273,6 +276,7 @@
         <image name="doneButton" width="113" height="113"/>
         <image name="editButton" width="313" height="313"/>
         <image name="huiSelected" width="38" height="85"/>
+        <image name="huiTaken" width="38" height="85"/>
         <image name="huis" width="209" height="85"/>
         <image name="modal" width="235" height="311"/>
     </resources>

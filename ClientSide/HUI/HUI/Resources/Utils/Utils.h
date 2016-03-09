@@ -19,4 +19,6 @@
             withFont:( UIFont* )font
            withWidth:( CGFloat )width;
 
++(void) scrollToBottomAnimate:(UITextView *)textView completion:(void (^)(BOOL finished))completion;
+
 @end

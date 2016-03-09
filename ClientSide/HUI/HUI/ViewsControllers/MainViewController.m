@@ -61,9 +61,9 @@
 #define FRAME_NEW_PLANT_1_PLANT CGRectMake(80, 260, WIDTH_PLANT, HEIGHT_PLANT)
 #define FRAME_NEW_PLANT_2_PLANT CGRectMake(80, 260, WIDTH_PLANT, HEIGHT_PLANT)
 #define FRAME_NEW_PLANT_3_PLANT CGRectMake(180, 260, 120, 120)
-#define FRAME_NEW_PLANT_4_PLANT CGRectMake(10, 475, 80, 80)
-#define FRAME_ASK_HUI_BUTTON_FIRST_POSITION CGRectMake(120, 475, 80, 80)
-#define FRAME_ASK_HUI_BUTTON_FINAL_POSITION CGRectMake(230, 475, 80, 80)
+#define FRAME_NEW_PLANT_4_PLANT CGRectMake(15, 475, 80, 80)
+#define FRAME_ASK_HUI_BUTTON_FIRST_POSITION CGRectMake(85, 475, 150, 55)
+#define FRAME_ASK_HUI_BUTTON_FINAL_POSITION CGRectMake(150, 490, 150, 55)
 
 
 @implementation MainViewController
@@ -111,7 +111,7 @@
     
     _askHuiButton = [[UIButton alloc] initWithFrame: FRAME_ASK_HUI_BUTTON_FIRST_POSITION];
     [_askHuiButton addTarget:self action:@selector(onAskHuiTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
-    [_askHuiButton setBackgroundImage:[UIImage imageNamed:@"askHUI"] forState:UIControlStateNormal];
+    [_askHuiButton setBackgroundImage:[UIImage imageNamed:@"askHuiButton"] forState:UIControlStateNormal];
     
     [self.view addSubview: newPlantButton];
     [self.view addSubview: _askHuiButton];
@@ -450,13 +450,17 @@
         
         if( ![[plant getIdentify] isEqualToString:[plantViewModel getIdentify]]){
             position ++;
+        }else{
+            break;
         }
     }
 
     if(status == 1){
         [[_plantsViewControllerCollection objectAtIndex:position] setStatusKo ];
-    }else{
+    }else if(status == 0){
         [[_plantsViewControllerCollection objectAtIndex:position] setStatusOk ];
+    }else{
+        [[_plantsViewControllerCollection objectAtIndex:position] setStatusUndefined ];
     }
     
    [_manager setStatusPlant:[NSString stringWithFormat:@"%d", status] inPlant:[_plantsCollection objectAtIndex:position]];
@@ -566,7 +570,7 @@
     
     
     // setinitialStatus if there is no status
-    if(![_manager getStatus]){
+    if(![[_manager getStatus] getLanguage]){
         [_manager setInitialStatus];
     }
 }

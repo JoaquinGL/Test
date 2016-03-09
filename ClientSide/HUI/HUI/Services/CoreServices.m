@@ -60,14 +60,19 @@
     NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
                                                 completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
                                       {
-                                          NSDictionary* json = [NSJSONSerialization JSONObjectWithData:data
-                                                                                               options:kNilOptions
-                                                                                                 error:&error];
-                                          if (error){
-                                              NSLog(@"Error in the connection: %@", error);
+                                          if ( data ){
+                                              NSDictionary* json = [NSJSONSerialization JSONObjectWithData:data
+                                                                                                   options:kNilOptions
+                                                                                                     error:&error];
+                                              if (error){
+                                                  NSLog(@"Error in the connection: %@", error);
+                                              }
+                                              [self.delegate answerFromServer: json];
+                                          }else{
+                                              NSLog(@"Error in the response: %@", error);
+                                              NSDictionary *error = @{@"error":@"no response from server"};
+                                              [self.delegate answerFromServer: error];
                                           }
-                                          
-                                          [self.delegate answerFromServer: json];
                                           
                                       }];
     [dataTask resume];
@@ -256,8 +261,8 @@
         
         
         NSDictionary *postDictionary = @{
-                                           @"huiID": [huiViewModel getName]
-                                         , @"moistureID": moisture
+                                         @"huiID": [huiViewModel getName] ? [huiViewModel getName] : @""
+                                         , @"moistureID": moisture ? moisture : @""
                                          };;
         
         [self postDictionary:postDictionary inRequest:request];

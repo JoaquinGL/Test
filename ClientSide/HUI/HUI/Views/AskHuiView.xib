@@ -10,6 +10,7 @@
                 <outlet property="_labelToRead" destination="WY1-he-O6y" id="AOQ-I4-uhH"/>
                 <outlet property="_responseTitle" destination="qJT-wA-UsO" id="NLG-fg-gBa"/>
                 <outlet property="_testLabel" destination="x4J-Uo-W5B" id="S0D-qX-Zxb"/>
+                <outlet property="_textView" destination="5OB-2b-fJm" id="PYA-vl-66y"/>
                 <outlet property="recognitionType" destination="bKq-VW-6Ry" id="0CE-J6-W1j"/>
                 <outlet property="recordButton" destination="Nuo-2K-xlY" id="4nQ-tx-fOI"/>
                 <outlet property="searchBox" destination="eFa-sf-nag" id="6gD-OV-1e6"/>
@@ -30,11 +31,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" id="8hv-lQ-99r">
-                                <rect key="frame" x="26" y="444" width="10" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.0" green="1" blue="0.0059685909790000002" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Response:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qJT-wA-UsO">
                                 <rect key="frame" x="18" y="138" width="80" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -88,13 +84,14 @@
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Lg9-P8-aJM">
-                                <rect key="frame" x="219" y="342" width="92" height="53"/>
+                                <rect key="frame" x="201" y="401" width="110" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Read">
+                                <color key="backgroundColor" red="0.070588235289999995" green="0.3411764706" blue="0.1764705882" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="READ">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="speakOrStopAction:" destination="-1" eventType="touchUpInside" id="qVR-xN-bdc"/>
+                                    <action selector="speakOrStopActionButtonTouchUpInside:" destination="-1" eventType="touchUpInside" id="CN6-Wd-vJa"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="WY1-he-O6y">
@@ -128,6 +125,19 @@
                                     <action selector="onBackTouchUpInside:" destination="-1" eventType="touchUpInside" id="eZM-iU-Oe3"/>
                                 </connections>
                             </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" id="5OB-2b-fJm">
+                                <rect key="frame" x="17" y="164" width="294" height="208"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <view contentMode="scaleToFill" id="8hv-lQ-99r">
+                                <rect key="frame" x="18" y="454" width="0.0" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.0" green="1" blue="0.0059685909790000002" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
                         </subviews>
                     </view>
                     <blurEffect style="dark"/>

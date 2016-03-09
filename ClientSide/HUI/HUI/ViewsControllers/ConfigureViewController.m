@@ -184,7 +184,9 @@
     [_sensor1Button setSelected: NO];
     [_sensor2Button setSelected: NO];
     [_sensor3Button setSelected: NO];
-
+    [_sensor1Button setHighlighted: NO];
+    [_sensor2Button setHighlighted: NO];
+    [_sensor3Button setHighlighted: NO];
 }
 
 - (void) showConfigureNewHUI{
@@ -241,6 +243,7 @@
             [Utils fadeIn:_configurationView completion:nil];
             
             [configureLabel setAlpha:0.0];
+            
         }];
     });
 }
@@ -428,7 +431,18 @@ numberOfRowsInComponent:(NSInteger)component
         [self showConfigureNewHUI];
     }else{
         // set configureHUI dictionary
+        if( ![[_huiSelectionViewModel getSensor1] isEqualToString:@""]){
+            [_sensor1Button setHighlighted:YES];
+        }
         
+        if( ![[_huiSelectionViewModel getSensor2] isEqualToString:@""]){
+            [_sensor2Button setHighlighted:YES];
+        }
+        
+        if( ![[_huiSelectionViewModel getSensor3] isEqualToString:@""]){
+            [_sensor3Button setHighlighted:YES];
+        }
+
         [Utils fadeIn:_sensorConfigureView completion:nil];
     }
     
@@ -722,6 +736,18 @@ numberOfRowsInComponent:(NSInteger)component
                                    [_sensor1Button setSelected:NO];
                                    [_sensor2Button setSelected:NO];
                                    [_sensor3Button setSelected:NO];
+                                   
+                                   if( ![[_huiSelectionViewModel getSensor1] isEqualToString:@""]){
+                                       [_sensor1Button setHighlighted:YES];
+                                   }
+                                   
+                                   if( ![[_huiSelectionViewModel getSensor2] isEqualToString:@""]){
+                                       [_sensor2Button setHighlighted:YES];
+                                   }
+                                   
+                                   if( ![[_huiSelectionViewModel getSensor3] isEqualToString:@""]){
+                                       [_sensor3Button setHighlighted:YES];
+                                   }
                                    
                                    [Utils fadeOut:_continueSensorButton completion:nil];
                                }];
