@@ -21,6 +21,7 @@
 @property (nonatomic, assign, getter = getTimeZone, setter= setTimeZone:) NSString* timeZone;
 @property (nonatomic, assign, getter = getWaterAlarm, setter= setWaterAlarm:) NSString* waterAlarm;
 @property (nonatomic, assign, getter = getKeyGTM, setter= setKeyGTM:) NSString* keyGTM;
+@property (nonatomic, assign, getter = getDeviceID, setter= setDeviceID:) NSString* deviceID;
 
 + (StatusViewModel* )getStatusFromObject:(id) object;
 @end

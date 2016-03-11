@@ -32,7 +32,10 @@
 
 @implementation SearchPlantViewController
 
-@synthesize data = _data, sensor = _sensor, huiViewModel = _huiViewModel;
+@synthesize data = _data
+            , sensor = _sensor
+            , filter = _filter
+            , huiViewModel = _huiViewModel;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -70,7 +73,16 @@
     StatusViewModel* statusViewModel = [[StatusViewModel alloc] init];
     statusViewModel = [_manager getStatus];
     
-    [_coreServices getPlantListWithHUID:[self.huiViewModel getName] withLanguage:[statusViewModel getLanguage]];
+    
+    if( !self.filter || [self.filter isEqualToString:@""]){
+    
+        [_coreServices getPlantListWithHUID: [self.huiViewModel getName]
+                               withLanguage: [statusViewModel getLanguage]];
+    }else{
+        [_coreServices getPlantListWithFilter: self.filter
+                                   withStatus: statusViewModel
+                                    withHuiId: [self.huiViewModel getName]];
+    }
 }
 
 #pragma mark - Instantiate method

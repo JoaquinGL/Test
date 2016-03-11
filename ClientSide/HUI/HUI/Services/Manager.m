@@ -621,7 +621,7 @@ withPlantViewModel: ( PlantViewModel* )plantViewModel
     }else if (!error && results.count > 0) {
         for(NSManagedObject *managedObject in results){
             
-            [managedObject setValue:registrationToken forKey:@"keyGTM"];
+            [managedObject setValue:registrationToken forKey:@"deviceID"];
         }
         
         //Save context to write to store

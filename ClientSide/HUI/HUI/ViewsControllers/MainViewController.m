@@ -49,6 +49,10 @@
     NSInteger numberOfPages;
     NSInteger plantScrollViewControllerHeight;
     CoreServices* _coreServices;
+    
+    BOOL diagnosticStatus;
+    BOOL newPLantStatus;
+
 }
 
 @end
@@ -79,6 +83,8 @@
 
 - (void)customInit {
     
+    diagnosticStatus = NO;
+    
     _positionX = 95;
     _positionY = 20;
     
@@ -105,7 +111,7 @@
     
     /* New Plant Button */
     newPlantButton = [[UIButton alloc] initWithFrame: FRAME_NEW_PLANT];
-    [newPlantButton addTarget:self action:@selector(showSearchPlantOnTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
+    [newPlantButton addTarget:self action:@selector(onNewPlantTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
     [newPlantButton setBackgroundImage:[UIImage imageNamed:@"plant_something_new.png"] forState:UIControlStateNormal];
     
     
@@ -216,7 +222,7 @@
 }
 
 
-- (IBAction)showSearchPlantOnTouchUpInside:(id)sender{
+- (IBAction)onNewPlantTouchUpInside:(id)sender{
         
    if(!_configureViewController){
        _configureViewController = [ConfigureViewController instantiate];
@@ -259,7 +265,24 @@
     [self presentViewController:walkthrough animated:YES completion:nil];
 }
 
+- (void) showHUIAssistant{
+
+    if(!_askHuiViewController){
+        _askHuiViewController = [[AskHuiViewController alloc] init];
+    }
+    
+    [_askHuiViewController.view setAlpha: 0.0];
+    
+    [self.navigationController.view addSubview:_askHuiViewController.view];
+    
+    [Utils fadeIn:_askHuiViewController.view completion:nil];
+}
+
+
 - (IBAction) onAskHuiTouchUpInside:(id)sender{
+    
+    diagnosticStatus = NO;
+    newPLantStatus = NO;
     
     _HUD = [[MBProgressHUD alloc] initWithView:self.view];
     [self.view addSubview:_HUD];
@@ -270,26 +293,51 @@
     [_HUD showWhileExecuting:@selector(showHUIAssistant) onTarget:self withObject:nil animated:YES];
 }
 
-- (void) showHUIAssistant{
-
-    [_askHuiViewController.view setAlpha: 0.0];
-    [self.navigationController.view addSubview:_askHuiViewController.view];
-    
-    [Utils fadeIn:_askHuiViewController.view completion:nil];
-}
-
-
-#pragma mark - DELEGATE AskHUI
+#pragma mark - Delegate AskHUI
 
 - (void) onBackAskTouchUpInside{
     
     [Utils fadeOut:_askHuiViewController.view
         completion:^(BOOL completion){
         [_askHuiViewController.view removeFromSuperview];
+        [newPlantButton setEnabled: YES];
+        [_askHuiButton setEnabled: YES];
     }];
 }
 
-#pragma mark - DELEGATE Walk
+- (void) diagnosticPhase {
+    [Utils fadeOut:_askHuiViewController.view
+        completion:^(BOOL completion){
+        [_askHuiViewController.view removeFromSuperview];
+        [newPlantButton setEnabled: NO];
+        [_askHuiButton setEnabled: NO];
+    }];
+    diagnosticStatus = YES;
+}
+
+- (void) newPlantPhase {
+    [Utils fadeOut:_askHuiViewController.view
+        completion:^(BOOL completion){
+            [_askHuiViewController.view removeFromSuperview];
+            [newPlantButton setEnabled: YES];
+            [_askHuiButton setEnabled: YES];
+        }];
+    newPLantStatus = YES;
+    [self onNewPlantTouchUpInside:nil];
+}
+
+- (void) filterPlant:(NSString* )filterSearchText withSensor:(int)sensor withHUI:(HUIViewModel *)huiViewModel {
+    
+    [Utils fadeOut:_askHuiViewController.view completion:^(BOOL finisehd){
+        _searchPlantViewController.sensor = sensor;
+        _searchPlantViewController.huiViewModel = huiViewModel;
+        _searchPlantViewController.filter = filterSearchText;
+        [self.navigationController pushViewController:_searchPlantViewController animated:YES];
+    }];
+
+}
+
+#pragma mark - Delegate Walk
 
 - (void)walkthroughCloseButtonPressed
 {
@@ -317,7 +365,7 @@
      withHuiViewModel:(HUIViewModel *) huiViewModel
              inSensor:(int) sensor
           plantStatus:(NSString* ) status {
-
+    
     /* create the new plant with empty values */
     PlantViewModel* plantViewModel = [[PlantViewModel alloc] init];
     plantViewModel = [PlantViewModel initEmptyPlant:plantObject andPosition: [NSNumber numberWithLong: 0]];
@@ -375,12 +423,21 @@
 
 - (void)showPlantDetail:(PlantViewModel*) plantViewModel{
     
-    _detailPlantViewController.title = [plantViewModel getName];
-    _detailPlantViewController.plantViewModel = plantViewModel;
-    _detailPlantViewController.position = [plantViewModel getPosition];
-    
-    [self.navigationController pushViewController:_detailPlantViewController animated:YES];
+    if(!diagnosticStatus){
+        _detailPlantViewController.title = [plantViewModel getName];
+        _detailPlantViewController.plantViewModel = plantViewModel;
+        _detailPlantViewController.position = [plantViewModel getPosition];
+        
+        [self.navigationController pushViewController:_detailPlantViewController animated:YES];
+    }else{
+        _askHuiViewController.diagnosticStatus = YES;
+        _askHuiViewController.plantViewModel = plantViewModel;
+        [self showHUIAssistant];
+        [_askHuiViewController onSelectPlantToDiagnosticReturnBack];
+        diagnosticStatus = NO;
+    }
 }
+
 #pragma mark - DeleteFromGarden
 
 -(void) removePlantFromBBDDAndCollectionWithId:(NSString* )plantId{
@@ -588,14 +645,26 @@
 
 -(void)closeConfiguration:(HUIViewModel*)huiViewModel withSensor:(int)sensor{
     
-    [Utils fadeOut:_configureViewController.view completion:^(BOOL finisehd){
-        
-        _searchPlantViewController.sensor = sensor;
-        _searchPlantViewController.huiViewModel = huiViewModel;
-        
-        [self.navigationController pushViewController:_searchPlantViewController animated:YES];
-    }];
-    
+    if(!newPLantStatus){
+        [Utils fadeOut:_configureViewController.view completion:^(BOOL finisehd){
+            
+            _searchPlantViewController.sensor = sensor;
+            _searchPlantViewController.huiViewModel = huiViewModel;
+            _searchPlantViewController.filter = @"";
+            
+            [self.navigationController pushViewController:_searchPlantViewController animated:YES];
+        }];
+    } else {
+        [_configureViewController.view removeFromSuperview];
+        _askHuiViewController.diagnosticStatus = NO;
+        _askHuiViewController.newPlantStatus = NO;
+        _askHuiViewController.huiViewModel = huiViewModel;
+        _askHuiViewController.sensor = sensor;
+        [self showHUIAssistant];
+        [_askHuiViewController onNewPlantReturnBack];
+        diagnosticStatus = NO;
+        newPLantStatus = NO;
+    }
 }
 
 - (void) cancelConfiguration{
@@ -630,7 +699,7 @@
     NSMutableDictionary* postNewHuiObject = [[NSMutableDictionary alloc]
                                              initWithDictionary:
                                              @{@"notificationTime": notificationTimeSort,
-                                               @"deviceID": [statusFromBBDD getIdentify],
+                                               @"deviceID": [statusFromBBDD getDeviceID],
                                                @"countryCode": [statusFromBBDD getCountry],
                                                @"huiID": [huiViewModel getName],
                                                @"waterAlarm": [statusFromBBDD getWaterAlarm],

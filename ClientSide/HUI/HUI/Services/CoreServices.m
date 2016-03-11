@@ -32,6 +32,7 @@
 #define PLANT_IMAGE_URL                 @"http://growandhelp.com/plants/%@.png"
 #define CHANGE_PLANT_STATE_POST_URL     [NSURL URLWithString: @"http://www.growandhelp.com/huiWebApp/HuiServer?changePlantStage"]
 #define DELETE_PLANT_POST_URL           [NSURL URLWithString: @" http://www.growandhelp.com/huiWebApp/HuiServer?removePlant"]
+#define DIAGNOSTIC_POST_URL             [NSURL URLWithString: @"http://www.growandhelp.com/huiWebApp/HuiServer?diagnostic"]
 
 @implementation CoreServices
 
@@ -122,6 +123,28 @@
     }
 }
 
+- (void) getPlantListWithFilter:(NSString* )filter withStatus:(StatusViewModel* )status withHuiId:(NSString* )huiID{
+    
+    if( [self isNetWorkAvailable]){
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL: PLANT_LIST_POST_URL];
+        [request setHTTPMethod:@"POST"];
+        
+        NSDictionary *postDictionary = @{
+                                         @"temperatureUnit": [status getMeasures]
+                                         , @"huiID": huiID
+                                         , @"language": [status getLanguage]
+                                         , @"distanceUnit": [status getDistances]
+                                         , @"filter": filter
+                                         };
+        
+        [self postDictionary:postDictionary inRequest:request];
+    }else{
+        [self.delegate answerFromServer: nil];
+    }
+}
+
+
+
 - (void) getPlantState:(PlantViewModel* )plantViewModel withHui:(HUIViewModel* )huiViewModel withStatus:(StatusViewModel* )statusViewModel{
     
     if( [self isNetWorkAvailable]){
@@ -188,7 +211,7 @@
         NSDictionary *postDictionary = @{
                                          @"plantStage": [plant getGrowing]
                                          , @"plantID": [plant getPlantId]
-                                         , @"huiId": [huiViewModel getName]
+                                         , @"huiID": [huiViewModel getName]
                                          , @"moistureID": moisture
                                          };;
         
@@ -259,10 +282,44 @@
             moisture = @"M3";
         }
         
-        
         NSDictionary *postDictionary = @{
                                          @"huiID": [huiViewModel getName] ? [huiViewModel getName] : @""
                                          , @"moistureID": moisture ? moisture : @""
+                                         };;
+        
+        [self postDictionary:postDictionary inRequest:request];
+    }else{
+        [self.delegate answerFromServer: nil];
+    }
+}
+
+- (void) diagnostic: (PlantViewModel* )plant
+       withHuiModel: (HUIViewModel* )huiViewModel
+         withSpeech: (NSString* )speech
+         withStatus: ( StatusViewModel* )status {
+    
+    if( [self isNetWorkAvailable]){
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL: DIAGNOSTIC_POST_URL];
+        [request setHTTPMethod:@"POST"];
+        
+        NSString* moisture = @"M2";
+        
+        if( [[plant getIdentify] isEqualToString: [huiViewModel getSensor1]]){
+            moisture = @"M1";
+        } else if( [[plant getIdentify] isEqualToString: [huiViewModel getSensor2]]){
+            moisture = @"M2";
+        } else if( [[plant getIdentify] isEqualToString: [huiViewModel getSensor3]]){
+            moisture = @"M3";
+        }
+        
+        
+        NSDictionary *postDictionary = @{
+                                         @"speech": speech
+                                         , @"temperatureUnit": [status getMeasures]
+                                         , @"huiID": [huiViewModel getName]
+                                         , @"language": [status getLanguage]
+                                         , @"moistureID": moisture
+                                         , @"distanceUnit": [status getDistances]
                                          };;
         
         [self postDictionary:postDictionary inRequest:request];

@@ -115,10 +115,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="WXH-hK-SrU">
-                                <rect key="frame" x="258" y="22" width="53" height="35"/>
+                                <rect key="frame" x="8" y="8" width="35" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <state key="normal" title="CLOSE">
+                                <state key="normal" backgroundImage="closeButton">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -149,6 +149,7 @@
         </view>
     </objects>
     <resources>
+        <image name="closeButton" width="113" height="113"/>
         <image name="mic_off" width="68" height="68"/>
     </resources>
 </document>

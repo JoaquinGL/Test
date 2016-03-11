@@ -63,6 +63,9 @@
 - (NSString*)getDistances{
     return [ self.innerState valueForKey: @"distances" ];
 }
+- (NSString*)getDeviceID{
+    return [ self.innerState valueForKey: @"deviceID" ];
+}
 
 - (void)setIdentify:(NSString *)identify
 {
@@ -105,6 +108,10 @@
     [ self.innerState setObject:keyGTM forKey:@"keyGTM"];
 }
 
+-(void)setDeviceID:(NSString *)deviceID {
+    [ self.innerState setObject:deviceID forKey:@"deviceID"];
+}
+
 + (StatusViewModel* )getStatusFromObject:(id) object{
     StatusViewModel * returnHUI = [[StatusViewModel alloc] init];
     
@@ -120,6 +127,7 @@
                                  ,@"timeZone": [object valueForKey:@"timeZone"] ? [object valueForKey:@"timeZone"] : @""
                                  ,@"waterAlarm": [object valueForKey:@"waterAlarm"] ? [object valueForKey:@"waterAlarm"] : @""
                                  ,@"keyGTM": [object valueForKey:@"keyGTM"] ? [object valueForKey:@"keyGTM"] : @""
+                                 ,@"deviceID": [object valueForKey:@"deviceID"] ? [object valueForKey:@"deviceID"] : @""
                                  };
     
     [returnHUI.innerState setDictionary: localState];

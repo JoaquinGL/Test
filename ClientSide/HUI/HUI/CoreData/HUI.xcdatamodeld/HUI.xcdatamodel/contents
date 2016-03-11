@@ -35,6 +35,7 @@
     <entity name="Status" syncable="YES">
         <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="country" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="deviceID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="distances" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="keyGTM" optional="YES" attributeType="String" syncable="YES"/>
@@ -50,6 +51,6 @@
     <elements>
         <element name="HUI" positionX="151" positionY="-18" width="128" height="210"/>
         <element name="Plant" positionX="-335" positionY="-97" width="128" height="300"/>
-        <element name="Status" positionX="-126" positionY="9" width="128" height="240"/>
+        <element name="Status" positionX="-126" positionY="9" width="128" height="255"/>
     </elements>
 </model>

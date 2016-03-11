@@ -21,14 +21,18 @@
 
 @end
 
-@interface SearchPlantViewController : BaseViewController<CoreServicesDelegate, MBProgressHUDDelegate>
+@interface SearchPlantViewController : BaseViewController<CoreServicesDelegate, MBProgressHUDDelegate>{
 
+    NSString * _filter;
+    
+}
 
 @property (nonatomic, assign) id <SearchPlantViewControllerDelegate> delegate;
 @property (nonatomic) NSMutableArray* data;
 
 @property (nonatomic, retain) HUIViewModel* huiViewModel;
 @property (nonatomic, assign) int sensor;
+@property (nonatomic, retain) NSString* filter;
 
 + ( SearchPlantViewController* )instantiate;
 

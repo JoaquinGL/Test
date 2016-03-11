@@ -33,6 +33,10 @@
 - (void) getPlantListWithHUID:(NSString* )huiId
                  withLanguage:(NSString* )language;
 
+- (void) getPlantListWithFilter:(NSString* )filter
+                     withStatus:(StatusViewModel* )status
+                      withHuiId:(NSString* )huiID;
+
 - (void) getPlantState:(PlantViewModel* )plantViewModel
                withHui:(HUIViewModel* )huiViewModel
             withStatus:(StatusViewModel* )statusViewModel;
@@ -49,5 +53,9 @@
 
 - (void) deletePlant:(PlantViewModel* )plant
         withHuiModel:(HUIViewModel* )huiViewModel;
+
+- (void) diagnostic:(PlantViewModel* )plant withHuiModel:(HUIViewModel* )huiViewModel
+         withSpeech:(NSString* )speech
+         withStatus:( StatusViewModel* )status;
 
 @end

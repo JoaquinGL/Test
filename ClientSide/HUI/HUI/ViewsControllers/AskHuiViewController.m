@@ -10,6 +10,7 @@
 #import "Manager.h"
 #import "StatusViewModel.h"
 
+
 @interface AskHuiViewController (){
     //TODO, MUTE
 
@@ -25,6 +26,9 @@
     BOOL _isReadingAgain;
     
     BOOL _moveToBottom;
+    
+    BOOL _isDiagnostic;
+    BOOL _isNewPlant;
 }
 
 @end
@@ -41,6 +45,11 @@ const unsigned char SpeechKitApplicationKey[] = {0x0c, 0x24, 0xeb, 0xdb, 0x69, 0
             , vuMeter
             , voiceSearch
             , speakButton
+            , diagnosticStatus = _diagnosticStatus
+            , plantViewModel = _plantViewModel
+            , newPlantStatus = _newPlantStatus
+            , huiViewModel = _huiViewModel
+            , sensor = _sensor
             , vocalizer;
 
 - (void)viewDidLoad {
@@ -80,6 +89,8 @@ const unsigned char SpeechKitApplicationKey[] = {0x0c, 0x24, 0xeb, 0xdb, 0x69, 0
     [_textView setText:@""];
     [_textView setDelegate: self];
     _isReadingAgain = NO;
+    searchBox.text = @"";
+    searchBox.placeholder = NSLocalizedString(@"Tap to write or press record button", nil);
     
 }
 
@@ -94,9 +105,12 @@ const unsigned char SpeechKitApplicationKey[] = {0x0c, 0x24, 0xeb, 0xdb, 0x69, 0
 
 #pragma mark - ACTIONS
 
-- (IBAction)onBackTouchUpInside:(id)sender{
+- (void) clearContent{
     [_textView setText:@""];
-
+    
+    searchBox.text = @"";
+    searchBox.placeholder = NSLocalizedString(@"Tap to write or press record button", nil);
+    
     if (isSpeaking) {
         [vocalizer cancel];
         isSpeaking = NO;
@@ -104,7 +118,13 @@ const unsigned char SpeechKitApplicationKey[] = {0x0c, 0x24, 0xeb, 0xdb, 0x69, 0
     }
     
     [speakButton setAlpha:0.0];
+    
+    self.newPlantStatus = NO;
+}
 
+- (IBAction)onBackTouchUpInside:(id)sender{
+
+    [self clearContent];
     [self.delegate onBackAskTouchUpInside];
 }
 
@@ -112,6 +132,9 @@ const unsigned char SpeechKitApplicationKey[] = {0x0c, 0x24, 0xeb, 0xdb, 0x69, 0
 #pragma mark Actions
 
 - (IBAction)recordButtonAction: (id)sender {
+    
+    self.diagnosticStatus = NO;
+    
     [searchBox resignFirstResponder];
     
     if (transactionState == TS_RECORDING) {
@@ -242,6 +265,8 @@ const unsigned char SpeechKitApplicationKey[] = {0x0c, 0x24, 0xeb, 0xdb, 0x69, 0
     [recordButton setImage:[UIImage imageNamed:@"mic_processing.png"] forState:UIControlStateNormal];
 }
 
+#pragma mark RECOGNIZER - DIAGNOSTIC
+
 - (void)recognizer:(SKRecognizer *)recognizer didFinishWithResults:(SKRecognition *)results
 {
     NSLog(@"Got results.");
@@ -254,8 +279,44 @@ const unsigned char SpeechKitApplicationKey[] = {0x0c, 0x24, 0xeb, 0xdb, 0x69, 0
     
     if (numOfResults > 0){
         searchBox.text = [results firstResult];
-        // send to server the question
-        [_coreServices postQuestion:searchBox.text andStatus:_statusViewModel];
+        
+        if([searchBox.text isEqualToString: @"What's wrong"]){
+            
+            _labelToRead.text = NSLocalizedString(@"Select your plant." , nil);
+            _isDiagnostic = YES;
+             _isNewPlant = NO;
+            
+            [self speakOrStopAction:nil];
+            
+            [self.delegate diagnosticPhase];
+            
+        } else if([searchBox.text isEqualToString: @"New plant"]){
+            
+            _isDiagnostic = NO;
+            _isNewPlant = YES;
+            
+            [self.delegate newPlantPhase];
+            
+        } else {
+            // send to server the question
+            
+            if( self.diagnosticStatus ){
+                [_coreServices diagnostic: self.plantViewModel
+                             withHuiModel: [_manager getHuiWithId:[self.plantViewModel getHuiId]]
+                               withSpeech: searchBox.text
+                               withStatus: _statusViewModel];
+            }else if(self.newPlantStatus){
+                
+                [self.delegate filterPlant: searchBox.text
+                                withSensor: self.sensor
+                                   withHUI: self.huiViewModel];
+                
+                [self clearContent];
+                
+            }else{
+                [_coreServices postQuestion:searchBox.text andStatus:_statusViewModel];
+            }
+        }
     }
     if (results.suggestion){
         UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Suggestion"
@@ -392,6 +453,13 @@ const unsigned char SpeechKitApplicationKey[] = {0x0c, 0x24, 0xeb, 0xdb, 0x69, 0
     
     if ([response objectForKey:@"speechResult"]){
         _labelToRead.text = [response objectForKey:@"speechResult"];
+        
+        
+        if ([_labelToRead.text isEqualToString:@"ERROR"] ){
+            _labelToRead.text = NSLocalizedString(@"Sorry, I can't process this question", nil);
+        }
+            
+        
         [self speakOrStopAction:nil];
     }
 
@@ -417,6 +485,26 @@ const unsigned char SpeechKitApplicationKey[] = {0x0c, 0x24, 0xeb, 0xdb, 0x69, 0
         _moveToBottom = YES;
     }
     return YES;
+}
+
+#pragma mark DiagnosticMethod
+
+- (void) onSelectPlantToDiagnosticReturnBack{
+    
+    [self recordButtonAction:nil];
+    
+    self.diagnosticStatus = YES;
+    
+}
+
+- (void) onNewPlantReturnBack{
+    
+    self.newPlantStatus = YES;
+    
+    _labelToRead.text = NSLocalizedString(@"What do you want to plant?", nil);
+    
+    [self speakOrStopAction:nil];
+
 }
 
 
