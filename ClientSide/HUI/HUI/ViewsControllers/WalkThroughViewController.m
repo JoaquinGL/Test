@@ -49,6 +49,7 @@
 		[self.scrollview setShowsVerticalScrollIndicator:NO];
 		[self.scrollview setPagingEnabled:YES];
 		self.controllers = [[NSMutableArray alloc]init];
+        
 	}
 	return self;
 }
@@ -148,6 +149,17 @@
 														  metrics:nil
 															views:@{@"scrollview":self.scrollview}];
 	[self.view addConstraints:constraints];
+    
+    if (IS_STANDARD_IPHONE_6_PLUS){
+        [self.nextButton setCenter:CGPointMake(self.nextButton.center.x + 100.0f, self.nextButton.center.y)];
+        [self.pageController setCenter:CGPointMake(self.pageController.center.x + 50.0f, self.pageController.center.y + 50.0f)];
+        [self.closeButton setCenter:CGPointMake(self.closeButton.center.x + 70.0f, self.closeButton.center.y)];
+    }
+    if (IS_STANDARD_IPHONE_6){
+        [self.nextButton setCenter:CGPointMake(self.nextButton.center.x + 70.0f, self.nextButton.center.y)];
+        [self.pageController setCenter:CGPointMake(self.pageController.center.x + 30.0f, self.pageController.center.y + 30.0f)];
+        [self.closeButton setCenter:CGPointMake(self.closeButton.center.x + 50.0f, self.closeButton.center.y)];
+    }
 	
 }
 

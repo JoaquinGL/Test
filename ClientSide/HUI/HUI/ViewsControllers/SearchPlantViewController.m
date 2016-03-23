@@ -143,7 +143,7 @@
                                     
                                 }];
     UIAlertAction* noButton = [UIAlertAction
-                               actionWithTitle:NSLocalizedString(@"Shoots", nil)
+                               actionWithTitle:NSLocalizedString(@"Plant", nil)
                                style:UIAlertActionStyleDefault
                                handler:^(UIAlertAction * action)
                                {

@@ -8,6 +8,9 @@
 
 #import "Utils.h"
 
+
+
+
 @implementation Utils
 
 
@@ -61,5 +64,19 @@
      ];
 
 }
+
++ (NSString* )viewToDevice:(NSString* )view{
+    
+    if (IS_STANDARD_IPHONE_6 || IS_ZOOMED_IPHONE_6){
+        view = [NSString stringWithFormat:@"%@%@", view, @"_2x" ];
+    }else if (IS_STANDARD_IPHONE_6_PLUS || IS_ZOOMED_IPHONE_6_PLUS){
+        view = [NSString stringWithFormat:@"%@%@", view, @"_3x" ];
+    }else if (! IS_IPHONE_5){
+        view = [NSString stringWithFormat:@"%@%@", view, @"_1x" ];
+    }
+    
+    return view;
+}
+
 
 @end

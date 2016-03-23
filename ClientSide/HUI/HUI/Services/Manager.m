@@ -574,6 +574,10 @@ withPlantViewModel: ( PlantViewModel* )plantViewModel
 - (void) setInitialStatus{
     NSManagedObjectContext *context = [self managedObjectContext];
     
+    /* Time zone */
+    NSTimeZone *timeZone = [NSTimeZone localTimeZone];
+    NSString *tzName = [timeZone name];
+    
     /* Status object */
     NSManagedObject *statusInfo = [NSEntityDescription
                                   insertNewObjectForEntityForName:@"Status"
@@ -582,10 +586,10 @@ withPlantViewModel: ( PlantViewModel* )plantViewModel
     [statusInfo setValue:STATUS_APP_ID forKey:@"id"];
     [statusInfo setValue:SERVER_API_KEY forKey:@"keyGTM"];
     
-    // TODO set in the configuration view
     [statusInfo setValue:@"en" forKey:@"language"];
     [statusInfo setValue:@"[Celsius]" forKey:@"measures"];
     [statusInfo setValue:@"[centimeters]" forKey:@"distances"];
+    [statusInfo setValue:tzName forKey:@"timeZone"];
     
     NSError *error;
     if (![context save:&error]) {

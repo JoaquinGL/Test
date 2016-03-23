@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ConfigureViewController">
+            <connections>
+                <outlet property="_configurationView" destination="Hdt-Dr-hUT" id="fBD-Ld-Ifn"/>
+                <outlet property="_continueSensorButton" destination="Nfg-nR-BL0" id="oqW-Fg-i0i"/>
+                <outlet property="_dateLabel" destination="iNI-Lc-Rj5" id="h8A-cE-kDY"/>
+                <outlet property="_datePicker" destination="3rl-li-WS3" id="8Y7-YG-Khx"/>
+                <outlet property="_datePickerView" destination="aLV-7L-PGw" id="FGf-Iq-cnW"/>
+                <outlet property="_doneButton" destination="c8P-xx-hFd" id="yEh-wQ-Ix4"/>
+                <outlet property="_editDateButton" destination="8ax-bM-PTc" id="Xe7-9L-wbP"/>
+                <outlet property="_editDateImageView" destination="bn7-ui-QY4" id="VbK-bz-f7i"/>
+                <outlet property="_editNameButton" destination="cB2-tD-m69" id="FbN-qY-sgR"/>
+                <outlet property="_editNameImageView" destination="iEU-A5-goA" id="yHP-Je-Nyg"/>
+                <outlet property="_editNumberButton" destination="Gnt-y1-yfW" id="A84-Sz-S0g"/>
+                <outlet property="_editNumberImageView" destination="wN6-1w-787" id="Bp2-6h-JsG"/>
+                <outlet property="_huiIdLabel" destination="eHR-uH-JvQ" id="iEw-lK-s7h"/>
+                <outlet property="_huiNameLabel" destination="xGE-y4-Ffq" id="wcL-EK-6lw"/>
+                <outlet property="_huiSelectorPickerView" destination="vcX-iN-9MB" id="kGP-zJ-4rP"/>
+                <outlet property="_parametersView" destination="4mr-5x-nct" id="LGY-oI-07K"/>
+                <outlet property="_selectionHUIButton" destination="3Mb-Ox-7x2" id="fMr-5s-9Mo"/>
+                <outlet property="_sensor1Button" destination="eFp-t0-yHF" id="2mG-8Q-UKt"/>
+                <outlet property="_sensor2Button" destination="3ti-gM-rlS" id="2f6-7S-RrB"/>
+                <outlet property="_sensor3Button" destination="wHR-MJ-5fD" id="5n3-bu-yCB"/>
+                <outlet property="_sensorConfigureView" destination="fuv-Gi-mXw" id="aRL-UP-OVz"/>
+                <outlet property="configureButton" destination="9cf-DI-dJN" id="B4A-ne-ZTh"/>
+                <outlet property="configureLabel" destination="pPV-Nh-QQE" id="oGn-QN-0Oa"/>
+                <outlet property="configureTextField" destination="M0t-ZL-OIf" id="4ux-3K-sY7"/>
+                <outlet property="view" destination="dgH-3e-cy1" id="Idk-pl-JHf"/>
+                <outletCollection property="_editButtons" destination="cB2-tD-m69" id="q2x-Bk-Dnv"/>
+                <outletCollection property="_editButtons" destination="8ax-bM-PTc" id="IDm-nF-Sto"/>
+                <outletCollection property="_editImagesButtons" destination="iEU-A5-goA" id="qX5-Hw-x2L"/>
+                <outletCollection property="_editImagesButtons" destination="wN6-1w-787" id="GTO-S0-YZX"/>
+                <outletCollection property="_editImagesButtons" destination="bn7-ui-QY4" id="qC1-2D-cnM"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="dgH-3e-cy1">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6JB-h7-Ygo">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" id="OC2-Gb-lSk">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vcX-iN-9MB">
+                                <rect key="frame" x="1" y="141" width="413" height="118"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="-1" id="al3-rV-oBJ"/>
+                                    <outlet property="delegate" destination="-1" id="0yF-0B-mVN"/>
+                                </connections>
+                            </pickerView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="HUI name:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pPV-Nh-QQE">
+                                <rect key="frame" x="20" y="63" width="269" height="49"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="M0t-ZL-OIf">
+                                <rect key="frame" x="20" y="110" width="386" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="onNextButtonTouchUpInside:" destination="-1" eventType="touchDragEnter" id="MXL-0r-hys"/>
+                                </connections>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9cf-DI-dJN">
+                                <rect key="frame" x="272" y="148" width="134" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <state key="normal" title="CONTINUE">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="onNextButtonTouchUpInside:" destination="-1" eventType="touchUpInside" id="tPp-3W-AIq"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Configure HUI" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZqB-Ll-O7p">
+                                <rect key="frame" x="164" y="1" width="128" height="49"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Mb-Ox-7x2">
+                                <rect key="frame" x="329" y="71" width="77" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <state key="normal" title="CONTINUE">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="onSelectorTouchUpInside:" destination="-1" eventType="touchUpInside" id="B0Q-eA-FPz"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jb9-hD-vW2">
+                                <rect key="frame" x="8" y="8" width="35" height="35"/>
+                                <state key="normal" backgroundImage="closeButton"/>
+                                <connections>
+                                    <action selector="onCancelButtonTouchUpInside:" destination="-1" eventType="touchUpInside" id="CFP-Y3-egW"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aLV-7L-PGw">
+                                <rect key="frame" x="0.0" y="520" width="414" height="216"/>
+                                <subviews>
+                                    <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="3rl-li-WS3">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="216"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <date key="date" timeIntervalSinceReferenceDate="474114962.579274">
+                                            <!--2016-01-10 10:36:02 +0000-->
+                                        </date>
+                                    </datePicker>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4mr-5x-nct">
+                                <rect key="frame" x="87" y="392" width="240" height="128"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NId-8x-OKR">
+                                        <rect key="frame" x="26" y="37" width="189" height="54"/>
+                                        <color key="backgroundColor" red="0.1529411765" green="0.36862745099999999" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="CONTINUE"/>
+                                        <connections>
+                                            <action selector="onCloseButtonTouchUpInside:" destination="-1" eventType="touchUpInside" id="WCr-9r-Vfh"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hdt-Dr-hUT">
+                                <rect key="frame" x="64" y="267" width="287" height="117"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="editButton" translatesAutoresizingMaskIntoConstraints="NO" id="iEU-A5-goA">
+                                        <rect key="frame" x="4" y="8" width="20" height="20"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="editButton" translatesAutoresizingMaskIntoConstraints="NO" id="wN6-1w-787">
+                                        <rect key="frame" x="4" y="48" width="20" height="20"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="editButton" translatesAutoresizingMaskIntoConstraints="NO" id="bn7-ui-QY4">
+                                        <rect key="frame" x="4" y="88" width="20" height="20"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xGE-y4-Ffq">
+                                        <rect key="frame" x="32" y="7" width="240" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Number:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eHR-uH-JvQ">
+                                        <rect key="frame" x="32" y="48" width="240" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Notification Date:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iNI-Lc-Rj5">
+                                        <rect key="frame" x="32" y="88" width="240" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cB2-tD-m69" userLabel="EditName">
+                                        <rect key="frame" x="4" y="7" width="278" height="30"/>
+                                        <connections>
+                                            <action selector="onEditTouchUpInside:" destination="-1" eventType="touchUpInside" id="q2P-yL-buX"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8ax-bM-PTc" userLabel="EditDate">
+                                        <rect key="frame" x="4" y="87" width="278" height="30"/>
+                                        <connections>
+                                            <action selector="onEditTouchUpInside:" destination="-1" eventType="touchUpInside" id="Jqk-xn-ZZi"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gnt-y1-yfW" userLabel="Edit Number">
+                                        <rect key="frame" x="4" y="47" width="278" height="30"/>
+                                        <connections>
+                                            <action selector="onEditTouchUpInside:" destination="-1" eventType="touchUpInside" id="fv8-yG-exc"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c8P-xx-hFd">
+                                <rect key="frame" x="371" y="8" width="35" height="35"/>
+                                <state key="normal" backgroundImage="doneButton"/>
+                                <connections>
+                                    <action selector="onCloseButtonTouchUpInside:" destination="-1" eventType="touchUpInside" id="TO7-EX-geI"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fuv-Gi-mXw">
+                                <rect key="frame" x="20" y="71" width="386" height="281"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="modal" translatesAutoresizingMaskIntoConstraints="NO" id="LsY-UO-Ubj">
+                                        <rect key="frame" x="0.0" y="0.0" width="386" height="281"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="huis" translatesAutoresizingMaskIntoConstraints="NO" id="PSn-Ye-4iZ">
+                                        <rect key="frame" x="46" y="65" width="282" height="151"/>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eFp-t0-yHF">
+                                        <rect key="frame" x="46" y="84" width="51" height="112"/>
+                                        <state key="selected" backgroundImage="huiSelected"/>
+                                        <state key="highlighted" backgroundImage="huiTaken"/>
+                                        <connections>
+                                            <action selector="onSensorTouchUpInside:" destination="-1" eventType="touchUpInside" id="mnH-MH-SF9"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3ti-gM-rlS">
+                                        <rect key="frame" x="162" y="84" width="51" height="111"/>
+                                        <state key="selected" backgroundImage="huiSelected"/>
+                                        <state key="highlighted" backgroundImage="huiTaken"/>
+                                        <connections>
+                                            <action selector="onSensorTouchUpInside:" destination="-1" eventType="touchUpInside" id="P7V-Zb-NT7"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wHR-MJ-5fD">
+                                        <rect key="frame" x="277" y="84" width="51" height="111"/>
+                                        <state key="selected" backgroundImage="huiSelected"/>
+                                        <state key="highlighted" backgroundImage="huiTaken"/>
+                                        <connections>
+                                            <action selector="onSensorTouchUpInside:" destination="-1" eventType="touchUpInside" id="9ma-tu-hgW"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nfg-nR-BL0">
+                                        <rect key="frame" x="87" y="224" width="201" height="44"/>
+                                        <state key="normal" title="CONTINUE">
+                                            <color key="titleColor" red="0.95742982629999995" green="0.95742982629999995" blue="0.95742982629999995" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="onContinueSensorTouchUpInside:" destination="-1" eventType="touchUpInside" id="YpZ-iu-JFW"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="M1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HxQ-3C-rkf">
+                                        <rect key="frame" x="60" y="55" width="23" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="M2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kVu-N3-Gdr">
+                                        <rect key="frame" x="173" y="55" width="29" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="M3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ffp-k5-puI">
+                                        <rect key="frame" x="290" y="55" width="25" height="20"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Select HUI sensor" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wNr-qG-bQL">
+                                        <rect key="frame" x="118" y="24" width="138" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                    </view>
+                    <blurEffect style="dark"/>
+                </visualEffectView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+            <point key="canvasLocation" x="500" y="332"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="closeButton" width="113" height="113"/>
+        <image name="doneButton" width="113" height="113"/>
+        <image name="editButton" width="313" height="313"/>
+        <image name="huiSelected" width="38" height="85"/>
+        <image name="huiTaken" width="38" height="85"/>
+        <image name="huis" width="209" height="85"/>
+        <image name="modal" width="235" height="311"/>
+    </resources>
+</document>

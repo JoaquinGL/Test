@@ -31,6 +31,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    if(IS_STANDARD_IPHONE_6){
+        self.view.frame = CGRectMake(0, 0, 375, 667);
+    }
+    
+    
     [self customInit];
 }
 
@@ -66,12 +72,14 @@
 
 - (IBAction)showWalkthrough:(id)sender {
     
-    WalkThroughViewController *walkthrough = [[WalkThroughViewController alloc]init];
+    WalkThroughViewController *walkthrough = [WalkThroughViewController instantiateWithNibName:[Utils viewToDevice:@"WalkThroughViewController"]];
     
-    WalkthroughPageViewController *page_one = [[WalkthroughPageViewController alloc]initWithNibName:@"WalkOne" bundle:nil];
-    WalkthroughPageViewController *page_two = [[WalkthroughPageViewController alloc]initWithNibName:@"WalkTwo" bundle:nil];
-    CustomPageViewController *page_three = [[CustomPageViewController alloc]initWithNibName:@"WalkThree" bundle:nil];
-    WalkthroughPageViewController *page_zero = [[WalkthroughPageViewController alloc]initWithNibName:@"WalkZero" bundle:nil];
+    WalkthroughPageViewController *page_one = [[WalkthroughPageViewController alloc]initWithNibName:[Utils viewToDevice:@"WalkOne"] bundle:nil];
+    WalkthroughPageViewController *page_two = [[WalkthroughPageViewController alloc]initWithNibName:[Utils viewToDevice:@"WalkTwo"] bundle:nil];
+    CustomPageViewController *page_three = [[CustomPageViewController alloc]initWithNibName:[Utils viewToDevice:@"WalkThree"] bundle:nil];
+    WalkthroughPageViewController *page_fourth = [[WalkthroughPageViewController alloc]initWithNibName:[Utils viewToDevice:@"WalkFourth"] bundle:nil];
+    CustomPageViewController *page_fifth = [[CustomPageViewController alloc]initWithNibName:[Utils viewToDevice:@"WalkFifth"] bundle:nil];
+    WalkthroughPageViewController *page_zero = [[WalkthroughPageViewController alloc]initWithNibName:[Utils viewToDevice:@"WalkZero"] bundle:nil];
     
     // Attach the pages to the master
     walkthrough.delegate = self;
@@ -79,6 +87,8 @@
     [walkthrough addViewController:page_one];
     [walkthrough addViewController:page_two];
     [walkthrough addViewController:page_three];
+    [walkthrough addViewController:page_fourth];
+    [walkthrough addViewController:page_fifth];
     [walkthrough addViewController:page_zero];
     
     [self presentViewController:walkthrough animated:YES completion:nil];

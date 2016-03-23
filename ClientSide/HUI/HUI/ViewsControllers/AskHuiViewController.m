@@ -35,7 +35,7 @@
 
 //const unsigned char SpeechKitApplicationKey[] = {0x2b, 0x68, 0xea, 0x70, 0x07, 0x01, 0xc0, 0xff, 0xea, 0xb5, 0x2b, 0xb4, 0x60, 0xea, 0xb5, 0x4a, 0xba, 0xed, 0x7f, 0x1a, 0xd3, 0x3e, 0x53, 0x4d, 0xbc, 0x6a, 0x61, 0xcb, 0xf2, 0xc0, 0xe2, 0x1d, 0x29, 0xcc, 0x8d, 0x30, 0xcd, 0x4e, 0x2f, 0xb7, 0x03, 0x5a, 0x6b, 0x63, 0x44, 0x20, 0xae, 0xfe, 0x0d, 0x2d, 0x19, 0xe1, 0x6c, 0x6c, 0x2e, 0x28, 0xd7, 0x90, 0xf3, 0xc9, 0x50, 0xd5, 0xe7, 0x79};
 
-const unsigned char SpeechKitApplicationKey[] = {0x0c, 0x24, 0xeb, 0xdb, 0x69, 0x22, 0x51, 0x9f, 0xfe, 0xc1, 0x73, 0xbc, 0x2f, 0xe1, 0xad, 0x28, 0x07, 0x50, 0x22, 0x54, 0x17, 0xd1, 0xe1, 0x02, 0x98, 0x58, 0x99, 0x2b, 0x66, 0x18, 0xdb, 0x73, 0x3d, 0xc6, 0x4e, 0xa6, 0xe8, 0xa0, 0x45, 0xe6, 0x61, 0xb8, 0xa2, 0x90, 0x9a, 0x50, 0xb9, 0xa1, 0xa0, 0xdb, 0xf5, 0xb7, 0xac, 0xd7, 0xba, 0x44, 0x2f, 0x53, 0x6f, 0x95, 0x6c, 0x4a, 0x08, 0xa9};
+const unsigned char SpeechKitApplicationKey[] = {0xea, 0xb5, 0x52, 0x00, 0x8d, 0xb0, 0x76, 0x88, 0x86, 0xe8, 0xdc, 0x7e, 0x24, 0x60, 0xd8, 0x23, 0xab, 0x7e, 0x3a, 0x6e, 0x66, 0x8f, 0x33, 0x25, 0x8e, 0x6c, 0x12, 0xda, 0x1e, 0x8d, 0x34, 0x08, 0x43, 0x86, 0x09, 0xd0, 0x37, 0x7f, 0x58, 0xbd, 0x67, 0x34, 0x3b, 0x8b, 0x94, 0x13, 0xae, 0x3f, 0x91, 0xe8, 0xad, 0xf7, 0x78, 0xe0, 0x1d, 0x06, 0x4d, 0x2f, 0xe0, 0x6b, 0xbc, 0x14, 0x74, 0xff};
 
 
 @implementation AskHuiViewController
@@ -61,10 +61,10 @@ const unsigned char SpeechKitApplicationKey[] = {0x0c, 0x24, 0xeb, 0xdb, 0x69, 0
     [_responseTitle setAlpha: 0.0f];
     [speakButton setAlpha: 0.0f];
     
-    [SpeechKit setupWithID:@"NMDPPRODUCTION_Joaquin_Giraldez_HUI_20160307042306"
-                      host:@"fvr.nmdp.nuancemobility.net"
+    [SpeechKit setupWithID:@"NMDPTRIAL_jjm_growandhelp_com20160317044052"
+                      host:@"sslsandbox.nmdp.nuancemobility.net"
                       port:443
-                    useSSL:NO
+                    useSSL:YES
                   delegate:self];
     
     // Set earcons to play
@@ -100,7 +100,8 @@ const unsigned char SpeechKitApplicationKey[] = {0x0c, 0x24, 0xeb, 0xdb, 0x69, 0
 }
 
 + ( AskHuiViewController* )instantiate{
-    return [[AskHuiViewController alloc] initWithNibName:@"AskHuiView" bundle:nil];
+    
+    return [[AskHuiViewController alloc] initWithNibName:[self viewToDevice:@"AskHuiView"] bundle:nil];
 }
 
 #pragma mark - ACTIONS
@@ -216,7 +217,7 @@ const unsigned char SpeechKitApplicationKey[] = {0x0c, 0x24, 0xeb, 0xdb, 0x69, 0
 #pragma mark SpeechKitDelegate methods
 
 - (void) audioSessionReleased {
-    NSLog(@"audio session released");
+
 }
 
 - (void) destroyed {
@@ -247,7 +248,7 @@ const unsigned char SpeechKitApplicationKey[] = {0x0c, 0x24, 0xeb, 0xdb, 0x69, 0
 
 - (void)recognizerDidBeginRecording:(SKRecognizer *)recognizer
 {
-    NSLog(@"Recording started.");
+   
     
     transactionState = TS_RECORDING;
     [recordButton setImage:[UIImage imageNamed:@"mic_on.png"] forState:UIControlStateNormal];
@@ -257,7 +258,7 @@ const unsigned char SpeechKitApplicationKey[] = {0x0c, 0x24, 0xeb, 0xdb, 0x69, 0
 
 - (void)recognizerDidFinishRecording:(SKRecognizer *)recognizer
 {
-    NSLog(@"Recording finished.");
+   
     _isReadingAgain = NO;
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(updateVUMeter) object:nil];
     [self setVUMeterWidth:0.];
@@ -269,8 +270,6 @@ const unsigned char SpeechKitApplicationKey[] = {0x0c, 0x24, 0xeb, 0xdb, 0x69, 0
 
 - (void)recognizer:(SKRecognizer *)recognizer didFinishWithResults:(SKRecognition *)results
 {
-    NSLog(@"Got results.");
-    NSLog(@"Session id [%@].", [SpeechKit sessionID]); // for debugging purpose: printing out the speechkit session id
     
     long numOfResults = [results.results count];
     
@@ -337,8 +336,6 @@ const unsigned char SpeechKitApplicationKey[] = {0x0c, 0x24, 0xeb, 0xdb, 0x69, 0
 
 - (void)recognizer:(SKRecognizer *)recognizer didFinishWithError:(NSError *)error suggestion:(NSString *)suggestion
 {
-    NSLog(@"Got error.");
-    NSLog(@"Session id [%@].", [SpeechKit sessionID]); // for debugging purpose: printing out the speechkit session id
     
     transactionState = TS_IDLE;
     [recordButton setTitle:@"Record" forState:UIControlStateNormal];
@@ -410,23 +407,8 @@ const unsigned char SpeechKitApplicationKey[] = {0x0c, 0x24, 0xeb, 0xdb, 0x69, 0
 }
 
 - (void)vocalizer:(SKVocalizer *)vocalizer didFinishSpeakingString:(NSString *)text withError:(NSError *)error {
-    NSLog(@"Session id [%@].", [SpeechKit sessionID]); // for debugging purpose: printing out the speechkit session id
     isSpeaking = NO;
     [speakButton setTitle:@"Read it again" forState:UIControlStateNormal];
-    if (error !=nil)
-    {
-        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Error"
-                                                                       message:[error localizedDescription]
-                                                                preferredStyle:UIAlertControllerStyleAlert];
-        
-        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
-                                                              handler:^(UIAlertAction * action) {}];
-        
-        [alert addAction:defaultAction];
-        [self presentViewController:alert animated:YES completion:nil];
-        
-        
-    }
 }
 
 
@@ -447,10 +429,8 @@ const unsigned char SpeechKitApplicationKey[] = {0x0c, 0x24, 0xeb, 0xdb, 0x69, 0
 #pragma  mark - CoreServicesDelegate
 
 
--(void)answerFromServer:(NSDictionary *)response{
+- ( void )answerFromServer:( NSDictionary * )response {
 
-    NSLog(@"Respuesta delegada: %@", response);
-    
     if ([response objectForKey:@"speechResult"]){
         _labelToRead.text = [response objectForKey:@"speechResult"];
         
@@ -458,7 +438,6 @@ const unsigned char SpeechKitApplicationKey[] = {0x0c, 0x24, 0xeb, 0xdb, 0x69, 0
         if ([_labelToRead.text isEqualToString:@"ERROR"] ){
             _labelToRead.text = NSLocalizedString(@"Sorry, I can't process this question", nil);
         }
-            
         
         [self speakOrStopAction:nil];
     }

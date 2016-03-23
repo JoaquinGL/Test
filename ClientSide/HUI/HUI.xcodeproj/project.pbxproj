@@ -18,6 +18,21 @@
 		E308169C1C0457EA0007D896 /* WalkZero.xib in Resources */ = {isa = PBXBuildFile; fileRef = E30816971C0457EA0007D896 /* WalkZero.xib */; };
 		E30982EE1C845978008F0376 /* StatusViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E30982ED1C845978008F0376 /* StatusViewModel.m */; };
 		E3190EEB1C06F36800F8C390 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3190EEA1C06F36800F8C390 /* BaseViewController.m */; };
+		E32162211C9B146F00E3A10E /* DetailPlantView_1x.xib in Resources */ = {isa = PBXBuildFile; fileRef = E32162201C9B146F00E3A10E /* DetailPlantView_1x.xib */; };
+		E32162231C9B148000E3A10E /* DetailPlantView_3x.xib in Resources */ = {isa = PBXBuildFile; fileRef = E32162221C9B148000E3A10E /* DetailPlantView_3x.xib */; };
+		E32162251C9B148900E3A10E /* DetailPlantView_2x.xib in Resources */ = {isa = PBXBuildFile; fileRef = E32162241C9B148900E3A10E /* DetailPlantView_2x.xib */; };
+		E32162271C9B21BB00E3A10E /* SettingsView_2x.xib in Resources */ = {isa = PBXBuildFile; fileRef = E32162261C9B21BB00E3A10E /* SettingsView_2x.xib */; };
+		E32162291C9B21C200E3A10E /* SettingsView_3x.xib in Resources */ = {isa = PBXBuildFile; fileRef = E32162281C9B21C200E3A10E /* SettingsView_3x.xib */; };
+		E321622B1C9B21C900E3A10E /* SettingsView_1x.xib in Resources */ = {isa = PBXBuildFile; fileRef = E321622A1C9B21C900E3A10E /* SettingsView_1x.xib */; };
+		E321622D1C9B22E900E3A10E /* ConfigureView_2x.xib in Resources */ = {isa = PBXBuildFile; fileRef = E321622C1C9B22E900E3A10E /* ConfigureView_2x.xib */; };
+		E321622F1C9B22F300E3A10E /* ConfigureView_3x.xib in Resources */ = {isa = PBXBuildFile; fileRef = E321622E1C9B22F300E3A10E /* ConfigureView_3x.xib */; };
+		E32162311C9B22FA00E3A10E /* ConfigureView_1x.xib in Resources */ = {isa = PBXBuildFile; fileRef = E32162301C9B22FA00E3A10E /* ConfigureView_1x.xib */; };
+		E32162331C9BDA1300E3A10E /* AskHuiView_2x.xib in Resources */ = {isa = PBXBuildFile; fileRef = E32162321C9BDA1300E3A10E /* AskHuiView_2x.xib */; };
+		E32162371C9BDA2500E3A10E /* AskHuiView_1x.xib in Resources */ = {isa = PBXBuildFile; fileRef = E32162361C9BDA2500E3A10E /* AskHuiView_1x.xib */; };
+		E321623B1C9BDAAF00E3A10E /* AskHuiView_3x.xib in Resources */ = {isa = PBXBuildFile; fileRef = E321623A1C9BDAAF00E3A10E /* AskHuiView_3x.xib */; };
+		E321623D1C9BE3C000E3A10E /* MainView_1x.xib in Resources */ = {isa = PBXBuildFile; fileRef = E321623C1C9BE3C000E3A10E /* MainView_1x.xib */; };
+		E321623F1C9BE3C700E3A10E /* MainView_3x.xib in Resources */ = {isa = PBXBuildFile; fileRef = E321623E1C9BE3C700E3A10E /* MainView_3x.xib */; };
+		E32162411C9BE3CE00E3A10E /* MainView_2x.xib in Resources */ = {isa = PBXBuildFile; fileRef = E32162401C9BE3CE00E3A10E /* MainView_2x.xib */; };
 		E32A47311C56725600EDF993 /* Comunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = E32A47301C56725600EDF993 /* Comunicator.m */; };
 		E33823751C1A2C310029C285 /* HUIViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E33823741C1A2C310029C285 /* HUIViewModel.m */; };
 		E36079CB1C18867D00AD6D11 /* BaseViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E36079CA1C18867D00AD6D11 /* BaseViewModel.m */; };
@@ -40,6 +55,27 @@
 		E3B3B0161C71E16F005C39CC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E3B3B0151C71E16F005C39CC /* GoogleService-Info.plist */; };
 		E3B3B01F1C7CA8D0005C39CC /* SocketConnectionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E3B3B01E1C7CA8D0005C39CC /* SocketConnectionVC.m */; };
 		E3B3B0211C7CA974005C39CC /* SocketConnectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3B3B0201C7CA974005C39CC /* SocketConnectionView.xib */; };
+		E3BF6DCB1CA05E46000FCBE2 /* WalkFifth_1x.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3BF6DC41CA05E46000FCBE2 /* WalkFifth_1x.xib */; };
+		E3BF6DCC1CA05E46000FCBE2 /* WalkFourth_1x.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3BF6DC51CA05E46000FCBE2 /* WalkFourth_1x.xib */; };
+		E3BF6DCD1CA05E46000FCBE2 /* WalkOne_1x.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3BF6DC61CA05E46000FCBE2 /* WalkOne_1x.xib */; };
+		E3BF6DCE1CA05E46000FCBE2 /* WalkThree_1x.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3BF6DC71CA05E46000FCBE2 /* WalkThree_1x.xib */; };
+		E3BF6DCF1CA05E46000FCBE2 /* WalkThroughViewController_1x.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3BF6DC81CA05E46000FCBE2 /* WalkThroughViewController_1x.xib */; };
+		E3BF6DD01CA05E46000FCBE2 /* WalkTwo_1x.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3BF6DC91CA05E46000FCBE2 /* WalkTwo_1x.xib */; };
+		E3BF6DD11CA05E46000FCBE2 /* WalkZero_1x.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3BF6DCA1CA05E46000FCBE2 /* WalkZero_1x.xib */; };
+		E3BF6DDA1CA05E50000FCBE2 /* WalkFifth_3x.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3BF6DD31CA05E50000FCBE2 /* WalkFifth_3x.xib */; };
+		E3BF6DDB1CA05E50000FCBE2 /* WalkFourth_3x.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3BF6DD41CA05E50000FCBE2 /* WalkFourth_3x.xib */; };
+		E3BF6DDC1CA05E50000FCBE2 /* WalkOne_3x.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3BF6DD51CA05E50000FCBE2 /* WalkOne_3x.xib */; };
+		E3BF6DDD1CA05E50000FCBE2 /* WalkThree_3x.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3BF6DD61CA05E50000FCBE2 /* WalkThree_3x.xib */; };
+		E3BF6DDE1CA05E50000FCBE2 /* WalkThroughViewController_3x.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3BF6DD71CA05E50000FCBE2 /* WalkThroughViewController_3x.xib */; };
+		E3BF6DDF1CA05E50000FCBE2 /* WalkTwo_3x.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3BF6DD81CA05E50000FCBE2 /* WalkTwo_3x.xib */; };
+		E3BF6DE01CA05E50000FCBE2 /* WalkZero_3x.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3BF6DD91CA05E50000FCBE2 /* WalkZero_3x.xib */; };
+		E3BF6DE91CA05E5A000FCBE2 /* WalkFifth_2x.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3BF6DE21CA05E5A000FCBE2 /* WalkFifth_2x.xib */; };
+		E3BF6DEA1CA05E5A000FCBE2 /* WalkFourth_2x.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3BF6DE31CA05E5A000FCBE2 /* WalkFourth_2x.xib */; };
+		E3BF6DEB1CA05E5A000FCBE2 /* WalkOne_2x.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3BF6DE41CA05E5A000FCBE2 /* WalkOne_2x.xib */; };
+		E3BF6DEC1CA05E5A000FCBE2 /* WalkThree_2x.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3BF6DE51CA05E5A000FCBE2 /* WalkThree_2x.xib */; };
+		E3BF6DED1CA05E5A000FCBE2 /* WalkThroughViewController_2x.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3BF6DE61CA05E5A000FCBE2 /* WalkThroughViewController_2x.xib */; };
+		E3BF6DEE1CA05E5A000FCBE2 /* WalkTwo_2x.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3BF6DE71CA05E5A000FCBE2 /* WalkTwo_2x.xib */; };
+		E3BF6DEF1CA05E5A000FCBE2 /* WalkZero_2x.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3BF6DE81CA05E5A000FCBE2 /* WalkZero_2x.xib */; };
 		E3CE4E161C0221850096D0FB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E3CE4E151C0221850096D0FB /* main.m */; };
 		E3CE4E191C0221850096D0FB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E3CE4E181C0221850096D0FB /* AppDelegate.m */; };
 		E3CE4E241C0221850096D0FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3CE4E231C0221850096D0FB /* Assets.xcassets */; };
@@ -55,6 +91,8 @@
 		E3CE4E651C0227250096D0FB /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3CE4E641C0227250096D0FB /* ImageIO.framework */; };
 		E3CE4E671C0227330096D0FB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3CE4E661C0227330096D0FB /* QuartzCore.framework */; };
 		E3CE4E691C0227B70096D0FB /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E3CE4E681C0227B60096D0FB /* libsqlite3.0.tbd */; };
+		E3D628BA1C9717A500BBF1CD /* WalkFifth.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3D628B91C9717A500BBF1CD /* WalkFifth.xib */; };
+		E3D628BC1C971A2B00BBF1CD /* WalkFourth.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3D628BB1C971A2B00BBF1CD /* WalkFourth.xib */; };
 		E3DA78621C08430600F6C06A /* PlantViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3DA78611C08430600F6C06A /* PlantViewController.m */; };
 		E3DA78641C08486800F6C06A /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3DA78631C08486800F6C06A /* CFNetwork.framework */; };
 		E3DA78661C08489200F6C06A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3DA78651C08489200F6C06A /* UIKit.framework */; };
@@ -124,6 +162,21 @@
 		E30982ED1C845978008F0376 /* StatusViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusViewModel.m; sourceTree = "<group>"; };
 		E3190EE91C06F36800F8C390 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		E3190EEA1C06F36800F8C390 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
+		E32162201C9B146F00E3A10E /* DetailPlantView_1x.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DetailPlantView_1x.xib; path = 4Views/DetailPlantView_1x.xib; sourceTree = "<group>"; };
+		E32162221C9B148000E3A10E /* DetailPlantView_3x.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DetailPlantView_3x.xib; path = 6plusViews/DetailPlantView_3x.xib; sourceTree = "<group>"; };
+		E32162241C9B148900E3A10E /* DetailPlantView_2x.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DetailPlantView_2x.xib; path = 6Views/DetailPlantView_2x.xib; sourceTree = "<group>"; };
+		E32162261C9B21BB00E3A10E /* SettingsView_2x.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SettingsView_2x.xib; path = 6Views/SettingsView_2x.xib; sourceTree = "<group>"; };
+		E32162281C9B21C200E3A10E /* SettingsView_3x.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SettingsView_3x.xib; path = 6plusViews/SettingsView_3x.xib; sourceTree = "<group>"; };
+		E321622A1C9B21C900E3A10E /* SettingsView_1x.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SettingsView_1x.xib; path = 4Views/SettingsView_1x.xib; sourceTree = "<group>"; };
+		E321622C1C9B22E900E3A10E /* ConfigureView_2x.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ConfigureView_2x.xib; path = 6Views/ConfigureView_2x.xib; sourceTree = "<group>"; };
+		E321622E1C9B22F300E3A10E /* ConfigureView_3x.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ConfigureView_3x.xib; path = 6plusViews/ConfigureView_3x.xib; sourceTree = "<group>"; };
+		E32162301C9B22FA00E3A10E /* ConfigureView_1x.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ConfigureView_1x.xib; path = 4Views/ConfigureView_1x.xib; sourceTree = "<group>"; };
+		E32162321C9BDA1300E3A10E /* AskHuiView_2x.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AskHuiView_2x.xib; path = 6Views/AskHuiView_2x.xib; sourceTree = "<group>"; };
+		E32162361C9BDA2500E3A10E /* AskHuiView_1x.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AskHuiView_1x.xib; path = 4Views/AskHuiView_1x.xib; sourceTree = "<group>"; };
+		E321623A1C9BDAAF00E3A10E /* AskHuiView_3x.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AskHuiView_3x.xib; path = 6plusViews/AskHuiView_3x.xib; sourceTree = "<group>"; };
+		E321623C1C9BE3C000E3A10E /* MainView_1x.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainView_1x.xib; path = 4Views/MainView_1x.xib; sourceTree = "<group>"; };
+		E321623E1C9BE3C700E3A10E /* MainView_3x.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainView_3x.xib; path = 6plusViews/MainView_3x.xib; sourceTree = "<group>"; };
+		E32162401C9BE3CE00E3A10E /* MainView_2x.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainView_2x.xib; path = 6Views/MainView_2x.xib; sourceTree = "<group>"; };
 		E32A472F1C56725600EDF993 /* Comunicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comunicator.h; sourceTree = "<group>"; };
 		E32A47301C56725600EDF993 /* Comunicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comunicator.m; sourceTree = "<group>"; };
 		E33823731C1A2C310029C285 /* HUIViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HUIViewModel.h; sourceTree = "<group>"; };
@@ -159,6 +212,27 @@
 		E3B3B01D1C7CA8D0005C39CC /* SocketConnectionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketConnectionVC.h; sourceTree = "<group>"; };
 		E3B3B01E1C7CA8D0005C39CC /* SocketConnectionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocketConnectionVC.m; sourceTree = "<group>"; };
 		E3B3B0201C7CA974005C39CC /* SocketConnectionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SocketConnectionView.xib; sourceTree = "<group>"; };
+		E3BF6DC41CA05E46000FCBE2 /* WalkFifth_1x.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WalkFifth_1x.xib; sourceTree = "<group>"; };
+		E3BF6DC51CA05E46000FCBE2 /* WalkFourth_1x.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WalkFourth_1x.xib; sourceTree = "<group>"; };
+		E3BF6DC61CA05E46000FCBE2 /* WalkOne_1x.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WalkOne_1x.xib; sourceTree = "<group>"; };
+		E3BF6DC71CA05E46000FCBE2 /* WalkThree_1x.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WalkThree_1x.xib; sourceTree = "<group>"; };
+		E3BF6DC81CA05E46000FCBE2 /* WalkThroughViewController_1x.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WalkThroughViewController_1x.xib; sourceTree = "<group>"; };
+		E3BF6DC91CA05E46000FCBE2 /* WalkTwo_1x.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WalkTwo_1x.xib; sourceTree = "<group>"; };
+		E3BF6DCA1CA05E46000FCBE2 /* WalkZero_1x.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WalkZero_1x.xib; sourceTree = "<group>"; };
+		E3BF6DD31CA05E50000FCBE2 /* WalkFifth_3x.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WalkFifth_3x.xib; sourceTree = "<group>"; };
+		E3BF6DD41CA05E50000FCBE2 /* WalkFourth_3x.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WalkFourth_3x.xib; sourceTree = "<group>"; };
+		E3BF6DD51CA05E50000FCBE2 /* WalkOne_3x.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WalkOne_3x.xib; sourceTree = "<group>"; };
+		E3BF6DD61CA05E50000FCBE2 /* WalkThree_3x.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WalkThree_3x.xib; sourceTree = "<group>"; };
+		E3BF6DD71CA05E50000FCBE2 /* WalkThroughViewController_3x.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WalkThroughViewController_3x.xib; sourceTree = "<group>"; };
+		E3BF6DD81CA05E50000FCBE2 /* WalkTwo_3x.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WalkTwo_3x.xib; sourceTree = "<group>"; };
+		E3BF6DD91CA05E50000FCBE2 /* WalkZero_3x.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WalkZero_3x.xib; sourceTree = "<group>"; };
+		E3BF6DE21CA05E5A000FCBE2 /* WalkFifth_2x.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WalkFifth_2x.xib; sourceTree = "<group>"; };
+		E3BF6DE31CA05E5A000FCBE2 /* WalkFourth_2x.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WalkFourth_2x.xib; sourceTree = "<group>"; };
+		E3BF6DE41CA05E5A000FCBE2 /* WalkOne_2x.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WalkOne_2x.xib; sourceTree = "<group>"; };
+		E3BF6DE51CA05E5A000FCBE2 /* WalkThree_2x.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WalkThree_2x.xib; sourceTree = "<group>"; };
+		E3BF6DE61CA05E5A000FCBE2 /* WalkThroughViewController_2x.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WalkThroughViewController_2x.xib; sourceTree = "<group>"; };
+		E3BF6DE71CA05E5A000FCBE2 /* WalkTwo_2x.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WalkTwo_2x.xib; sourceTree = "<group>"; };
+		E3BF6DE81CA05E5A000FCBE2 /* WalkZero_2x.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WalkZero_2x.xib; sourceTree = "<group>"; };
 		E3CE4E111C0221850096D0FB /* HUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3CE4E151C0221850096D0FB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E3CE4E171C0221850096D0FB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -182,6 +256,8 @@
 		E3CE4E641C0227250096D0FB /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		E3CE4E661C0227330096D0FB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		E3CE4E681C0227B60096D0FB /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		E3D628B91C9717A500BBF1CD /* WalkFifth.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WalkFifth.xib; sourceTree = "<group>"; };
+		E3D628BB1C971A2B00BBF1CD /* WalkFourth.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WalkFourth.xib; sourceTree = "<group>"; };
 		E3DA78601C08430600F6C06A /* PlantViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlantViewController.h; sourceTree = "<group>"; };
 		E3DA78611C08430600F6C06A /* PlantViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlantViewController.m; sourceTree = "<group>"; };
 		E3DA78631C08486800F6C06A /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -283,6 +359,45 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		E321621D1C9B12E400E3A10E /* 6Views */ = {
+			isa = PBXGroup;
+			children = (
+				E32162321C9BDA1300E3A10E /* AskHuiView_2x.xib */,
+				E321622C1C9B22E900E3A10E /* ConfigureView_2x.xib */,
+				E32162241C9B148900E3A10E /* DetailPlantView_2x.xib */,
+				E32162261C9B21BB00E3A10E /* SettingsView_2x.xib */,
+				E32162401C9BE3CE00E3A10E /* MainView_2x.xib */,
+				E3BF6DE11CA05E5A000FCBE2 /* tutorial */,
+			);
+			name = 6Views;
+			sourceTree = "<group>";
+		};
+		E321621E1C9B12F900E3A10E /* 6plusViews */ = {
+			isa = PBXGroup;
+			children = (
+				E321623A1C9BDAAF00E3A10E /* AskHuiView_3x.xib */,
+				E32162221C9B148000E3A10E /* DetailPlantView_3x.xib */,
+				E32162281C9B21C200E3A10E /* SettingsView_3x.xib */,
+				E321622E1C9B22F300E3A10E /* ConfigureView_3x.xib */,
+				E321623E1C9BE3C700E3A10E /* MainView_3x.xib */,
+				E3BF6DD21CA05E50000FCBE2 /* tutorial */,
+			);
+			name = 6plusViews;
+			sourceTree = "<group>";
+		};
+		E321621F1C9B130D00E3A10E /* 4Views */ = {
+			isa = PBXGroup;
+			children = (
+				E32162361C9BDA2500E3A10E /* AskHuiView_1x.xib */,
+				E32162201C9B146F00E3A10E /* DetailPlantView_1x.xib */,
+				E321622A1C9B21C900E3A10E /* SettingsView_1x.xib */,
+				E32162301C9B22FA00E3A10E /* ConfigureView_1x.xib */,
+				E321623C1C9BE3C000E3A10E /* MainView_1x.xib */,
+				E3BF6DC31CA05E46000FCBE2 /* tutorial */,
+			);
+			name = 4Views;
+			sourceTree = "<group>";
+		};
 		E36079C51C18856600AD6D11 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -305,6 +420,51 @@
 				E39B8C901C20689D0015EF9F /* Wit.bundle */,
 			);
 			name = Wit;
+			sourceTree = "<group>";
+		};
+		E3BF6DC31CA05E46000FCBE2 /* tutorial */ = {
+			isa = PBXGroup;
+			children = (
+				E3BF6DC41CA05E46000FCBE2 /* WalkFifth_1x.xib */,
+				E3BF6DC51CA05E46000FCBE2 /* WalkFourth_1x.xib */,
+				E3BF6DC61CA05E46000FCBE2 /* WalkOne_1x.xib */,
+				E3BF6DC71CA05E46000FCBE2 /* WalkThree_1x.xib */,
+				E3BF6DC81CA05E46000FCBE2 /* WalkThroughViewController_1x.xib */,
+				E3BF6DC91CA05E46000FCBE2 /* WalkTwo_1x.xib */,
+				E3BF6DCA1CA05E46000FCBE2 /* WalkZero_1x.xib */,
+			);
+			name = tutorial;
+			path = 4Views/tutorial;
+			sourceTree = "<group>";
+		};
+		E3BF6DD21CA05E50000FCBE2 /* tutorial */ = {
+			isa = PBXGroup;
+			children = (
+				E3BF6DD31CA05E50000FCBE2 /* WalkFifth_3x.xib */,
+				E3BF6DD41CA05E50000FCBE2 /* WalkFourth_3x.xib */,
+				E3BF6DD51CA05E50000FCBE2 /* WalkOne_3x.xib */,
+				E3BF6DD61CA05E50000FCBE2 /* WalkThree_3x.xib */,
+				E3BF6DD71CA05E50000FCBE2 /* WalkThroughViewController_3x.xib */,
+				E3BF6DD81CA05E50000FCBE2 /* WalkTwo_3x.xib */,
+				E3BF6DD91CA05E50000FCBE2 /* WalkZero_3x.xib */,
+			);
+			name = tutorial;
+			path = 6plusViews/tutorial;
+			sourceTree = "<group>";
+		};
+		E3BF6DE11CA05E5A000FCBE2 /* tutorial */ = {
+			isa = PBXGroup;
+			children = (
+				E3BF6DE21CA05E5A000FCBE2 /* WalkFifth_2x.xib */,
+				E3BF6DE31CA05E5A000FCBE2 /* WalkFourth_2x.xib */,
+				E3BF6DE41CA05E5A000FCBE2 /* WalkOne_2x.xib */,
+				E3BF6DE51CA05E5A000FCBE2 /* WalkThree_2x.xib */,
+				E3BF6DE61CA05E5A000FCBE2 /* WalkThroughViewController_2x.xib */,
+				E3BF6DE71CA05E5A000FCBE2 /* WalkTwo_2x.xib */,
+				E3BF6DE81CA05E5A000FCBE2 /* WalkZero_2x.xib */,
+			);
+			name = tutorial;
+			path = 6Views/tutorial;
 			sourceTree = "<group>";
 		};
 		E3CE4E081C0221850096D0FB = {
@@ -400,11 +560,16 @@
 		E3CE4E511C02226F0096D0FB /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				E30816931C0457EA0007D896 /* WalkOne.xib */,
-				E30816941C0457EA0007D896 /* WalkThree.xib */,
-				E30816951C0457EA0007D896 /* WalkThroughViewController.xib */,
-				E30816961C0457EA0007D896 /* WalkTwo.xib */,
+				E321621F1C9B130D00E3A10E /* 4Views */,
+				E321621E1C9B12F900E3A10E /* 6plusViews */,
+				E321621D1C9B12E400E3A10E /* 6Views */,
 				E30816971C0457EA0007D896 /* WalkZero.xib */,
+				E30816931C0457EA0007D896 /* WalkOne.xib */,
+				E30816961C0457EA0007D896 /* WalkTwo.xib */,
+				E30816941C0457EA0007D896 /* WalkThree.xib */,
+				E3D628BB1C971A2B00BBF1CD /* WalkFourth.xib */,
+				E3D628B91C9717A500BBF1CD /* WalkFifth.xib */,
+				E30816951C0457EA0007D896 /* WalkThroughViewController.xib */,
 				E3694FE01C074A1A0036D1F1 /* DetailPlantView.xib */,
 				E3694FE21C074A540036D1F1 /* SearchPlantView.xib */,
 				E3B02EB21C09AEB9005E7DF4 /* MainView.xib */,
@@ -663,39 +828,77 @@
 			buildActionMask = 2147483647;
 			files = (
 				E39B8C651C1DEAB50015EF9F /* View.xib in Resources */,
+				E3BF6DDF1CA05E50000FCBE2 /* WalkTwo_3x.xib in Resources */,
 				E3DDCB431C11BE2F0053E150 /* Icon.png in Resources */,
+				E32162311C9B22FA00E3A10E /* ConfigureView_1x.xib in Resources */,
+				E32162291C9B21C200E3A10E /* SettingsView_3x.xib in Resources */,
 				E3694FE31C074A540036D1F1 /* SearchPlantView.xib in Resources */,
 				E3DA78AE1C086B5100F6C06A /* Main.storyboard in Resources */,
 				E3DDCB321C11B46E0053E150 /* Robot2.wav in Resources */,
+				E3BF6DDD1CA05E50000FCBE2 /* WalkThree_3x.xib in Resources */,
+				E3BF6DDB1CA05E50000FCBE2 /* WalkFourth_3x.xib in Resources */,
 				E3DDCB411C11BE2F0053E150 /* Icon-Small.png in Resources */,
+				E321622D1C9B22E900E3A10E /* ConfigureView_2x.xib in Resources */,
+				E32162331C9BDA1300E3A10E /* AskHuiView_2x.xib in Resources */,
 				E3E81E421C85ACCE0042ADC9 /* SettingsView.xib in Resources */,
 				E3CE4E271C0221850096D0FB /* LaunchScreen.storyboard in Resources */,
 				E3DDCB421C11BE2F0053E150 /* Icon-Small@2x.png in Resources */,
 				E3B3B0161C71E16F005C39CC /* GoogleService-Info.plist in Resources */,
+				E3BF6DEF1CA05E5A000FCBE2 /* WalkZero_2x.xib in Resources */,
 				E3EFE1F31C108BF50033BB25 /* AskHuiView.xib in Resources */,
+				E3BF6DE91CA05E5A000FCBE2 /* WalkFifth_2x.xib in Resources */,
+				E32162371C9BDA2500E3A10E /* AskHuiView_1x.xib in Resources */,
 				E30816981C0457EA0007D896 /* WalkOne.xib in Resources */,
 				E3DDCB441C11BE2F0053E150 /* Icon@2x.png in Resources */,
+				E3BF6DDE1CA05E50000FCBE2 /* WalkThroughViewController_3x.xib in Resources */,
 				E3DDCB311C11B46E0053E150 /* Robot1.wav in Resources */,
+				E3BF6DEB1CA05E5A000FCBE2 /* WalkOne_2x.xib in Resources */,
+				E3D628BA1C9717A500BBF1CD /* WalkFifth.xib in Resources */,
 				E3B3B0211C7CA974005C39CC /* SocketConnectionView.xib in Resources */,
 				E3CE4E241C0221850096D0FB /* Assets.xcassets in Resources */,
 				E308169A1C0457EA0007D896 /* WalkThroughViewController.xib in Resources */,
 				E308169C1C0457EA0007D896 /* WalkZero.xib in Resources */,
 				E3EFE1E61C0F51C40033BB25 /* earcon_listening.wav in Resources */,
+				E32162271C9B21BB00E3A10E /* SettingsView_2x.xib in Resources */,
 				E3694FE11C074A1A0036D1F1 /* DetailPlantView.xib in Resources */,
+				E3BF6DEE1CA05E5A000FCBE2 /* WalkTwo_2x.xib in Resources */,
+				E32162251C9B148900E3A10E /* DetailPlantView_2x.xib in Resources */,
 				E3DDCB3E1C11BE2F0053E150 /* 37x-Checkmark.png in Resources */,
 				E3EFE1E41C0F51C40033BB25 /* earcon_cancel.wav in Resources */,
 				E3DDCB301C11B46E0053E150 /* Cancel.wav in Resources */,
+				E3BF6DEC1CA05E5A000FCBE2 /* WalkThree_2x.xib in Resources */,
 				E3F694AB1C46ADAD008A2F3C /* GrandHotel-Regular.ttf in Resources */,
+				E3BF6DCE1CA05E46000FCBE2 /* WalkThree_1x.xib in Resources */,
 				E3F694AC1C46ADAD008A2F3C /* Multicolore.otf in Resources */,
+				E3BF6DCF1CA05E46000FCBE2 /* WalkThroughViewController_1x.xib in Resources */,
+				E3BF6DED1CA05E5A000FCBE2 /* WalkThroughViewController_2x.xib in Resources */,
+				E3BF6DDC1CA05E50000FCBE2 /* WalkOne_3x.xib in Resources */,
+				E3BF6DCB1CA05E46000FCBE2 /* WalkFifth_1x.xib in Resources */,
+				E321623F1C9BE3C700E3A10E /* MainView_3x.xib in Resources */,
+				E32162211C9B146F00E3A10E /* DetailPlantView_1x.xib in Resources */,
 				E39B8C921C20689D0015EF9F /* Wit.bundle in Resources */,
+				E321623B1C9BDAAF00E3A10E /* AskHuiView_3x.xib in Resources */,
+				E32162411C9BE3CE00E3A10E /* MainView_2x.xib in Resources */,
+				E3BF6DCD1CA05E46000FCBE2 /* WalkOne_1x.xib in Resources */,
+				E321622F1C9B22F300E3A10E /* ConfigureView_3x.xib in Resources */,
+				E32162231C9B148000E3A10E /* DetailPlantView_3x.xib in Resources */,
 				E3DF6CA01C0D896200004DA2 /* PlantView.xib in Resources */,
+				E3BF6DD11CA05E46000FCBE2 /* WalkZero_1x.xib in Resources */,
 				E3DDCB3F1C11BE2F0053E150 /* 37x-Checkmark@2x.png in Resources */,
 				E308169B1C0457EA0007D896 /* WalkTwo.xib in Resources */,
+				E3D628BC1C971A2B00BBF1CD /* WalkFourth.xib in Resources */,
+				E3BF6DCC1CA05E46000FCBE2 /* WalkFourth_1x.xib in Resources */,
 				E3DDCB471C11F5BC0053E150 /* Play.wav in Resources */,
 				E39B8C6A1C1DEB670015EF9F /* ConfigureView.xib in Resources */,
+				E321622B1C9B21C900E3A10E /* SettingsView_1x.xib in Resources */,
+				E3BF6DD01CA05E46000FCBE2 /* WalkTwo_1x.xib in Resources */,
 				E30816991C0457EA0007D896 /* WalkThree.xib in Resources */,
+				E3BF6DDA1CA05E50000FCBE2 /* WalkFifth_3x.xib in Resources */,
+				E321623D1C9BE3C000E3A10E /* MainView_1x.xib in Resources */,
 				E3EFE1E51C0F51C40033BB25 /* earcon_done_listening.wav in Resources */,
+				E3BF6DE01CA05E50000FCBE2 /* WalkZero_3x.xib in Resources */,
 				E3DDCB401C11BE2F0053E150 /* Icon-iOS7@2x.png in Resources */,
+				E3BF6DEA1CA05E5A000FCBE2 /* WalkFourth_2x.xib in Resources */,
 				E3B02EB31C09AEB9005E7DF4 /* MainView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -934,7 +1137,7 @@
 			baseConfigurationReference = 3F50527291474C2F6DB81AED /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Joaquin Giraldez Lopez (KDLWU8Z5LL)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Grow and Help SL (MYY9TNWLB7)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -964,7 +1167,7 @@
 			baseConfigurationReference = 6ABAA538C58AACE92BFD10EB /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Joaquin Giraldez Lopez (KDLWU8Z5LL)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Grow and Help SL (MYY9TNWLB7)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

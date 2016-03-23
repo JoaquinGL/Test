@@ -48,7 +48,6 @@
     NSMutableDictionary* _light;
     
     IBOutlet UIView* _moreDetailsView;
-    IBOutlet UILabel* _moreDetailsLabel;
     IBOutlet UIImageView* _moreDetailsImageView;
     IBOutlet UILabel* _moreDetailsTitleLabel;
     
@@ -57,6 +56,10 @@
     
     IBOutlet UILabel* _growingLabel;
     IBOutlet UISwitch* _growingSwitch;
+    
+    IBOutlet UITextView* _descriptionTextView;
+    
+    NSString* _huiNotificationTimeString;
 }
 
 @end
@@ -144,8 +147,6 @@ plantViewModel = _plantViewModel;
             
             [_coreServices getPlantState:self.plantViewModel withHui: huiViewModel withStatus: statusViewModel];
             
-            _huiNameLabel.text = [huiViewModel getName];
-            
             if( [[self.plantViewModel getIdentify] isEqualToString:[huiViewModel getSensor1]]){
                 _sensorLabel.text = @"1";
             }else if( [[self.plantViewModel getIdentify] isEqualToString:[huiViewModel getSensor2]]){
@@ -153,6 +154,10 @@ plantViewModel = _plantViewModel;
             }else if( [[self.plantViewModel getIdentify] isEqualToString:[huiViewModel getSensor3]]){
                 _sensorLabel.text = @"3";
             }
+            
+            _huiNameLabel.text = [NSString stringWithFormat:@"%@_M%@", [huiViewModel getName], _sensorLabel.text];
+            
+            _huiNotificationTimeString = [huiViewModel getNotificationTime];
             
         // this case never happend
         }else{
@@ -182,8 +187,10 @@ plantViewModel = _plantViewModel;
 
 + ( DetailPlantViewController* )instantiate
 {
-    return [[ DetailPlantViewController alloc]  initWithNibName:@"DetailPlantView" bundle:nil];
+    return [[ DetailPlantViewController alloc]  initWithNibName:[self viewToDevice:@"DetailPlantView"] bundle:nil];
 }
+
+#pragma mark - Actions
 
 - (IBAction)onSelectPlantTouchUpInside:(id)sender{
     
@@ -295,7 +302,7 @@ plantViewModel = _plantViewModel;
         globalStatus = -1;
         [temperatureStatusImageView setImage:[UIImage imageNamed:@"question_mark.png"]];
     }else{
-        if([[_temperature objectForKey:@"Alert"] isEqualToString:@"ok"]){
+        if(![[_temperature objectForKey:@"Alert"] isEqualToString:@"true"]){
             [temperatureStatusImageView setImage:[UIImage imageNamed:@"thumb_up.png"]];
         }else{
             globalStatus = 1;
@@ -307,7 +314,7 @@ plantViewModel = _plantViewModel;
         globalStatus = -1;
         [sunStatusImageView setImage:[UIImage imageNamed:@"question_mark.png"]];
     }else{
-        if([[_light objectForKey:@"Alert"] isEqualToString:@"ok"]){
+        if(![[_light objectForKey:@"Alert"] isEqualToString:@"true"]){
             [sunStatusImageView setImage:[UIImage imageNamed:@"thumb_up.png"]];
         }else{
             globalStatus = 1;
@@ -319,7 +326,7 @@ plantViewModel = _plantViewModel;
         globalStatus = -1;
         [waterStatusImageView setImage:[UIImage imageNamed:@"question_mark.png"]];
     }else{
-        if([[_moisture objectForKey:@"Alert"] isEqualToString:@"ok"]){
+        if(![[_moisture objectForKey:@"Alert"] isEqualToString:@"true"]){
             [waterStatusImageView setImage:[UIImage imageNamed:@"thumb_up.png"]];
         }else{
             globalStatus = 1;
@@ -337,7 +344,6 @@ plantViewModel = _plantViewModel;
                                    title: ( NSString *)title
                              description: ( NSString *)description {
     
-    _moreDetailsLabel.text = description;
     _moreDetailsTitleLabel.text = title;
     
     if( ![imageName isEqualToString:@"NO"])
@@ -351,7 +357,8 @@ plantViewModel = _plantViewModel;
     
     [Utils fadeIn:_moreDetailsView completion:nil];
     
-    [Utils resizeLabel: _moreDetailsLabel withText:description withFont:[_moreDetailsLabel font] withWidth:220.0f];
+    [_descriptionTextView setText:@""];
+    [_descriptionTextView setText: description];
 }
 
 - ( IBAction )onHUITouchUpInside:(id)sender {
@@ -359,11 +366,14 @@ plantViewModel = _plantViewModel;
     
     [self setMoreDetailsViewWithImageName: @"huiNormal.png"
                                     title: _huiNameLabel.text
-                              description: [NSString stringWithFormat:@"%@%@ \n%@%@"
+                              description: [NSString stringWithFormat:@"%@%@ \n%@%@ \n%@%@"
                                             , NSLocalizedString(@"Number: ", nil)
                                             , [huiViewModel getNumber]
                                             , NSLocalizedString(@"Sensor: ", nil)
-                                            , _sensorLabel.text]];
+                                            , _sensorLabel.text
+                                            , NSLocalizedString(@"Notification time: ", nil)
+                                            , _huiNotificationTimeString
+                                            ]];
 }
 
 - ( IBAction )onPlantDescriptionTouchUpInside:(id)sender {

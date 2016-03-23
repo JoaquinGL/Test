@@ -52,7 +52,8 @@
     
     BOOL diagnosticStatus;
     BOOL newPLantStatus;
-
+    BOOL _isDeleteMode;
+    int countPlantFromServer;
 }
 
 @end
@@ -68,7 +69,22 @@
 #define FRAME_NEW_PLANT_4_PLANT CGRectMake(15, 475, 80, 80)
 #define FRAME_ASK_HUI_BUTTON_FIRST_POSITION CGRectMake(85, 475, 150, 55)
 #define FRAME_ASK_HUI_BUTTON_FINAL_POSITION CGRectMake(150, 490, 150, 55)
-
+// ------------------------------------------------------------------------------------------- 2X
+#define FRAME_ASK_HUI_BUTTON_FIRST_POSITION_2X CGRectMake(110, 550, 150, 55)
+#define FRAME_ASK_HUI_BUTTON_FINAL_POSITION_2X CGRectMake(180, 550, 150, 55)
+#define FRAME_NEW_PLANT_2X CGRectMake(107, 130, WIDTH_PLANT, HEIGHT_PLANT)
+#define FRAME_NEW_PLANT_1_PLANT_2X CGRectMake(107, 280, WIDTH_PLANT, HEIGHT_PLANT)
+#define FRAME_NEW_PLANT_2_PLANT_2X CGRectMake(107, 280, WIDTH_PLANT, HEIGHT_PLANT)
+#define FRAME_NEW_PLANT_3_PLANT_2X CGRectMake(210, 300, 120, 120)
+#define FRAME_NEW_PLANT_4_PLANT_2X CGRectMake(50, 520, 100, 100)
+// ------------------------------------------------------------------------------------------- 3X
+#define FRAME_ASK_HUI_BUTTON_FIRST_POSITION_3X CGRectMake(127, 550, 150, 55)
+#define FRAME_ASK_HUI_BUTTON_FINAL_POSITION_3X CGRectMake(200, 550, 150, 55)
+#define FRAME_NEW_PLANT_3X CGRectMake(120, 130, WIDTH_PLANT, HEIGHT_PLANT)
+#define FRAME_NEW_PLANT_1_PLANT_3X CGRectMake(120, 280, WIDTH_PLANT, HEIGHT_PLANT)
+#define FRAME_NEW_PLANT_2_PLANT_3X CGRectMake(120, 280, WIDTH_PLANT, HEIGHT_PLANT)
+#define FRAME_NEW_PLANT_3_PLANT_3X CGRectMake(230, 280, 120, 120)
+#define FRAME_NEW_PLANT_4_PLANT_3X CGRectMake(70, 520, 100, 100)
 
 @implementation MainViewController
 
@@ -82,9 +98,13 @@
 
 
 - (void)customInit {
+    countPlantFromServer = 0;
+    
+    //add notification observer
+    [self addNotificationObserver];
     
     diagnosticStatus = NO;
-    
+    _isDeleteMode = NO;
     _positionX = 95;
     _positionY = 20;
     
@@ -144,8 +164,6 @@
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithCustomView: infoButton];
     self.navigationItem.rightBarButtonItem = rightButton;
     
-    
-    
     UIImage* settingImage = [UIImage imageNamed:@"settingsInfo.png"];
     UIButton *settingButton = [[UIButton alloc] initWithFrame:frameimg];
     [settingButton setBackgroundImage:settingImage forState:UIControlStateNormal];
@@ -158,9 +176,6 @@
     UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithCustomView: settingButton];
     self.navigationItem.leftBarButtonItem = leftButton;
 
-    
-    
-    
     UIFont *customFont = [UIFont fontWithName:@"GrandHotel-Regular" size:30];
     
     NSShadow* shadow = [NSShadow new];
@@ -179,14 +194,41 @@
     
     [self.navigationItem setBackBarButtonItem:backItem];
     
-    [_askHuiButton setFrame:FRAME_ASK_HUI_BUTTON_FIRST_POSITION];
-    
     /* GET CONTENT FROM BBDD */
     [self initializeContent];
     
     
     plantScrollViewControllerHeight = 0;
     
+    // Registering as observer from one object
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onbackToBackground)
+                                                 name:@"notification_back_from_background"
+                                               object:nil];
+    
+    
+    //reset alerts
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
+    
+}
+
+-(void) onbackToBackground{
+    countPlantFromServer = 0;
+    // Remove Observer back_from_background
+    [[NSNotificationCenter defaultCenter] removeObserver: self
+                                                    name: @"notification_back_from_background"
+                                                  object: nil];
+
+    NSMutableArray* content = [_manager getPlantsFromBBDD];
+    
+    if([content count] != 0){
+        
+        for (PlantViewModel *plant in content) {
+
+            //call service to update the plant status.
+            [self updatePlantStatus: plant];
+        }
+    }
 }
 
 
@@ -203,7 +245,7 @@
 
 + ( MainViewController* )instantiate
 {
-    return [[ MainViewController alloc]  initWithNibName:@"MainView" bundle:nil];
+    return [[ MainViewController alloc]  initWithNibName:[MainViewController viewToDevice:@"MainView"] bundle:nil];
 }
 
 #pragma mark - ACTIONS BUTTONS
@@ -247,12 +289,14 @@
 
 - (IBAction)showWalkthrough:(id)sender {
     
-    WalkThroughViewController *walkthrough = [[WalkThroughViewController alloc]init];
+    WalkThroughViewController *walkthrough = [WalkThroughViewController instantiate];
     
-    WalkthroughPageViewController *page_one = [[WalkthroughPageViewController alloc]initWithNibName:@"WalkOne" bundle:nil];
-    WalkthroughPageViewController *page_two = [[WalkthroughPageViewController alloc]initWithNibName:@"WalkTwo" bundle:nil];
-    CustomPageViewController *page_three = [[CustomPageViewController alloc]initWithNibName:@"WalkThree" bundle:nil];
-    WalkthroughPageViewController *page_zero = [[WalkthroughPageViewController alloc]initWithNibName:@"WalkZero" bundle:nil];
+    WalkthroughPageViewController *page_one = [[WalkthroughPageViewController alloc]initWithNibName:[Utils viewToDevice:@"WalkOne"] bundle:nil];
+    WalkthroughPageViewController *page_two = [[WalkthroughPageViewController alloc]initWithNibName:[Utils viewToDevice:@"WalkTwo"] bundle:nil];
+    CustomPageViewController *page_three = [[CustomPageViewController alloc]initWithNibName:[Utils viewToDevice:@"WalkThree"] bundle:nil];
+    WalkthroughPageViewController *page_fourth = [[WalkthroughPageViewController alloc]initWithNibName:[Utils viewToDevice:@"WalkFourth"] bundle:nil];
+    CustomPageViewController *page_fifth = [[CustomPageViewController alloc]initWithNibName:[Utils viewToDevice:@"WalkFifth"] bundle:nil];
+    WalkthroughPageViewController *page_zero = [[WalkthroughPageViewController alloc]initWithNibName:[Utils viewToDevice:@"WalkZero"] bundle:nil];
     
     // Attach the pages to the master
     walkthrough.delegate = self;
@@ -260,6 +304,8 @@
     [walkthrough addViewController:page_one];
     [walkthrough addViewController:page_two];
     [walkthrough addViewController:page_three];
+    [walkthrough addViewController:page_fourth];
+    [walkthrough addViewController:page_fifth];
     [walkthrough addViewController:page_zero];
     
     [self presentViewController:walkthrough animated:YES completion:nil];
@@ -460,6 +506,7 @@
 
 #pragma mark - Delegate DetailPlant
 - (void)deletePlant:(NSNumber *)identify withId:(NSString *)plantId{
+    _isDeleteMode = YES;
     
     /* DELETE PLANT FROM SERVER */
     
@@ -583,19 +630,52 @@
         
         self.numberOfPlants = [NSNumber numberWithInt: localNumberOfPlants + 1];
        
-        [_askHuiButton setFrame: FRAME_ASK_HUI_BUTTON_FIRST_POSITION];
+        if(IS_STANDARD_IPHONE_6)
+            [_askHuiButton setFrame: FRAME_ASK_HUI_BUTTON_FIRST_POSITION_2X];
+        else if(IS_STANDARD_IPHONE_6_PLUS)
+            [_askHuiButton setFrame: FRAME_ASK_HUI_BUTTON_FIRST_POSITION_3X];
+        else
+            [_askHuiButton setFrame: FRAME_ASK_HUI_BUTTON_FIRST_POSITION];
         
         // calculate newPlantButton Frame
         if ([self.numberOfPlants integerValue]==0){
-            [newPlantButton setFrame: FRAME_NEW_PLANT_1_PLANT];
+            if( IS_STANDARD_IPHONE_6)
+                [newPlantButton setFrame: FRAME_NEW_PLANT_1_PLANT_2X];
+            else if( IS_STANDARD_IPHONE_6_PLUS)
+                [newPlantButton setFrame: FRAME_NEW_PLANT_1_PLANT_3X];
+            else
+                [newPlantButton setFrame: FRAME_NEW_PLANT_1_PLANT];
         }else if ([self.numberOfPlants integerValue] < 2){
-            [newPlantButton setFrame: FRAME_NEW_PLANT_2_PLANT];
+            
+            if( IS_STANDARD_IPHONE_6)
+                [newPlantButton setFrame: FRAME_NEW_PLANT_2_PLANT_2X];
+            else if( IS_STANDARD_IPHONE_6_PLUS)
+                [newPlantButton setFrame: FRAME_NEW_PLANT_2_PLANT_3X];
+            else
+                [newPlantButton setFrame: FRAME_NEW_PLANT_2_PLANT];
+        
         }else if ([self.numberOfPlants integerValue] == 3){
-            [newPlantButton setFrame: FRAME_NEW_PLANT_3_PLANT];
+            if( IS_STANDARD_IPHONE_6){
+                [newPlantButton setFrame: FRAME_NEW_PLANT_3_PLANT_2X];
+            }else if( IS_STANDARD_IPHONE_6_PLUS){
+                [newPlantButton setFrame: FRAME_NEW_PLANT_3_PLANT_3X];
+            }else{
+                [newPlantButton setFrame: FRAME_NEW_PLANT_3_PLANT];
+            }
         }
         else if ([self.numberOfPlants integerValue] >= 4){
-            [_askHuiButton setFrame: FRAME_ASK_HUI_BUTTON_FINAL_POSITION];
-            [newPlantButton setFrame: FRAME_NEW_PLANT_4_PLANT];
+            if( IS_STANDARD_IPHONE_6){
+                [_askHuiButton setFrame: FRAME_ASK_HUI_BUTTON_FINAL_POSITION_2X];
+                [newPlantButton setFrame: FRAME_NEW_PLANT_4_PLANT_2X];
+            }else if( IS_STANDARD_IPHONE_6_PLUS){
+                [_askHuiButton setFrame: FRAME_ASK_HUI_BUTTON_FINAL_POSITION_3X];
+                [newPlantButton setFrame: FRAME_NEW_PLANT_4_PLANT_3X];
+            }else{
+                [_askHuiButton setFrame: FRAME_ASK_HUI_BUTTON_FINAL_POSITION];
+                [newPlantButton setFrame: FRAME_NEW_PLANT_4_PLANT];
+            }
+            
+            
         }
         
     }else{
@@ -619,12 +699,29 @@
         for (PlantViewModel *plant in content) {
         
             [self addNewPlant:plant];
+        
+            //call service to update the plant status.
+            if(!_isDeleteMode)
+                [self updatePlantStatus: plant];
+            else
+                _isDeleteMode = NO;
         }
     }else{
         //initialize button AddNewPlant
-        [newPlantButton setFrame: FRAME_NEW_PLANT];
+        
+        if (IS_STANDARD_IPHONE_6){
+            [newPlantButton setFrame: FRAME_NEW_PLANT_2X];
+            [_askHuiButton setFrame: FRAME_ASK_HUI_BUTTON_FIRST_POSITION_2X];
+        }
+        else if (IS_STANDARD_IPHONE_6_PLUS){
+            [newPlantButton setFrame: FRAME_NEW_PLANT_3X];
+            [_askHuiButton setFrame: FRAME_ASK_HUI_BUTTON_FIRST_POSITION_3X];
+        }
+        else{
+            [newPlantButton setFrame: FRAME_NEW_PLANT];
+            [_askHuiButton setFrame: FRAME_ASK_HUI_BUTTON_FIRST_POSITION];
+        }
     }
-    
     
     // setinitialStatus if there is no status
     if(![[_manager getStatus] getLanguage]){
@@ -709,16 +806,130 @@
                                                @"keyGCM": [statusFromBBDD getKeyGTM],
                                                @"city": [statusFromBBDD getCity],
                                                @"country": [statusFromBBDD getCountry],
+                                               @"huiKey": [huiViewModel getNumber]
                                                }
                                              ];
     
     [_coreServices postNewHUI: postNewHuiObject];
 }
 
+#pragma mark - sync methods from server
+
+- (void) updatePlantStatus:(PlantViewModel* )plant{
+    
+    if(!_coreServices){
+        _coreServices = [[CoreServices alloc] init];
+        [_coreServices setDelegate: self];
+    }
+    
+    //dispatch_async(dispatch_get_main_queue(), ^{
+        [_coreServices getPlantState:plant withHui:[_manager getHuiWithId:[plant getHuiId]] withStatus:[_manager getStatus]];
+    //});
+}
+
 #pragma mark - Delegate CoreServices
 
--(void)answerFromServer:(NSDictionary *)response{
+- (void)answerFromServer:(NSDictionary *)response{
     NSLog(@"Response from Server NEW HUI: %@", response);
+    
+    NSDictionary* light = [response objectForKey:@"Light"];
+    NSDictionary* moisture = [response objectForKey:@"Moisture"];
+    NSDictionary* temperature = [response objectForKey:@"Temperature"];
+    
+    if( light ){
+        //update status plant
+        [self updatePlantStatusFromServer:light :moisture :temperature];
+    }
 }
+
+- ( void )updatePlantStatusFromServer: (NSDictionary *)light :(NSDictionary* ) moisture :(NSDictionary* ) temperature{
+    
+    int globalStatus = 0;
+    
+    if([[temperature objectForKey:@"Alert"] isEqualToString:@"unknown"]){
+        globalStatus = -1;
+    }else{
+        if([[temperature objectForKey:@"Alert"] isEqualToString:@"true"]){
+            globalStatus = 1;
+        }
+    }
+    
+    if( globalStatus == 0){
+        if([[moisture objectForKey:@"Alert"] isEqualToString:@"unknown"]){
+            globalStatus = -1;
+        }else{
+            if([[moisture objectForKey:@"Alert"] isEqualToString:@"true"]){
+                globalStatus = 1;
+            }
+        }
+    }
+    
+    if( globalStatus == 0){
+        if([[light objectForKey:@"Alert"] isEqualToString:@"unknown"]){
+            globalStatus = -1;
+        }else{
+            if([[light objectForKey:@"Alert"] isEqualToString:@"true"]){
+                globalStatus = 1;
+            }
+        }
+    }
+    
+    
+    if(globalStatus == 1){
+        [[_plantsViewControllerCollection objectAtIndex:countPlantFromServer] setStatusKo ];
+    }else if(globalStatus == 0){
+        [[_plantsViewControllerCollection objectAtIndex:countPlantFromServer] setStatusOk ];
+    }else{
+        [[_plantsViewControllerCollection objectAtIndex:countPlantFromServer] setStatusUndefined ];
+    }
+    
+    [_manager setStatusPlant:[NSString stringWithFormat:@"%d", globalStatus] inPlant:[_plantsCollection objectAtIndex:countPlantFromServer]];
+    
+    countPlantFromServer ++;
+}
+
+#pragma mark - NOTIFICATIONS METHODS
+
+- (void) addNotificationObserver{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onReciveNotificationFromServer:)
+                                                 name:@"NOTIFICATION_FROM_SERVER"
+                                               object:nil];
+}
+
+- (void)onReciveNotificationFromServer:(NSNotification *)notification{
+    NSDictionary *userInfo = [[[notification userInfo] objectForKey:@"aps" ] objectForKey:@"alert"];
+    
+    NSString* alertmessage = [userInfo objectForKey:@"body"];
+    NSString* titleAlert = [userInfo objectForKey:@"title"];
+    
+    UIAlertController * alert=   [UIAlertController
+                                  alertControllerWithTitle: titleAlert
+                                  message: alertmessage
+                                  preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* yesButton = [UIAlertAction
+                                actionWithTitle:NSLocalizedString(@"Ok", nil)
+                                style:UIAlertActionStyleDefault
+                                handler:^(UIAlertAction * action)
+                                {
+                                    
+                                    NSInteger numberOfBadges = [UIApplication sharedApplication].applicationIconBadgeNumber;
+                                    
+                                    numberOfBadges -=1;
+                                    
+                                    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:numberOfBadges];
+                                    
+                                    [alert dismissViewControllerAnimated:YES completion:nil];
+                                }];
+
+    
+
+    [alert addAction:yesButton];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+
 
 @end

@@ -262,7 +262,7 @@
 
 + ( ConfigureViewController* )instantiate
 {
-    return [[ ConfigureViewController alloc]  initWithNibName:@"ConfigureView" bundle:nil];
+    return [[ ConfigureViewController alloc]  initWithNibName:[self viewToDevice:@"ConfigureView"] bundle:nil];
 }
 
 #pragma mark -
@@ -289,13 +289,16 @@
 
 -(IBAction)onCloseButtonTouchUpInside:(id)sender{
     
-    // dont save
-    
+    [_huiSelectorPickerView reloadAllComponents];
+    [_huiSelectorPickerView selectRow:0 inComponent:0 animated:YES];
     [self.delegate closeConfiguration:_huiSelectionViewModel withSensor:sensorToSave];
 }
 
 -(IBAction)onCancelButtonTouchUpInside:(id)sender{
-
+    
+    [_huiSelectorPickerView reloadAllComponents];
+    [_huiSelectorPickerView selectRow:0 inComponent:0 animated:YES];
+    
     [configureTextField resignFirstResponder];
     [self.delegate cancelConfiguration];
 }
@@ -310,81 +313,84 @@
 }
 
 - (IBAction)onNextButtonTouchUpInside:(id)sender{
-    step ++;
-    [Utils fadeIn:_configurationView completion:nil];
-    switch (step) {
-        case 1: {
-            [_huiSelectionViewModel setName: configureTextField.text];
-            _huiNameLabel.text = [NSString stringWithFormat:@"%@%@", NSLocalizedString(HUI_NAME, nil), configureTextField.text];
-            [Utils fadeIn:_huiNameLabel completion:^(BOOL finished){
-                [self initTextField];
-            }];
-            configureLabel.text = NSLocalizedString(HUI_ID, nil);
-            
-            break;
-        }
-        case 2:{
-            
-            [_huiSelectionViewModel setNumber: configureTextField.text];
-            _huiIdLabel.text = [NSString stringWithFormat:@"%@%@", NSLocalizedString(HUI_ID, nil), configureTextField.text];
-            
-            [Utils fadeIn:_huiIdLabel completion:^(BOOL finished){
-                
-                if(!_isEditing){
-                    [Utils fadeIn:_datePickerView completion:nil];
-                    configureTextField.text = @"";
-                    configureTextField.userInteractionEnabled = NO;
-                    [self labelTitle:nil];
-                    
-                }
-            }];
-            configureLabel.text = NSLocalizedString(HUI_DATE, nil);
-            [configureButton setTitle:HUI_DONE forState:UIControlStateNormal];
-            
-            break;
-        }
-        case 3: {
-            [_huiSelectionViewModel setNotificationTime: configureTextField.text];
-            
-            // provisional
-            [_huiSelectionViewModel setWifiKey:@"undefined"];
-            [_huiSelectionViewModel setWifiName:@"undefined"];
-            
-            for (UIImageView  *imageView in _editImagesButtons){
-                [imageView setAlpha:1.0];
-            }
-            for (UIButton  *button in _editButtons){
-                [button setAlpha:1.0];
-            }
-            
-            [Utils fadeIn:_parametersView completion:nil];
-            
-            _dateLabel.text = [NSString stringWithFormat:@"%@%@", NSLocalizedString(HUI_DATE, nil), configureTextField.text];
-            [Utils fadeIn:_dateLabel completion:^(BOOL finished){
-                configureTextField.text = @"";
-                [Utils fadeOut:configureTextField completion:nil];
-                [Utils fadeOut:configureLabel completion:nil];
-                [Utils fadeOut:_datePickerView completion:nil];
-                [Utils fadeIn:_doneButton completion:nil];
-                [configureTextField resignFirstResponder];
-                
-            }];
-            [configureButton setAlpha:0];
-            break;
-        
-        }
-        default:
-            [self saveHuiData];
-            break;
-    }
     
-    // hideTextField
-    if(_isEditing){
-        configureTextField.text = @"";
-        [configureLabel setAlpha:0.0];
-        [configureTextField setAlpha:0.0];
-        [configureTextField resignFirstResponder];
-        [configureButton setAlpha:0.0];
+    if(![configureTextField.text isEqualToString:@""]){
+        step ++;
+        [Utils fadeIn:_configurationView completion:nil];
+        switch (step) {
+            case 1: {
+                [_huiSelectionViewModel setName: configureTextField.text];
+                _huiNameLabel.text = [NSString stringWithFormat:@"%@%@", NSLocalizedString(HUI_NAME, nil), [configureTextField.text uppercaseString]];
+                [Utils fadeIn:_huiNameLabel completion:^(BOOL finished){
+                    [self initTextField];
+                }];
+                configureLabel.text = NSLocalizedString(HUI_ID, nil);
+                
+                break;
+            }
+            case 2:{
+                
+                [_huiSelectionViewModel setNumber: configureTextField.text];
+                _huiIdLabel.text = [NSString stringWithFormat:@"%@%@", NSLocalizedString(HUI_ID, nil), [configureTextField.text uppercaseString]];
+                
+                [Utils fadeIn:_huiIdLabel completion:^(BOOL finished){
+                    
+                    if(!_isEditing){
+                        [Utils fadeIn:_datePickerView completion:nil];
+                        configureTextField.text = @"";
+                        configureTextField.userInteractionEnabled = NO;
+                        [self labelTitle:nil];
+                        
+                    }
+                }];
+                configureLabel.text = NSLocalizedString(HUI_DATE, nil);
+                [configureButton setTitle:HUI_DONE forState:UIControlStateNormal];
+                
+                break;
+            }
+            case 3: {
+                [_huiSelectionViewModel setNotificationTime: configureTextField.text];
+                
+                // provisional
+                [_huiSelectionViewModel setWifiKey:@"undefined"];
+                [_huiSelectionViewModel setWifiName:@"undefined"];
+                
+                for (UIImageView  *imageView in _editImagesButtons){
+                    [imageView setAlpha:1.0];
+                }
+                for (UIButton  *button in _editButtons){
+                    [button setAlpha:1.0];
+                }
+                
+                [Utils fadeIn:_parametersView completion:nil];
+                
+                _dateLabel.text = [NSString stringWithFormat:@"%@%@", NSLocalizedString(HUI_DATE, nil), configureTextField.text];
+                [Utils fadeIn:_dateLabel completion:^(BOOL finished){
+                    configureTextField.text = @"";
+                    [Utils fadeOut:configureTextField completion:nil];
+                    [Utils fadeOut:configureLabel completion:nil];
+                    [Utils fadeOut:_datePickerView completion:nil];
+                    [Utils fadeIn:_doneButton completion:nil];
+                    [configureTextField resignFirstResponder];
+                    
+                }];
+                [configureButton setAlpha:0];
+                break;
+                
+            }
+            default:
+                [self saveHuiData];
+                break;
+        }
+        
+        // hideTextField
+        if(_isEditing){
+            configureTextField.text = @"";
+            [configureLabel setAlpha:0.0];
+            [configureTextField setAlpha:0.0];
+            [configureTextField resignFirstResponder];
+            [configureButton setAlpha:0.0];
+        }
     }
 }
 

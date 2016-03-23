@@ -31,6 +31,7 @@ NSString *const SubscriptionTopic = @"/topics/global";
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
     [[AVAudioSession sharedInstance] setActive:YES error:nil];
     
@@ -43,11 +44,11 @@ NSString *const SubscriptionTopic = @"/topics/global";
     
     Reachability *reachability = [Reachability reachabilityWithHostname:@"www.apple.com"];
     reachability.reachableBlock = ^(Reachability * reachability){
-        NSLog(@"Network is available");
+        //NSLog(@"Network is available");
     };
     
     reachability.unreachableBlock = ^(Reachability * reachability){
-        NSLog(@"Network is disable");
+        //NSLog(@"Network is disable");
     };
     
     [reachability startNotifier];
@@ -90,7 +91,7 @@ NSString *const SubscriptionTopic = @"/topics/global";
     _registrationHandler = ^(NSString *registrationToken, NSError *error){
         if (registrationToken != nil) {
             weakSelf.registrationToken = registrationToken;
-            NSLog(@"Registration Token: %@", registrationToken);
+           // NSLog(@"Registration Token: %@", registrationToken);
             
             Manager* manager = [[Manager alloc] init];
             
@@ -102,7 +103,7 @@ NSString *const SubscriptionTopic = @"/topics/global";
                                                                 object:nil
                                                               userInfo:userInfo];
         } else {
-            NSLog(@"Registration to GCM failed with error: %@", error.localizedDescription);
+           // NSLog(@"Registration to GCM failed with error: %@", error.localizedDescription);
             NSDictionary *userInfo = @{@"error":error.localizedDescription};
             [[NSNotificationCenter defaultCenter] postNotificationName:weakSelf.registrationKey
                                                                 object:nil
@@ -123,13 +124,13 @@ NSString *const SubscriptionTopic = @"/topics/global";
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     
-    NSLog(@"Background");
+   
     
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     
-    NSLog(@"Foreground");
+
     
     //NOTIFICATION BACKGROUND
     
@@ -169,7 +170,7 @@ NSString *const SubscriptionTopic = @"/topics/global";
 
 - (void)application:(UIApplication *)application
 didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
-    NSLog(@"Registration for remote notification failed with error: %@", error.localizedDescription);
+   // NSLog(@"Registration for remote notification failed with error: %@", error.localizedDescription);
     NSDictionary *userInfo = @{@"error" :error.localizedDescription};
     [[NSNotificationCenter defaultCenter] postNotificationName:_registrationKey
                                                         object:nil
@@ -178,7 +179,7 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
 
 - (void)onTokenRefresh {
     // A rotation of the registration tokens is happening, so the app needs to request a new token.
-    NSLog(@"The GCM registration token needs to be changed.");
+   // NSLog(@"The GCM registration token needs to be changed.");
     [[GGLInstanceID sharedInstance] tokenWithAuthorizedEntity:_gcmSenderID
                                                         scope:kGGLInstanceIDScopeGCM
                                                       options:_registrationOptions
@@ -205,7 +206,7 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
                                                        }
                                                    } else {
                                                        self.subscribedToTopic = true;
-                                                       NSLog(@"Subscribed to %@", SubscriptionTopic);
+                                                      // NSLog(@"Subscribed to %@", SubscriptionTopic);
                                                    }
                                                }];
     }
@@ -234,13 +235,9 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
 - (void) application:(UIApplication *)application
          didReceiveRemoteNotification:(NSDictionary *)userInfo {
     
-    NSLog(@"Notification received: %@", userInfo);
+    //NSLog(@"Notification received: %@", userInfo);
     // This works only if the app started the GCM service
     [[GCMService sharedInstance] appDidReceiveMessage:userInfo];
-    // Handle the received message
-    //    [[NSNotificationCenter defaultCenter] postNotificationName:_messageKey
-    //                                                        object:nil
-    //                                                      userInfo:userInfo];
     
 }
 
@@ -248,14 +245,16 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
          didReceiveRemoteNotification:(NSDictionary *)userInfo
          fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))handler {
     
-    NSLog(@"Notification received: %@", userInfo);
+   // NSLog(@"Notification received: %@", userInfo);
+    
     // This works only if the app started the GCM service
     [[GCMService sharedInstance] appDidReceiveMessage:userInfo];
     // Handle the received message
-    // Invoke the completion handler passing the appropriate UIBackgroundFetchResult value
-//    [[NSNotificationCenter defaultCenter] postNotificationName:_messageKey
-//                                                        object:nil
-//                                                      userInfo:userInfo];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName: @"NOTIFICATION_FROM_SERVER"
+                                                        object: nil
+                                                      userInfo: userInfo];
+    
     handler(UIBackgroundFetchResultNoData);
 }
 

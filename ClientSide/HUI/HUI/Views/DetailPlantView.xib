@@ -7,11 +7,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DetailPlantViewController">
             <connections>
+                <outlet property="_descriptionTextView" destination="xMR-eF-fCo" id="gy3-B1-UvH"/>
                 <outlet property="_growingLabel" destination="tsC-W7-whG" id="gQ9-DH-srJ"/>
                 <outlet property="_growingSwitch" destination="tjS-nU-6hy" id="p2i-Dj-MLX"/>
                 <outlet property="_huiNameLabel" destination="OXp-qm-5pQ" id="4LZ-Tj-PB4"/>
                 <outlet property="_moreDetailsImageView" destination="ofd-iS-LmG" id="u8o-MI-8xq"/>
-                <outlet property="_moreDetailsLabel" destination="SGU-rz-oEQ" id="day-rJ-eB9"/>
                 <outlet property="_moreDetailsTitleLabel" destination="Xh4-lA-3ER" id="DV1-rP-fcq"/>
                 <outlet property="_moreDetailsView" destination="kdj-td-liz" id="72n-ew-Hy4"/>
                 <outlet property="_sensorLabel" destination="sM1-PE-RWZ" id="pRC-jL-IcH"/>
@@ -67,7 +67,7 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="title" translatesAutoresizingMaskIntoConstraints="NO" id="2MJ-Mx-1hS">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="title" translatesAutoresizingMaskIntoConstraints="NO" id="2MJ-Mx-1hS">
                     <rect key="frame" x="0.0" y="-18" width="320" height="80"/>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Eez-LP-gsu">
@@ -126,7 +126,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kdj-td-liz">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="600"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <subviews>
                         <button opaque="NO" alpha="0.59999999999999998" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GZe-Mc-CcP">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -144,12 +144,6 @@
                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ofd-iS-LmG">
                                     <rect key="frame" x="28" y="27" width="50" height="50"/>
                                 </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Description" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SGU-rz-oEQ">
-                                    <rect key="frame" x="31" y="87" width="220" height="26"/>
-                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xh4-lA-3ER">
                                     <rect key="frame" x="86" y="39" width="149" height="26"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="22"/>
@@ -168,6 +162,14 @@
                                         <action selector="onSwitchTouchUpInside:" destination="-1" eventType="touchUpInside" id="jAR-Jd-Wyl"/>
                                     </connections>
                                 </switch>
+                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="xMR-eF-fCo">
+                                    <rect key="frame" x="28" y="85" width="223" height="138"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                </textView>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
@@ -183,7 +185,11 @@
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="2MJ-Mx-1hS" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="knk-Cv-pa6"/>
+            </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+            <point key="canvasLocation" x="210.5" y="381.5"/>
         </view>
     </objects>
     <resources>

@@ -64,7 +64,7 @@
 
 + ( SettingsViewController* )instantiate
 {
-    return [[ SettingsViewController alloc]  initWithNibName:@"SettingsView" bundle:nil];
+    return [[ SettingsViewController alloc]  initWithNibName:[self viewToDevice:@"SettingsView"] bundle:nil];
 }
 
 

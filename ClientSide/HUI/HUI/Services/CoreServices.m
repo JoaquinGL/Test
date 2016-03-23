@@ -32,7 +32,7 @@
 #define PLANT_IMAGE_URL                 @"http://growandhelp.com/plants/%@.png"
 #define CHANGE_PLANT_STATE_POST_URL     [NSURL URLWithString: @"http://www.growandhelp.com/huiWebApp/HuiServer?changePlantStage"]
 #define DELETE_PLANT_POST_URL           [NSURL URLWithString: @" http://www.growandhelp.com/huiWebApp/HuiServer?removePlant"]
-#define DIAGNOSTIC_POST_URL             [NSURL URLWithString: @"http://www.growandhelp.com/huiWebApp/HuiServer?diagnostic"]
+#define DIAGNOSTIC_POST_URL             [NSURL URLWithString: @"http://www.growandhelp.com/huiWebApp/HuiServer?diagnosis"]
 
 @implementation CoreServices
 

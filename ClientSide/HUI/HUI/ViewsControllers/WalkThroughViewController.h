@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Utils.h"
 @protocol WalkthroughViewControllerDelegate <NSObject>
 
 @required
@@ -37,5 +38,6 @@
 - (void)addViewController:(UIViewController *)vc;
 
 + ( WalkThroughViewController* )instantiate;
++ ( WalkThroughViewController* )instantiateWithNibName: (NSString*)nibName;
 
 @end
